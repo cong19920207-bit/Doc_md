@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hayyo Admin · User list 可行性 Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="demo-bar">
+    <span class="tag">非真实业务</span>
+    <strong>User list 可行性 Demo</strong>
+    <div class="mode-switch">
+      <button type="button" data-mode="live">现网原页</button>
+      <button type="button" data-mode="after" class="active">改后原型</button>
+    </div>
+    <div class="hint">壳和未点名的列保持现网；黄底「变更」才是这次示例补丁。数据为 mock，提交不会打到测试服。</div>
+  </div>
+  <div id="changelog" class="changelog show">
+    <b>本次示例变更（只为验证「原页 + 补丁」，不是要做的需求）：</b>
+    1）按 PRD 口径去掉筛选和列里的 GameBan；
+    2）「近7天活跃天数」小于 2 时警示（原列上优化，不改结构）；
+    3）Operation 增加 Demo 入口，演示在原页加能力。
+  </div>
+
+  <div class="app">
+    <div class="logo"><span class="mark"></span>Hayyo Admin</div>
+    <div class="top">
+      <div class="hamburger">☰</div>
+      <nav class="top-nav">
+        <a class="on" href="#">Manage</a>
+        <a href="#" data-dead>数据统计</a>
+        <a href="#" data-dead>平台配置</a>
+        <a href="#" data-dead>Audit</a>
+        <a href="#" data-dead>代理管理</a>
+        <a href="#" data-dead>后台配置</a>
+      </nav>
+      <div class="top-user">demo</div>
+    </div>
+
+    <aside class="side">
+      <div class="side-item">
+        <div class="row" data-dead>Manage Room <span class="arrow">▾</span></div>
+      </div>
+      <div class="side-item open">
+        <div class="row">Manage User <span class="arrow">▴</span></div>
+        <div class="sub">
+          <a href="#" data-dead>账号信息</a>
+          <a class="on" href="#">User list</a>
+          <a href="#" data-dead>账号添加好友</a>
+          <a href="#" data-dead>用户登录设备</a>
+          <a href="#" data-dead>自动封号记录</a>
+          <a href="#" data-dead>平台排行榜白名单</a>
+          <a href="#" data-dead>用户网络测试结果</a>
+          <a href="#" data-dead>设备号封禁</a>
+          <a href="#" data-dead>设备指纹封禁</a>
+          <a href="#" data-dead>代理充值白名单</a>
+          <a href="#" data-dead>帐号封禁</a>
+          <a href="#" data-dead>设备指纹风控记录</a>
+          <a href="#" data-dead>个人靓号变动记录</a>
+        </div>
+      </div>
+      <div class="side-item">
+        <div class="row" data-dead>Manage Family <span class="arrow">▾</span></div>
+      </div>
+      <div class="side-item">
+        <div class="row" data-dead>Manage VIP <span class="arrow">▾</span></div>
+      </div>
+      <div class="side-item">
+        <div class="row" data-dead>货币管理 <span class="arrow">▾</span></div>
+      </div>
+      <div class="side-item">
+        <div class="row" data-dead>币商管理 <span class="arrow">▾</span></div>
+      </div>
+      <div class="side-item">
+        <div class="row" data-dead>商品赠送管理 <span class="arrow">▾</span></div>
+      </div>
+      <div class="side-item">
+        <div class="row" data-dead>预警管理 <span class="arrow">▾</span></div>
+      </div>
+      <div class="side-item">
+        <div class="row" data-dead>拉新后台 <span class="arrow">▾</span></div>
+      </div>
+    </aside>
+
+    <div class="tabs">
+      <div class="ctrl">‹</div>
+      <div class="tab">User list</div>
+      <div class="ctrl" style="margin-left:auto">›</div>
+      <div class="ctrl">▾</div>
+    </div>
+
+    <main class="body">
+      <form class="search" id="SearchForm">
+        <textarea id="FAccountId" name="FAccountId" placeholder="ZID"></textarea>
+        <textarea id="FPrettyId" name="FPrettyId" placeholder="XID"></textarea>
+        <input id="FRoomIdx" name="FRoomIdx" placeholder="Room IDX">
+        <select id="FStatus" name="FStatus"></select>
+        <button class="btn" id="Search" type="submit" title="搜索">⌕</button>
+      </form>
+      <div class="table-wrap">
+        <table>
+          <thead id="thead"></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="pager" id="pager"></div>
+    </main>
+  </div>
+
+  <div class="mask" id="mask">
+    <div class="dialog">
+      <h3 id="dlgTitle">操作</h3>
+      <div class="bd" id="dlgBody"></div>
+      <div class="ft">
+        <button class="btn btn-ghost" id="dlgCancel" type="button">取消</button>
+        <button class="btn" id="dlgOk" type="button">确定</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

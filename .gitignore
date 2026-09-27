@@ -1,0 +1,14 @@
+.env
+site/.env
+site/kb-api/.env
+**/__pycache__/
+*.pyc
+site/kb-api/.venv/
+site/kb-api/tests/.tmp-data/
+.pytest_cache/
+.DS_Store
+
+# Word 原文不入库
+*.doc
+*.docx
+*.docm

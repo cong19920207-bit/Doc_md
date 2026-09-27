@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>商品赠送-房间装饰</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:1280px}</style>
+</head>
+<body>
+<div class="caption">「图6」商品赠送 · 房间装饰</div>
+<div class="hint">橙底 tab / 行 = 本版新增类型。时长正整数，不可 -1。失效时间 = 赠送时间 + 时长。</div>
+<div class="tabs">
+  <div class="tab">头饰卡</div>
+  <div class="tab">座驾</div>
+  <div class="tab">房间背景</div>
+  <div class="tab">头像框</div>
+  <div class="tab on new">房间装饰 <span class="tag">新增</span></div>
+  <div class="tab new">名片装饰 <span class="tag">新增</span></div>
+</div>
+<div class="toolbar">
+  <span>商品名称</span>
+  <span class="fake-input" style="min-width:160px;display:inline-flex;align-items:center;color:#999">英语 / 阿语模糊搜索</span>
+  <span>时间</span>
+  <span class="fake-input" style="min-width:110px;display:inline-flex;align-items:center">2026-08-25</span>
+  <span>~</span>
+  <span class="fake-input" style="min-width:110px;display:inline-flex;align-items:center">2026-08-31</span>
+  <span class="btn solid">查询</span>
+  <span class="btn solid">创建</span>
+  <span class="btn">确认赠送</span>
+  <span class="btn">导出</span>
+</div>
+<table class="grid">
+  <tr>
+    <th style="width:36px"></th>
+    <th>用户 ID</th>
+    <th>用户昵称</th>
+    <th>名称</th>
+    <th style="width:60px">图片</th>
+    <th>规格</th>
+    <th>赠送时间</th>
+    <th>失效时间</th>
+    <th>状态</th>
+  </tr>
+  <tr class="row-new">
+    <td class="center"><input type="checkbox" checked></td>
+    <td>10086001</td>
+    <td>Ali</td>
+    <td>Golden Room Frame</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">7 天</td>
+    <td class="center muted">—</td>
+    <td class="center muted">—</td>
+    <td class="center status-wait">待赠送</td>
+  </tr>
+  <tr class="row-new">
+    <td class="center"><input type="checkbox" disabled></td>
+    <td>10086002</td>
+    <td>Noor</td>
+    <td>Neon Room</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">1 天</td>
+    <td>31/08 14:20(GMT+3)</td>
+    <td>01/09 14:20(GMT+3)</td>
+    <td class="center status-ok">已赠送</td>
+  </tr>
+  <tr class="row-new">
+    <td class="center"><input type="checkbox" disabled></td>
+    <td>10086003</td>
+    <td>Omar</td>
+    <td>Golden Room Frame</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">15 天</td>
+    <td>30/08 09:00(GMT+3)</td>
+    <td>14/09 09:00(GMT+3)</td>
+    <td class="center status-ok">已赠送</td>
+  </tr>
+</table>
+<div class="page-num">共 3 条　<span>&lt;</span><span class="cur">1</span><span>&gt;</span></div>
+<div class="note">
+  已赠送不可勾选。发放到背包对应分类，获得即开始倒计时（精确到秒）。每次发放写一条获得记录。该分类从 0 到 1 才自动使用。名片装饰列表结构相同，切 tab 即可。
+</div>
+</body>
+</html>

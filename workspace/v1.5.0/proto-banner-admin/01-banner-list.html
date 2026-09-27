@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Banner 列表</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+body{width:1280px}
+.grid th, .grid td{font-size:12px;padding:6px 8px}
+.addr{max-width:180px;word-break:break-all;color:#555;font-size:11px}
+.time{font-size:11px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="caption">「图1」Banner 列表</div>
+<div class="hint">沿用现有 Banner 管理，不新开菜单。橙底 / 标签 = 本版新增类型「团队数据页」。用户端团队数据页只展示图片，不展示标题（含多语言标题）。图为 demo。</div>
+<div class="toolbar">
+  <span>状态</span>
+  <span class="fake-select">启用 <span class="caret">▼</span></span>
+  <span>系统</span>
+  <span class="fake-select">全部 <span class="caret">▼</span></span>
+  <span>语区</span>
+  <span class="fake-select">全部 <span class="caret">▼</span></span>
+  <span>类型 <span class="tag">新增筛选项</span></span>
+  <span class="wrap-rel">
+    <span class="fake-select">全部 <span class="caret">▼</span></span>
+    <div class="dropdown" style="width:140px">
+      <div class="on">全部</div>
+      <div>首页</div>
+      <div class="new-opt">团队数据页</div>
+    </div>
+  </span>
+  <span class="btn solid">查询</span>
+  <span class="btn solid">新增</span>
+</div>
+<table class="grid">
+  <tr>
+    <th>标题</th>
+    <th style="width:56px">图片</th>
+    <th style="width:88px">类型</th>
+    <th style="width:64px">跳转</th>
+    <th>地址</th>
+    <th style="width:168px">时间</th>
+    <th style="width:72px">显示设备</th>
+    <th style="width:56px">语区</th>
+    <th style="width:48px">排序</th>
+    <th style="width:56px">状态</th>
+    <th style="width:72px">最低版本号</th>
+    <th style="width:64px">操作</th>
+  </tr>
+  <tr>
+    <td>首页活动位</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">首页</td>
+    <td class="center">页面</td>
+    <td class="addr">https://h5.example.com/home-act</td>
+    <td class="time">2026-09-01 00:00:00<br>2026-12-31 23:59:59</td>
+    <td class="center">全设备</td>
+    <td class="center">英语</td>
+    <td class="center">5</td>
+    <td class="center status-on">启用</td>
+    <td class="center muted">—</td>
+    <td class="center"><span class="link">编辑</span></td>
+  </tr>
+  <tr class="row-new">
+    <td>团队数据运营位 <span class="tag">本版新增</span></td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">团队数据页</td>
+    <td class="center">页面</td>
+    <td class="addr">https://h5.example.com/team-act</td>
+    <td class="time">2026-09-01 00:00:00<br>2026-12-31 23:59:59</td>
+    <td class="center">全设备</td>
+    <td class="center">英语</td>
+    <td class="center">10</td>
+    <td class="center status-on">启用</td>
+    <td class="center muted">—</td>
+    <td class="center"><span class="link">编辑</span></td>
+  </tr>
+</table>
+<div class="page-num">共 2 条　<span>&lt;</span><span class="cur">1</span><span>&gt;</span></div>
+<div class="note">
+  进入默认筛选状态=启用，按生成时间倒序。类型=团队数据页只下发团长团队数据页；类型=首页只下发首页 / 房间大厅，互不下发。标题列仅后台识别。不为团队数据页另造字段。
+</div>
+</body>
+</html>

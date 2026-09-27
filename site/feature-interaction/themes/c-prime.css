@@ -1,0 +1,29 @@
+/* C′ · 黄主色；品红只给错误/踩；青给健康与社交 */
+:root {
+  --bg: #07070a;
+  --bg-elevated: #0c0c12;
+  --bg-panel: #09090e;
+  --stroke: #22222c;
+  --stroke-strong: #333344;
+  --text: #eeeef2;
+  --text-muted: #90909a;
+  --text-faint: #5c5c66;
+  --accent: #fcee0a;
+  --accent-soft: rgba(252, 238, 10, 0.14);
+  --ok: #3dfff3;
+  --warn: #fcee0a;
+  --danger: #ff3cac;
+  --danger-soft: rgba(255, 60, 172, 0.14);
+  --on-accent: #0b1220;
+  --social: #3dfff3;
+  --money: #05ffa1;
+  --growth: #fcee0a;
+  --reach: #c77dff;
+  --admin: #9aa0b4;
+  --reach-soft: rgba(199, 125, 255, 0.16);
+  --dot: #22222c;
+  --node-admin: #0e0e14;
+  --node-pure: #12121a;
+  --node-selected: #1a1800;
+  --edge: #3a3a48;
+}

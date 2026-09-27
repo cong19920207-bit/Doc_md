@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>添加商品-房间装饰</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:720px}</style>
+</head>
+<body>
+<div class="caption">「图3」添加 / 编辑商品（房间装饰）</div>
+<div class="hint">分类写死不可改。名片装饰弹窗相同，仅分类写死为「名片装饰」。编辑不改变商城展示状态。</div>
+<div class="dialog wide">
+  <h2>添加商品</h2>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>商品分类</div>
+    <div class="fld"><input class="locked" value="房间装饰" readonly></div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>英文名称</div>
+    <div class="fld"><input value="Golden Room Frame" maxlength="30"><div class="hint-inline">最长 30 字符</div></div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>阿语名称</div>
+    <div class="fld"><input value="إطار الغرفة الذهبي" maxlength="30"></div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>土语名称</div>
+    <div class="fld"><input value="Altın Oda Çerçevesi" maxlength="30"></div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>静态图</div>
+    <div class="fld"><span class="upload">+</span><div class="hint-inline">商品静态原图</div></div>
+  </div>
+  <div class="form-row">
+    <div class="lab">动效文件</div>
+    <div class="fld"><span class="upload">+</span><div class="hint-inline">静态商品可不传</div></div>
+  </div>
+  <div class="form-row">
+    <div class="lab">VIP 要求</div>
+    <div class="fld">
+      <select style="max-width:200px">
+        <option selected>无要求</option>
+        <option>VIP1</option>
+        <option>VIP2</option>
+        <option>VIP3</option>
+        <option>VIP4</option>
+        <option>VIP5</option>
+      </select>
+      <div class="hint-inline">不填 / 无要求 = 无 VIP 门槛</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">可通过商城获得</div>
+    <div class="fld" style="padding-top:5px">
+      <label><input type="checkbox" checked> 勾选后可在商城购买</label>
+      <div class="hint-inline">VIP 无要求且未勾选 → 客户端置灰 Obtain，toast「商品无法通过购买获得」</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">活动标识</div>
+    <div class="fld" style="padding-top:5px">
+      <label><input type="checkbox"> 展示活动标识</label>
+      <input placeholder="活动跳转（选填）" style="margin-top:6px;max-width:360px">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>排序</div>
+    <div class="fld"><input value="20" style="max-width:120px"><div class="hint-inline">非负整数；越大越靠前。最低 0。本期不进 VIP 自动发放池。</div></div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>货币</div>
+    <div class="fld"><input class="locked" value="金币" readonly style="max-width:120px"></div>
+  </div>
+  <div class="form-row">
+    <div class="lab">商品说明</div>
+    <div class="fld"><textarea rows="2" placeholder="未配置则客户端预览不展示说明"></textarea></div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>商品规格</div>
+    <div class="fld">
+      <table class="grid spec-grid">
+        <tr>
+          <th></th>
+          <th>价格（金币）</th>
+          <th>时长（天）</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>规格一 *</td>
+          <td><input value="1999" style="width:90px;height:26px"></td>
+          <td><input value="7" style="width:90px;height:26px"></td>
+          <td class="muted">必填</td>
+        </tr>
+        <tr>
+          <td>规格二</td>
+          <td><input value="3999" style="width:90px;height:26px"></td>
+          <td><input value="15" style="width:90px;height:26px"></td>
+          <td class="muted">选填</td>
+        </tr>
+        <tr>
+          <td>规格三</td>
+          <td><input placeholder="" style="width:90px;height:26px"></td>
+          <td><input placeholder="" style="width:90px;height:26px"></td>
+          <td class="muted">选填</td>
+        </tr>
+        <tr>
+          <td>规格四</td>
+          <td><input placeholder="" style="width:90px;height:26px"></td>
+          <td><input placeholder="-1=永久" style="width:90px;height:26px"></td>
+          <td class="muted">选填；永久填 -1</td>
+        </tr>
+      </table>
+      <div class="hint-inline">每条 = 价格 + 时长，禁止只填一项，否则「规格配置错误」。不是固定四种套餐。房间装饰 / 名片装饰不按个数。</div>
+    </div>
+  </div>
+  <div class="btns">
+    <span class="btn">取消</span>
+    <span class="btn solid">提交</span>
+  </div>
+</div>
+<div class="note">提交成功 toast「提交成功」，新商品默认不展示。必填未填：「请填写必填项」。其它错误：「商品配置信息有误」。</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+/* 把硬编码色接到主题变量。边缘行者基线不加载本文件。 */
+
+.health-dot.bad i { background: var(--danger); }
+.health-dot.bad { color: var(--danger); }
+.qa-conv-del:hover {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+.qa-send { color: var(--on-accent); }
+.qa-icon-badge { color: var(--on-accent); }
+.qa-tag.admin {
+  background: var(--reach-soft);
+  color: var(--reach);
+}
+
+.canvas-wrap {
+  background:
+    radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 0) 0 0 / 18px 18px;
+}
+.node.admin rect { fill: var(--node-admin); }
+.node.pure rect { fill: var(--node-pure); }
+.node.selected rect { fill: var(--node-selected); }
+.edge { stroke: var(--edge); }
+

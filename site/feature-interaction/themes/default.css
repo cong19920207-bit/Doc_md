@@ -1,0 +1,29 @@
+/* 现网蓝灰：从原 style.css :root 抽出，供手动选「现网蓝灰」时覆盖边缘行者基线 */
+:root {
+  --bg: #111318;
+  --bg-elevated: #1a1d24;
+  --bg-panel: #161920;
+  --stroke: #2c313c;
+  --stroke-strong: #3d4452;
+  --text: #e8eaed;
+  --text-muted: #9aa0ab;
+  --text-faint: #6b7280;
+  --accent: #6ea8fe;
+  --accent-soft: rgba(110, 168, 254, 0.16);
+  --ok: #7dcea0;
+  --warn: #e2b657;
+  --danger: #e07070;
+  --danger-soft: rgba(224, 112, 112, 0.12);
+  --on-accent: #0b1220;
+  --social: #6ea8fe;
+  --money: #7dcea0;
+  --growth: #e2b657;
+  --reach: #c4a6ff;
+  --admin: #9aa0ab;
+  --reach-soft: rgba(196, 166, 255, 0.16);
+  --dot: #252a33;
+  --node-admin: #1e222b;
+  --node-pure: #22252c;
+  --node-selected: #1e2a3d;
+  --edge: #4a5160;
+}

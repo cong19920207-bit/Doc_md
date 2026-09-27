@@ -1,0 +1,138 @@
+/* Banner 确认稿增量，不改 workspace/_kit/admin-skin 原文件 */
+body.banner {
+  min-width: 1100px;
+}
+.banner-table {
+  min-width: 1180px;
+}
+.banner-table th,
+.banner-table td {
+  font-size: 12px;
+  padding: 7px 8px;
+}
+.thumb {
+  width: 52px;
+  height: 28px;
+  background: #eee;
+  border: 1px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+}
+.addr {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #888;
+}
+.time {
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+}
+.req { color: #ff5722; margin-right: 2px; }
+.radios { display: flex; flex-wrap: wrap; gap: 4px 14px; padding-top: 8px; }
+.radios label { color: #333; cursor: default; }
+.upload {
+  width: 72px;
+  height: 72px;
+  border: 1px dashed #ccc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  background: #fafafa;
+  font-size: 22px;
+}
+.hint-inline { color: #999; font-size: 12px; margin-top: 4px; line-height: 1.4; }
+.form-row {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+.form-row .lab {
+  width: 118px;
+  flex-shrink: 0;
+  padding-top: 8px;
+  color: #666;
+}
+.form-row .fld { flex: 1; min-width: 0; }
+.form-row .fld input[type="text"],
+.form-row .fld input[type="datetime-local"] {
+  width: 100%;
+  max-width: 360px;
+  height: 36px;
+  border: 1px solid #e6e6e6;
+  padding: 0 8px;
+}
+.form-row .fld .pair {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-row .fld .pair input { max-width: 170px; }
+.dialog.wide {
+  width: 720px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+.dialog.wide .bd { overflow: auto; flex: 1; }
+.inner-only {
+  background: #f2f2f2;
+  min-height: 100vh;
+}
+.inner-only .body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.drop-open {
+  position: relative;
+  display: inline-block;
+}
+.drop-panel {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 160px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  z-index: 8;
+}
+.drop-panel div {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #333;
+}
+.drop-panel .on { background: #e8f6f5; color: #009688; }
+/* 进 Word 的截图也要能看见「变更」角标 */
+.search select.changed,
+.banner-table .changed,
+.radios label.changed {
+  overflow: visible;
+}
+
+.picker {
+  max-width: 960px;
+  margin: 32px auto 48px;
+  padding: 0 24px;
+  font-family: 微软雅黑, "PingFang SC", sans-serif;
+  color: #333;
+}
+.picker h1 { font-size: 20px; margin: 0 0 8px; }
+.picker .lead { color: #666; font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.card {
+  display: block;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 2px;
+}
+.card:hover { border-color: #009688; }
+.card b { display: block; font-size: 15px; margin-bottom: 6px; color: #009688; }
+.card p { margin: 0; font-size: 13px; color: #666; line-height: 1.55; }
+.card .rec { display: inline-block; margin-left: 6px; font-size: 11px; color: #fff; background: #009688; padding: 1px 6px; border-radius: 2px; }

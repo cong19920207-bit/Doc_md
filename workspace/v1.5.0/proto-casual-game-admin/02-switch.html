@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>游戏入口开关</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:420px;padding:20px 24px 28px}</style>
+</head>
+<body>
+<div class="caption">「图2」游戏入口开关</div>
+<div class="hint">点配置表「游戏入口开关」操作后弹出。橙底为新两款，默认关闭。</div>
+<div class="dialog">
+  <h2>游戏入口开关</h2>
+  <div class="sw-row"><span class="name">LUDO</span><label><input type="radio" name="a"> 关闭</label><label><input type="radio" name="a" checked> 开启</label></div>
+  <div class="sw-row"><span class="name">Carrom</span><label><input type="radio" name="b"> 关闭</label><label><input type="radio" name="b" checked> 开启</label></div>
+  <div class="sw-row"><span class="name">Block Crush</span><label><input type="radio" name="c"> 关闭</label><label><input type="radio" name="c" checked> 开启</label></div>
+  <div class="sw-row row-new" style="padding:4px 4px;margin-left:-4px;margin-right:-4px;">
+    <span class="name">Jackaroo <span class="tag">新增</span></span>
+    <label><input type="radio" name="d" checked> 关闭</label><label><input type="radio" name="d"> 开启</label>
+  </div>
+  <div class="sw-row row-new" style="padding:4px 4px;margin-left:-4px;margin-right:-4px;">
+    <span class="name">Melon Dash <span class="tag">新增</span></span>
+    <label><input type="radio" name="e" checked> 关闭</label><label><input type="radio" name="e"> 开启</label>
+  </div>
+  <span class="btn dialog ok">确定</span>
+</div>
+<div class="note">关则大厅不展示入口；已停留该游戏页再点快速开始，toast「游戏已下架」后回大厅。</div>
+</body>
+</html>

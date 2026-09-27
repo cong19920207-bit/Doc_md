@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>A · Banner 列表补丁</title>
+<link rel="stylesheet" href="../../_kit/admin-skin/style.css">
+<link rel="stylesheet" href="extra.css">
+</head>
+<body class="gold banner">
+<div class="demo-bar">
+  <span class="tag">确认稿</span>
+  <strong>A 现网壳 · 列表补丁</strong>
+  <div class="hint">不进 Word。黄标 = 本期增量。壳沿用 _kit/admin-skin，未点名的菜单只占位。</div>
+</div>
+<div class="app">
+  <div class="logo"><span class="mark"></span>Hayyo Admin</div>
+  <div class="top">
+    <div class="hamburger">☰</div>
+    <nav class="top-nav">
+      <a href="#">Manage</a>
+      <a href="#">数据统计</a>
+      <a class="on" href="#">平台配置</a>
+      <a href="#">Audit</a>
+      <a href="#">代理管理</a>
+      <a href="#">后台配置</a>
+    </nav>
+    <div class="top-user">demo</div>
+  </div>
+  <aside class="side">
+    <div class="side-item">
+      <div class="row">商品管理 <span class="arrow">▾</span></div>
+    </div>
+    <div class="side-item open">
+      <div class="row">Banner管理 <span class="arrow">▴</span></div>
+      <div class="sub">
+        <a class="on" href="#">Banner列表</a>
+        <a href="#">活动管理</a>
+      </div>
+    </div>
+    <div class="side-item">
+      <div class="row">敏感词管理 <span class="arrow">▾</span></div>
+    </div>
+    <div class="side-item">
+      <div class="row">消息管理 <span class="arrow">▾</span></div>
+    </div>
+    <div class="side-item">
+      <div class="row">签到配置 <span class="arrow">▾</span></div>
+    </div>
+  </aside>
+  <div class="tabs">
+    <div class="ctrl">‹</div>
+    <div class="tab">Banner列表</div>
+    <div class="ctrl" style="margin-left:auto">›</div>
+    <div class="ctrl">▾</div>
+  </div>
+  <main class="body">
+    <form class="search">
+      <select><option selected>启用</option><option>停用</option><option>全部</option></select>
+      <select><option selected>全部系统</option><option>iOS</option><option>安卓</option></select>
+      <select><option selected>全部语区</option><option>英语</option><option>阿语</option><option>土语</option></select>
+      <select class="changed">
+        <option selected>全部类型</option>
+        <option>首页</option>
+        <option>团队数据页</option>
+      </select>
+      <button class="btn" type="button">查询</button>
+      <button class="btn" type="button">新增</button>
+    </form>
+    <div class="table-wrap">
+      <table class="banner-table">
+        <thead>
+          <tr>
+            <th>标题</th>
+            <th>图片</th>
+            <th class="changed">类型</th>
+            <th>跳转</th>
+            <th>地址</th>
+            <th>时间</th>
+            <th>显示设备</th>
+            <th>语区</th>
+            <th>排序</th>
+            <th>状态</th>
+            <th>最低版本号</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>首页活动位</td>
+            <td><span class="thumb"></span></td>
+            <td>首页</td>
+            <td>页面</td>
+            <td class="addr">https://h5.example.com/home-act</td>
+            <td class="time">2026-09-01 00:00:00 — 2026-12-31 23:59:59</td>
+            <td>全设备</td>
+            <td>英语</td>
+            <td>5</td>
+            <td><span class="status ok">启用</span></td>
+            <td>—</td>
+            <td class="ops"><a>编辑</a></td>
+          </tr>
+          <tr>
+            <td>团队数据运营位</td>
+            <td><span class="thumb"></span></td>
+            <td class="changed">团队数据页</td>
+            <td>页面</td>
+            <td class="addr">https://h5.example.com/team-act</td>
+            <td class="time">2026-09-01 00:00:00 — 2026-12-31 23:59:59</td>
+            <td>全设备</td>
+            <td>英语</td>
+            <td>10</td>
+            <td><span class="status ok">启用</span></td>
+            <td>—</td>
+            <td class="ops"><a>编辑</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pager">共 2 条</div>
+  </main>
+</div>
+</body>
+</html>

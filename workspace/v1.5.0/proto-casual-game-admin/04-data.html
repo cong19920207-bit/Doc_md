@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>休闲游戏数据</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:920px}</style>
+</head>
+<body>
+<div class="caption">「图1」休闲游戏数据 · 游戏条件下拉</div>
+<div class="hint">表格列沿用历史（大厅 / 房间各：对局数、人数、流水、抽成）。本版只在游戏下拉增加两款。</div>
+<div class="toolbar" style="margin-bottom:48px;">
+  <span>日期：</span>
+  <input placeholder="请输入" style="width:140px">
+  <span style="margin-left:12px;">游戏：</span>
+  <span class="wrap-rel">
+    <span class="fake-select" style="min-width:160px;border-color:#4a90d9;">- 全部游戏 - <span class="caret">▼</span></span>
+    <div class="dropdown">
+      <div class="on">- 全部游戏 -</div>
+      <div>LUDO</div>
+      <div>Carrom</div>
+      <div>Block Crush</div>
+      <div class="new-opt">Jackaroo　本版新增</div>
+      <div class="new-opt">Melon Dash　本版新增</div>
+    </div>
+  </span>
+  <span class="btn" style="margin-left:8px;">搜索</span>
+</div>
+<table class="grid" style="margin-top:8px;">
+  <tr>
+    <th rowspan="2" style="width:16%">日期</th>
+    <th colspan="4">大厅游戏</th>
+    <th colspan="4">房间游戏</th>
+  </tr>
+  <tr>
+    <th>对局数</th><th>人数</th><th>流水</th><th>抽成</th>
+    <th>对局数</th><th>人数</th><th>流水</th><th>抽成</th>
+  </tr>
+  <tr>
+    <td>2026-09-03</td>
+    <td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">0</td>
+    <td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">0</td>
+  </tr>
+  <tr>
+    <td>2026-09-02</td>
+    <td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">0</td>
+    <td class="center">0</td><td class="center">0</td><td class="center">0</td><td class="center">0</td>
+  </tr>
+</table>
+<div class="page-num"><span>上一页</span><span class="cur">1</span><span>2</span><span>下一页</span></div>
+<div class="note">本版房间内 Jackaroo / Melon Dash 无对局，房间列为空则显示 0，不跳过日期。T+1。</div>
+</body>
+</html>

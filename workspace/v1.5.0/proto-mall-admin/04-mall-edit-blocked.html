@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>展示中不可编辑</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:1180px}</style>
+</head>
+<body>
+<div class="caption">「图4」展示中商品 · 点编辑</div>
+<div class="hint">不打开编辑弹窗。须先「不展示」，再编辑，再「展示」。</div>
+<div class="tabs">
+  <div class="tab">头饰卡</div>
+  <div class="tab">座驾</div>
+  <div class="tab">房间背景</div>
+  <div class="tab">头像框</div>
+  <div class="tab on new">房间装饰 <span class="tag">新增</span></div>
+  <div class="tab new">名片装饰</div>
+</div>
+<table class="grid">
+  <tr>
+    <th>商品名称（英）</th>
+    <th style="width:70px">排序</th>
+    <th style="width:70px">图片</th>
+    <th style="width:90px">价格</th>
+    <th style="width:90px">规格一</th>
+    <th style="width:90px">商城展示</th>
+    <th style="width:180px">操作</th>
+  </tr>
+  <tr class="row-new">
+    <td>Golden Room Frame</td>
+    <td class="center">20</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">1999</td>
+    <td class="center">7 天</td>
+    <td class="center status-on">展示</td>
+    <td class="center"><span class="link">不展示</span>　<span class="link off">编辑 ← 点击</span></td>
+  </tr>
+</table>
+<div style="margin-top:24px;text-align:center">
+  <div class="toast">不支持编辑展示中的商品</div>
+</div>
+</body>
+</html>

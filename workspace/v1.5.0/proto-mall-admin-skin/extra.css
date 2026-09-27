@@ -1,0 +1,254 @@
+/* 商城后台确认稿增量，不改 workspace/_kit/admin-skin 原文件 */
+body.mall {
+  min-width: 1100px;
+}
+
+.mall-table {
+  min-width: 1480px;
+}
+.mall-table th,
+.mall-table td {
+  font-size: 12px;
+  padding: 7px 8px;
+}
+
+.thumb {
+  width: 48px;
+  height: 32px;
+  background: #eee;
+  border: 1px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+}
+.search select.changed {
+  min-width: 128px;
+  padding-right: 36px;
+}
+.delta {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 16px;
+  padding: 0 4px;
+  background: var(--change);
+  color: #fff;
+  vertical-align: middle;
+}
+
+.req { color: #ff5722; margin-right: 2px; }
+.hint-inline { color: #999; font-size: 12px; margin-top: 4px; line-height: 1.4; }
+.muted { color: #999; }
+
+.form-row {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+.form-row .lab {
+  width: 128px;
+  flex-shrink: 0;
+  padding-top: 8px;
+  color: #666;
+}
+.form-row .fld { flex: 1; min-width: 0; }
+.form-row .fld input[type="text"],
+.form-row .fld input:not([type]),
+.form-row .fld select,
+.form-row .fld textarea {
+  width: 100%;
+  max-width: 360px;
+  height: 36px;
+  border: 1px solid #e6e6e6;
+  padding: 0 8px;
+}
+.form-row .fld textarea {
+  height: 56px;
+  padding: 6px 8px;
+  resize: vertical;
+}
+.form-row .fld input.locked {
+  background: #f5f5f5;
+  color: #999;
+  max-width: 220px;
+}
+
+.cat-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  padding: 0 12px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.cat-tabs a {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 14px;
+  font-size: 13px;
+  color: #666;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  position: relative;
+}
+.cat-tabs a.on {
+  color: #009688;
+  border-bottom-color: #009688;
+}
+.cat-tabs a.changed {
+  padding-right: 38px;
+  overflow: visible;
+}
+
+.upload {
+  width: 72px;
+  height: 72px;
+  border: 1px dashed #ccc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  background: #fafafa;
+  font-size: 22px;
+}
+
+.dialog.wide {
+  width: 760px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+.dialog.wide .bd { overflow: auto; flex: 1; }
+.dialog.mid {
+  width: 680px;
+  overflow: visible !important;
+}
+.dialog.mid .bd { overflow: visible; }
+
+.spec-grid {
+  min-width: 0;
+  width: 100%;
+}
+.spec-grid th,
+.spec-grid td {
+  padding: 6px 8px;
+  font-size: 12px;
+}
+.spec-grid input {
+  height: 32px;
+  width: 88px;
+  border: 1px solid #e6e6e6;
+  padding: 0 6px;
+}
+
+.ops a.off {
+  color: #bbb;
+  cursor: default;
+}
+
+.drop-open {
+  position: relative;
+  display: inline-block;
+}
+.drop-panel {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  width: 180px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  z-index: 8;
+}
+.drop-panel.side {
+  top: 0;
+  left: calc(100% + 8px);
+}
+.type-list {
+  width: 148px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+}
+.type-list div {
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #333;
+}
+.type-list .on { background: #e8f6f5; color: #009688; }
+.drop-panel div {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #333;
+}
+.drop-panel .on { background: #e8f6f5; color: #009688; }
+.drop-panel .changed {
+  padding-right: 36px;
+}
+
+.fake-select {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  min-width: 180px;
+  padding: 0 10px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+}
+.fake-select .caret { color: #999; font-size: 10px; margin-left: 8px; }
+
+.search select.changed,
+.mall-table .changed,
+.cat-tabs a.changed,
+.fake-select.changed,
+.drop-panel .changed,
+.type-list .changed {
+  overflow: visible;
+}
+
+.picker {
+  max-width: 960px;
+  margin: 32px auto 48px;
+  padding: 0 24px;
+  font-family: 微软雅黑, "PingFang SC", sans-serif;
+  color: #333;
+}
+.picker h1 { font-size: 20px; margin: 0 0 8px; }
+.picker .lead { color: #666; font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.card {
+  display: block;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 2px;
+}
+.card:hover { border-color: #009688; }
+.card b { display: block; font-size: 15px; margin-bottom: 6px; color: #009688; }
+.card p { margin: 0; font-size: 13px; color: #666; line-height: 1.55; }
+.card .rec { display: inline-block; margin-left: 6px; font-size: 11px; color: #fff; background: #009688; padding: 1px 6px; border-radius: 2px; }
+
+/* 进 Word 截图：去掉顶栏说明，弹窗整页展开 */
+body.word .demo-bar { display: none !important; }
+body.word-shot .app { display: none !important; }
+body.word-shot {
+  display: block;
+  height: auto;
+  background: #f2f2f2;
+}
+body.word-shot .mask {
+  display: flex !important;
+  position: static;
+  inset: auto;
+  background: #f2f2f2;
+  min-height: auto;
+  padding: 24px 0 40px;
+}
+body.word-shot .dialog.wide,
+body.word-shot .dialog.mid {
+  max-height: none !important;
+}
+body.word-shot .dialog.wide .bd {
+  overflow: visible !important;
+}

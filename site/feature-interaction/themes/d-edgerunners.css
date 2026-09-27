@@ -1,0 +1,29 @@
+/* D · 边缘行者 Neon：品红当主色（发送/选中都是粉） */
+:root {
+  --bg: #050508;
+  --bg-elevated: #0c0a12;
+  --bg-panel: #09080f;
+  --stroke: #2a1830;
+  --stroke-strong: #3d2248;
+  --text: #f4f0ff;
+  --text-muted: #a898b8;
+  --text-faint: #6e6480;
+  --accent: #ff3cac;
+  --accent-soft: rgba(255, 60, 172, 0.16);
+  --ok: #3dfff3;
+  --warn: #f8ff2a;
+  --danger: #ff3cac;
+  --danger-soft: rgba(255, 60, 172, 0.14);
+  --on-accent: #14010c;
+  --social: #3dfff3;
+  --money: #05ffa1;
+  --growth: #f8ff2a;
+  --reach: #ff3cac;
+  --admin: #9aa0b4;
+  --reach-soft: rgba(255, 60, 172, 0.16);
+  --dot: #2a1830;
+  --node-admin: #0e0c14;
+  --node-pure: #121018;
+  --node-selected: #2a1020;
+  --edge: #4a3060;
+}

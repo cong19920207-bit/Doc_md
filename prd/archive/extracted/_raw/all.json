@@ -1,0 +1,312 @@
+{
+  "V1.2.0": [
+    {
+      "feature": "app-branding",
+      "title": "应用名称 / 更新 / 品牌",
+      "md": "prd/archive/extracted/_raw/V1.2.0/app-branding/V1.2.0.md",
+      "images": 1,
+      "headings": [
+        "1.0.0 应用改名涉及改动"
+      ]
+    }
+  ],
+  "V1.3.1": [
+    {
+      "feature": "infra",
+      "title": "基建与其他",
+      "md": "prd/archive/extracted/_raw/V1.3.1/infra/V1.3.1.md",
+      "images": 0,
+      "headings": [
+        "文首"
+      ]
+    },
+    {
+      "feature": "referral",
+      "title": "拉新",
+      "md": "prd/archive/extracted/_raw/V1.3.1/referral/V1.3.1.md",
+      "images": 1,
+      "headings": [
+        "拉新新增限制逻辑(丛)"
+      ]
+    }
+  ],
+  "V1.1.1": [
+    {
+      "feature": "yallapay",
+      "title": "YallaPay 分销支付",
+      "md": "prd/archive/extracted/_raw/V1.1.1/yallapay/V1.1.1.md",
+      "images": 19,
+      "headings": [
+        "3.1 第一部分 YallaPay-币商分销支付（许静）",
+        "3.1.1分销支付链接生成入口",
+        "3.1.2 [YallaPay]生成三方分销支付链接",
+        "3.1.3 [YallaPay]付款人/收货人搜索功能",
+        "3.1.4 [YallaPay]支付链接管理/记录",
+        "3.1.5[YallaPay]查询分销订单",
+        "3.1.6[YallaPay]用户通过分销链接支付-预订单"
+      ]
+    },
+    {
+      "feature": "infra",
+      "title": "基建与其他",
+      "md": "prd/archive/extracted/_raw/V1.1.1/infra/V1.1.1.md",
+      "images": 3,
+      "headings": [
+        "3.1.7币商账户金币流水",
+        "3.1.8币商中心数据统计",
+        "3.1.9私聊风控"
+      ]
+    }
+  ],
+  "V1.1.0": [
+    {
+      "feature": "infra",
+      "title": "基建与其他",
+      "md": "prd/archive/extracted/_raw/V1.1.0/infra/V1.1.0.md",
+      "images": 31,
+      "headings": [
+        "文首",
+        "3.4 第四部分 其他优化需求"
+      ]
+    },
+    {
+      "feature": "yallapay",
+      "title": "YallaPay 分销支付",
+      "md": "prd/archive/extracted/_raw/V1.1.0/yallapay/V1.1.0.md",
+      "images": 0,
+      "headings": [
+        "3.1 第一部分 YallaPay-币商分销支付（许静）"
+      ]
+    },
+    {
+      "feature": "lottery",
+      "title": "抽奖活动",
+      "md": "prd/archive/extracted/_raw/V1.1.0/lottery/V1.1.0.md",
+      "images": 26,
+      "headings": [
+        "3.2 第二部分 抽奖活动（许静）"
+      ]
+    },
+    {
+      "feature": "room",
+      "title": "房间",
+      "md": "prd/archive/extracted/_raw/V1.1.0/room/V1.1.0.md",
+      "images": 24,
+      "headings": [
+        "3.3 第三部分 房间内需求"
+      ]
+    },
+    {
+      "feature": "auth-login",
+      "title": "登录注册",
+      "md": "prd/archive/extracted/_raw/V1.1.0/auth-login/V1.1.0.md",
+      "images": 9,
+      "headings": [
+        "3.5第五部分 登录-优化新增（丛国序）"
+      ]
+    },
+    {
+      "feature": "coupon",
+      "title": "福利券",
+      "md": "prd/archive/extracted/_raw/V1.1.0/coupon/V1.1.0.md",
+      "images": 26,
+      "headings": [
+        "3.6 第六部分 新功能 – 福利券体系（丛国序）"
+      ]
+    },
+    {
+      "feature": "channel-tracking",
+      "title": "渠道埋点",
+      "md": "prd/archive/extracted/_raw/V1.1.0/channel-tracking/V1.1.0.md",
+      "images": 0,
+      "headings": [
+        "第八部分：版本埋点https://365.kdocs.cn/l/cbSRmBnKkeZh"
+      ]
+    }
+  ],
+  "V1.3.0": [
+    {
+      "feature": "casual-game",
+      "title": "休闲游戏",
+      "md": "prd/archive/extracted/_raw/V1.3.0/casual-game/V1.3.0.md",
+      "images": 116,
+      "headings": [
+        "3.1 第一部分 双端接入三方休闲游戏"
+      ]
+    },
+    {
+      "feature": "infra",
+      "title": "基建与其他",
+      "md": "prd/archive/extracted/_raw/V1.3.0/infra/V1.3.0.md",
+      "images": 6,
+      "headings": [
+        "3.2 第二部分 其他功能"
+      ]
+    },
+    {
+      "feature": "app-branding",
+      "title": "应用名称 / 更新 / 品牌",
+      "md": "prd/archive/extracted/_raw/V1.3.0/app-branding/V1.3.0.md",
+      "images": 1,
+      "headings": [
+        "3.3 第三部分 IOS端需补齐功能"
+      ]
+    },
+    {
+      "feature": "admin",
+      "title": "运营后台",
+      "md": "prd/archive/extracted/_raw/V1.3.0/admin/V1.3.0.md",
+      "images": 65,
+      "headings": [
+        "3.4 第四部分 后台功能"
+      ]
+    },
+    {
+      "feature": "channel-tracking",
+      "title": "渠道埋点",
+      "md": "prd/archive/extracted/_raw/V1.3.0/channel-tracking/V1.3.0.md",
+      "images": 0,
+      "headings": [
+        "3.5 第五部分 埋点需求@曹敏"
+      ]
+    }
+  ],
+  "V1.0.0": [
+    {
+      "feature": "infra",
+      "title": "基建与其他",
+      "md": "prd/archive/extracted/_raw/V1.0.0/infra/V1.0.0.md",
+      "images": 35,
+      "headings": [
+        "文首",
+        "3.11第十一部分 其他基建需求（许静）"
+      ]
+    },
+    {
+      "feature": "auth-login",
+      "title": "登录注册",
+      "md": "prd/archive/extracted/_raw/V1.0.0/auth-login/V1.0.0.md",
+      "images": 31,
+      "headings": [
+        "3.1 第一部分：登陆注册模块（丛国序）"
+      ]
+    },
+    {
+      "feature": "checkin-task",
+      "title": "签到与任务",
+      "md": "prd/archive/extracted/_raw/V1.0.0/checkin-task/V1.0.0.md",
+      "images": 16,
+      "headings": [
+        "3.2 第二部分：每日签到和玩家任务（丛国序）"
+      ]
+    },
+    {
+      "feature": "user-level",
+      "title": "用户等级",
+      "md": "prd/archive/extracted/_raw/V1.0.0/user-level/V1.0.0.md",
+      "images": 6,
+      "headings": [
+        "3.3 第三部分：用户等级（丛国序）"
+      ]
+    },
+    {
+      "feature": "referral",
+      "title": "拉新",
+      "md": "prd/archive/extracted/_raw/V1.0.0/referral/V1.0.0.md",
+      "images": 100,
+      "headings": [
+        "3.4 第四部分：个人拉新（丛国序）"
+      ]
+    },
+    {
+      "feature": "merchant",
+      "title": "币商",
+      "md": "prd/archive/extracted/_raw/V1.0.0/merchant/V1.0.0.md",
+      "images": 50,
+      "headings": [
+        "3.5 第五部分 币商相关（许静）"
+      ]
+    },
+    {
+      "feature": "profile",
+      "title": "个人中心",
+      "md": "prd/archive/extracted/_raw/V1.0.0/profile/V1.0.0.md",
+      "images": 113,
+      "headings": [
+        "3.6 第六部分 个人中心模块（许静）"
+      ]
+    },
+    {
+      "feature": "messaging",
+      "title": "消息",
+      "md": "prd/archive/extracted/_raw/V1.0.0/messaging/V1.0.0.md",
+      "images": 30,
+      "headings": [
+        "3.7 第七部分 消息（许静）"
+      ]
+    },
+    {
+      "feature": "recharge",
+      "title": "金币充值",
+      "md": "prd/archive/extracted/_raw/V1.0.0/recharge/V1.0.0.md",
+      "images": 26,
+      "headings": [
+        "3.8 第八部分 金币充值（许静）"
+      ]
+    },
+    {
+      "feature": "room",
+      "title": "房间",
+      "md": "prd/archive/extracted/_raw/V1.0.0/room/V1.0.0.md",
+      "images": 208,
+      "headings": [
+        "3.9 第九部分 房间功能（许静）"
+      ]
+    },
+    {
+      "feature": "ranking",
+      "title": "排行榜",
+      "md": "prd/archive/extracted/_raw/V1.0.0/ranking/V1.0.0.md",
+      "images": 11,
+      "headings": [
+        "3.10第十部分 排行榜（许静）"
+      ]
+    },
+    {
+      "feature": "mall",
+      "title": "商城 / 背包 / 靓号",
+      "md": "prd/archive/extracted/_raw/V1.0.0/mall/V1.0.0.md",
+      "images": 36,
+      "headings": [
+        "3.12第十二部分 商城、背包、靓号（许静）"
+      ]
+    },
+    {
+      "feature": "relationship",
+      "title": "关系体系",
+      "md": "prd/archive/extracted/_raw/V1.0.0/relationship/V1.0.0.md",
+      "images": 25,
+      "headings": [
+        "3.13 第十三部分 关系体系（许静）"
+      ]
+    },
+    {
+      "feature": "vip",
+      "title": "用户 VIP",
+      "md": "prd/archive/extracted/_raw/V1.0.0/vip/V1.0.0.md",
+      "images": 17,
+      "headings": [
+        "3.14 第十四部分 用户VIP（丛国序）"
+      ]
+    },
+    {
+      "feature": "room-game",
+      "title": "房间游戏（水果机 / 动物机 / 水果派对）",
+      "md": "prd/archive/extracted/_raw/V1.0.0/room-game/V1.0.0.md",
+      "images": 11,
+      "headings": [
+        "3.15第十五部分 房间游戏-水果派对"
+      ]
+    }
+  ]
+}

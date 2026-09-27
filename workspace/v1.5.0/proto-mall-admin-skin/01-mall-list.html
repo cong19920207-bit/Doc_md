@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>图1 · 商城管理列表</title>
+<link rel="stylesheet" href="../../_kit/admin-skin/style.css">
+<link rel="stylesheet" href="extra.css?v=5">
+</head>
+<body class="gold mall">
+<div class="demo-bar">
+  <span class="tag">确认稿</span>
+  <strong>图1 现网壳 · 商城管理列表</strong>
+  <div class="hint">不进 Word。列表按现网：分类在筛选下拉，不在 tab。黄标 = 下拉里新增房间装饰 / 名片装饰。展示位置、按钮状态用现网取值当壳。展示中「编辑」灰色。</div>
+</div>
+<div class="app">
+  <div class="logo"><span class="mark"></span>Hayyo Admin</div>
+  <div class="top">
+    <div class="hamburger">☰</div>
+    <nav class="top-nav">
+      <a href="#">数据统计</a>
+      <a href="#">Manage</a>
+      <a class="on" href="#">平台配置</a>
+      <a href="#">Audit</a>
+    </nav>
+    <div class="top-user">demo</div>
+  </div>
+  <aside class="side">
+    <div class="side-item open">
+      <div class="row">商品管理 <span class="arrow">▴</span></div>
+      <div class="sub">
+        <a href="#">礼物管理</a>
+        <a href="#">周星礼物</a>
+        <a class="on" href="#">商城管理</a>
+      </div>
+    </div>
+    <div class="side-item">
+      <div class="row">Banner管理 <span class="arrow">▾</span></div>
+    </div>
+    <div class="side-item">
+      <div class="row">消息管理 <span class="arrow">▾</span></div>
+    </div>
+    <div class="side-item">
+      <div class="row">签到配置 <span class="arrow">▾</span></div>
+    </div>
+  </aside>
+  <div class="tabs">
+    <div class="ctrl">‹</div>
+    <div class="tab">商城管理</div>
+    <div class="ctrl" style="margin-left:auto">›</div>
+    <div class="ctrl">▾</div>
+  </div>
+  <main class="body">
+    <form class="search">
+      <select>
+        <option>头饰卡</option>
+        <option>座驾</option>
+        <option>房间背景</option>
+        <option>头像框</option>
+        <option selected>房间装饰</option>
+        <option>名片装饰</option>
+      </select>
+      <span class="delta">变更</span>
+      <select>
+        <option selected disabled>--商城展示--</option>
+        <option>全部</option>
+        <option>展示</option>
+        <option>不展示</option>
+      </select>
+      <select>
+        <option selected disabled>--货币类型--</option>
+        <option>金币</option>
+        <option>宝石</option>
+      </select>
+      <input type="text" placeholder="商品名称">
+      <input type="text" placeholder="商品ID">
+      <button class="btn" type="button" title="搜索">⌕</button>
+      <button class="btn" type="button">添加</button>
+    </form>
+    <div class="table-wrap">
+      <table class="mall-table">
+        <thead>
+          <tr>
+            <th>商品ID</th>
+            <th>排序</th>
+            <th>英语名称</th>
+            <th>阿语名称</th>
+            <th>土语名称</th>
+            <th>图片</th>
+            <th>价格</th>
+            <th>规格</th>
+            <th>展示位置</th>
+            <th>货币类型</th>
+            <th>按钮状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>11001</td>
+            <td>20</td>
+            <td>Golden Room Frame</td>
+            <td>إطار الغرفة الذهبي</td>
+            <td>Altın Oda Çerçevesi</td>
+            <td><span class="thumb"></span></td>
+            <td>1,999</td>
+            <td>7天</td>
+            <td>礼物面板 商城</td>
+            <td>金币</td>
+            <td>所有人可购买</td>
+            <td class="ops"><a>不展示</a><a class="off">编辑</a></td>
+          </tr>
+          <tr>
+            <td>11002</td>
+            <td>10</td>
+            <td>Neon Room</td>
+            <td>غرفة نيون</td>
+            <td>Neon Oda</td>
+            <td><span class="thumb"></span></td>
+            <td>499</td>
+            <td>1天</td>
+            <td>不展示</td>
+            <td>金币</td>
+            <td>仅展示</td>
+            <td class="ops"><a>展示</a><a>编辑</a></td>
+          </tr>
+          <tr>
+            <td>11003</td>
+            <td>5</td>
+            <td>Forever Glow</td>
+            <td>توهج دائم</td>
+            <td>Sonsuz Işıltı</td>
+            <td><span class="thumb"></span></td>
+            <td>9,999</td>
+            <td>永久</td>
+            <td>不展示</td>
+            <td>金币</td>
+            <td>仅展示</td>
+            <td class="ops"><a>展示</a><a>编辑</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pager">共 3 条</div>
+  </main>
+</div>
+<script>
+(function () {
+  if (!/[?&]word=1/.test(location.search)) return;
+  document.body.classList.add("word");
+  var bar = document.querySelector(".demo-bar");
+  if (bar) bar.remove();
+  if (document.querySelector(".mask.show")) {
+    document.body.classList.add("word-shot");
+    var dlg = document.querySelector(".mask.show .dialog");
+    if (dlg) dlg.style.maxHeight = "none";
+    var bd = document.querySelector(".mask.show .dialog .bd");
+    if (bd) { bd.style.overflow = "visible"; bd.style.maxHeight = "none"; }
+  }
+})();
+</script>
+</body>
+</html>

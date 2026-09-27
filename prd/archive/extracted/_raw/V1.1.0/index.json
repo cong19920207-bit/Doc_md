@@ -1,0 +1,66 @@
+[
+  {
+    "feature": "infra",
+    "title": "基建与其他",
+    "md": "prd/archive/extracted/_raw/V1.1.0/infra/V1.1.0.md",
+    "images": 31,
+    "headings": [
+      "文首",
+      "3.4 第四部分 其他优化需求"
+    ]
+  },
+  {
+    "feature": "yallapay",
+    "title": "YallaPay 分销支付",
+    "md": "prd/archive/extracted/_raw/V1.1.0/yallapay/V1.1.0.md",
+    "images": 0,
+    "headings": [
+      "3.1 第一部分 YallaPay-币商分销支付（许静）"
+    ]
+  },
+  {
+    "feature": "lottery",
+    "title": "抽奖活动",
+    "md": "prd/archive/extracted/_raw/V1.1.0/lottery/V1.1.0.md",
+    "images": 26,
+    "headings": [
+      "3.2 第二部分 抽奖活动（许静）"
+    ]
+  },
+  {
+    "feature": "room",
+    "title": "房间",
+    "md": "prd/archive/extracted/_raw/V1.1.0/room/V1.1.0.md",
+    "images": 24,
+    "headings": [
+      "3.3 第三部分 房间内需求"
+    ]
+  },
+  {
+    "feature": "auth-login",
+    "title": "登录注册",
+    "md": "prd/archive/extracted/_raw/V1.1.0/auth-login/V1.1.0.md",
+    "images": 9,
+    "headings": [
+      "3.5第五部分 登录-优化新增（丛国序）"
+    ]
+  },
+  {
+    "feature": "coupon",
+    "title": "福利券",
+    "md": "prd/archive/extracted/_raw/V1.1.0/coupon/V1.1.0.md",
+    "images": 26,
+    "headings": [
+      "3.6 第六部分 新功能 – 福利券体系（丛国序）"
+    ]
+  },
+  {
+    "feature": "channel-tracking",
+    "title": "渠道埋点",
+    "md": "prd/archive/extracted/_raw/V1.1.0/channel-tracking/V1.1.0.md",
+    "images": 0,
+    "headings": [
+      "第八部分：版本埋点https://365.kdocs.cn/l/cbSRmBnKkeZh"
+    ]
+  }
+]

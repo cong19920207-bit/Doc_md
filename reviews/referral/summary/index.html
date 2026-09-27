@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hayyo 拉新运营复盘</title>
+  <style>
+:root {
+  --bg: #181818;
+  --text: #f0f0f0;
+  --text-2: rgba(240, 240, 240, 0.74);
+  --text-3: rgba(240, 240, 240, 0.6);
+  --text-4: rgba(240, 240, 240, 0.36);
+  --fill: rgba(240, 240, 240, 0.08);
+  --fill-2: rgba(240, 240, 240, 0.06);
+  --stroke: rgba(240, 240, 240, 0.12);
+  --stroke-2: rgba(240, 240, 240, 0.08);
+  --accent: #81a1c1;
+  --info: #2e79b5;
+  --success: #1f8a65;
+  --warning: #e2b657;
+  --danger: #c04848;
+  --orange: #f0a040;
+  --yellow: #e8c030;
+  --font: -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+body { overflow: auto; }
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 590;
+}
+h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 590;
+}
+h3 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 590;
+}
+p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text);
+}
+.muted { color: var(--text-2); }
+.caption {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-3);
+}
+.stack { display: flex; flex-direction: column; }
+.gap-8 { gap: 8px; }
+.gap-10 { gap: 10px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.gap-24 { gap: 24px; }
+
+.callout {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--stroke-2);
+  border-radius: 8px;
+  background: var(--fill-2);
+}
+.callout.warn { border-color: rgba(226, 182, 87, 0.35); background: rgba(226, 182, 87, 0.1); }
+.callout.info { border-color: rgba(46, 121, 181, 0.35); background: rgba(46, 121, 181, 0.1); }
+.callout-mark {
+  width: 8px;
+  min-width: 8px;
+  border-radius: 99px;
+  margin-top: 4px;
+  align-self: stretch;
+}
+.callout.warn .callout-mark { background: var(--warning); }
+.callout.info .callout-mark { background: var(--info); }
+.callout h4 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 650;
+}
+.callout p { color: var(--text-2); }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.stat { min-width: 0; }
+.stat-value {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 650;
+}
+.stat-value.danger { color: #e06c75; }
+.stat-value.warning { color: var(--warning); }
+.stat-label {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.usage { display: flex; flex-direction: column; gap: 6px; }
+.usage-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-3);
+}
+.usage-track {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--fill);
+  overflow: hidden;
+  display: flex;
+}
+.usage-fill { height: 100%; border-radius: 99px; }
+.usage-fill.orange { background: var(--orange); }
+.usage-fill.yellow { background: var(--yellow); }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.grid-split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+}
+.grid-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.chart-box {
+  width: 100%;
+  min-height: 200px;
+}
+.chart-box svg { display: block; width: 100%; height: auto; }
+
+.table-wrap {
+  border: 1px solid var(--stroke-2);
+  border-radius: 8px;
+  overflow: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 18px;
+}
+th, td {
+  padding: 9px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--stroke-2);
+  vertical-align: top;
+}
+th {
+  font-weight: 600;
+  color: var(--text-3);
+  background: var(--fill-2);
+  white-space: nowrap;
+}
+tr:last-child td { border-bottom: 0; }
+tbody tr:nth-child(even) td { background: rgba(240, 240, 240, 0.03); }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  margin-right: 8px;
+  vertical-align: 1px;
+}
+.dot.info { background: var(--info); }
+.dot.success { background: var(--success); }
+.dot.warning { background: var(--warning); }
+.dot.danger { background: var(--danger); }
+.dot.neutral { background: var(--text-4); }
+
+.card {
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+  background: transparent;
+  overflow: hidden;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--stroke-2);
+}
+.card-body { padding: 12px; }
+.divider {
+  height: 1px;
+  background: var(--stroke-2);
+  margin: 2px 0;
+}
+
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill {
+  font-size: 12px;
+  line-height: 16px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid var(--stroke);
+  color: var(--text-2);
+}
+.pill.active {
+  background: var(--fill);
+  color: var(--text);
+  border-color: transparent;
+}
+
+.footer {
+  border-top: 1px solid var(--stroke-2);
+  padding-top: 12px;
+}
+
+@media (max-width: 860px) {
+  .stats,
+  .grid-2,
+  .grid-split,
+  .grid-cards { grid-template-columns: 1fr; }
+  .page { padding: 20px 14px 36px; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="stack gap-8">
+      <h1>Hayyo 拉新运营复盘</h1>
+      <p class="muted">工作表1 是 4–9 月动作台账，工作表2 是 8 月数据看板。主线没变：人数能做起来，充值靠少数团队；个人参与带不动付费。</p>
+      <p class="caption">来源：未命名电子表格 · 工作表1 · 4 月底至 9 月拉新运营记录 · 来源：未命名电子表格 · 工作表2 · Hayyo 拉新业务数据看板 · 拉新周期 8/1–8/31 · 充值周期 8/30–9/5</p>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-mark"></div>
+      <div>
+        <h4>核心结论</h4>
+        <p>8 月拉新 330 / 充值 $368.08 / 去重参与 57，三项都低于时间进度（目标分别约 1000 人、$800、100 人）。团队贡献了全部充值，个人拉新 67 人、充值 $0。9 月已把目标下调到 600 人 / $500 / 100 人。</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value danger">330</div>
+        <div class="stat-label">8 月拉新（KPI 33%）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value warning">$368</div>
+        <div class="stat-label">8 月拉新充值（KPI 46%）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value warning">57</div>
+        <div class="stat-label">8 月去重参与（KPI 57%）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value danger">$0</div>
+        <div class="stat-label">个人拉新充值</div>
+      </div>
+    </div>
+
+    <h2>8 月数据看板补强</h2>
+    <p class="caption">工作表1 的 8 月数字是过程口径（参与「目前 50 人」、底薪客服 $70+）。工作表2 是月末看板，以下以工作表2 为准。充值兑换：220000 金币 = $1。</p>
+
+    <h3>8 月 KPI 进度（时间进度 100%）</h3>
+    <div class="stack gap-12">
+      <div class="usage">
+        <div class="usage-labels"><span>拉新人数 33%</span><span>330 / 1000 人</span></div>
+        <div class="usage-track"><div class="usage-fill orange" style="width:33%"></div></div>
+      </div>
+      <div class="usage">
+        <div class="usage-labels"><span>拉新充值 46%</span><span>$368.08 / $800</span></div>
+        <div class="usage-track"><div class="usage-fill orange" style="width:46.01%"></div></div>
+      </div>
+      <div class="usage">
+        <div class="usage-labels"><span>活动参与 57%</span><span>57 / 100 人</span></div>
+        <div class="usage-track"><div class="usage-fill yellow" style="width:57%"></div></div>
+      </div>
+    </div>
+    <p class="caption">目标由达成率反推：330÷33%=1000，368.08÷46.01%≈800，57÷57%=100。看板备注：落后时间进度标绿、超过标红。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>指标</th>
+            <th class="num">8月实际</th>
+            <th class="num">KPI</th>
+            <th class="num">达成</th>
+            <th>环比/同期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="dot danger"></span>活动拉新人数</td>
+            <td class="num">330</td>
+            <td class="num">1000</td>
+            <td class="num">33%</td>
+            <td>上月同期 253（+30.4%）</td>
+          </tr>
+          <tr>
+            <td><span class="dot warning"></span>活动拉新充值</td>
+            <td class="num">$368.08</td>
+            <td class="num">$800</td>
+            <td class="num">46.01%</td>
+            <td>上月 $322.04（+14.3%）</td>
+          </tr>
+          <tr>
+            <td><span class="dot warning"></span>活动参与人数</td>
+            <td class="num">57</td>
+            <td class="num">100</td>
+            <td class="num">57%</td>
+            <td>上月同期 35（+62.9%）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">来源：工作表2 · Hayyo 拉新业务数据看板 · 环比列来自看板辅助列</p>
+
+    <h3>团队拿走了价值，个人只贡献人数</h3>
+    <div class="grid-2">
+      <div class="stack gap-8">
+        <div id="chart-split-count" class="chart-box"></div>
+        <p class="caption">横轴：指标；纵轴：人数。来源：工作表2「拉新指标拆解」。</p>
+      </div>
+      <div class="stack gap-8">
+        <div id="chart-split-money" class="chart-box"></div>
+        <p class="caption">横轴：指标；纵轴：美元。个人充值 $0，全部 $368.08 来自团队。</p>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-mark"></div>
+      <div>
+        <h4>和运营判断对得上</h4>
+        <p>工作表1 写「普通用户转 BD 周期很长、活动撬动有限」。工作表2 把这句话量化了：个人参与 34 人多于团队 23 人，但 67 个个人拉新没有产生任何充值。</p>
+      </div>
+    </div>
+
+    <h3>量和价值不在同一周</h3>
+    <div id="chart-week" class="chart-box"></div>
+    <p class="caption">横轴：8 月自然周；纵轴：人数或美元（分组柱，未归一化）。W2 拉新 167 人几乎无充值（含 9 日 94 人 / $0）；W3 仅 44 人却贡献 $181.71。日数据按周加总。</p>
+
+    <div class="grid-2">
+      <div class="stack gap-8">
+        <h3>8 月每日拉新人数</h3>
+        <div id="chart-daily-users" class="chart-box"></div>
+        <p class="caption">横轴：8 月日期；纵轴：当日拉新人数（人）。峰值 9 日 94 人。来源：按日汇总，人数未去重说明见原表。</p>
+      </div>
+      <div class="stack gap-8">
+        <h3>8 月每日拉新充值</h3>
+        <div id="chart-daily-recharge" class="chart-box"></div>
+        <p class="caption">横轴：8 月日期；纵轴：当日拉新充值（美元）。高峰 15 日 $87.93、28 日 $70.79。全月 25 个充值人次。</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>集中度</th><th>数字</th><th>含义</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>拉新人数 Top3 日</td>
+            <td>9日 94 + 8日 38 + 6日 29 = 161</td>
+            <td>占全月 330 人的 48.8%，这三天充值合计仅 $0.54</td>
+          </tr>
+          <tr>
+            <td>充值 Top4 日</td>
+            <td>15 / 28 / 21 / 16 日合计 $250.79</td>
+            <td>占全月 $368.08 的 68%</td>
+          </tr>
+          <tr>
+            <td>充值转化</td>
+            <td>25 人次 / 330 拉新</td>
+            <td>约 7.6%；人均拉新充值 $1.12，付费人均 $14.72</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">来源：工作表2 · 付费人均 = 368.08 ÷ 25；按日「拉新充值人数」未去重</p>
+
+    <h3>看板里的本周动作（衔接 9 月）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>动作</th><th>结果</th><th>判断</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="dot info"></span>底薪客服招募与管理</td>
+            <td>新增 60 号；50 团队昨日拉新 2 人、+$0.27；其余底薪客服无新增</td>
+            <td>专业团队仍靠个别点产出，和 8 月「依赖个别团队」同一结构</td>
+          </tr>
+          <tr>
+            <td><span class="dot danger"></span>Yalla 流失用户建联 53 人</td>
+            <td>WA 无账号 24 / 未回复 28 / 不满手机号暴露 1</td>
+            <td>53 人全部落在无效结果，没有写出成功转化</td>
+          </tr>
+          <tr>
+            <td><span class="dot warning"></span>待清退 BD 团队</td>
+            <td>已发提醒，暂无反馈；计划当天清退</td>
+            <td>对应工作表1 7 月「只盯少数活跃团队」</td>
+          </tr>
+          <tr>
+            <td><span class="dot neutral"></span>运营动作整理</td>
+            <td>待与产品同步后续优化</td>
+            <td>工作表1 的台账用途</td>
+          </tr>
+          <tr>
+            <td><span class="dot info"></span>9 月 KPI</td>
+            <td>参与 100 / 拉新 600 / 充值 $500</td>
+            <td>相对 8 月目标（1000 / $800 / 100）下调了人数和充值</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>五个月在做什么</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>阶段</th>
+            <th>常态化</th>
+            <th>重点动作</th>
+            <th>结果</th>
+            <th>卡点</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="dot info"></span>4月底–5月</td>
+            <td>Banner 常驻；求职建联</td>
+            <td>功能引导视频；短周期排名活动</td>
+            <td>22 个团队 / 16 个有效；284 BD；累计拉新 543，充值 $20.51</td>
+            <td>团长混淆团员与拉新；平台定位与求职诉求不匹配</td>
+          </tr>
+          <tr>
+            <td><span class="dot success"></span>6月</td>
+            <td>求职建联；存量团队沟通</td>
+            <td>两期全平台激励；对接迪拜底薪客服</td>
+            <td>一期 186 人 / $40.34；二期 171 人 / $172.3；也门团队转正后一般</td>
+            <td>底薪客服离职；薪资不够吸引；简历少</td>
+          </tr>
+          <tr>
+            <td><span class="dot warning"></span>7月</td>
+            <td>拉新建联；存量团队沟通</td>
+            <td>BD 周度激励；资源整合与分层运营</td>
+            <td>一期充值 +81%；二期拉新 +177，充值 -22%</td>
+            <td>少数人冲榜；半数流失高风险；除清退外未落地</td>
+          </tr>
+          <tr>
+            <td><span class="dot danger"></span>8月</td>
+            <td>拉新建联；存量团队沟通</td>
+            <td>个人拉新 4 期；重启底薪客服</td>
+            <td>看板：拉新 330、充值 $368.08、参与 57；团队 263 人拿走全部充值</td>
+            <td>三项 KPI 均落后；个人 67 人拉新充值 $0；量和价值错位</td>
+          </tr>
+          <tr>
+            <td><span class="dot neutral"></span>9月</td>
+            <td>建联、团队沟通、活动跟进</td>
+            <td>社媒；Yalla 流失承接；底薪客服；清退</td>
+            <td>KPI 改为 600 人 / $500 / 100 人；Yalla 建联 53 人暂无有效转化</td>
+            <td>WA 风控；无账号 + 未回复吃掉几乎全部触达</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">4–7 月来自工作表1；8–9 月用工作表2 月末数覆盖过程口径</p>
+
+    <h2>策略怎么转的</h2>
+    <div class="grid-split">
+      <div class="stack gap-12">
+        <p>前半段把力气花在「把平台用户变成拉新 BD」上。8 月数据说明这条路能拉高参与（个人 34 人 vs 团队 23 人），但变现是 0。后半段转向专业团队，9 月同时下调人数和充值目标。</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>时段</th><th>主判断</th><th>下一手</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>上线初期</td><td>求职用户要公会主播 / 金币可提现</td><td>先承接建联，再试活动</td></tr>
+              <tr><td>6月</td><td>存量团队潜力低；短活动感知弱</td><td>加长活动；向迪拜要专业团队</td></tr>
+              <tr><td>7月</td><td>仅 7% BD 产出；半数流失</td><td>清退 + 孵化 + 评级；实际只做清退</td></tr>
+              <tr><td>8月</td><td>参与占日活约 2%；个人充值 $0</td><td>活动降为曝光；加现金招底薪客服</td></tr>
+              <tr><td>9月</td><td>WA 风控；8 月三项 KPI 未完成</td><td>目标下调；试社媒；清退；继续底薪客服</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span>相对有效的动作</span>
+          <span class="pill active">已验证</span>
+        </div>
+        <div class="card-body stack gap-10">
+          <p><strong>6 月加长版激励</strong></p>
+          <p class="muted" style="font-size:12px;line-height:16px;">二期充值 $172.3，明显高于一期 $40.34。争榜会带动充值，榜单断层后立刻掉下去——7 月重演了一次。</p>
+          <div class="divider"></div>
+          <p><strong>团队侧，不是个人侧</strong></p>
+          <p class="muted" style="font-size:12px;line-height:16px;">8 月团队 263 人拉新、充值 $368.08；个人 67 人拉新、充值 $0。底薪客服仍是当前唯一能出充值的供给。</p>
+          <div class="divider"></div>
+          <p><strong>7 月清退机制</strong></p>
+          <p class="muted" style="font-size:12px;line-height:16px;">整合方案里唯一落地项。9 月看板写明当天继续清退无反馈团队。</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>反复出现的问题</h2>
+    <div class="grid-cards">
+      <div class="card">
+        <div class="card-head">数量起来了，质量没跟上</div>
+        <div class="card-body stack gap-8">
+          <p>5 月 543 人拉新只有 $20.51。8 月 330 人拉新、25 个充值人次、$368.08，KPI 仍只有 46%。9 日单日 94 人，充值 $0。</p>
+          <p class="caption">环比人数 +30%、充值只 +14%，参与 +63% 也没有变成付费。</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">产出集中在少数人 / 少数天</div>
+        <div class="card-body stack gap-8">
+          <p>7 月只有 7% BD 产出。8 月 4 天贡献 68% 充值；底薪客服里除 50 团队外「其他无新增」。</p>
+          <p class="caption">结构没有散开，只是把冲榜日换成了个别团队的出勤日。</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">个人活动不是充值盘</div>
+        <div class="card-body stack gap-8">
+          <p>个人参与 34 人高于团队 23 人，个人拉新 67 人，充值全部为 0。这不是样本不够，是路径不成立。</p>
+          <p class="caption">因此 8 月把个人拉新降为常态曝光，是数据支持后的收缩，不是放弃动作本身。</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">渠道供给不稳</div>
+        <div class="card-body stack gap-8">
+          <p>Yalla 流失 53 人建联：24 人没有 WA、28 人未回复、1 人因手机号暴露不满。WA 管控变严后，看板已写要改其他渠道宣发。</p>
+          <p class="caption">6 月底薪客服离职、迪拜简历少，和现在的渠道风控是同一类供给风险。</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>措施清单</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>类型</th><th>措施</th><th>阶段</th><th>状态</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>常态</td><td>招募 Banner 常驻</td><td>4–5月</td><td>初期入口</td></tr>
+          <tr><td>常态</td><td>求职 / 拉新建联</td><td>全程</td><td>持续</td></tr>
+          <tr><td>常态</td><td>已有团队管理沟通</td><td>6月起</td><td>持续</td></tr>
+          <tr><td>重点</td><td>拉新功能引导视频</td><td>4–5月</td><td>已做</td></tr>
+          <tr><td>重点</td><td>短周期排名活动</td><td>5月</td><td>感知弱</td></tr>
+          <tr><td>重点</td><td>全平台双玩法激励</td><td>6月</td><td>充值提升最明显</td></tr>
+          <tr><td>重点</td><td>迪拜底薪客服</td><td>6月</td><td>转正后一般，后离职</td></tr>
+          <tr><td>重点</td><td>BD 周度激励</td><td>7月</td><td>拉新升、充值回落</td></tr>
+          <tr><td>重点</td><td>清退 / 孵化 / 评级</td><td>7–9月</td><td>清退在 9 月继续</td></tr>
+          <tr><td>重点</td><td>个人拉新活动</td><td>8月</td><td>参与升、充值 $0</td></tr>
+          <tr><td>重点</td><td>优化底薪客服</td><td>8–9月</td><td>团队贡献全部 $368；9 月仍靠个别团队</td></tr>
+          <tr><td>重点</td><td>Yalla 流失承接</td><td>9月</td><td>53 人建联，有效转化未写出</td></tr>
+          <tr><td>重点</td><td>社媒拉新</td><td>9月</td><td>因 WA 风控作为备选渠道</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">来源：工作表1 运营记录 · 工作表2 数据看板</p>
+
+    <h2>按月摘录</h2>
+    <div class="stack gap-8">
+      <div class="pills">
+        <span class="pill">4–5月 · 承接求职</span>
+        <span class="pill">6月 · 活动见效</span>
+        <span class="pill">7月 · 整合受阻</span>
+        <span class="pill active">8月 · 数据验明路径</span>
+        <span class="pill">9月 · 降目标换渠道</span>
+      </div>
+      <p><strong>4–5 月：</strong>求职消息多，22 个团队里 16 个真正有拉新。用户要公会主播和金币可提现，平台对不上。累计 543 人、$20.51。</p>
+      <p><strong>6 月：</strong>活动拉到 2 周。二期充值 $172.3。向迪拜招底薪客服，团队质量不佳。</p>
+      <p><strong>7 月：</strong>激励收窄到已开权限 BD。争榜结束后充值掉下来。整合方案除清退外未实施。</p>
+      <p><strong>8 月：</strong>看板收官：330 人 / $368.08 / 57 人参与，三项都没到时间进度。个人路径被证伪（充值 $0）。充值集中在月中以后少数几天。</p>
+      <p><strong>9 月：</strong>KPI 下调为 600 / $500 / 100。本周在招 60 号底薪客服、清退无反馈团队，并处理 Yalla 53 人建联失败和 WA 风控。</p>
+    </div>
+
+    <div class="footer">
+      <p class="caption">8 月 KPI 目标由达成率反推，原表未单列目标值。9 月 KPI 为看板原文。按日参与/充值人数未去重；月度参与 57 为去重。</p>
+    </div>
+  </div>
+  <script>
+/* 本地复盘页图表：纯 SVG，不依赖外网 CDN */
+(function () {
+  const INFO = "#2E79B5";
+  const SUCCESS = "#1F8A65";
+  const NEUTRAL = "#888899";
+  const AXIS = "rgba(240,240,240,0.36)";
+  const GRID = "rgba(240,240,240,0.08)";
+  const LABEL = "rgba(240,240,240,0.6)";
+
+  function svgEl(tag, attrs) {
+    const node = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    Object.entries(attrs || {}).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) node.setAttribute(key, String(value));
+    });
+    return node;
+  }
+
+  function niceMax(value) {
+    if (value <= 0) return 1;
+    const exp = Math.pow(10, Math.floor(Math.log10(value)));
+    const n = value / exp;
+    const nice = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
+    return nice * exp;
+  }
+
+  function groupedBar(target, options) {
+    const categories = options.categories;
+    const series = options.series;
+    const height = options.height || 220;
+    const width = 640;
+    const pad = { top: 28, right: 12, bottom: 36, left: 40 };
+    const innerW = width - pad.left - pad.right;
+    const innerH = height - pad.top - pad.bottom;
+    const maxVal = niceMax(Math.max(...series.flatMap((item) => item.data), 0));
+    const groupW = innerW / categories.length;
+    const barGap = 4;
+    const barW = Math.min(28, (groupW - 16 - barGap * (series.length - 1)) / series.length);
+
+    const svg = svgEl("svg", {
+      viewBox: `0 0 ${width} ${height}`,
+      role: "img",
+    });
+
+    series.forEach((item, index) => {
+      const x = pad.left + index * 78;
+      svg.appendChild(svgEl("rect", {
+        x, y: 8, width: 8, height: 8, rx: 1, fill: item.color,
+      }));
+      const text = svgEl("text", {
+        x: x + 12, y: 16, fill: LABEL, "font-size": 11,
+      });
+      text.textContent = item.name;
+      svg.appendChild(text);
+    });
+
+    for (let i = 0; i <= 4; i += 1) {
+      const y = pad.top + innerH - (innerH * i) / 4;
+      svg.appendChild(svgEl("line", {
+        x1: pad.left, x2: width - pad.right, y1: y, y2: y, stroke: GRID,
+      }));
+      const t = svgEl("text", {
+        x: pad.left - 6, y: y + 3, fill: AXIS, "font-size": 10, "text-anchor": "end",
+      });
+      const raw = (maxVal * i) / 4;
+      t.textContent = options.valuePrefix
+        ? (options.valuePrefix + (raw % 1 ? raw.toFixed(0) : String(raw)))
+        : String(Math.round(raw));
+      svg.appendChild(t);
+    }
+
+    categories.forEach((cat, ci) => {
+      const groupX = pad.left + ci * groupW + (groupW - series.length * barW - barGap * (series.length - 1)) / 2;
+      series.forEach((item, si) => {
+        const value = item.data[ci] || 0;
+        const h = maxVal ? (value / maxVal) * innerH : 0;
+        const x = groupX + si * (barW + barGap);
+        const y = pad.top + innerH - h;
+        svg.appendChild(svgEl("rect", {
+          x, y, width: barW, height: Math.max(h, 0), rx: 2, fill: item.color,
+        }));
+        if (series.length * categories.length <= 10 && value !== 0) {
+          const label = svgEl("text", {
+            x: x + barW / 2,
+            y: y - 4,
+            fill: LABEL,
+            "font-size": 10,
+            "text-anchor": "middle",
+          });
+          label.textContent = options.valuePrefix ? options.valuePrefix + value : String(value);
+          svg.appendChild(label);
+        }
+      });
+      const catText = svgEl("text", {
+        x: pad.left + ci * groupW + groupW / 2,
+        y: height - 10,
+        fill: LABEL,
+        "font-size": 11,
+        "text-anchor": "middle",
+      });
+      catText.textContent = cat;
+      svg.appendChild(catText);
+    });
+
+    target.innerHTML = "";
+    target.appendChild(svg);
+  }
+
+  function lineChart(target, options) {
+    const cats = options.categories;
+    const data = options.data;
+    const height = options.height || 220;
+    const width = 640;
+    const pad = { top: 16, right: 12, bottom: 28, left: 36 };
+    const innerW = width - pad.left - pad.right;
+    const innerH = height - pad.top - pad.bottom;
+    const maxVal = niceMax(Math.max(...data, 0));
+    const color = options.color || INFO;
+
+    const points = data.map((value, index) => {
+      const x = pad.left + (cats.length === 1 ? innerW / 2 : (index / (cats.length - 1)) * innerW);
+      const y = pad.top + innerH - (maxVal ? (value / maxVal) * innerH : 0);
+      return [x, y];
+    });
+    const line = points.map((p, i) => (i ? "L" : "M") + p[0] + " " + p[1]).join(" ");
+    const area = line
+      + " L " + points[points.length - 1][0] + " " + (pad.top + innerH)
+      + " L " + points[0][0] + " " + (pad.top + innerH) + " Z";
+
+    const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}`, role: "img" });
+    const gid = "fill-" + Math.random().toString(36).slice(2, 7);
+    const defs = svgEl("defs");
+    const lg = svgEl("linearGradient", { id: gid, x1: "0", y1: "0", x2: "0", y2: "1" });
+    lg.appendChild(svgEl("stop", { offset: "0%", "stop-color": color, "stop-opacity": "0.28" }));
+    lg.appendChild(svgEl("stop", { offset: "100%", "stop-color": color, "stop-opacity": "0.02" }));
+    defs.appendChild(lg);
+    svg.appendChild(defs);
+
+    for (let i = 0; i <= 4; i += 1) {
+      const y = pad.top + innerH - (innerH * i) / 4;
+      svg.appendChild(svgEl("line", {
+        x1: pad.left, x2: width - pad.right, y1: y, y2: y, stroke: GRID,
+      }));
+      const t = svgEl("text", {
+        x: pad.left - 6, y: y + 3, fill: AXIS, "font-size": 10, "text-anchor": "end",
+      });
+      const raw = (maxVal * i) / 4;
+      t.textContent = options.valuePrefix ? options.valuePrefix + Math.round(raw) : String(Math.round(raw));
+      svg.appendChild(t);
+    }
+
+    svg.appendChild(svgEl("path", { d: area, fill: "url(#" + gid + ")" }));
+    svg.appendChild(svgEl("path", {
+      d: line, fill: "none", stroke: color, "stroke-width": 1.8,
+    }));
+    points.forEach((p) => {
+      svg.appendChild(svgEl("circle", { cx: p[0], cy: p[1], r: 2, fill: color }));
+    });
+
+    cats.forEach((cat, index) => {
+      if (index % 5 !== 0 && index !== cats.length - 1) return;
+      const x = pad.left + (index / (cats.length - 1)) * innerW;
+      const t = svgEl("text", {
+        x, y: height - 8, fill: LABEL, "font-size": 10, "text-anchor": "middle",
+      });
+      t.textContent = cat;
+      svg.appendChild(t);
+    });
+
+    target.innerHTML = "";
+    target.appendChild(svg);
+  }
+
+  const dailyUsers = [
+    2, 6, 3, 6, 5, 29, 21, 38, 94, 3, 3, 13, 9, 7, 4, 8, 6, 6, 8, 6, 6, 2, 5, 3,
+    4, 5, 10, 8, 3, 3, 4,
+  ];
+  const dailyRecharge = [
+    0.27, 7.95, 0.27, 0, 0, 0.27, 0.8, 0.27, 0, 0, 0.27, 28.81, 0, 0, 87.93,
+    45.9, 0, 0, 0.8, 0.91, 46.17, 0, 0.27, 7.73, 20.23, 19.36, 9.44, 70.79,
+    19.36, 0, 0.27,
+  ];
+  const days = Array.from({ length: 31 }, (_, i) => String(i + 1));
+
+  groupedBar(document.getElementById("chart-split-count"), {
+    categories: ["拉新人数", "活动参与"],
+    series: [
+      { name: "团队", data: [263, 23], color: INFO },
+      { name: "个人", data: [67, 34], color: NEUTRAL },
+    ],
+    height: 220,
+  });
+  groupedBar(document.getElementById("chart-split-money"), {
+    categories: ["拉新充值"],
+    series: [
+      { name: "团队", data: [368.08], color: SUCCESS },
+      { name: "个人", data: [0], color: NEUTRAL },
+    ],
+    height: 220,
+    valuePrefix: "$",
+  });
+  groupedBar(document.getElementById("chart-week"), {
+    categories: ["W1 1–7日", "W2 8–14日", "W3 15–21日", "W4 22–28日", "W5 29–31日"],
+    series: [
+      { name: "拉新人数（人）", data: [72, 167, 44, 37, 10], color: INFO },
+      { name: "拉新充值（美元）", data: [9.56, 29.35, 181.71, 127.82, 19.63], color: SUCCESS },
+    ],
+    height: 240,
+  });
+  lineChart(document.getElementById("chart-daily-users"), {
+    categories: days,
+    data: dailyUsers,
+    color: INFO,
+    height: 220,
+  });
+  lineChart(document.getElementById("chart-daily-recharge"), {
+    categories: days,
+    data: dailyRecharge,
+    color: SUCCESS,
+    height: 220,
+    valuePrefix: "$",
+  });
+})();
+
+  </script>
+</body>
+</html>

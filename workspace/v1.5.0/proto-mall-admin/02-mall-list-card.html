@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>商城管理-名片装饰</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:1180px}</style>
+</head>
+<body>
+<div class="caption">「图2」商城管理 · 名片装饰</div>
+<div class="hint">与「图1」同一后台，切 tab 即可。字段、筛选、操作完全相同。按时长，不按个数。</div>
+<div class="tabs">
+  <div class="tab">头饰卡</div>
+  <div class="tab">座驾</div>
+  <div class="tab">房间背景</div>
+  <div class="tab">头像框</div>
+  <div class="tab new">房间装饰 <span class="tag">新增</span></div>
+  <div class="tab on new">名片装饰 <span class="tag">新增</span></div>
+</div>
+<div class="toolbar">
+  <span>商品名称</span>
+  <span class="fake-input" style="min-width:180px;display:inline-flex;align-items:center;color:#999">英语 / 阿语模糊搜索</span>
+  <span>商城展示</span>
+  <span class="fake-select">全部 <span class="caret">▼</span></span>
+  <span class="btn solid">查询</span>
+  <span class="btn solid">添加</span>
+</div>
+<table class="grid">
+  <tr>
+    <th>商品名称（英）</th>
+    <th style="width:70px">排序</th>
+    <th style="width:70px">图片</th>
+    <th style="width:90px">价格</th>
+    <th style="width:90px">规格一</th>
+    <th style="width:90px">商城展示</th>
+    <th style="width:180px">操作</th>
+  </tr>
+  <tr class="row-new">
+    <td>Star Namecard</td>
+    <td class="center">18</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">1299</td>
+    <td class="center">7 天</td>
+    <td class="center status-on">展示</td>
+    <td class="center"><span class="link">不展示</span>　<span class="link off">编辑</span></td>
+  </tr>
+  <tr class="row-new">
+    <td>Game Card Glow</td>
+    <td class="center">8</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">299</td>
+    <td class="center">3 天</td>
+    <td class="center status-off">不展示</td>
+    <td class="center"><span class="link">展示</span>　<span class="link">编辑</span></td>
+  </tr>
+</table>
+<div class="page-num">共 2 条　<span>&lt;</span><span class="cur">1</span><span>&gt;</span></div>
+<div class="note">客户端分类相对顺序：头像框 → 房间装饰 → 名片装饰 → 房间背景。后台 tab 在原文分类后追加这两类即可。</div>
+</body>
+</html>

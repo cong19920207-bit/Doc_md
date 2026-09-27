@@ -1,0 +1,138 @@
+[
+  {
+    "feature": "infra",
+    "title": "基建与其他",
+    "md": "prd/archive/extracted/_raw/V1.0.0/infra/V1.0.0.md",
+    "images": 35,
+    "headings": [
+      "文首",
+      "3.11第十一部分 其他基建需求（许静）"
+    ]
+  },
+  {
+    "feature": "auth-login",
+    "title": "登录注册",
+    "md": "prd/archive/extracted/_raw/V1.0.0/auth-login/V1.0.0.md",
+    "images": 31,
+    "headings": [
+      "3.1 第一部分：登陆注册模块（丛国序）"
+    ]
+  },
+  {
+    "feature": "checkin-task",
+    "title": "签到与任务",
+    "md": "prd/archive/extracted/_raw/V1.0.0/checkin-task/V1.0.0.md",
+    "images": 16,
+    "headings": [
+      "3.2 第二部分：每日签到和玩家任务（丛国序）"
+    ]
+  },
+  {
+    "feature": "user-level",
+    "title": "用户等级",
+    "md": "prd/archive/extracted/_raw/V1.0.0/user-level/V1.0.0.md",
+    "images": 6,
+    "headings": [
+      "3.3 第三部分：用户等级（丛国序）"
+    ]
+  },
+  {
+    "feature": "referral",
+    "title": "拉新",
+    "md": "prd/archive/extracted/_raw/V1.0.0/referral/V1.0.0.md",
+    "images": 100,
+    "headings": [
+      "3.4 第四部分：个人拉新（丛国序）"
+    ]
+  },
+  {
+    "feature": "merchant",
+    "title": "币商",
+    "md": "prd/archive/extracted/_raw/V1.0.0/merchant/V1.0.0.md",
+    "images": 50,
+    "headings": [
+      "3.5 第五部分 币商相关（许静）"
+    ]
+  },
+  {
+    "feature": "profile",
+    "title": "个人中心",
+    "md": "prd/archive/extracted/_raw/V1.0.0/profile/V1.0.0.md",
+    "images": 113,
+    "headings": [
+      "3.6 第六部分 个人中心模块（许静）"
+    ]
+  },
+  {
+    "feature": "messaging",
+    "title": "消息",
+    "md": "prd/archive/extracted/_raw/V1.0.0/messaging/V1.0.0.md",
+    "images": 30,
+    "headings": [
+      "3.7 第七部分 消息（许静）"
+    ]
+  },
+  {
+    "feature": "recharge",
+    "title": "金币充值",
+    "md": "prd/archive/extracted/_raw/V1.0.0/recharge/V1.0.0.md",
+    "images": 26,
+    "headings": [
+      "3.8 第八部分 金币充值（许静）"
+    ]
+  },
+  {
+    "feature": "room",
+    "title": "房间",
+    "md": "prd/archive/extracted/_raw/V1.0.0/room/V1.0.0.md",
+    "images": 208,
+    "headings": [
+      "3.9 第九部分 房间功能（许静）"
+    ]
+  },
+  {
+    "feature": "ranking",
+    "title": "排行榜",
+    "md": "prd/archive/extracted/_raw/V1.0.0/ranking/V1.0.0.md",
+    "images": 11,
+    "headings": [
+      "3.10第十部分 排行榜（许静）"
+    ]
+  },
+  {
+    "feature": "mall",
+    "title": "商城 / 背包 / 靓号",
+    "md": "prd/archive/extracted/_raw/V1.0.0/mall/V1.0.0.md",
+    "images": 36,
+    "headings": [
+      "3.12第十二部分 商城、背包、靓号（许静）"
+    ]
+  },
+  {
+    "feature": "relationship",
+    "title": "关系体系",
+    "md": "prd/archive/extracted/_raw/V1.0.0/relationship/V1.0.0.md",
+    "images": 25,
+    "headings": [
+      "3.13 第十三部分 关系体系（许静）"
+    ]
+  },
+  {
+    "feature": "vip",
+    "title": "用户 VIP",
+    "md": "prd/archive/extracted/_raw/V1.0.0/vip/V1.0.0.md",
+    "images": 17,
+    "headings": [
+      "3.14 第十四部分 用户VIP（丛国序）"
+    ]
+  },
+  {
+    "feature": "room-game",
+    "title": "房间游戏（水果机 / 动物机 / 水果派对）",
+    "md": "prd/archive/extracted/_raw/V1.0.0/room-game/V1.0.0.md",
+    "images": 11,
+    "headings": [
+      "3.15第十五部分 房间游戏-水果派对"
+    ]
+  }
+]

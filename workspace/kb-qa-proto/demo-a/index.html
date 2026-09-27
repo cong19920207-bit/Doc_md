@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知识问答原型 A · 延续现网</title>
+  <link rel="stylesheet" href="../../../site/feature-interaction/style.css">
+  <link rel="stylesheet" href="../shared/proto.css">
+</head>
+<body>
+  <div class="app qa-active">
+    <header class="chrome">
+    <div class="topbar">
+      <div class="brand">
+        <h1>功能交互关系</h1>
+        <p>原型 A · 延续现网第四 Tab</p>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="tab" data-view="admin" type="button">客户端 ↔ 后台</button>
+        <button class="tab" data-view="client" type="button">客户端交叉</button>
+        <button class="tab" data-view="kb" type="button">文档索引</button>
+        <button class="tab active" data-view="qa" type="button">知识问答</button>
+      </div>
+      <input id="search" class="search" type="search" placeholder="搜索功能 / ID" autocomplete="off">
+      <input id="kbSearch" class="search kb-search" type="search" placeholder="搜索标题 / 正文" autocomplete="off">
+      <div class="top-actions">
+        <div id="healthDot" class="health-dot"><i></i><span>检查中…</span></div>
+        <button class="kb-btn" type="button" data-reindex>重建索引</button>
+        <button class="kb-btn" type="button" data-open-cfg>配置</button>
+        <button class="kb-btn" type="button" data-clear>清空当前</button>
+      </div>
+    </div>
+    <div class="proto-strip">
+      <b>仅原型</b>
+      <span>剧本条不是产品功能。选中后可验收失败口径。</span>
+      <label>剧本
+        <select id="scenarioSelect"></select>
+      </label>
+      <a class="proto-link" href="../index.html">选型页</a>
+      <a class="proto-link" href="../demo-b/index.html">切到 B</a>
+    </div>
+    </header>
+
+    <div id="graphPlaceholder" class="graph-placeholder" hidden>
+      <p>关系图两个 Tab 仍在现网站点，本原型不改它们的实现。</p>
+      <p><a href="/feature-interaction/">打开现网 http://127.0.0.1:18765/feature-interaction/</a></p>
+      <p><button class="kb-btn" type="button" data-back-qa>返回知识问答</button></p>
+    </div>
+
+    <div id="kbWorkspace" class="kb-workspace" hidden>
+      <aside class="kb-list-pane">
+        <h2>默认可读文档</h2>
+        <div id="kbList" class="kb-list"></div>
+      </aside>
+      <section class="kb-reader">
+        <div id="kbMeta" class="kb-meta"></div>
+        <div class="kb-toolbar">
+          <button class="kb-btn" type="button" data-back-qa>返回知识问答</button>
+        </div>
+        <div id="kbFail" class="kb-fail" hidden></div>
+        <article id="kbArticle" class="kb-article"></article>
+      </section>
+      <aside class="kb-side">
+        <h2>本文目录</h2>
+        <nav id="kbToc" class="kb-toc"></nav>
+      </aside>
+    </div>
+
+    <div id="qaWorkspace" class="qa-workspace layout-a">
+      <aside class="qa-conv" id="qaConvPane">
+        <button class="qa-new" type="button" data-new-conv>新建对话</button>
+        <div id="qaConvList" class="qa-conv-list"></div>
+      </aside>
+      <div class="qa-main">
+        <details class="qa-debug" id="qaDebug">
+          <summary>本轮调试（改写句 / 是否同主题 / 重排块）</summary>
+          <div class="qa-debug-box"></div>
+        </details>
+        <div id="qaMessages" class="qa-messages"></div>
+        <div class="qa-composer">
+          <div class="qa-composer-box">
+            <textarea id="qaInput" rows="2" placeholder="用口语问规则，例如：保级扣的是财富值还是金币"></textarea>
+            <button id="qaSend" class="qa-send" type="button">发送</button>
+          </div>
+          <p class="qa-hint">Enter 发送，Shift+Enter 换行。/ 聚焦输入。左侧可新建、切换、删除对话；刷新后仍恢复。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cfgBackdrop" class="qa-backdrop" hidden></div>
+  <aside id="cfgRoot" class="qa-drawer" hidden></aside>
+  <div id="reindexRoot" class="qa-overlay" hidden></div>
+
+  <script src="../../../site/feature-interaction/kb-md.js"></script>
+  <script src="../shared/mock-data.js"></script>
+  <script src="../shared/mock-api.js"></script>
+  <script src="../shared/qa-core.js"></script>
+  <script src="../shared/proto-ui.js"></script>
+  <script>
+    window.KbQaProto.init({ layout: "a" });
+  </script>
+</body>
+</html>

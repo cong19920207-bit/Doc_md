@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>创建赠送</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:520px}</style>
+</head>
+<body>
+<div class="caption">「图7」创建赠送商品</div>
+<div class="hint">商品类型默认带入当前 tab。房间装饰 / 名片装饰显示时长（天），正整数，不可填 -1。</div>
+<div class="dialog mid">
+  <h2>创建赠送</h2>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>用户 ID</div>
+    <div class="fld">
+      <input value="10086001,10086004">
+      <div class="hint-inline">最多 10 个，英文逗号分隔。查不到或重复 →「信息填写错误」</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>商品类型</div>
+    <div class="fld">
+      <div class="wrap-rel" style="width:220px">
+        <span class="fake-select" style="width:220px">房间装饰 <span class="caret">▼</span></span>
+        <div class="dropdown" style="width:220px;left:228px;top:0">
+          <div>头饰卡</div>
+          <div>座驾</div>
+          <div>房间背景</div>
+          <div>头像框</div>
+          <div class="on new-opt">房间装饰</div>
+          <div class="new-opt">名片装饰</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>商品名称</div>
+    <div class="fld">
+      <span class="fake-select" style="width:220px">Golden Room Frame <span class="caret">▼</span></span>
+      <div class="hint-inline">该分类下全部商品，按排序倒序</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>时长（天）</div>
+    <div class="fld">
+      <input value="7" style="max-width:120px">
+      <div class="hint-inline">正整数。不可填 -1（不支持赠送永久）</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">自定义消息 EN</div>
+    <div class="fld"><input placeholder="空则用默认文案"></div>
+  </div>
+  <div class="form-row">
+    <div class="lab">自定义消息 AR</div>
+    <div class="fld"><input placeholder="空则用默认文案"></div>
+  </div>
+  <div class="form-row">
+    <div class="lab">自定义消息 TR</div>
+    <div class="fld"><input placeholder="空则用默认文案"></div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>赠送类型</div>
+    <div class="fld">
+      <span class="fake-select" style="width:220px">平台活动奖励 <span class="caret">▼</span></span>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">原由</div>
+    <div class="fld"><input placeholder="备注"></div>
+  </div>
+  <div class="btns">
+    <span class="btn">取消</span>
+    <span class="btn solid">提交</span>
+  </div>
+</div>
+<div class="note">提交成功：每个用户 ID 一行待赠送数据。填写有误统一「填写信息有误」。赠送类型：平台活动奖励 / KOL 奖励 / 代理活动奖励 / 商务活动奖励。</div>
+</body>
+</html>

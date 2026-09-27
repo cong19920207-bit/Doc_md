@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Banner 新增 / 编辑</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:760px}</style>
+</head>
+<body>
+<div class="caption">「图2」Banner 新增 / 编辑</div>
+<div class="hint">类型单选增加「团队数据页」（橙底）。跳转类型不含已删除的代理列表页。用户端团队数据页不展示标题（含多语言标题）。图为 demo。</div>
+<div class="dialog wide">
+  <h2>编辑 Banner</h2>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>标题</div>
+    <div class="fld">
+      <input value="团队数据运营位">
+      <div class="hint-inline">后台列表识别用。用户端团队数据页不展示标题</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>图片</div>
+    <div class="fld">
+      <span class="upload">+</span>
+      <div class="hint-inline">上传限制 5MB 以下</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">类型</div>
+    <div class="fld" style="padding-top:5px">
+      <label style="margin-right:16px"><input type="radio" name="type"> 首页</label>
+      <label class="row-new" style="padding:2px 8px;border-radius:2px">
+        <input type="radio" name="type" checked> 团队数据页 <span class="tag">本版新增</span>
+      </label>
+      <div class="hint-inline">默认「首页」。覆盖历史「只保留首页 banner」；已删除的主播中心 / 主播 / 工会 / 游戏不恢复</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">跳转类型</div>
+    <div class="fld" style="padding-top:5px">
+      <label style="margin-right:16px"><input type="radio" name="jump" checked> 页面</label>
+      <label><input type="radio" name="jump"> 房间</label>
+      <div class="hint-inline">默认页面。不恢复代理列表页</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">地址</div>
+    <div class="fld">
+      <input value="https://h5.example.com/team-act">
+      <div class="hint-inline">非必填。页面填链接；房间填 ID（纯数字正整数）。未填可保存，用户端仅展示、点击无跳转</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>时间</div>
+    <div class="fld">
+      <input value="2026-09-01 00:00:00" style="max-width:170px">
+      <span style="margin:0 8px;padding-top:5px;display:inline-block">至</span>
+      <input value="2026-12-31 23:59:59" style="max-width:170px">
+      <div class="hint-inline">仅在有效时间内对用户端展示</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab"><span class="req">*</span>显示设备</div>
+    <div class="fld" style="padding-top:5px">
+      <label style="margin-right:12px"><input type="radio" name="dev" checked> 全设备</label>
+      <label style="margin-right:12px"><input type="radio" name="dev"> iOS</label>
+      <label><input type="radio" name="dev"> 安卓</label>
+      <div class="hint-inline">默认全设备（通用）</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">语区</div>
+    <div class="fld" style="padding-top:5px">
+      <label style="margin-right:12px"><input type="radio" name="lang" checked> 英语</label>
+      <label style="margin-right:12px"><input type="radio" name="lang"> 阿语</label>
+      <label><input type="radio" name="lang"> 土语</label>
+      <div class="hint-inline">单选，默认英语</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">排序</div>
+    <div class="fld">
+      <input value="10" style="max-width:120px">
+      <div class="hint-inline">只可输入正整数；数字小的展示在前面</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">状态</div>
+    <div class="fld" style="padding-top:5px">
+      <label style="margin-right:16px"><input type="radio" name="st"> 停用</label>
+      <label><input type="radio" name="st" checked> 启用</label>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">最低版本号</div>
+    <div class="fld">
+      <input placeholder="选填" style="max-width:160px">
+      <div class="hint-inline">非必填。大于等于此版本号才显示</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="lab">H5 多语言标题</div>
+    <div class="fld">
+      <input placeholder="英语标题" style="margin-bottom:6px">
+      <input placeholder="阿语标题" style="margin-bottom:6px">
+      <input placeholder="土语标题">
+      <div class="hint-inline">配置 H5 时填写。用户端团队数据页仍不展示标题</div>
+    </div>
+  </div>
+  <div class="btns">
+    <span class="btn solid">立即提交</span>
+    <span class="btn ghost">关闭</span>
+  </div>
+</div>
+<div class="note">不为团队数据页另造字段。截图中的积分欠款 / 去提现不是 Banner 配置项。</div>
+</body>
+</html>

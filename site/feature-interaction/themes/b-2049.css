@@ -1,0 +1,29 @@
+/* B · 银翼杀手 2049：暖黑底、琥珀主色 */
+:root {
+  --bg: #0a0908;
+  --bg-elevated: #14110e;
+  --bg-panel: #100e0b;
+  --stroke: #2c2418;
+  --stroke-strong: #3d3424;
+  --text: #f0ebe3;
+  --text-muted: #a89880;
+  --text-faint: #6e6454;
+  --accent: #e08a2c;
+  --accent-soft: rgba(224, 138, 44, 0.16);
+  --ok: #6a9a78;
+  --warn: #e08a2c;
+  --danger: #d46a9a;
+  --danger-soft: rgba(212, 106, 154, 0.14);
+  --on-accent: #140c04;
+  --social: #7eb8c4;
+  --money: #c4a05a;
+  --growth: #e08a2c;
+  --reach: #d46a9a;
+  --admin: #8a8478;
+  --reach-soft: rgba(212, 106, 154, 0.16);
+  --dot: #2a2418;
+  --node-admin: #16130f;
+  --node-pure: #1a1612;
+  --node-selected: #2a1c10;
+  --edge: #4a4030;
+}

@@ -1,0 +1,29 @@
+/* C · 2077 夜之城黄：纯黑底、荧光黄主操作 */
+:root {
+  --bg: #000000;
+  --bg-elevated: #0a0a0f;
+  --bg-panel: #050508;
+  --stroke: #1a1a22;
+  --stroke-strong: #2a2a33;
+  --text: #e8e8e8;
+  --text-muted: #8a8a94;
+  --text-faint: #5a5a64;
+  --accent: #fcee0a;
+  --accent-soft: rgba(252, 238, 10, 0.14);
+  --ok: #05ffa1;
+  --warn: #fcee0a;
+  --danger: #ff2a6d;
+  --danger-soft: rgba(255, 42, 109, 0.14);
+  --on-accent: #0b1220;
+  --social: #00f0ff;
+  --money: #05ffa1;
+  --growth: #fcee0a;
+  --reach: #ff2a6d;
+  --admin: #b4b4b4;
+  --reach-soft: rgba(255, 42, 109, 0.16);
+  --dot: #1a1a22;
+  --node-admin: #0c0c10;
+  --node-pure: #101014;
+  --node-selected: #1a1800;
+  --edge: #3a3a44;
+}

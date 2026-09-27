@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>签到修改奖品</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:720px}</style>
+</head>
+<body>
+<div class="caption">「图10」签到 · 修改当天奖品</div>
+<div class="hint">奖品类型下拉增加房间装饰、名片装饰。时长正整数，不可 -1。当天概率总和须为 100。</div>
+<div class="dialog wide">
+  <h2>修改 · 第 3 天</h2>
+  <div class="form-row">
+    <div class="lab">奖品图片</div>
+    <div class="fld"><span class="upload">+</span></div>
+  </div>
+  <table class="grid spec-grid">
+    <tr>
+      <th>奖品类型</th>
+      <th>商品名称</th>
+      <th>时长（天）</th>
+      <th>发放数量</th>
+      <th>概率 %</th>
+      <th></th>
+    </tr>
+    <tr class="row-new">
+      <td>
+        <div class="wrap-rel">
+          <span class="fake-select" style="min-width:120px">房间装饰 <span class="caret">▼</span></span>
+          <div class="dropdown" style="width:140px;left:128px;top:0">
+            <div>座驾</div>
+            <div>充值币</div>
+            <div>宝石</div>
+            <div>房间背景</div>
+            <div>运营头像框</div>
+            <div>礼物</div>
+            <div class="on new-opt">房间装饰</div>
+            <div class="new-opt">名片装饰</div>
+          </div>
+        </div>
+      </td>
+      <td><span class="fake-select" style="min-width:120px">Neon Room <span class="caret">▼</span></span></td>
+      <td><input value="1" style="width:64px;height:26px"></td>
+      <td class="muted">—</td>
+      <td><input value="50" style="width:56px;height:26px"></td>
+      <td><span class="link">删除</span></td>
+    </tr>
+    <tr class="row-new">
+      <td><span class="fake-select" style="min-width:120px">名片装饰 <span class="caret">▼</span></span></td>
+      <td><span class="fake-select" style="min-width:120px">Star Namecard <span class="caret">▼</span></span></td>
+      <td><input value="3" style="width:64px;height:26px"></td>
+      <td class="muted">—</td>
+      <td><input value="50" style="width:56px;height:26px"></td>
+      <td><span class="link">删除</span></td>
+    </tr>
+  </table>
+  <div class="toolbar" style="margin-top:10px">
+    <span class="btn">添加奖品</span>
+  </div>
+  <div class="btns">
+    <span class="btn">取消</span>
+    <span class="btn solid">提交</span>
+  </div>
+</div>
+<div class="note">货币填发放数量、不填时长；道具填时长、不填数量。概率总和不为 100 →「概率总和须为 100」。未配全 →「奖品信息有误」。</div>
+</body>
+</html>

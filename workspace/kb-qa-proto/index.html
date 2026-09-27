@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知识问答 H5 原型选型</title>
+  <link rel="stylesheet" href="../../site/feature-interaction/style.css">
+  <style>
+    body { overflow: auto; }
+    .picker {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+    .picker h1 { margin: 0 0 8px; font-size: 22px; }
+    .lead { color: var(--text-muted); line-height: 1.65; margin: 0 0 22px; font-size: 14px; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .card {
+      display: block;
+      border: 1px solid var(--stroke);
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      padding: 18px 18px 16px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card b { display: block; font-size: 16px; margin-bottom: 8px; }
+    .card p { margin: 0; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .note {
+      margin-top: 22px;
+      font-size: 12px;
+      color: var(--text-faint);
+      line-height: 1.65;
+    }
+    @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="picker">
+    <h1>Hayyo 知识问答 · 交互原型</h1>
+    <p class="lead">
+      左列表多会话（新建 / 删除 / 刷新恢复）。两套 demo 共用同一套 mock 状态机。拟议交互 1–7 都已接入。不改现网三个 Tab。
+    </p>
+    <div class="cards">
+      <a class="card" href="demo-a/index.html">
+        <b>A · 延续现网（建议落地）</b>
+        <p>第四 Tab 全宽对话，出处折叠为「N 条出处」，配置右侧抽屉。改写句 / 同主题放在「本轮调试」折叠里。</p>
+      </a>
+      <a class="card" href="demo-b/index.html">
+        <b>B · 双栏工作台（建议验收）</b>
+        <p>左对话、右本轮过程（改写句、是否同主题、collection、重排块可点）。配置为整页 overlay。</p>
+      </a>
+    </div>
+    <p class="note">
+      建议问法：保级扣的是财富值还是金币 → 那退款呢 → VIP11 保级线具体是多少 → 拉新后台奖励组有哪些字段 → 币商转账最低多少。<br>
+      顶栏黄色「仅原型」剧本条可切：未配 Key、索引未就绪、改写失败、生成失败、流中断、强制空结果、演示冲突。<br>
+      本目录是工作区原型，非产品权威。对话写入浏览器 localStorage，刷新可恢复。配置写入另一份 localStorage 模拟 volume。
+    </p>
+  </div>
+</body>
+</html>

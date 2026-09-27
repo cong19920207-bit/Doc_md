@@ -1,0 +1,19 @@
+{
+  "vip": ["VIP", "用户VIP"],
+  "user-level": ["用户等级", "平台等级"],
+  "referral": ["拉新"],
+  "admin": ["运营后台", "后台"],
+  "auth-login": ["登录注册"],
+  "merchant": ["币商", "代理转账", "币商代充"],
+  "recharge": ["充值", "钱包充值", "首充"],
+  "payout": ["提现"],
+  "mall": ["商城", "靓号"],
+  "room": ["房间"],
+  "profile": ["个人中心"],
+  "yallapay": ["YallaPay", "链接支付", "分销支付"],
+  "coupon": ["体验券", "VIP体验券", "膨胀券", "福利券"],
+  "room-game": ["Bounty Racing", "水果机", "动物机", "Game Center", "Lord of Olympus"],
+  "casual-game": ["Ludo", "Carrom", "Block Crush", "休闲游戏"],
+  "ranking": ["Billionaires", "充值榜", "排行榜"],
+  "checkin-task": ["充值任务", "签到", "任务"]
+}

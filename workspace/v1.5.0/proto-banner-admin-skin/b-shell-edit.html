@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>B · Banner 编辑弹窗</title>
+<link rel="stylesheet" href="../../_kit/admin-skin/style.css">
+<link rel="stylesheet" href="extra.css">
+</head>
+<body class="gold banner">
+<div class="demo-bar">
+  <span class="tag">确认稿</span>
+  <strong>B 现网壳 · 编辑弹窗</strong>
+  <div class="hint">不进 Word。现网是层弹窗。用户端团队数据页不展示标题。</div>
+</div>
+<div class="app">
+  <div class="logo"><span class="mark"></span>Hayyo Admin</div>
+  <div class="top">
+    <div class="hamburger">☰</div>
+    <nav class="top-nav">
+      <a href="#">Manage</a>
+      <a href="#">数据统计</a>
+      <a class="on" href="#">平台配置</a>
+      <a href="#">Audit</a>
+      <a href="#">代理管理</a>
+      <a href="#">后台配置</a>
+    </nav>
+    <div class="top-user">demo</div>
+  </div>
+  <aside class="side">
+    <div class="side-item">
+      <div class="row">商品管理 <span class="arrow">▾</span></div>
+    </div>
+    <div class="side-item open">
+      <div class="row">Banner管理 <span class="arrow">▴</span></div>
+      <div class="sub">
+        <a class="on" href="#">Banner列表</a>
+        <a href="#">活动管理</a>
+      </div>
+    </div>
+    <div class="side-item">
+      <div class="row">敏感词管理 <span class="arrow">▾</span></div>
+    </div>
+    <div class="side-item">
+      <div class="row">消息管理 <span class="arrow">▾</span></div>
+    </div>
+  </aside>
+  <div class="tabs">
+    <div class="ctrl">‹</div>
+    <div class="tab">Banner列表</div>
+    <div class="ctrl" style="margin-left:auto">›</div>
+    <div class="ctrl">▾</div>
+  </div>
+  <main class="body">
+    <form class="search">
+      <select><option selected>启用</option></select>
+      <select><option selected>全部系统</option></select>
+      <select><option selected>全部语区</option></select>
+      <select class="changed">
+        <option selected>全部类型</option>
+        <option>首页</option>
+        <option>团队数据页</option>
+      </select>
+      <button class="btn" type="button">查询</button>
+      <button class="btn" type="button">新增</button>
+    </form>
+    <div class="table-wrap">
+      <table class="banner-table">
+        <thead>
+          <tr>
+            <th>标题</th><th>图片</th><th class="changed">类型</th><th>跳转</th><th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>首页活动位</td>
+            <td><span class="thumb"></span></td>
+            <td>首页</td>
+            <td>页面</td>
+            <td class="ops"><a>编辑</a></td>
+          </tr>
+          <tr>
+            <td>团队数据运营位</td>
+            <td><span class="thumb"></span></td>
+            <td class="changed">团队数据页</td>
+            <td>页面</td>
+            <td class="ops"><a>编辑</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pager">共 2 条</div>
+  </main>
+</div>
+
+<div class="mask show">
+  <div class="dialog wide">
+    <h3>编辑</h3>
+    <div class="bd">
+      <div class="form-row">
+        <div class="lab"><span class="req">*</span>标题</div>
+        <div class="fld">
+          <input type="text" value="团队数据运营位">
+          <div class="hint-inline">后台识别用。用户端团队数据页不展示标题</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab"><span class="req">*</span>图片</div>
+        <div class="fld">
+          <span class="upload">+</span>
+          <div class="hint-inline">5MB 以下</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab">类型</div>
+        <div class="fld">
+          <div class="radios">
+            <label><input type="radio" name="t"> 首页</label>
+            <label class="changed" style="padding:2px 8px"><input type="radio" name="t" checked> 团队数据页</label>
+          </div>
+          <div class="hint-inline">默认首页。已删除的主播中心 / 主播 / 工会 / 游戏不恢复</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab">跳转类型</div>
+        <div class="fld">
+          <div class="radios">
+            <label><input type="radio" name="j" checked> 页面</label>
+            <label><input type="radio" name="j"> 房间</label>
+          </div>
+          <div class="hint-inline">默认页面。不恢复代理列表页</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab">地址</div>
+        <div class="fld">
+          <input type="text" value="https://h5.example.com/team-act">
+          <div class="hint-inline">非必填。页面填链接，房间填纯数字 ID</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab"><span class="req">*</span>时间</div>
+        <div class="fld">
+          <div class="pair">
+            <input type="text" value="2026-09-01 00:00:00">
+            <span>至</span>
+            <input type="text" value="2026-12-31 23:59:59">
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab"><span class="req">*</span>显示设备</div>
+        <div class="fld">
+          <div class="radios">
+            <label><input type="radio" name="d" checked> 全设备</label>
+            <label><input type="radio" name="d"> iOS</label>
+            <label><input type="radio" name="d"> 安卓</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab">语区</div>
+        <div class="fld">
+          <div class="radios">
+            <label><input type="radio" name="l" checked> 英语</label>
+            <label><input type="radio" name="l"> 阿语</label>
+            <label><input type="radio" name="l"> 土语</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab">排序</div>
+        <div class="fld"><input type="text" value="10" style="max-width:120px"></div>
+      </div>
+      <div class="form-row">
+        <div class="lab">状态</div>
+        <div class="fld">
+          <div class="radios">
+            <label><input type="radio" name="s"> 停用</label>
+            <label><input type="radio" name="s" checked> 启用</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab">最低版本号</div>
+        <div class="fld">
+          <input type="text" placeholder="选填" style="max-width:160px">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="lab">H5 多语言标题</div>
+        <div class="fld">
+          <input type="text" placeholder="英语标题" style="margin-bottom:6px">
+          <input type="text" placeholder="阿语标题" style="margin-bottom:6px">
+          <input type="text" placeholder="土语标题">
+          <div class="hint-inline">配置 H5 时填写。用户端团队数据页仍不展示</div>
+        </div>
+      </div>
+    </div>
+    <div class="ft">
+      <button class="btn" type="button">立即提交</button>
+      <button class="btn btn-ghost" type="button">关闭</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,995 @@
+[
+  {
+    "i": 0,
+    "id": "multi_module_0",
+    "groups": [
+      {
+        "g": "Manage Room",
+        "items": [
+          {
+            "n": "房间管理",
+            "h": "/ManageMent/RoomManage/RoomConfig"
+          },
+          {
+            "n": "运营房管理",
+            "h": "/ManageMent/OperationRoom/OperationRoomConfig"
+          },
+          {
+            "n": "运营房考核标准",
+            "h": "/ManageMent/OperationRoom/Wage"
+          },
+          {
+            "n": "Audit Room",
+            "h": "/ManageMent/RoomManage/ForeignRoomConfig"
+          },
+          {
+            "n": "官方房考核标准",
+            "h": "/ManageMent/OfficialRoomManagerSalary/Index"
+          },
+          {
+            "n": "管理员工作时间配置",
+            "h": "/ManageMent/OfficialRoomManager/Index"
+          },
+          {
+            "n": "官方房房间管理员配置",
+            "h": "/ManageMent/OfficialRoomOperator/Index"
+          }
+        ]
+      },
+      {
+        "g": "Manage User",
+        "items": [
+          {
+            "n": "账号信息",
+            "h": "/ManageMent/Account/Index"
+          },
+          {
+            "n": "User list",
+            "h": "/ManageMent/AccountUser/Index"
+          },
+          {
+            "n": "账号添加好友",
+            "h": "/ManageMent/BestFriendsLog/BestFriendsLogIndex"
+          },
+          {
+            "n": "用户登录设备",
+            "h": "/ManageMent/AccountLoginRecord/LoginDevice"
+          },
+          {
+            "n": "自动封号记录",
+            "h": "/ManageMent/OrderRefund/AccountBlockPage"
+          },
+          {
+            "n": "平台排行榜白名单",
+            "h": "/ManageMent/AccountWhitelist/Index"
+          },
+          {
+            "n": "用户网络测试结果",
+            "h": "/ManageMent/NetWorkTest/Index"
+          },
+          {
+            "n": "设备号封禁",
+            "h": "/ManageMent/DeviceStatus/Index"
+          },
+          {
+            "n": "设备指纹封禁",
+            "h": "/ManageMent/DeviceFingerprint/Index"
+          },
+          {
+            "n": "代理充值白名单",
+            "h": "/ManageMent/AnchorForumAgentWhitelist/Index"
+          },
+          {
+            "n": "帐号封禁",
+            "h": "/ManageMent/BlockUser/Index"
+          },
+          {
+            "n": "设备指纹风控记录",
+            "h": "/ManageMent/RiskFingerprint/RecordIndex"
+          },
+          {
+            "n": "个人靓号变动记录",
+            "h": "/ManageMent/PrettyvipidLog/Index"
+          }
+        ]
+      },
+      {
+        "g": "Manage Family",
+        "items": [
+          {
+            "n": "家族管理",
+            "h": "/ManageMent/Family/Index"
+          }
+        ]
+      },
+      {
+        "g": "Manage VIP",
+        "items": [
+          {
+            "n": "VIP Pool",
+            "h": "/ManageMent/AccountKa/Index"
+          },
+          {
+            "n": "VIP 消费数据",
+            "h": "/ManageMent/StsKaConsum/VipIndex"
+          },
+          {
+            "n": "VIP升降级",
+            "h": "/ManageMent/AccountViplevelLog/Index"
+          }
+        ]
+      },
+      {
+        "g": "货币管理",
+        "items": [
+          {
+            "n": "自动返币配置",
+            "h": "/ManageMent/DigHuntUserRefundCoinConfig/Index"
+          },
+          {
+            "n": "自动返币申请",
+            "h": "/ManageMent/DigHuntUserRefundCoinVerify/Index"
+          },
+          {
+            "n": "自动返币记录",
+            "h": "/ManageMent/DighuntuserRefundcoinLog/Index"
+          },
+          {
+            "n": "申请加减货币",
+            "h": "/ManageMent/InsideCurrencyVerify/InsideCurrency"
+          },
+          {
+            "n": "货币操作记录",
+            "h": "/ManageMent/InsideCurrencyVerify/InsideCurrencyLogIndex"
+          },
+          {
+            "n": "货币审核记录",
+            "h": "/ManageMent/InsideCurrencyVerify/InsideCurrencyCheckIndex"
+          },
+          {
+            "n": "申请加减金币",
+            "h": "/ManageMent/InsideAgentVerify/InsideAgent"
+          },
+          {
+            "n": "申请操作查询",
+            "h": "/ManageMent/InsideAgentVerify/InsideAgentLogPage"
+          },
+          {
+            "n": "审核记录",
+            "h": "/ManageMent/InsideAgentVerify/InsideAgentCheckLogPage"
+          },
+          {
+            "n": "转账记录",
+            "h": "/ManageMent/InsideAgentVerify/InsideAgentTransferLog"
+          },
+          {
+            "n": "平台给代理自动补币",
+            "h": "/ManageMent/InsideAgentVerify/InsideAgentTransferRepairLog"
+          },
+          {
+            "n": "薪资抵扣审核记录",
+            "h": "/ManageMent/AnchorForumSalaryDeduction/Index"
+          },
+          {
+            "n": "薪资结算",
+            "h": "/ManageMent/AnchorForumSalaryDeduction/SettlementIndex"
+          },
+          {
+            "n": "薪资结算审核记录",
+            "h": "/ManageMent/AnchorForumSalaryDeduction/SettlementVerifyIndex"
+          },
+          {
+            "n": "主播薪资明细",
+            "h": "/ManageMent/AnchorForumSalaryDeduction/AnchorSalaryIndex"
+          },
+          {
+            "n": "扣薪/加薪记录",
+            "h": "/ManageMent/AnchorForumSalaryDeduction/SalaryCorrectLogIndex"
+          },
+          {
+            "n": "退款冻币用户",
+            "h": "/ManageMent/OrderRefund/OrderRefundPage"
+          },
+          {
+            "n": "补单",
+            "h": "/ManageMent/OrderSupplement/Index"
+          },
+          {
+            "n": "金币操作查询",
+            "h": "/ManageMent/InsideCoinVerify/InsideCoinLogPage"
+          },
+          {
+            "n": "钻石操作查询",
+            "h": "/ManageMent/InsideDiamondVerify/InsideDiamondLogPage"
+          },
+          {
+            "n": "宝石操作查询",
+            "h": "/ManageMent/InsideGemStoneVerify/InsideGemStoneLogPage"
+          }
+        ]
+      },
+      {
+        "g": "币商管理",
+        "items": [
+          {
+            "n": "币商代理管理",
+            "h": "/ManageMent/AnchorForum/Index"
+          }
+        ]
+      },
+      {
+        "g": "商品赠送管理",
+        "items": [
+          {
+            "n": "商品赠送",
+            "h": "/ManageMent/SysShopSend/Index"
+          },
+          {
+            "n": "贵族赠送",
+            "h": "/ManageMent/SysNobleSend/Index"
+          },
+          {
+            "n": "靓号赠送",
+            "h": "/ManageMent/PrettyVipIdSend/Index"
+          },
+          {
+            "n": "VIP赠送",
+            "h": "/ManageMent/ViplevelSend/Index"
+          }
+        ]
+      },
+      {
+        "g": "预警管理",
+        "items": [
+          {
+            "n": "预警任务",
+            "h": "/ManageMent/Warningconfig/Index"
+          }
+        ]
+      },
+      {
+        "g": "拉新后台",
+        "items": [
+          {
+            "n": "奖励组配置",
+            "h": "/ManageMent/InviteRewardGroup/Index"
+          },
+          {
+            "n": "个人拉新周期配置",
+            "h": "/ManageMent/InviteCycleConfig/Index"
+          },
+          {
+            "n": "个人拉新后台",
+            "h": "/ManageMent/InviteAccountPermission/Index"
+          },
+          {
+            "n": "个人拉新活动统计",
+            "h": "/ManageMent/InvitePersonalInviteStats/Index"
+          },
+          {
+            "n": "个人拉新充值结算",
+            "h": "/ManageMent/InvitePersonalSettlement/Index"
+          },
+          {
+            "n": "BD拉新周期配置",
+            "h": "/ManageMent/InviteBdCycleConfig/Index"
+          },
+          {
+            "n": "BD拉新后台",
+            "h": "/ManageMent/InviteTeamPermission/Index"
+          },
+          {
+            "n": "BD拉新活动统计",
+            "h": "/ManageMent/InviteBdInviteStats/Index"
+          },
+          {
+            "n": "币商拉新周期配置",
+            "h": "/ManageMent/InviteAgentCycleConfig/Index"
+          },
+          {
+            "n": "币商拉新后台",
+            "h": "/ManageMent/InviteTeamDealerPermission/Index"
+          },
+          {
+            "n": "币商拉新活动统计",
+            "h": "/ManageMent/InviteDealerInviteStats/Index"
+          },
+          {
+            "n": "新用户充值阶梯配置",
+            "h": "/ManageMent/InviteNewUserRewardStep/Index"
+          },
+          {
+            "n": "新用户任务配置",
+            "h": "/ManageMent/InviteNewUserTask/Index"
+          },
+          {
+            "n": "新用户奖励领取记录",
+            "h": "/ManageMent/InviteNewUserTaskProgress/Index"
+          },
+          {
+            "n": "新用户任务完成情况统计",
+            "h": "/ManageMent/InviteNewUserTaskProgress/StsNewUserTaskDay"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "i": 1,
+    "id": "multi_module_1",
+    "groups": [
+      {
+        "g": "用户统计",
+        "items": [
+          {
+            "n": "新增用户",
+            "h": "/StsAccount/NewUser/Index"
+          },
+          {
+            "n": "活跃用户",
+            "h": "/StsAccount/ActiveUser/Index"
+          },
+          {
+            "n": "用户留存",
+            "h": "/StsAccount/UserKeep/Index"
+          },
+          {
+            "n": "用户平台时长",
+            "h": "/StsAccount/UserPlatformOnline/Index"
+          },
+          {
+            "n": "新用户充值",
+            "h": "/StsAccount/NewUserRecharge/Index"
+          },
+          {
+            "n": "新用户来源统计",
+            "h": "/StsAccount/UserSourceStatistics/Index"
+          },
+          {
+            "n": "新用户平台时长",
+            "h": "/StsAccount/NewUserPlatformOnline/Index"
+          },
+          {
+            "n": "平台日总表",
+            "h": "/StsConsum/Plat/Index"
+          },
+          {
+            "n": "平台消耗日总表",
+            "h": "/StsConsum/Plat/PlatDepleteTotal"
+          },
+          {
+            "n": "新人行为留存",
+            "h": "/StsAccount/UserNewKeepDay/Index"
+          },
+          {
+            "n": "用户平台时长详情",
+            "h": "/StsAccount/UserPlatformOnline/Show"
+          },
+          {
+            "n": "家族日总表",
+            "h": "/StsAccount/Familyday/Index"
+          },
+          {
+            "n": "邀请日总表",
+            "h": "/StsAccount/InviterDay/Index"
+          },
+          {
+            "n": "邀请查询",
+            "h": "/ManageMent/Inviter/Index"
+          },
+          {
+            "n": "Cp关系日总表",
+            "h": "/StsAccount/Cpday/Index"
+          }
+        ]
+      },
+      {
+        "g": "消费统计",
+        "items": [
+          {
+            "n": "用户充币统计",
+            "h": "/StsConsum/Recharge/RechargeDiamond"
+          },
+          {
+            "n": "用户订阅日志",
+            "h": "/StsConsum/SubscribeOrder/Index"
+          },
+          {
+            "n": "用户充值日志",
+            "h": "/StsConsum/Recharge/RechargeOrder"
+          },
+          {
+            "n": "用户订阅操作日志",
+            "h": "/StsConsum/SubscribeOrder/SubscribeOrderCheck"
+          },
+          {
+            "n": "用户充值操作日志",
+            "h": "/StsConsum/Recharge/OrderCheck"
+          }
+        ]
+      },
+      {
+        "g": "商品统计",
+        "items": [
+          {
+            "n": "金币统计",
+            "h": "/StsProduct/StsCoin/Index"
+          },
+          {
+            "n": "钻石统计",
+            "h": "/StsProduct/StsDiamonds/Index"
+          },
+          {
+            "n": "宝石统计",
+            "h": "/StsProduct/StsGemstone/Index"
+          },
+          {
+            "n": "礼物统计",
+            "h": "/StsProp/StatProp/Index"
+          },
+          {
+            "n": "礼物查询",
+            "h": "/StsProp/StatProp/PropSearch"
+          },
+          {
+            "n": "游戏币统计",
+            "h": "/StsProduct/StsGameCoin/Index"
+          },
+          {
+            "n": "周星统计",
+            "h": "/StsProduct/WeeklyStarsLog/Index"
+          },
+          {
+            "n": "商品统计",
+            "h": "/StsProduct/ShopConfigStatistics/Index"
+          },
+          {
+            "n": "用户金币流向",
+            "h": "/ManageMent/Currencytraderecord/Index"
+          },
+          {
+            "n": "爆奖礼物统计",
+            "h": "/StsProp/StsPropJackpot/Index"
+          },
+          {
+            "n": "爆奖礼物消费统计",
+            "h": "/StsProp/StsPropJackpot/ConsumeIndex"
+          },
+          {
+            "n": "幸运礼物统计",
+            "h": "/StsProp/StatProp/LuckyPropTotalIndex"
+          }
+        ]
+      },
+      {
+        "g": "房间统计",
+        "items": [
+          {
+            "n": "房间在线统计",
+            "h": "/StsRoom/RoomOnlineLog/BarOnlineLogPage"
+          },
+          {
+            "n": "房间消耗统计",
+            "h": "/StsRoom/RoomDepleteDay/RoomDeplete"
+          },
+          {
+            "n": "活动房/运营房统计",
+            "h": "/StsRoom/BarActivityDay/ActivityStatistics"
+          },
+          {
+            "n": "房间用户监控管理",
+            "h": "/StsRoom/RoomUsermointConfig/Index"
+          },
+          {
+            "n": "房间用户监控统计",
+            "h": "/StsRoom/Roomusermoint/Index"
+          },
+          {
+            "n": "礼物计数器",
+            "h": "/StsRoom/StsGiftCounter/Index"
+          },
+          {
+            "n": "俱乐部统计",
+            "h": "/StsRoom/RooomClubStatistics/Index"
+          },
+          {
+            "n": "数据总览",
+            "h": "/StsRoom/StsRoomPkOverview/Index"
+          },
+          {
+            "n": "数据详情",
+            "h": "/StsRoom/StsRoomPkOverview/PkIndexDetail"
+          }
+        ]
+      },
+      {
+        "g": "游戏统计",
+        "items": [
+          {
+            "n": "水果机/动物机统计",
+            "h": "/StsGame/FruitDay/Index"
+          },
+          {
+            "n": "水果机/动物机排行榜",
+            "h": "/StsGame/FruitTop/Index"
+          },
+          {
+            "n": "幸运转盘统计",
+            "h": "/StsGame/Luckwheel/Index"
+          },
+          {
+            "n": "水果大战统计",
+            "h": "/StsGame/FruitWar/Index"
+          },
+          {
+            "n": "幸运数字统计",
+            "h": "/StsGame/StsLuckynumber/Index"
+          },
+          {
+            "n": "Ludo/Domino游戏统计",
+            "h": "/StsGame/GameStatistics/Index"
+          },
+          {
+            "n": "掷色子统计",
+            "h": "/StsGame/DiceDay/Index"
+          },
+          {
+            "n": "桌球统计",
+            "h": "/StsGame/GameStatistics/BilliardsIndex"
+          },
+          {
+            "n": "Ludo/Domino机器人",
+            "h": "/StsGame/StsRobot/Index"
+          },
+          {
+            "n": "蛇梯游戏统计",
+            "h": "/StsGame/ShakeLadder/Index"
+          },
+          {
+            "n": "抽奖礼物统计",
+            "h": "/StsGame/GiftDrawDay/Index"
+          },
+          {
+            "n": "拉霸统计",
+            "h": "/StsGame/SlotDay/Index"
+          },
+          {
+            "n": "游戏表情使用统计",
+            "h": "/StsGame/StsEmojStatisticsDay/Index"
+          },
+          {
+            "n": "极限赛车统计",
+            "h": "/StsGame/RacingDay/Index"
+          },
+          {
+            "n": "珠宝集会统计",
+            "h": "/StsGame/StsJewelryStatisticsday/Index"
+          }
+        ]
+      },
+      {
+        "g": "排行榜统计",
+        "items": [
+          {
+            "n": "礼物排行榜",
+            "h": "/StsProp/StsSysRankList/Index"
+          }
+        ]
+      },
+      {
+        "g": "客服统计",
+        "items": [
+          {
+            "n": "客服处理统计",
+            "h": "/StsCustomer/Customerday/Index"
+          }
+        ]
+      },
+      {
+        "g": "AppsFlyer",
+        "items": [
+          {
+            "n": "渠道报表统计",
+            "h": "/AppsFlyer/ChannelStatistics/NewerBehavior"
+          },
+          {
+            "n": "新人行为统计",
+            "h": "/AppsFlyer/ChannelStatistics/ChannelStatistics"
+          },
+          {
+            "n": "Campaign管理",
+            "h": "/AppsFlyer/AfAnchorUserinfo/Index"
+          },
+          {
+            "n": "BD账号统计",
+            "h": "/AppsFlyer/AfAnchorUserinfo/AnchorUserStatistics"
+          }
+        ]
+      },
+      {
+        "g": "任务统计",
+        "items": [
+          {
+            "n": "新手任务统计",
+            "h": "/StsTask/NewUserTaskSts/Index"
+          },
+          {
+            "n": "每日任务统计",
+            "h": "/StsTask/EveryDayTaskSts/Index"
+          }
+        ]
+      },
+      {
+        "g": "埋点统计",
+        "items": [
+          {
+            "n": "Sailfish明细",
+            "h": "/StsTracking/StsSailfish/Index"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "i": 2,
+    "id": "multi_module_2",
+    "groups": [
+      {
+        "g": "商品管理",
+        "items": [
+          {
+            "n": "礼物管理",
+            "h": "/PlatformConfig/Prop/Index"
+          },
+          {
+            "n": "幸运礼物管理",
+            "h": "/PlatformConfig/PropLuck/Index"
+          },
+          {
+            "n": "周星礼物",
+            "h": "/PlatformConfig/PropWeeklyStars/Index"
+          },
+          {
+            "n": "商城管理",
+            "h": "/PlatformConfig/ShopConfig/Index"
+          }
+        ]
+      },
+      {
+        "g": "Banner管理",
+        "items": [
+          {
+            "n": "Banner列表",
+            "h": "/PlatformConfig/Banner/Index"
+          },
+          {
+            "n": "活动管理",
+            "h": "/ManageMent/Activity/Index"
+          }
+        ]
+      },
+      {
+        "g": "敏感词管理",
+        "items": [
+          {
+            "n": "关键词管理",
+            "h": "/PlatformConfig/KeyWords/Index"
+          }
+        ]
+      },
+      {
+        "g": "消息管理",
+        "items": [
+          {
+            "n": "惩罚理由文案配置",
+            "h": "/PlatformConfig/MsgConfigType/Index"
+          },
+          {
+            "n": "惩罚消息文案配置",
+            "h": "/PlatformConfig/MsgTypeTemplate/Index"
+          },
+          {
+            "n": "Syestem消息",
+            "h": "/PlatformConfig/Message/Index"
+          },
+          {
+            "n": "Official/Agency消息",
+            "h": "/PlatformConfig/TeamMsg/Index"
+          },
+          {
+            "n": "房间广播",
+            "h": "/PlatformConfig/RoomBroadcast/Index"
+          },
+          {
+            "n": "打招呼文案模板",
+            "h": "/PlatformConfig/SysHitemplate/Index"
+          },
+          {
+            "n": "Agency分类配置",
+            "h": "/PlatformConfig/AgencyClass/Index"
+          }
+        ]
+      },
+      {
+        "g": "签到配置",
+        "items": [
+          {
+            "n": "七日签到配置",
+            "h": "/PlatformConfig/Sign/Index"
+          },
+          {
+            "n": "新七日签到配置",
+            "h": "/PlatformConfig/SignNew/Index"
+          }
+        ]
+      },
+      {
+        "g": "休闲游戏",
+        "items": [
+          {
+            "n": "休闲游戏数据",
+            "h": "/CustomReportFlag/gamedata-bytesun-stat-day"
+          },
+          {
+            "n": "休闲游戏配置项",
+            "h": "/PlatformConfig/GameConfigItemBytesun/Index"
+          },
+          {
+            "n": "休闲游戏门票配置",
+            "h": "/PlatformConfig/GameTicketConfigBytesun/Index"
+          },
+          {
+            "n": "休闲游戏对局明细",
+            "h": "/PlatformConfig/GameDataBytesunMatchDetail/Index"
+          },
+          {
+            "n": "休闲游戏日报统计",
+            "h": "/CustomReportFlag/StsCasualGameDailyReport"
+          }
+        ]
+      },
+      {
+        "g": "游戏配置",
+        "items": [
+          {
+            "n": "内容配置",
+            "h": "/Statistics/AdminFruitwarconfig/Index"
+          },
+          {
+            "n": "水果派对入口管理",
+            "h": "/PlatformConfig/AccountBlackwhiteList/Index"
+          },
+          {
+            "n": "表情配置",
+            "h": "/GameConfig/ExpressionConfig/Index"
+          }
+        ]
+      },
+      {
+        "g": "福利券配置",
+        "items": [
+          {
+            "n": "VIP体验券",
+            "h": "/PlatformConfig/ExperienceVoucherConfig/Index"
+          },
+          {
+            "n": "体验券使用记录",
+            "h": "/PlatformConfig/ExperienceVoucherConfig/UseRecords"
+          }
+        ]
+      },
+      {
+        "g": "福利发放",
+        "items": [
+          {
+            "n": "发放计划配置",
+            "h": "/PlatformConfig/IssuancePlanConfig/Index"
+          },
+          {
+            "n": "用户群体配置",
+            "h": "/PlatformConfig/IssuanceGroup/Index"
+          }
+        ]
+      },
+      {
+        "g": "协议配置",
+        "items": [
+          {
+            "n": "协议配置",
+            "h": "/PlatformConfig/SysAgreementConfig/Index"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "i": 3,
+    "id": "multi_module_3",
+    "groups": [
+      {
+        "g": "Manage Report",
+        "items": [
+          {
+            "n": "Manage Report",
+            "h": "/AuditCheck/Report/Index"
+          }
+        ]
+      },
+      {
+        "g": "Manage Feedback",
+        "items": [
+          {
+            "n": "Log In Feedback",
+            "h": "/AuditCheck/Feedback/LoginIndex"
+          },
+          {
+            "n": "App Problem Feedback",
+            "h": "/AuditCheck/Feedback/Index"
+          },
+          {
+            "n": "回复子分类管理",
+            "h": "/AuditCheck/ChildReplyType/Index"
+          },
+          {
+            "n": "回复分类管理",
+            "h": "/AuditCheck/ReplyType/Index"
+          },
+          {
+            "n": "回复模板配置",
+            "h": "/AuditCheck/ReplyTemplate/Index"
+          }
+        ]
+      },
+      {
+        "g": "Action Record",
+        "items": [
+          {
+            "n": "Action Record",
+            "h": "/AuditCheck/ActionRecord/Index"
+          },
+          {
+            "n": "平台操作记录",
+            "h": "/AuditCheck/ChangeRecord/Index"
+          },
+          {
+            "n": "身份修改记录",
+            "h": "/AuditCheck/UserModifyRecord/Index"
+          },
+          {
+            "n": "后台登录记录",
+            "h": "/Sys/Admin/AdminLoginRecord"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "i": 4,
+    "id": "multi_module_4",
+    "groups": [
+      {
+        "g": "代理及销售管理",
+        "items": [
+          {
+            "n": "代理及销售管理",
+            "h": "/Agent/Agent/Index"
+          }
+        ]
+      },
+      {
+        "g": "代理加币记录",
+        "items": [
+          {
+            "n": "代理加币记录",
+            "h": "/Agent/AgentCoinLog/Index"
+          }
+        ]
+      },
+      {
+        "g": "用户转账记录",
+        "items": [
+          {
+            "n": "用户转账记录",
+            "h": "/Agent/AgentPay/Index"
+          }
+        ]
+      },
+      {
+        "g": "用户加币记录",
+        "items": [
+          {
+            "n": "用户加币记录",
+            "h": "/Agent/AgentForUserCoin/Index"
+          }
+        ]
+      },
+      {
+        "g": "银行账号管理",
+        "items": [
+          {
+            "n": "银行账号管理",
+            "h": "/Agent/BankAccount/Index"
+          }
+        ]
+      },
+      {
+        "g": "银行间转账",
+        "items": [
+          {
+            "n": "银行间转账",
+            "h": "/Agent/Agentpay/BankTransfer"
+          }
+        ]
+      },
+      {
+        "g": "银行收付款记录",
+        "items": [
+          {
+            "n": "银行收付款记录",
+            "h": "/Agent/AgentCoinLog/BankTransferLog"
+          }
+        ]
+      },
+      {
+        "g": "加币用户统计",
+        "items": [
+          {
+            "n": "加币用户统计",
+            "h": "/Agent/AgentForUserCoin/AddUserCoinTotal"
+          }
+        ]
+      },
+      {
+        "g": "充值用户分析",
+        "items": [
+          {
+            "n": "充值用户分析",
+            "h": "/Agent/AgentUserAnalysis/Index"
+          }
+        ]
+      },
+      {
+        "g": "充值国家统计",
+        "items": [
+          {
+            "n": "充值国家统计",
+            "h": "/Agent/AgentCountryAnalysis/Index"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "i": 5,
+    "id": "multi_module_5",
+    "groups": [
+      {
+        "g": "版本配置对比",
+        "items": [
+          {
+            "n": "版本配置对比",
+            "h": "/SysConfig/VersionConfig/Index"
+          }
+        ]
+      },
+      {
+        "g": "系统配置",
+        "items": [
+          {
+            "n": "系统配置",
+            "h": "/SysConfig/ConfigSys/Index"
+          }
+        ]
+      },
+      {
+        "g": "账号角色申请",
+        "items": [
+          {
+            "n": "账号角色申请",
+            "h": "/Sys/Apply/Index"
+          }
+        ]
+      }
+    ]
+  }
+]

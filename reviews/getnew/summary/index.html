@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hayyo 拉新与付费简报</title>
+  <style>
+:root {
+  --bg: #181818;
+  --text: #f0f0f0;
+  --text-2: rgba(240, 240, 240, 0.74);
+  --text-3: rgba(240, 240, 240, 0.6);
+  --fill: rgba(240, 240, 240, 0.08);
+  --fill-2: rgba(240, 240, 240, 0.06);
+  --stroke: rgba(240, 240, 240, 0.12);
+  --stroke-2: rgba(240, 240, 240, 0.08);
+  --info: #2e79b5;
+  --success: #1f8a65;
+  --warning: #e2b657;
+  --danger: #c04848;
+  --orange: #f0a040;
+  --font: -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+h1 { margin: 0; font-size: 24px; line-height: 30px; font-weight: 590; }
+h2 { margin: 0 0 8px; font-size: 18px; line-height: 24px; font-weight: 590; }
+p { margin: 0; font-size: 14px; line-height: 22px; }
+.muted { color: var(--text-2); }
+.caption { font-size: 12px; line-height: 16px; color: var(--text-3); }
+.lead { font-size: 16px; line-height: 26px; color: var(--text-2); }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.stat-value { font-size: 22px; line-height: 28px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.stat-value.danger { color: #e06c75; }
+.stat-value.warning { color: var(--warning); }
+.stat-label { margin-top: 4px; font-size: 12px; color: var(--text-3); }
+.callout {
+  display: flex;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--stroke-2);
+  border-radius: 8px;
+  background: var(--fill-2);
+}
+.callout.warn { border-color: rgba(226, 182, 87, 0.35); background: rgba(226, 182, 87, 0.1); }
+.callout.ok { border-color: rgba(31, 138, 101, 0.35); background: rgba(31, 138, 101, 0.1); }
+.callout.info { border-color: rgba(46, 121, 181, 0.35); background: rgba(46, 121, 181, 0.1); }
+.callout-mark {
+  width: 8px; min-width: 8px; border-radius: 99px; align-self: stretch;
+}
+.callout.warn .callout-mark { background: var(--warning); }
+.callout.ok .callout-mark { background: var(--success); }
+.callout.info .callout-mark { background: var(--info); }
+.callout h3 { margin: 0 0 6px; font-size: 14px; font-weight: 650; }
+.callout p { color: var(--text-2); }
+.block { display: flex; flex-direction: column; gap: 10px; }
+.chart-box canvas { display: block; width: 100%; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+ol.actions {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--text-2);
+  font-size: 14px;
+  line-height: 22px;
+}
+ol.actions strong { color: var(--text); font-weight: 650; }
+.footer { border-top: 1px solid var(--stroke-2); padding-top: 12px; }
+@media (max-width: 720px) {
+  .stats, .grid-2 { grid-template-columns: 1fr; }
+  .page { padding: 20px 14px 40px; }
+}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div>
+      <h1>Hayyo 拉新与付费简报</h1>
+      <p class="caption" style="margin-top:6px;">给老板 / 管理层 · 7–8 月充值与币消费 · 8.1–8.24 投放 · 拉新功能全量埋点</p>
+    </div>
+
+    <p class="lead">投放已经能买到安装和注册，但几乎买不到付费。现有付费盘被少数人和「未知」渠道撑着。拉新功能卡在进页，不卡在分享。钱真正花在送礼，不是游戏。</p>
+
+    <div class="stats">
+      <div>
+        <div class="stat-value">213</div>
+        <div class="stat-label">7–8 月充值用户</div>
+      </div>
+      <div>
+        <div class="stat-value warning">74%</div>
+        <div class="stat-label">金额来自「未知」渠道</div>
+      </div>
+      <div>
+        <div class="stat-value danger">16</div>
+        <div class="stat-label">投放 24 天带来的付费人数</div>
+      </div>
+      <div>
+        <div class="stat-value warning">9.5%</div>
+        <div class="stat-label">Me 进到拉新页的人</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-mark"></div>
+      <div>
+        <h3>总判断</h3>
+        <p>现在不宜按「投放在出付费、拉新功能在出充值」来加预算或加指标。先把归因补上，投放目标继续放在次留，拉新只改入口，消费看送礼不要看游戏流水。</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>1. 投放买得到人，买不到钱</h2>
+      <p class="muted">8.1–8.24 Facebook 花费约 <strong style="color:var(--text)">$8,740</strong>，注册 3.4 万人，次留 4,894，充值只有 <strong style="color:var(--text)">16 人</strong>。注册付费率 0.05%，一个付费用户成本约 <strong style="color:var(--text)">$546</strong>。</p>
+      <p class="muted">和充值表也对不上：充值表里标「推广量」的是 46 人，投放表是 16 人。没有用户级广告 ID，不能当成同一批人，更不能按系列优化付费。</p>
+      <div class="chart-box"><canvas id="c-ad" data-h="180"></canvas></div>
+      <p class="caption">柱子是花费。各国注册成本都便宜（约 $0.16–$0.35），付费都是个位数。</p>
+      <div class="callout info">
+        <div class="callout-mark"></div>
+        <div>
+          <h3>结论</h3>
+          <p>投放作为获客可以继续，作为付费渠道现在不成立。下一阶段不要把「充值人数」当成投放主 KPI，也不要按当前付费成本去加预算。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>2. 付费盘很薄，而且看不清是谁带来的</h2>
+      <p class="muted">7–8 月 213 个充值用户、累计 6.60 亿币。前 7 人贡献约一半金额，前 19 人约八成。推广量和自然量人数一样多（各 46 人），但推广量金额只有自然量的约六分之一。</p>
+      <div class="chart-box"><canvas id="c-ch" data-h="210"></canvas></div>
+      <p class="caption">金额单位：亿币。未知 4.86 亿 / 自然量 1.48 亿 / 推广量 0.26 亿。</p>
+      <div class="callout info">
+        <div class="callout-mark"></div>
+        <div>
+          <h3>结论</h3>
+          <p>渠道对比现在没有决策价值：一半以上人数、四分之三金额在「未知」里。在归因修好之前，不要按推广 / 自然决定投放或运营资源。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>3. 币花在送礼上，游戏流水会误导</h2>
+      <p class="muted">充值口径里，真金购买 4.38 亿，代理转账 2.22 亿（占「充值」三分之一）。另外后台加币 4.63 亿，比真金购买还多，但不算充值。报收入时这三笔必须拆开。</p>
+      <p class="muted">花出去的部分：送礼净消耗 9.75 亿，动物机净亏 1.18 亿，水果派对净亏 0.79 亿。水果派对下注流水有 82.8 亿，几乎全部开奖还回去了——那是空转，不是生意。</p>
+      <div class="grid-2">
+        <div>
+          <h3 style="margin:0 0 6px;font-size:14px;">获得结构</h3>
+          <div class="chart-box"><canvas id="c-in" data-h="230"></canvas></div>
+          <p class="caption">213 人钱包进账。不含游戏开奖、不含爆奖返还。其他 = 周星、签到、收礼物。</p>
+        </div>
+        <div>
+          <h3 style="margin:0 0 6px;font-size:14px;">消费结构（净消耗）</h3>
+          <div class="chart-box"><canvas id="c-out" data-h="230"></canvas></div>
+          <p class="caption">送礼已扣爆奖返还，游戏已扣开奖返还。其他 = 房间升级、活动、商城。</p>
+        </div>
+      </div>
+      <div class="callout info">
+        <div class="callout-mark"></div>
+        <div>
+          <h3>结论</h3>
+          <p>社交送礼才是金币主出口。不要因为水果派对流水大就加游戏运营或砍礼物。看经济系统，只看净消耗。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>4. 拉新功能卡在进页，后面两步是通的</h2>
+      <p class="muted">看过 Me 的 40,767 人里，只有 3,885 人进了拉新页（9.5%）。进页之后：约一半开通，开通后约六成分享。问题在入口，不在开通和分享。</p>
+      <div class="chart-box"><canvas id="c-funnel" data-h="180"></canvas></div>
+      <p class="caption">人数漏斗。分享次数会大于开通次数，那是因为一人可多次分享，不要用次数漏斗。</p>
+      <p class="muted">另外：充值表上的「是否拉新」不是「用过拉新功能」。标了拉新的 55 个付费用户里，只有 11 人开通过；没标的人里反而有 34 人开通过。这两个字段不能混着用。</p>
+      <div class="callout info">
+        <div class="callout-mark"></div>
+        <div>
+          <h3>结论</h3>
+          <p>拉新功能下一步只改一件事：让更多人从 Me 进到拉新页。不要优先改分享奖励，也不要用充值用户的「是否拉新」标签评估这个功能。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout ok">
+      <div class="callout-mark"></div>
+      <div>
+        <h3>建议按这个顺序做</h3>
+        <ol class="actions">
+          <li><strong>先修归因。</strong>「未知」占金额 74%，渠道结论现在不可信。没有用户级广告 ID，投放也优化不了付费。</li>
+          <li><strong>投放维持获客，不按付费加码。</strong>主看次留和注册成本；付费人数 16 人，样本不够做系列决策。</li>
+          <li><strong>拉新只改 Me 进页。</strong>进页后的开通、分享已经过得去。</li>
+          <li><strong>对内对外报充值，拆成三笔：</strong>IAP 真金、代理转入、后台加币。后两笔不是用户掏的钱。</li>
+          <li><strong>金币经济看送礼净消耗，</strong>不要拿游戏流水做经营判断。</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="footer caption">数据：7.1–8.31 充值 213 人；8.1–8.24 投放无用户 ID；拉新漏斗无日期。充值 = IAP + 代理转账，不含后台加币。单文件页面，转发即可打开。</p>
+  </div>
+
+  <script>
+(function () {
+  const INFO = "#2e79b5";
+  const SUCCESS = "#1f8a65";
+  const WARN = "#e2b657";
+  const DANGER = "#c04848";
+  const ORANGE = "#f0a040";
+  const PURPLE = "#8b7bb8";
+  const GRID = "rgba(240,240,240,0.10)";
+  const AXIS = "rgba(240,240,240,0.45)";
+  const LABEL = "rgba(240,240,240,0.72)";
+  const FONT = getComputedStyle(document.body).fontFamily;
+
+  function fit(canvas) {
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    const h = Number(canvas.getAttribute("data-h") || 200);
+    const w = canvas.parentElement.clientWidth || 640;
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    return { ctx: ctx, w: w, h: h };
+  }
+  function niceMax(v) {
+    if (v <= 0) return 1;
+    const mag = Math.pow(10, Math.floor(Math.log10(v)));
+    const n = v / mag;
+    const nice = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
+    return nice * mag;
+  }
+  function roundRect(ctx, x, y, w, h, r) {
+    const rr = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + rr, y);
+    ctx.arcTo(x + w, y, x + w, y + h, rr);
+    ctx.arcTo(x + w, y + h, x, y + h, rr);
+    ctx.arcTo(x, y + h, x, y, rr);
+    ctx.arcTo(x, y, x + w, y, rr);
+    ctx.closePath();
+  }
+  function groupedBar(canvas, opt) {
+    const box = fit(canvas);
+    const ctx = box.ctx, w = box.w, h = box.h;
+    const pad = { t: 26, r: 12, b: 32, l: opt.left || 40 };
+    const innerW = w - pad.l - pad.r;
+    const innerH = h - pad.t - pad.b;
+    const cats = opt.categories;
+    const series = opt.series;
+    const maxVal = niceMax(Math.max.apply(null, series.flatMap(function (s) { return s.data; })));
+    series.forEach(function (s, i) {
+      ctx.fillStyle = s.color;
+      ctx.fillRect(pad.l + i * 92, 8, 8, 8);
+      ctx.fillStyle = LABEL;
+      ctx.font = "11px " + FONT;
+      ctx.textAlign = "left";
+      ctx.fillText(s.name, pad.l + i * 92 + 12, 16);
+    });
+    ctx.font = "10px " + FONT;
+    for (var i = 0; i <= 4; i++) {
+      var y = pad.t + innerH - (innerH * i) / 4;
+      ctx.strokeStyle = GRID;
+      ctx.beginPath();
+      ctx.moveTo(pad.l, y);
+      ctx.lineTo(pad.l + innerW, y);
+      ctx.stroke();
+      ctx.fillStyle = AXIS;
+      ctx.textAlign = "right";
+      var raw = (maxVal * i) / 4;
+      ctx.fillText(opt.fmt ? opt.fmt(raw) : String(Math.round(raw)), pad.l - 6, y + 3);
+    }
+    var groupW = innerW / cats.length;
+    var gap = 4;
+    var barW = Math.min(28, (groupW - 16 - gap * (series.length - 1)) / series.length);
+    cats.forEach(function (cat, ci) {
+      var gx = pad.l + ci * groupW + (groupW - series.length * barW - gap * (series.length - 1)) / 2;
+      series.forEach(function (s, si) {
+        var v = s.data[ci] || 0;
+        var bh = maxVal ? (v / maxVal) * innerH : 0;
+        var x = gx + si * (barW + gap);
+        var y = pad.t + innerH - bh;
+        ctx.fillStyle = s.color;
+        roundRect(ctx, x, y, barW, Math.max(bh, 0), 2);
+        ctx.fill();
+      });
+      ctx.fillStyle = LABEL;
+      ctx.font = "11px " + FONT;
+      ctx.textAlign = "center";
+      ctx.fillText(cat, pad.l + ci * groupW + groupW / 2, h - 10);
+    });
+  }
+  function donut(canvas, opt) {
+    const box = fit(canvas);
+    const ctx = box.ctx, w = box.w, h = box.h;
+    const items = opt.items.filter(function (it) { return it.value > 0; });
+    const sum = items.reduce(function (s, it) { return s + it.value; }, 0) || 1;
+    const cx = Math.min(w * 0.34, 120);
+    const cy = h / 2;
+    const r = Math.min(cx - 8, cy - 12);
+    var a0 = -Math.PI / 2;
+    items.forEach(function (it) {
+      var a1 = a0 + (it.value / sum) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, a0, a1);
+      ctx.closePath();
+      ctx.fillStyle = it.color;
+      ctx.fill();
+      a0 = a1;
+    });
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * 0.58, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = LABEL;
+    ctx.font = "12px " + FONT;
+    ctx.textAlign = "center";
+    ctx.fillText(opt.center || "", cx, cy + 4);
+    var ly = Math.max(20, cy - items.length * 18);
+    items.forEach(function (it) {
+      ctx.fillStyle = it.color;
+      ctx.fillRect(w * 0.52, ly - 8, 8, 8);
+      ctx.fillStyle = LABEL;
+      ctx.textAlign = "left";
+      ctx.font = "12px " + FONT;
+      ctx.fillText(it.name, w * 0.52 + 14, ly);
+      ctx.fillStyle = AXIS;
+      ctx.font = "11px " + FONT;
+      ctx.fillText(it.label + "  " + (it.value / sum * 100).toFixed(0) + "%", w * 0.52 + 14, ly + 14);
+      ly += 36;
+    });
+  }
+  function hbar(canvas, items) {
+    const box = fit(canvas);
+    const ctx = box.ctx, w = box.w, h = box.h;
+    const pad = { t: 8, r: 148, b: 8, l: 108 };
+    const rowH = (h - pad.t - pad.b) / items.length;
+    const maxVal = Math.max.apply(null, items.map(function (it) { return it.value; }));
+    items.forEach(function (it, i) {
+      var y = pad.t + i * rowH + 6;
+      var bh = Math.min(18, rowH - 10);
+      var bw = ((w - pad.l - pad.r) * it.value) / maxVal;
+      ctx.fillStyle = LABEL;
+      ctx.font = "12px " + FONT;
+      ctx.textAlign = "right";
+      ctx.fillText(it.name, pad.l - 8, y + bh - 3);
+      ctx.fillStyle = it.color;
+      roundRect(ctx, pad.l, y, Math.max(bw, 1), bh, 2);
+      ctx.fill();
+      ctx.fillStyle = LABEL;
+      ctx.textAlign = "left";
+      ctx.fillText(it.label, pad.l + bw + 8, y + bh - 3);
+    });
+  }
+
+  function draw() {
+  hbar(document.getElementById("c-ad"), [
+    { name: "埃及", value: 3490, label: "$3,490 · 充值 3 人", color: INFO },
+    { name: "伊拉克", value: 2392, label: "$2,392 · 充值 6 人", color: INFO },
+    { name: "阿尔及利亚", value: 2278, label: "$2,278 · 充值 3 人", color: INFO },
+    { name: "约旦", value: 579, label: "$579 · 充值 4 人", color: SUCCESS }
+  ]);
+  groupedBar(document.getElementById("c-ch"), {
+    categories: ["推广量 46人", "自然量 46人", "未知 121人"],
+    left: 36,
+    fmt: function (v) { return v.toFixed(1); },
+    series: [
+      { name: "金额（亿币）", data: [0.26, 1.48, 4.86], color: ORANGE }
+    ]
+  });
+  donut(document.getElementById("c-in"), {
+    center: "获得",
+    items: [
+      { name: "后台加币", value: 4.63, label: "4.63 亿", color: ORANGE },
+      { name: "IAP 购买", value: 4.38, label: "4.38 亿", color: INFO },
+      { name: "其他获得", value: 2.69, label: "2.69 亿", color: PURPLE },
+      { name: "代理转账", value: 2.22, label: "2.22 亿", color: SUCCESS }
+    ]
+  });
+  donut(document.getElementById("c-out"), {
+    center: "消费",
+    items: [
+      { name: "送礼净消耗", value: 9.75, label: "9.75 亿", color: DANGER },
+      { name: "动物机净亏", value: 1.18, label: "1.18 亿", color: ORANGE },
+      { name: "水果派对净亏", value: 0.79, label: "0.79 亿", color: WARN },
+      { name: "其他消费", value: 0.33, label: "0.33 亿", color: INFO }
+    ]
+  });
+  hbar(document.getElementById("c-funnel"), [
+    { name: "Me 页面", value: 40767, label: "40,767", color: "rgba(240,240,240,0.28)" },
+    { name: "拉新页面", value: 3885, label: "3,885 · 9.5%", color: INFO },
+    { name: "开通功能", value: 1925, label: "1,925 · 50%", color: SUCCESS },
+    { name: "分享", value: 1211, label: "1,211 · 63%", color: WARN }
+  ]);
+  }
+  draw();
+  window.addEventListener("resize", function () {
+    clearTimeout(window.__r);
+    window.__r = setTimeout(draw, 160);
+  });
+})();
+  </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>商城管理-房间装饰</title>
+<link rel="stylesheet" href="_base.css">
+<style>body{width:1180px}</style>
+</head>
+<body>
+<div class="caption">「图1」商城管理 · 房间装饰</div>
+<div class="hint">橙底 tab / 行 = 本版新增。筛选、添加、编辑、展示/不展示沿用原商城管理。展示中商品不可编辑。</div>
+<div class="tabs">
+  <div class="tab">头饰卡</div>
+  <div class="tab">座驾</div>
+  <div class="tab">房间背景</div>
+  <div class="tab">头像框</div>
+  <div class="tab on new">房间装饰 <span class="tag">新增</span></div>
+  <div class="tab new">名片装饰 <span class="tag">新增</span></div>
+</div>
+<div class="toolbar">
+  <span>商品名称</span>
+  <span class="fake-input" style="min-width:180px;display:inline-flex;align-items:center;color:#999">英语 / 阿语模糊搜索</span>
+  <span>商城展示</span>
+  <span class="fake-select">全部 <span class="caret">▼</span></span>
+  <span class="btn solid">查询</span>
+  <span class="btn solid">添加</span>
+</div>
+<table class="grid">
+  <tr>
+    <th>商品名称（英）</th>
+    <th style="width:70px">排序</th>
+    <th style="width:70px">图片</th>
+    <th style="width:90px">价格</th>
+    <th style="width:90px">规格一</th>
+    <th style="width:90px">商城展示</th>
+    <th style="width:180px">操作</th>
+  </tr>
+  <tr class="row-new">
+    <td>Golden Room Frame</td>
+    <td class="center">20</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">1999</td>
+    <td class="center">7 天</td>
+    <td class="center status-on">展示</td>
+    <td class="center"><span class="link">不展示</span>　<span class="link off">编辑</span></td>
+  </tr>
+  <tr class="row-new">
+    <td>Neon Room</td>
+    <td class="center">10</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">499</td>
+    <td class="center">1 天</td>
+    <td class="center status-off">不展示</td>
+    <td class="center"><span class="link">展示</span>　<span class="link">编辑</span></td>
+  </tr>
+  <tr class="row-new">
+    <td>Forever Glow</td>
+    <td class="center">5</td>
+    <td class="center"><span class="thumb">图</span></td>
+    <td class="center">9999</td>
+    <td class="center">永久</td>
+    <td class="center status-off">不展示</td>
+    <td class="center"><span class="link">展示</span>　<span class="link">编辑</span></td>
+  </tr>
+</table>
+<div class="page-num">共 3 条　<span>&lt;</span><span class="cur">1</span><span>&gt;</span></div>
+<div class="note">
+  价格 / 规格取规格一。时长商品：N 天或「永久」（-1）。添加成功后默认不展示。点展示中商品的「编辑」见「图4」。展示仅影响商城，不影响赠送/签到/已获得用户。
+</div>
+</body>
+</html>

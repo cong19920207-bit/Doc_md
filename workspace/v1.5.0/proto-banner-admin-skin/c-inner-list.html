@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>C · 仅内页列表</title>
+<link rel="stylesheet" href="../../_kit/admin-skin/style.css">
+<link rel="stylesheet" href="extra.css">
+</head>
+<body class="inner-only">
+<div class="demo-bar">
+  <span class="tag">确认稿</span>
+  <strong>C 仅内页 · 列表</strong>
+  <div class="hint">不进 Word。无侧栏，构图接近历史 Banner 附图。类型下拉展开，方便对「团队数据页」。</div>
+</div>
+<main class="body">
+  <form class="search">
+    <select><option selected>启用</option><option>停用</option><option>全部</option></select>
+    <select><option selected>全部系统</option><option>iOS</option><option>安卓</option></select>
+    <select><option selected>全部语区</option><option>英语</option><option>阿语</option><option>土语</option></select>
+    <span class="drop-open">
+      <select class="changed" style="width:140px">
+        <option selected>全部类型</option>
+      </select>
+      <div class="drop-panel">
+        <div class="on">全部类型</div>
+        <div>首页</div>
+        <div class="changed">团队数据页</div>
+      </div>
+    </span>
+    <button class="btn" type="button">查询</button>
+    <button class="btn" type="button">新增</button>
+  </form>
+  <div class="table-wrap">
+    <table class="banner-table">
+      <thead>
+        <tr>
+          <th>标题</th>
+          <th>图片</th>
+          <th class="changed">类型</th>
+          <th>跳转</th>
+          <th>地址</th>
+          <th>时间</th>
+          <th>显示设备</th>
+          <th>语区</th>
+          <th>排序</th>
+          <th>状态</th>
+          <th>最低版本号</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>首页活动位</td>
+          <td><span class="thumb"></span></td>
+          <td>首页</td>
+          <td>页面</td>
+          <td class="addr">https://h5.example.com/home-act</td>
+          <td class="time">2026-09-01 00:00:00 — 2026-12-31 23:59:59</td>
+          <td>全设备</td>
+          <td>英语</td>
+          <td>5</td>
+          <td><span class="status ok">启用</span></td>
+          <td>—</td>
+          <td class="ops"><a>编辑</a></td>
+        </tr>
+        <tr>
+          <td>团队数据运营位</td>
+          <td><span class="thumb"></span></td>
+          <td class="changed">团队数据页</td>
+          <td>页面</td>
+          <td class="addr">https://h5.example.com/team-act</td>
+          <td class="time">2026-09-01 00:00:00 — 2026-12-31 23:59:59</td>
+          <td>全设备</td>
+          <td>英语</td>
+          <td>10</td>
+          <td><span class="status ok">启用</span></td>
+          <td>—</td>
+          <td class="ops"><a>编辑</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pager">共 2 条</div>
+</main>
+</body>
+</html>

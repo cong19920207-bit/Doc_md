@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>对局明细</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+body{width:1180px}
+.grid th,.grid td{font-size:12px;padding:8px 8px;}
+</style>
+</head>
+<body>
+<div class="caption">「图2」休闲游戏对局明细 · 游戏筛选下拉</div>
+<div class="hint">筛选项和列沿用历史。本版游戏下拉增加 Jackaroo、Melon Dash。并列第一可多名获胜用户。</div>
+<div class="toolbar" style="flex-wrap:wrap;gap:8px 12px;margin-bottom:8px;">
+  <span>对局时间</span>
+  <input placeholder="起始时间" style="width:120px">
+  <input placeholder="截止时间" style="width:120px">
+  <span>游戏</span>
+  <span class="wrap-rel">
+    <span class="fake-select" style="min-width:150px;border-color:#4a90d9;">下拉选择类型 <span class="caret">▼</span></span>
+    <div class="dropdown" style="width:170px;">
+      <div>LUDO</div>
+      <div>Carrom</div>
+      <div>Block Crush</div>
+      <div class="new-opt">Jackaroo　本版新增</div>
+      <div class="new-opt">Melon Dash　本版新增</div>
+    </div>
+  </span>
+  <span>类型</span>
+  <span class="fake-select" style="min-width:110px;">房间外/房间内 <span class="caret">▼</span></span>
+  <span>对局标记</span>
+  <span class="fake-select" style="min-width:120px;">正常/异常/逃跑 <span class="caret">▼</span></span>
+  <span class="btn solid">查询</span>
+  <span class="btn">导出</span>
+</div>
+<div style="height:148px;"></div>
+<table class="grid">
+  <tr>
+    <th>日期</th>
+    <th>类型</th>
+    <th>对局状态</th>
+    <th>对局标记</th>
+    <th>游戏</th>
+    <th>门票</th>
+    <th>平台抽成</th>
+    <th>对局房间ID</th>
+    <th>参与用户</th>
+    <th>获胜用户</th>
+  </tr>
+  <tr class="row-new">
+    <td>2026-09-03</td>
+    <td>房间外</td>
+    <td>成功</td>
+    <td>正常</td>
+    <td>Jackaroo <span class="tag">本版</span></td>
+    <td>10</td>
+    <td>按大厅抽成</td>
+    <td>大厅</td>
+    <td><span class="link">用户A 10001</span><br><span class="link">用户B 10002</span></td>
+    <td><span class="link">用户A 10001</span><br><span class="link">用户B 10002</span><br><span style="color:#c0392b;font-size:11px;">并列第一可多名</span></td>
+  </tr>
+  <tr>
+    <td>2026-09-03</td>
+    <td>房间外</td>
+    <td>成功</td>
+    <td>正常</td>
+    <td>LUDO</td>
+    <td>10</td>
+    <td>按大厅抽成</td>
+    <td>大厅</td>
+    <td><span class="link">用户C 10003</span></td>
+    <td><span class="link">用户C 10003</span></td>
+  </tr>
+</table>
+<div class="note">用户对局明细点进字段沿用现页，不新造列。对局标记沿用：正常 / 异常 / 逃跑 / 管理操作。</div>
+</body>
+</html>

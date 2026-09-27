@@ -1,0 +1,29 @@
+/* A · 攻壳克制 HUD：近黑底、浅青主色 */
+:root {
+  --bg: #07090b;
+  --bg-elevated: #0e1418;
+  --bg-panel: #0b1114;
+  --stroke: #1c3338;
+  --stroke-strong: #2a4a52;
+  --text: #dceef0;
+  --text-muted: #7fa3a8;
+  --text-faint: #5a767c;
+  --accent: #7ec8d0;
+  --accent-soft: rgba(126, 200, 208, 0.16);
+  --ok: #6db89a;
+  --warn: #c4a35a;
+  --danger: #d07070;
+  --danger-soft: rgba(208, 112, 112, 0.12);
+  --on-accent: #071014;
+  --social: #7ec8d0;
+  --money: #6db89a;
+  --growth: #c4a35a;
+  --reach: #9bb8d4;
+  --admin: #7a8a90;
+  --reach-soft: rgba(155, 184, 212, 0.16);
+  --dot: #1a3338;
+  --node-admin: #0f1618;
+  --node-pure: #121a1c;
+  --node-selected: #123038;
+  --edge: #3a555c;
+}

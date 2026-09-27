@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hayyo 功能交互关系</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="qa.css">
+  <!-- 主题运行时：空存储为边缘行者粉基线；合法 ?theme= 写入 localStorage -->
+  <script src="theme-preview.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <h1>功能交互关系</h1>
+        <p>Hayyo 客户端 ↔ 后台 · 正文交叉</p>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="tab" data-view="admin" type="button">客户端 ↔ 后台</button>
+        <button class="tab" data-view="client" type="button">客户端交叉</button>
+        <button class="tab" data-view="kb" type="button">文档索引</button>
+        <button class="tab active" data-view="qa" type="button">知识问答</button>
+      </div>
+      <input id="search" class="search" type="search" placeholder="搜索功能 / ID" autocomplete="off">
+      <input id="kbSearch" class="search kb-search" type="search" placeholder="搜索标题 / 正文" autocomplete="off">
+      <div id="qaTopActions" class="qa-top-actions">
+        <div id="qaHealth" class="health-dot"><i></i><span>检查中…</span></div>
+      </div>
+      <div id="stats" class="stats"></div>
+      <div class="topbar-end">
+        <label class="theme-picker">
+          <span>主题</span>
+          <select aria-label="主题">
+            <option value="default">现网蓝灰</option>
+            <option value="a-gits">攻壳青</option>
+            <option value="b-2049">2049 琥珀</option>
+            <option value="c-nightcity">夜之城黄</option>
+            <option value="d-edgerunners" selected>边缘行者粉</option>
+            <option value="c-prime">黄主色</option>
+          </select>
+        </label>
+        <div id="qaAccount" class="qa-account" hidden>
+          <button id="qaAccountBtn" class="qa-account-btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="qaAccountMenu">
+            <span class="qa-account-avatar" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <circle cx="12" cy="8.2" r="3.1"></circle>
+                <path d="M5.6 18.4c1.1-2.5 3.3-3.9 6.4-3.9s5.3 1.4 6.4 3.9"></path>
+              </svg>
+            </span>
+            <span id="qaAccountName">账号</span>
+          </button>
+          <div id="qaAccountMenu" class="qa-account-menu" role="menu">
+            <button type="button" data-qa-logout>退出</button>
+            <button type="button" data-qa-password>修改密码</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="workspace">
+      <aside class="rail">
+        <h2>域筛选</h2>
+        <div id="filters" class="filters"></div>
+        <p class="hint">黄色描边表示 INDEX / 文首未挂后台指针。灰色虚线框为纯后台。边均来自现有文档，未补画未写明关系。</p>
+      </aside>
+      <main class="canvas-wrap">
+        <svg id="graph" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="toolbar">
+          <button id="btnReset" type="button">复位布局</button>
+          <button id="btnClear" type="button">取消选中</button>
+        </div>
+      </main>
+      <aside class="detail">
+        <h2>节点详情</h2>
+        <div id="detailBody"></div>
+      </aside>
+    </div>
+    <div id="kbWorkspace" class="kb-workspace" hidden>
+      <aside class="kb-list-pane">
+        <h2>默认可读文档</h2>
+        <div id="kbList" class="kb-list"></div>
+      </aside>
+      <section class="kb-reader">
+        <div id="kbMeta" class="kb-meta"></div>
+        <div id="kbToolbar" class="kb-toolbar"></div>
+        <div id="kbHistory" class="kb-history" hidden></div>
+        <div id="kbFail" class="kb-fail" hidden></div>
+        <article id="kbArticle" class="kb-article"></article>
+      </section>
+      <aside class="kb-side">
+        <div id="kbSearchPanel" class="kb-search-panel" hidden>
+          <h2>检索结果</h2>
+          <p id="kbSearchHint" class="kb-hint" hidden></p>
+          <div id="kbSearchResults" class="kb-search-results"></div>
+        </div>
+        <h2>本文目录</h2>
+        <nav id="kbToc" class="kb-toc"></nav>
+        <h2>本文图集</h2>
+        <div id="kbGallery" class="kb-gallery"></div>
+      </aside>
+    </div>
+    <div id="qaWorkspace" class="qa-workspace" hidden>
+      <aside class="qa-conv">
+        <button class="qa-new" type="button" data-qa-new>新建对话</button>
+        <div id="qaConvList" class="qa-conv-list"></div>
+        <button class="kb-btn qa-clear" type="button" data-qa-clear>清空当前</button>
+      </aside>
+      <div class="qa-main">
+        <div class="qa-col">
+          <div id="qaStage" class="qa-stage-slot" hidden></div>
+          <div id="qaBanner" class="qa-banner" hidden></div>
+          <div id="qaMessages" class="qa-messages"></div>
+          <div class="qa-composer">
+            <div class="qa-composer-box">
+              <textarea id="qaInput" rows="1" placeholder="用口语问 Hayyo 现行规则"></textarea>
+              <div class="qa-composer-bar">
+                <button id="qaSend" class="qa-send" type="button">发送</button>
+              </div>
+            </div>
+            <p class="qa-hint">Enter 发送，Shift+Enter 换行</p>
+          </div>
+        </div>
+      </div>
+      <aside id="qaCitePane" class="qa-cite-pane" hidden>
+        <div class="qa-cite-pane-head">
+          <h2 id="qaCitePaneTitle">出处</h2>
+          <button class="kb-btn qa-icon-btn" type="button" data-close-cite title="关闭出处" aria-label="关闭出处">
+            <svg class="qa-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div id="qaCitePaneBody" class="qa-cite-pane-body"></div>
+      </aside>
+    </div>
+  </div>
+  <div id="qaOverlay" class="qa-overlay" hidden></div>
+  <script src="data.js"></script>
+  <script src="kb-md.js"></script>
+  <script src="kb.js"></script>
+  <script src="app.js"></script>
+  <script src="qa.js"></script>
+</body>
+</html>

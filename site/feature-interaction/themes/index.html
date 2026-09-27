@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>配色对照 · Hayyo 工作台</title>
+  <style>
+    :root {
+      --bg: #111318;
+      --card: #161920;
+      --stroke: #2c313c;
+      --text: #e8eaed;
+      --muted: #9aa0ab;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 28px 24px 48px;
+    }
+    h1 { margin: 0; font-size: 22px; font-weight: 650; }
+    .lead { margin: 8px 0 24px; color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 720px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      border: 1px solid var(--stroke);
+      background: var(--card);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 100%;
+    }
+    .card h2 { margin: 0; font-size: 16px; }
+    .card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.55; }
+    .swatches { display: flex; gap: 6px; flex-wrap: wrap; }
+    .swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+    .actions a {
+      display: inline-flex;
+      align-items: center;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      text-decoration: none;
+      color: var(--on, #0b1220);
+      background: var(--accent);
+      font-weight: 650;
+    }
+    .actions a.ghost {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--stroke);
+      font-weight: 500;
+    }
+    .now { border-style: dashed; }
+  </style>
+</head>
+<body>
+  <h1>配色对照</h1>
+  <p class="lead">
+    每套只换颜色，工作台结构不变。点进去看真实的问答 / 关系图 / 文档索引。
+    现网默认地址不加参数，仍是现在的蓝灰皮。看完后回这里或直接告诉我选哪一套。
+  </p>
+  <div class="grid">
+    <article class="card now">
+      <h2>现网 · 蓝灰</h2>
+      <p>对照基准。主色 <code>#6ea8fe</code>。</p>
+      <div class="swatches">
+        <i class="swatch" style="background:#111318"></i>
+        <i class="swatch" style="background:#6ea8fe"></i>
+        <i class="swatch" style="background:#7dcea0"></i>
+        <i class="swatch" style="background:#e2b657"></i>
+        <i class="swatch" style="background:#c4a6ff"></i>
+      </div>
+      <div class="actions" style="--accent:#6ea8fe">
+        <a href="/feature-interaction/">打开现网</a>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#7ec8d0">
+      <h2>A · 攻壳青</h2>
+      <p>近黑底、浅青终端色。最耐读，未来感最弱。</p>
+      <div class="swatches">
+        <i class="swatch" style="background:#07090b"></i>
+        <i class="swatch" style="background:#7ec8d0"></i>
+        <i class="swatch" style="background:#6db89a"></i>
+        <i class="swatch" style="background:#c4a35a"></i>
+        <i class="swatch" style="background:#9bb8d4"></i>
+      </div>
+      <div class="actions">
+        <a href="/feature-interaction/?theme=a-gits&amp;view=qa">问答</a>
+        <a class="ghost" href="/feature-interaction/?theme=a-gits&amp;view=admin">关系图</a>
+        <a class="ghost" href="/feature-interaction/?theme=a-gits&amp;view=kb">文档</a>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#e08a2c">
+      <h2>B · 2049 琥珀</h2>
+      <p>暖黑底、橙色发送钮。像电影控制室，不像夜之城霓虹。</p>
+      <div class="swatches">
+        <i class="swatch" style="background:#0a0908"></i>
+        <i class="swatch" style="background:#e08a2c"></i>
+        <i class="swatch" style="background:#6a9a78"></i>
+        <i class="swatch" style="background:#7eb8c4"></i>
+        <i class="swatch" style="background:#d46a9a"></i>
+      </div>
+      <div class="actions">
+        <a href="/feature-interaction/?theme=b-2049&amp;view=qa">问答</a>
+        <a class="ghost" href="/feature-interaction/?theme=b-2049&amp;view=admin">关系图</a>
+        <a class="ghost" href="/feature-interaction/?theme=b-2049&amp;view=kb">文档</a>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#fcee0a">
+      <h2>C · 夜之城黄</h2>
+      <p>纯黑 + 荧光黄主按钮。图谱上触达节点也是品红。</p>
+      <div class="swatches">
+        <i class="swatch" style="background:#000000"></i>
+        <i class="swatch" style="background:#fcee0a"></i>
+        <i class="swatch" style="background:#05ffa1"></i>
+        <i class="swatch" style="background:#00f0ff"></i>
+        <i class="swatch" style="background:#ff2a6d"></i>
+      </div>
+      <div class="actions">
+        <a href="/feature-interaction/?theme=c-nightcity&amp;view=qa">问答</a>
+        <a class="ghost" href="/feature-interaction/?theme=c-nightcity&amp;view=admin">关系图</a>
+        <a class="ghost" href="/feature-interaction/?theme=c-nightcity&amp;view=kb">文档</a>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#ff3cac">
+      <h2>D · 边缘行者粉</h2>
+      <p>品红当主色：发送、选中、用户气泡都是粉。辨识度最高。</p>
+      <div class="swatches">
+        <i class="swatch" style="background:#050508"></i>
+        <i class="swatch" style="background:#ff3cac"></i>
+        <i class="swatch" style="background:#3dfff3"></i>
+        <i class="swatch" style="background:#f8ff2a"></i>
+        <i class="swatch" style="background:#05ffa1"></i>
+      </div>
+      <div class="actions">
+        <a href="/feature-interaction/?theme=d-edgerunners&amp;view=qa">问答</a>
+        <a class="ghost" href="/feature-interaction/?theme=d-edgerunners&amp;view=admin">关系图</a>
+        <a class="ghost" href="/feature-interaction/?theme=d-edgerunners&amp;view=kb">文档</a>
+      </div>
+    </article>
+
+    <article class="card" style="--accent:#fcee0a">
+      <h2>C′ · 黄主色（品红仅告警）</h2>
+      <p>对齐边缘行者的三色分工：黄=操作，品红=错误，青=健康。触达用紫，避免和告警抢色。</p>
+      <div class="swatches">
+        <i class="swatch" style="background:#07070a"></i>
+        <i class="swatch" style="background:#fcee0a"></i>
+        <i class="swatch" style="background:#3dfff3"></i>
+        <i class="swatch" style="background:#ff3cac"></i>
+        <i class="swatch" style="background:#c77dff"></i>
+      </div>
+      <div class="actions">
+        <a href="/feature-interaction/?theme=c-prime&amp;view=qa">问答</a>
+        <a class="ghost" href="/feature-interaction/?theme=c-prime&amp;view=admin">关系图</a>
+        <a class="ghost" href="/feature-interaction/?theme=c-prime&amp;view=kb">文档</a>
+      </div>
+    </article>
+  </div>
+</body>
+</html>
