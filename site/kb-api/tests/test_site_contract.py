@@ -6,12 +6,13 @@ import re
 ROOT = Path(__file__).resolve().parents[3]
 
 
-def test_fourth_tab_and_no_chips_or_process():
+def test_qa_first_tab_and_no_process_panel():
     html = (ROOT / "site" / "feature-interaction" / "index.html").read_text(encoding="utf-8")
     js = (ROOT / "site" / "feature-interaction" / "qa.js").read_text(encoding="utf-8")
-    tabs = re.findall(r'<button class="tab[^"]*" data-view="([^"]+)"[^>]*>([^<]+)</button>', html)
-    labels = [t[1] for t in tabs]
-    assert labels == ["客户端 ↔ 后台", "客户端交叉", "文档索引", "知识问答"]
+    tabs = re.findall(r'<button class="tab[^"]*" data-view="([^"]+)"[^>]*>(.*?)</button>', html, re.S)
+    labels = [re.sub(r'<[^>]+>', '', t[1]).strip() for t in tabs]
+    # 2026-10-03 用户明确要求知识问答排第一；图标不影响可读标签。
+    assert labels == ["知识问答", "客户端 ↔ 后台", "客户端交叉", "文档索引"]
     assert 'id="qaWorkspace"' in html
     assert 'id="kbWorkspace"' in html
     assert 'id="qaProcess"' not in html

@@ -32,7 +32,8 @@
 | 术语 / 缺口 | [`prd/PROJECT_OVERVIEW.md`](prd/PROJECT_OVERVIEW.md) |
 | 改运营后台某一页的皮或字段对照 | [`workspace/_kit/admin-skin/INDEX.md`](workspace/_kit/admin-skin/INDEX.md) |
 | 改功能关系图 / 文档索引 H5 | [`site/docs/design/h5-kb/PRD-H5知识库-v1.md`](site/docs/design/h5-kb/PRD-H5知识库-v1.md) → 实现 [`site/feature-interaction/index.html`](site/feature-interaction/index.html) |
-| 改知识问答（向量检索 + 多轮回答） | [`site/docs/design/kb-qa/PRD-知识问答-v3.md`](site/docs/design/kb-qa/PRD-知识问答-v3.md) → 实施 [`site/docs/design/kb-qa/Hayyo-知识问答-STEP-验证版.md`](site/docs/design/kb-qa/Hayyo-知识问答-STEP-验证版.md) → 阶段 [`site/docs/design/kb-qa/Hayyo-知识问答-实施计划.md`](site/docs/design/kb-qa/Hayyo-知识问答-实施计划.md) |
+| 改多轮任务 / Memory / 新版后台，或查本轮收尾 | [`kb-qa-multdesign`](site/docs/design/kb-qa-multdesign/INDEX.md) → [当前实现契约](site/docs/contracts/INDEX.md) |
+| 改知识问答检索基线 | [`site/docs/design/kb-qa/PRD-知识问答-v3.md`](site/docs/design/kb-qa/PRD-知识问答-v3.md) → 实施 [`site/docs/design/kb-qa/Hayyo-知识问答-STEP-验证版.md`](site/docs/design/kb-qa/Hayyo-知识问答-STEP-验证版.md) → 阶段 [`site/docs/design/kb-qa/Hayyo-知识问答-实施计划.md`](site/docs/design/kb-qa/Hayyo-知识问答-实施计划.md) |
 | 改知识问答反馈 / 刷新 / 对话区样式 | [`site/docs/design/kb-qa-feedback/PRD-知识问答-反馈与对话样式-v2.md`](site/docs/design/kb-qa-feedback/PRD-知识问答-反馈与对话样式-v2.md) |
 | 改本仓库账号 / 管理模块 / 证书启用 | [`site/docs/design/kb-auth/PRD-账号体系与管理模块-v2.md`](site/docs/design/kb-auth/PRD-账号体系与管理模块-v2.md) |
 | 理解知识问答链路 / 案例 / K 与 n（讲解，非 PRD） | [`knowledge/INDEX.md`](knowledge/INDEX.md) |

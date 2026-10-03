@@ -3,8 +3,8 @@
  */
 (function () {
   const DATA = window.FEATURE_DATA;
-  const NODE_W = 148;
-  const NODE_H = 40;
+  const NODE_W = 164;
+  const NODE_H = 44;
   const DOMAINS = ["房间社交", "资金商业", "身份成长", "账号触达"];
   const DOMAIN_COLOR = {
     "房间社交": "#6ea8fe",
@@ -40,7 +40,9 @@
     dragging: null,
     panning: null,
     positions: {},
-    hoverId: null
+    hoverId: null,
+    focusOnly: false,
+    autoFit: true
   };
 
   const els = {
@@ -49,7 +51,11 @@
     detail: document.getElementById("detailBody"),
     filters: document.getElementById("filters"),
     search: document.getElementById("search"),
-    tabs: document.querySelectorAll(".tab")
+    tabs: document.querySelectorAll(".tab"),
+    nodeList: document.getElementById("graphNodeList"),
+    focus: document.getElementById("btnFocus"),
+    context: document.getElementById("graphContext"),
+    zoom: document.getElementById("graphZoom")
   };
 
   const featureMap = Object.fromEntries(DATA.features.map((f) => [f.id, f]));
@@ -73,24 +79,19 @@
 
   function visibleIds() {
     const q = state.query.trim().toLowerCase();
-    const ids = new Set();
-    const pool = state.view === "admin"
-      ? DATA.features.concat(DATA.adminNodes)
-      : DATA.features.slice();
-    pool.forEach((n) => {
-      if (!state.domainFilter.has(n.domain)) return;
-      if (q) {
-        const hay = [n.name, n.id, n.admin || "", n.kind || ""].join(" ").toLowerCase();
-        if (!hay.includes(q)) return;
-      }
-      ids.add(n.id);
-    });
+    const pool = state.view === "admin" ? allNodes() : DATA.features;
+    const eligible = pool.filter((n) => state.domainFilter.has(n.domain));
+    const allowed = new Set(eligible.map((n) => n.id));
+    const ids = new Set(eligible.filter((n) => !q ||
+      [n.name, n.id, n.admin || "", n.kind || ""].join(" ").toLowerCase().includes(q)).map((n) => n.id));
     const matched = new Set(ids);
-    if (q) {
-      currentEdges().forEach((e) => {
-        if (matched.has(e.from)) ids.add(e.to);
-        if (matched.has(e.to)) ids.add(e.from);
-      });
+    if (q) currentEdges().forEach((e) => {
+      if (matched.has(e.from) && allowed.has(e.to)) ids.add(e.to);
+      if (matched.has(e.to) && allowed.has(e.from)) ids.add(e.from);
+    });
+    if (state.focusOnly && state.selectedId) {
+      const connected = connectedIds(state.selectedId);
+      return new Set([...ids].filter((id) => connected.has(id)));
     }
     return ids;
   }
@@ -105,23 +106,28 @@
   }
 
   function layoutAdmin() {
-    const leftX = 40;
-    const rightX = 560;
-    DATA.features.forEach((n, i) => {
-      state.positions[n.id] = { x: leftX, y: 28 + i * 48 };
+    const vis = visibleIds();
+    const clients = DATA.features.filter((n) => vis.has(n.id));
+    const admins = DATA.adminNodes.filter((n) => vis.has(n.id));
+    const clientRows = Math.ceil(clients.length / (clients.length > 12 ? 2 : 1));
+    const adminRows = Math.ceil(admins.length / (admins.length > 13 ? 2 : 1));
+    const rightX = clients.length > 12 ? 600 : 440;
+    clients.forEach((n, i) => {
+      state.positions[n.id] = { x: 36 + Math.floor(i / clientRows) * 196, y: 32 + (i % clientRows) * 54 };
     });
-    DATA.adminNodes.forEach((n, i) => {
-      state.positions[n.id] = { x: rightX, y: 28 + i * 42 };
+    admins.forEach((n, i) => {
+      state.positions[n.id] = { x: rightX + Math.floor(i / adminRows) * 196, y: 32 + (i % adminRows) * 54 };
     });
   }
 
   function layoutClient() {
     const byDomain = {};
     DOMAINS.forEach((d) => { byDomain[d] = []; });
+    const vis = visibleIds();
     DATA.features.forEach((f) => {
-      byDomain[f.domain].push(f);
+      if (vis.has(f.id)) byDomain[f.domain].push(f);
     });
-    DOMAINS.forEach((d, col) => {
+    DOMAINS.filter((d) => byDomain[d].length).forEach((d, col) => {
       byDomain[d].forEach((n, row) => {
         state.positions[n.id] = {
           x: 36 + col * 250,
@@ -174,12 +180,13 @@
     ];
 
     if (state.view === "client") {
-      DOMAINS.forEach((d, i) => {
+      DOMAINS.filter((d) => nodes.some((n) => n.domain === d)).forEach((d, i) => {
         parts.push(`<text class="cluster-label" x="${36 + i * 250}" y="18">${d}</text>`);
       });
     } else {
-      parts.push('<text class="cluster-label" x="40" y="16">客户端</text>');
-      parts.push('<text class="cluster-label" x="560" y="16">运营后台</text>');
+      const clientCount = nodes.filter((n) => !isAdmin(n.id)).length;
+      parts.push('<text class="cluster-label" x="36" y="12">客户端功能</text>');
+      parts.push('<text class="cluster-label" x="' + (clientCount > 12 ? 600 : 440) + '" y="12">运营后台</text>');
     }
 
     edges.forEach((e) => {
@@ -211,7 +218,7 @@
       const color = domainColor(n.domain);
       const sub = isAdmin(n.id) ? (n.kind === "pure" ? "纯后台" : "后台章节") : n.domain;
       parts.push(`
-        <g class="${cls}" data-id="${n.id}" transform="translate(${p.x},${p.y})">
+        <g class="${cls}" data-id="${n.id}" role="button" tabindex="0" aria-label="${escapeXml(n.name)}" aria-pressed="${state.selectedId === n.id}" transform="translate(${p.x},${p.y})">
           <rect width="${NODE_W}" height="${NODE_H}" rx="8"></rect>
           <circle cx="12" cy="20" r="4" fill="${color}"></circle>
           <text x="22" y="18">${escapeXml(n.name)}</text>
@@ -224,9 +231,45 @@
     els.graph.innerHTML = `<g id="scene" transform="translate(${x},${y}) scale(${k})">${parts.join("")}</g>`;
     bindNodeEvents();
     renderStats(vis, edges);
+    renderNodeList(vis);
+    document.getElementById("graphEmpty").hidden = nodes.length > 0;
+    els.focus.disabled = !state.selectedId;
+    els.focus.setAttribute("aria-pressed", String(state.focusOnly));
+    document.getElementById("btnClear").disabled = !state.selectedId;
+    els.context.textContent = state.focusOnly ? (nodeOf(state.selectedId).name + " · 直接关联") : (state.query ? "搜索结果 · 含直接关联" : "全局关系");
+    els.zoom.textContent = Math.round(state.camera.k * 100) + "%";
+  }
+
+  function fitGraph(ids) {
+    const vis = ids || visibleIds();
+    const positions = [...vis].map((id) => state.positions[id]).filter(Boolean);
+    const rect = els.graph.getBoundingClientRect();
+    if (!positions.length || !rect.width || !rect.height) return;
+    const minX = Math.min(...positions.map((p) => p.x));
+    const minY = Math.min(...positions.map((p) => p.y)) - 28;
+    const width = Math.max(...positions.map((p) => p.x)) + NODE_W - minX;
+    const height = Math.max(...positions.map((p) => p.y)) + NODE_H - minY;
+    const availableWidth = Math.max(80, rect.width - 80);
+    const availableHeight = Math.max(80, rect.height - 160);
+    const k = Math.min(1.3, Math.max(.15, Math.min(availableWidth / width, availableHeight / height)));
+    state.camera = { k, x: (rect.width - width * k) / 2 - minX * k,
+      y: 64 + (availableHeight - height * k) / 2 - minY * k };
+    updateCamera();
+  }
+
+  function zoomBy(factor) {
+    state.autoFit = false;
+    const rect = els.graph.getBoundingClientRect();
+    const k = Math.max(.15, Math.min(2.4, state.camera.k * factor));
+    const ratio = k / state.camera.k;
+    state.camera.x = rect.width / 2 - (rect.width / 2 - state.camera.x) * ratio;
+    state.camera.y = rect.height / 2 - (rect.height / 2 - state.camera.y) * ratio;
+    state.camera.k = k;
+    updateCamera();
   }
 
   function updateCamera() {
+    els.zoom.textContent = Math.round(state.camera.k * 100) + "%";
     const scene = document.getElementById("scene");
     if (scene) scene.setAttribute("transform", `translate(${state.camera.x},${state.camera.y}) scale(${state.camera.k})`);
   }
@@ -269,21 +312,21 @@
   }
 
   function renderStats(vis, edges) {
-    const clientCount = DATA.features.filter((f) => vis.has(f.id)).length;
-    const unmapped = DATA.features.filter((f) => vis.has(f.id) && f.admin === "未挂指针").length;
-    els.stats.innerHTML = `
-      <span>可见节点 <b>${vis.size}</b></span>
-      <span>关系 <b>${edges.length}</b></span>
-      <span>客户端 <b>${clientCount}</b></span>
-      <span>未挂指针 <b>${unmapped}</b></span>
-    `;
+    els.stats.innerHTML = `<span><b>${vis.size}</b> 可见节点</span><span><b>${edges.length}</b> 文档关系</span>`;
+  }
+
+  function renderNodeList(vis) {
+    const pool = state.view === "admin" ? allNodes() : DATA.features;
+    const nodes = pool.filter((n) => vis.has(n.id));
+    document.getElementById("graphNodeCount").textContent = nodes.length;
+    els.nodeList.innerHTML = nodes.map((n) => `<button class="graph-node-item${n.id === state.selectedId ? " active" : ""}" type="button" data-node-jump="${n.id}" aria-pressed="${n.id === state.selectedId}"><span class="node-index-dot" style="background:${domainColor(n.domain)}"></span><span>${escapeXml(n.name)}<small>${escapeXml(isAdmin(n.id) ? "后台" : n.id)}</small></span>${window.HayyoIcons.svg("arrow")}</button>`).join("") || '<p class="empty">没有匹配项</p>';
   }
 
   function renderFilters() {
     const items = DOMAINS.concat(state.view === "admin" ? ["后台"] : []);
     els.filters.innerHTML = items.map((d) => {
       const active = state.domainFilter.has(d);
-      return `<button class="chip${active ? " active" : " muted"}" data-domain="${d}">
+      return `<button class="chip${active ? " active" : " muted"}" type="button" aria-pressed="${active}" data-domain="${d}">
         <span class="dot" style="background:${domainColor(d)}"></span>${d}
       </button>`;
     }).join("");
@@ -292,17 +335,11 @@
   function renderDetail() {
     const id = state.selectedId;
     if (!id) {
-      els.detail.innerHTML = `<p class="empty">点击图中节点查看进出关系。可拖拽节点、滚轮缩放、空白处拖动画布。Esc 取消选中。</p>
-        <div class="legend">
-          <span><i style="background:${domainColor("房间社交")}"></i>房间社交</span>
-          <span><i style="background:${domainColor("资金商业")}"></i>资金商业</span>
-          <span><i style="background:${domainColor("身份成长")}"></i>身份成长</span>
-          <span><i style="background:${domainColor("账号触达")}"></i>账号触达</span>
-          <span><i style="background:${domainColor("后台")}"></i>后台</span>
-        </div>`;
+      els.detail.innerHTML = `<div class="detail-empty">${window.HayyoIcons.svg("client")}<h3>从一个功能开始</h3><p>选择左侧目录或图中节点，查看它的上下游关系与文档依据。</p><div class="interaction-tip"><span>拖动画布</span><span>滚轮缩放</span><span>Esc 取消选中</span></div></div>`;
       return;
     }
     const n = nodeOf(id);
+    if (!n) return;
     const edges = currentEdges();
     const outs = edges.filter((e) => e.from === id);
     const ins = edges.filter((e) => e.to === id);
@@ -310,19 +347,20 @@
       ? `<a class="prd-link" href="${n.prd}">打开 PRD</a>`
       : "";
     els.detail.innerHTML = `
+      <div class="detail-title"><span class="section-kicker">${escapeXml(n.domain)}</span><h3>${escapeXml(n.name)}</h3><code>${escapeXml(n.id)}</code></div>
       <div class="kv">
         <div><dt>功能</dt><dd>${escapeXml(n.name)}</dd></div>
         <div><dt>域</dt><dd>${escapeXml(n.domain)}</dd></div>
         <div><dt>${isAdmin(id) ? "类型" : "关联后台"}</dt><dd>${escapeXml(n.admin || (n.kind === "pure" ? "纯后台，不挂客户端" : "后台章节"))}</dd></div>
         <div><dt>文档</dt><dd>${prd || "—"}</dd></div>
       </div>
-      <h2>指出（${outs.length}）</h2>
+      <h2 class="relation-section">影响的功能 <span>${outs.length}</span></h2>
       <div class="edge-list">${renderEdgeItems(outs, "to") || '<p class="empty">无</p>'}</div>
-      <h2 style="margin-top:14px">指入（${ins.length}）</h2>
+      <h2 class="relation-section">来自其他功能 <span>${ins.length}</span></h2>
       <div class="edge-list">${renderEdgeItems(ins, "from") || '<p class="empty">无</p>'}</div>
     `;
     els.detail.querySelectorAll("[data-jump]").forEach((btn) => {
-      btn.addEventListener("click", () => selectNode(btn.getAttribute("data-jump")));
+      btn.addEventListener("click", () => selectNode(btn.getAttribute("data-jump"), { reveal: true }));
     });
   }
 
@@ -337,12 +375,41 @@
     }).join("");
   }
 
-  function selectNode(id) {
-    state.selectedId = id;
-    if (state.panel === "graph") {
-      renderGraph();
-      renderDetail();
+  function selectNode(id, options) {
+    if (id && !nodeOf(id)) return;
+    const wasFocused = state.focusOnly;
+    if (id && isAdmin(id) && state.view !== "admin") setView("admin");
+    if (id && !visibleIds().has(id)) {
+      state.query = ""; els.search.value = "";
+      state.domainFilter.add(nodeOf(id).domain);
+      state.focusOnly = false;
+      applyLayout(); renderFilters();
     }
+    state.selectedId = id;
+    if (!id) state.focusOnly = false;
+    if (state.panel === "graph") {
+      if (state.focusOnly || wasFocused) applyLayout();
+      renderGraph(); renderDetail();
+      if (!id && wasFocused) { state.autoFit = true; fitGraph(); }
+      if (id && options && options.reveal) {
+        state.autoFit = false;
+        fitGraph(new Set([...connectedIds(id)].filter((key) => visibleIds().has(key))));
+      }
+      if (id && window.matchMedia("(max-width: 980px)").matches) {
+        document.querySelector('.workspace').classList.remove('rail-open');
+        document.querySelector('.workspace').classList.add('detail-open');
+      }
+    }
+  }
+
+  function updateTabs(target) {
+    els.tabs.forEach((tab) => {
+      const active = tab.getAttribute('data-view') === target;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+    });
   }
 
   /**
@@ -351,12 +418,16 @@
    */
   function setView(target, options) {
     const preserve = options && options.preserveSelection;
+    updateTabs(target);
+    state.dragging = null; state.panning = null;
+    els.graph.classList.remove('panning');
+    document.querySelector('.workspace').classList.remove('rail-open', 'detail-open');
     const appEl = document.querySelector(".app");
     const kbWs = document.getElementById("kbWorkspace");
     const qaWs = document.getElementById("qaWorkspace");
 
     if (target === "qa") {
-      if (!preserve) state.selectedId = null;
+      if (!preserve) { state.selectedId = null; state.focusOnly = false; }
       state.panel = "qa";
       appEl.classList.add("qa-active");
       appEl.classList.remove("kb-active");
@@ -365,7 +436,7 @@
         qaWs.hidden = false;
         qaWs.inert = false;
       }
-      els.tabs.forEach((t) => t.classList.toggle("active", t.getAttribute("data-view") === "qa"));
+
       if (window.HayyoQA && typeof window.HayyoQA.onEnter === "function") window.HayyoQA.onEnter();
       return;
     }
@@ -380,34 +451,49 @@
     }
 
     if (target === "kb") {
-      if (!preserve) state.selectedId = null;
+      if (!preserve) { state.selectedId = null; state.focusOnly = false; }
       state.panel = "kb";
       appEl.classList.add("kb-active");
       if (kbWs) kbWs.hidden = false;
-      els.tabs.forEach((t) => t.classList.toggle("active", t.getAttribute("data-view") === "kb"));
+
       if (window.KB) window.KB.onEnter();
       return;
     }
 
+    const viewChanged = state.view !== target;
     state.panel = "graph";
     state.view = target;
     appEl.classList.remove("kb-active");
     if (kbWs) kbWs.hidden = true;
-    els.tabs.forEach((t) => t.classList.toggle("active", t.getAttribute("data-view") === target));
-    if (!preserve) {
+
+    if (state.view === "admin") state.domainFilter.add("后台");
+    if (!preserve || viewChanged) {
       state.selectedId = null;
+      state.focusOnly = false;
+      state.autoFit = true;
       state.camera = { x: 24, y: 36, k: 1 };
       applyLayout();
     }
-    if (state.view === "admin") state.domainFilter.add("后台");
-    renderFilters();
-    renderGraph();
-    renderDetail();
+    document.getElementById('graphTitle').textContent = target === 'admin' ? '客户端 ↔ 后台' : '客户端交叉';
+    document.getElementById('graphSubtitle').textContent = target === 'admin' ? '追踪客户端功能对应的后台入口与文档依据。' : '查看功能之间的依赖与影响，定位改动涉及的业务范围。';
+    renderFilters(); renderGraph(); renderDetail();
+    if (!preserve || viewChanged) requestAnimationFrame(() => {
+      if (state.panel === 'graph' && state.autoFit) fitGraph();
+    });
   }
 
   function bindNodeEvents() {
     els.graph.querySelectorAll(".node").forEach((g) => {
+      g.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          const id = g.getAttribute('data-id');
+          selectNode(id);
+          els.graph.querySelector('.node[data-id="' + id + '"]')?.focus();
+        }
+      });
       g.addEventListener("pointerdown", (ev) => {
+        if (ev.button !== 0) return;
         ev.stopPropagation();
         const id = g.getAttribute("data-id");
         const p = state.positions[id];
@@ -433,8 +519,9 @@
   }
 
   els.graph.addEventListener("pointerdown", (ev) => {
-    if (state.panel !== "graph") return;
+    if (state.panel !== "graph" || ev.button !== 0) return;
     if (ev.target.closest(".node")) return;
+    els.graph.setPointerCapture(ev.pointerId);
     state.panning = { x: ev.clientX, y: ev.clientY, cx: state.camera.x, cy: state.camera.y };
     els.graph.classList.add("panning");
   });
@@ -444,7 +531,7 @@
     if (state.dragging) {
       const dx = (ev.clientX - state.dragging.startX) / state.camera.k;
       const dy = (ev.clientY - state.dragging.startY) / state.camera.k;
-      if (Math.abs(dx) + Math.abs(dy) > 3) state.dragging.moved = true;
+      if (Math.abs(dx) + Math.abs(dy) > 3) { state.dragging.moved = true; state.autoFit = false; }
       state.positions[state.dragging.id] = {
         x: state.dragging.origX + dx,
         y: state.dragging.origY + dy
@@ -453,6 +540,7 @@
       return;
     }
     if (state.panning) {
+      state.autoFit = false;
       state.camera.x = state.panning.cx + (ev.clientX - state.panning.x);
       state.camera.y = state.panning.cy + (ev.clientY - state.panning.y);
       updateCamera();
@@ -476,7 +564,8 @@
     if (state.panel !== "graph") return;
     ev.preventDefault();
     const factor = ev.deltaY < 0 ? 1.08 : 0.92;
-    const next = Math.min(2.4, Math.max(0.35, state.camera.k * factor));
+    state.autoFit = false;
+    const next = Math.min(2.4, Math.max(0.15, state.camera.k * factor));
     const rect = els.graph.getBoundingClientRect();
     const px = ev.clientX - rect.left;
     const py = ev.clientY - rect.top;
@@ -488,7 +577,18 @@
     updateCamera();
   }, { passive: false });
 
-  els.tabs.forEach((tab) => {
+  window.addEventListener('pointercancel', () => { state.dragging = null; state.panning = null; els.graph.classList.remove('panning'); });
+
+  els.tabs.forEach((tab, index) => {
+    tab.addEventListener('keydown', (ev) => {
+      let next = index;
+      if (ev.key === 'ArrowRight') next = (index + 1) % els.tabs.length;
+      else if (ev.key === 'ArrowLeft') next = (index + els.tabs.length - 1) % els.tabs.length;
+      else if (ev.key === 'Home') next = 0;
+      else if (ev.key === 'End') next = els.tabs.length - 1;
+      else return;
+      ev.preventDefault(); els.tabs[next].focus(); setView(els.tabs[next].getAttribute('data-view'));
+    });
     tab.addEventListener("click", () => {
       const view = tab.getAttribute("data-view");
       setView(view);
@@ -509,31 +609,56 @@
     const d = btn.getAttribute("data-domain");
     if (state.domainFilter.has(d)) state.domainFilter.delete(d);
     else state.domainFilter.add(d);
-    if (state.domainFilter.size === 0) state.domainFilter.add(d);
-    applyLayout();
-    renderFilters();
-    renderGraph();
+    const domains = DOMAINS.concat(state.view === 'admin' ? ['后台'] : []);
+    if (!domains.some((name) => state.domainFilter.has(name))) state.domainFilter.add(d);
+    refreshGraphSelection();
   });
 
-  els.search.addEventListener("input", () => {
-    state.query = els.search.value;
-    renderGraph();
-  });
+  function refreshGraphSelection() {
+    if (state.selectedId && !visibleIds().has(state.selectedId)) { state.selectedId = null; state.focusOnly = false; }
+    applyLayout(); renderFilters(); renderGraph(); renderDetail();
+    state.autoFit = true; fitGraph();
+  }
 
-  document.getElementById("btnReset").addEventListener("click", () => {
-    state.camera = { x: 24, y: 36, k: 1 };
-    applyLayout();
-    renderGraph();
+  els.search.addEventListener("input", () => { state.query = els.search.value; refreshGraphSelection(); });
+  els.nodeList.addEventListener('click', (ev) => {
+    const btn = ev.target.closest('[data-node-jump]');
+    if (btn) selectNode(btn.getAttribute('data-node-jump'), { reveal: true });
   });
-  document.getElementById("btnClear").addEventListener("click", () => selectNode(null));
+  document.getElementById('btnRestoreFilters').addEventListener('click', () => {
+    state.query = ''; els.search.value = ''; state.domainFilter = new Set(DOMAINS.concat(['后台']));
+    refreshGraphSelection();
+  });
+  document.getElementById('btnFocus').addEventListener('click', () => {
+    if (!state.selectedId) return;
+    state.focusOnly = !state.focusOnly; refreshGraphSelection();
+  });
+  document.getElementById('btnZoomIn').addEventListener('click', () => zoomBy(1.2));
+  document.getElementById('btnZoomOut').addEventListener('click', () => zoomBy(1 / 1.2));
+  document.getElementById('btnFit').addEventListener('click', () => { state.autoFit = true; fitGraph(); });
+  document.getElementById("btnReset").addEventListener("click", () => { applyLayout(); renderGraph(); state.autoFit = true; fitGraph(); });
+  document.getElementById("btnClear").addEventListener("click", () => { selectNode(null); refreshGraphSelection(); });
+  document.querySelectorAll('[data-graph-panel]').forEach((btn) => btn.addEventListener('click', () => {
+    const ws = document.querySelector('.workspace');
+    const cls = btn.getAttribute('data-graph-panel') + '-open';
+    const open = !ws.classList.contains(cls);
+    ws.classList.remove('rail-open', 'detail-open');
+    if (open) ws.classList.add(cls);
+  }));
+  if (window.ResizeObserver) new ResizeObserver(() => {
+    if (state.panel === 'graph' && state.autoFit) fitGraph();
+  }).observe(els.graph);
 
   window.addEventListener("keydown", (ev) => {
     const kbSearch = document.getElementById("kbSearch");
     const qaInput = document.getElementById("qaInput");
     const inKb = document.querySelector(".app").classList.contains("kb-active");
     const inQa = document.querySelector(".app").classList.contains("qa-active");
-    if (ev.key === "Escape" && !inKb && !inQa) selectNode(null);
-    if (ev.key === "/" && document.activeElement !== els.search && document.activeElement !== kbSearch && document.activeElement !== qaInput) {
+    if (ev.key === "Escape" && !inKb && !inQa) {
+      document.querySelector('.workspace').classList.remove('rail-open', 'detail-open');
+      selectNode(null); refreshGraphSelection();
+    }
+    if (ev.key === "/" && !ev.target.closest("input, textarea, select, [contenteditable=true]")) {
       ev.preventDefault();
       if (inKb && kbSearch) kbSearch.focus();
       else if (!inQa) els.search.focus();

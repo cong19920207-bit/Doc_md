@@ -132,16 +132,17 @@ def test_post_check_refuses_empty_rerank_wording():
     assert checked["text"].startswith("文档未写")
 
 
-def test_post_check_keeps_text_on_leaked_numbers():
+def test_post_check_flags_leaked_numbers_without_delivering_note():
+    """STEP-Q19（G-E02）：不再「附提示后照常交付」；只标 numbers_ok=False，由证据检查并入 fail，正文不改。"""
     blocks = [{"content": "比例 200 金币 = 1 财富值。"}]
     checked = post_check_answer("保级线是 99999。按 200 计。", blocks)
-    assert checked["refused"] is True
-    assert "保级线是 99999" in checked["text"]
-    assert NUMBER_LEAK_NOTE in checked["text"]
-    assert not checked["text"].startswith("文档未写这些具体数字")
+    assert checked["numbers_ok"] is False
+    assert checked["text"] == "保级线是 99999。按 200 计。"
+    assert NUMBER_LEAK_NOTE not in checked["text"]
+    assert post_check_answer("按 200 计。", blocks)["numbers_ok"] is True
 
 
-def test_legacy_system_prompt_migrates(tmp_path):
+def test_legacy_system_prompt_stays_published(tmp_path):
     import json
     from app import settings
     from app.config_store import ConfigStore
@@ -152,17 +153,14 @@ def test_legacy_system_prompt_migrates(tmp_path):
         encoding="utf-8",
     )
     store = ConfigStore(path)
-    assert store.data["system_prompt"] == settings.SYSTEM_PROMPT
+    assert store.data["system_prompt"] == settings.LEGACY_SYSTEM_PROMPT
     assert store.data["recall_k"] == 32
     saved = json.loads(path.read_text(encoding="utf-8"))
-    assert saved["system_prompt"] == settings.SYSTEM_PROMPT
-    assert "先回答用户本轮问到的点" in settings.SYSTEM_PROMPT
+    assert saved["system_prompt"] == settings.LEGACY_SYSTEM_PROMPT
     assert settings.SYSTEM_PROMPT != settings.LEGACY_SYSTEM_PROMPT
-    assert "宁多勿漏" in settings.REWRITE_PROMPT
-    assert "chunk_id" in settings.SYSTEM_PROMPT
 
 
-def test_legacy_v2_and_rewrite_prompts_migrate(tmp_path):
+def test_legacy_v2_and_rewrite_prompts_stay_published(tmp_path):
     import json
     from app import settings
     from app.config_store import ConfigStore
@@ -180,12 +178,12 @@ def test_legacy_v2_and_rewrite_prompts_migrate(tmp_path):
         encoding="utf-8",
     )
     store = ConfigStore(path)
-    assert store.data["system_prompt"] == settings.SYSTEM_PROMPT
-    assert store.data["rewrite_prompt"] == settings.REWRITE_PROMPT
+    assert store.data["system_prompt"] == settings.LEGACY_SYSTEM_PROMPT_V2
+    assert store.data["rewrite_prompt"] == settings.LEGACY_REWRITE_PROMPT
     assert store.data["recall_k"] == 32
     saved = json.loads(path.read_text(encoding="utf-8"))
-    assert saved["system_prompt"] == settings.SYSTEM_PROMPT
-    assert saved["rewrite_prompt"] == settings.REWRITE_PROMPT
+    assert saved["system_prompt"] == settings.LEGACY_SYSTEM_PROMPT_V2
+    assert saved["rewrite_prompt"] == settings.LEGACY_REWRITE_PROMPT
 
 
 def test_aliases_cover_link_pay_and_rewrite_user():

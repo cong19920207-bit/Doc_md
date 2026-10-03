@@ -4,23 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>知识问答管理</title>
-  <link rel="stylesheet" href="/feature-interaction/style.css">
-  <link rel="stylesheet" href="/feature-interaction/qa.css">
   <link rel="stylesheet" href="admin.css">
-  <script src="/feature-interaction/theme-preview.js"></script>
 </head>
 <body class="kb-admin-body">
-  <div class="kb-admin">
-    <aside class="kb-admin-nav">
-      <h1>管理模块</h1>
-      <p id="adminUser" class="kb-admin-user"></p>
-      <nav id="adminNav"></nav>
-      <p><a href="/feature-interaction/">返回问答</a></p>
-    </aside>
-    <main id="adminMain" class="kb-admin-main">
-      <p>加载中…</p>
-    </main>
+  <div class="kb-shell">
+    <header class="kb-top">
+      <div class="kb-brand"><span class="kb-brand-mark" aria-hidden="true">H</span><div>管理模块<small>Hayyo · 知识问答工作台</small></div></div>
+      <div class="kb-top-end">
+        <button type="button" id="healthToggle" class="kb-health" hidden></button>
+        <span id="healthRule" class="kb-vrule" aria-hidden="true" hidden></span>
+        <span id="adminUser" class="kb-user"></span>
+        <a class="kb-exit" href="/feature-interaction/">去问答</a>
+      </div>
+    </header>
+    <div class="kb-body">
+      <aside class="kb-side">
+        <div class="kb-kicker">工作空间</div>
+        <nav id="adminNav"></nav>
+      </aside>
+      <main id="adminMain" class="kb-main">
+        <p class="kb-muted">加载中…</p>
+      </main>
+    </div>
   </div>
+  <div id="healthPop" class="kb-pop" hidden></div>
   <script src="admin.js"></script>
 </body>
 </html>

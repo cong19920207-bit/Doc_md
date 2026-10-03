@@ -3,24 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>请先登录</title>
-  <link rel="stylesheet" href="login.css">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#05090f">
+  <title>Hayyo · 请先登录</title>
+  <link rel="stylesheet" href="login.css?v=20261003">
+  <script src="login.js?v=20261003" defer></script>
+  <script src="ion-scene.js?v=20261003" defer></script>
 </head>
 <body>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- 与工作台 ui-icons.js 的 core 图标保持相同几何；登录资源须可匿名加载。 -->
+    <symbol id="hayyo-mark" viewBox="0 0 24 24"><path d="m12 2 8.5 5v10L12 22l-8.5-5V7Z"/><path d="M8 7v10m8-10v10M8 12h8"/><path d="M3.5 7 8 9m8 6 4.5 2"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+  </svg>
+  <canvas id="cursorTrail" class="cursor-trail" aria-hidden="true"></canvas>
   <main class="login-page">
-    <form id="loginForm" class="login-form">
-      <h1>请先登录</h1>
-      <p class="login-lead">登录后查看文档工作台</p>
-      <label>用户名
-        <input id="loginUser" name="username" type="text" autocomplete="username" required>
-      </label>
-      <label>密码
-        <input id="loginPass" name="password" type="password" autocomplete="current-password" required>
-      </label>
-      <button id="loginSubmit" type="submit">登录</button>
-      <p id="loginErr" class="login-err" hidden></p>
-    </form>
+    <section id="ionScene" class="ion-scene" aria-label="Hayyo 互动离子空间">
+      <div class="scene-halo" aria-hidden="true"></div>
+      <div class="scene-fallback" aria-hidden="true"><div class="fallback-orbit"></div><div class="fallback-orbit orbit-two"></div><svg class="fallback-mark icon"><use href="#hayyo-mark"/></svg></div>
+      <canvas id="ionCanvas" class="ion-canvas" aria-hidden="true"></canvas>
+      <canvas id="codeRain" class="code-rain" aria-hidden="true"></canvas>
+      <header class="scene-brand"><svg class="brand-mark icon" aria-hidden="true"><use href="#hayyo-mark"/></svg><div><span class="brand-name">Hayyo<span class="brand-period">.</span></span><p>文档与知识工作台</p></div></header>
+      <span class="scene-coordinate" aria-hidden="true">BEYOND THE ORDINARY</span>
+      <div class="scene-caption"><div class="scene-kicker"><span class="status-dot" aria-hidden="true"></span> KNOWLEDGE IN MOTION</div><h2>每个想法，都有引力。</h2><p>连接知识，探索更多可能。</p></div>
+      <div class="scene-toolbar" id="sceneToolbar" hidden>
+        <div class="scene-hint"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 14 10-7 1-3 7Z"/></svg><span>移动感应 · 拖动探索</span></div>
+        <div class="scene-controls">
+          <button id="shapeNext" class="shape-next" type="button" aria-label="切换离子形态" title="切换离子形态"><span id="shapeNumber">01</span><span id="shapeName">离子涡环</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
+          <div class="palette-controls" role="group" aria-label="离子色彩"><button type="button" class="palette-dot palette-auto" data-palette="auto" aria-label="自动变色" aria-pressed="true" title="自动变色"></button><button type="button" class="palette-dot palette-cyan" data-palette="0" aria-label="冰青" aria-pressed="false" title="冰青"></button><button type="button" class="palette-dot palette-violet" data-palette="1" aria-label="电紫" aria-pressed="false" title="电紫"></button><button type="button" class="palette-dot palette-jade" data-palette="2" aria-label="极光" aria-pressed="false" title="极光"></button></div>
+          <button id="motionToggle" class="motion-toggle" type="button" aria-label="暂停动效" aria-pressed="false" title="暂停动效"><svg class="icon pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg><svg class="icon play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 10 7-10 7Z"/></svg></button>
+        </div>
+      </div>
+    </section>
+    <section class="login-panel" aria-labelledby="loginTitle">
+      <span class="panel-corner" aria-hidden="true">A SPACE FOR IDEAS</span>
+      <div class="login-content">
+        <div class="login-heading"><span class="login-eyebrow">WELCOME TO HAYYO</span><h1 id="loginTitle">欢迎回来<span>.</span></h1><p class="login-lead">登录工作台，让知识彼此连接。</p></div>
+        <form id="loginForm" class="login-form" aria-busy="false">
+          <div class="form-field"><label for="loginUser">用户名</label><div class="input-wrap"><svg class="input-icon icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><input id="loginUser" name="username" type="text" placeholder="请输入用户名" autocomplete="username" autocapitalize="none" spellcheck="false" required></div></div>
+          <div class="form-field"><label for="loginPass">密码</label><div class="input-wrap"><svg class="input-icon icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg><input id="loginPass" name="password" type="password" placeholder="请输入密码" autocomplete="current-password" required><button id="passwordToggle" class="password-toggle" type="button" aria-label="显示密码" aria-pressed="false" aria-controls="loginPass"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/><path class="eye-slash" d="m4 3 16 18"/></svg></button></div></div>
+          <button id="loginSubmit" class="login-submit" type="submit"><span id="loginSubmitText">登录工作台</span><svg class="icon submit-arrow" aria-hidden="true"><use href="#arrow"/></svg><span class="submit-spinner" aria-hidden="true"></span></button>
+          <div class="error-slot"><p id="loginErr" class="login-err" role="alert" hidden></p></div>
+        </form>
+        <p class="account-hint"><span aria-hidden="true"></span>账号由管理员分配</p>
+      </div>
+      <footer class="panel-footer"><svg class="icon" aria-hidden="true"><use href="#hayyo-mark"/></svg><span>Hayyo</span><span class="footer-divider"></span><span>你的知识，有处可寻。</span></footer>
+    </section>
   </main>
-  <script src="login.js"></script>
 </body>
 </html>

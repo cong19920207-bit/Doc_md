@@ -3,51 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hayyo 功能交互关系</title>
+  <title>Hayyo 知识工作台</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="qa.css">
-  <!-- 主题运行时：空存储为边缘行者粉基线；合法 ?theme= 写入 localStorage -->
+  <link rel="stylesheet" href="workbench.css">
+  <!-- 主题运行时：空存储使用暖夜；保留已有合法偏好 -->
   <script src="theme-preview.js"></script>
 </head>
 <body>
   <div class="app">
     <header class="topbar">
       <div class="brand">
-        <h1>功能交互关系</h1>
-        <p>Hayyo 客户端 ↔ 后台 · 正文交叉</p>
+        <span class="brand-mark" data-icon="core" aria-hidden="true"></span>
+        <div><h1>Hayyo 知识工作台</h1><p>规则查询 · 文档与功能关联</p></div>
       </div>
       <div class="tabs" role="tablist">
-        <button class="tab" data-view="admin" type="button">客户端 ↔ 后台</button>
-        <button class="tab" data-view="client" type="button">客户端交叉</button>
-        <button class="tab" data-view="kb" type="button">文档索引</button>
-        <button class="tab active" data-view="qa" type="button">知识问答</button>
+        <button class="tab active" data-view="qa" type="button"><span data-icon="qa"></span>知识问答</button>
+        <button class="tab" data-view="admin" type="button"><span data-icon="admin"></span>客户端 ↔ 后台</button>
+        <button class="tab" data-view="client" type="button"><span data-icon="client"></span>客户端交叉</button>
+        <button class="tab" data-view="kb" type="button"><span data-icon="book"></span>文档索引</button>
       </div>
-      <input id="search" class="search" type="search" placeholder="搜索功能 / ID" autocomplete="off">
-      <input id="kbSearch" class="search kb-search" type="search" placeholder="搜索标题 / 正文" autocomplete="off">
       <div id="qaTopActions" class="qa-top-actions">
         <div id="qaHealth" class="health-dot"><i></i><span>检查中…</span></div>
       </div>
-      <div id="stats" class="stats"></div>
       <div class="topbar-end">
-        <label class="theme-picker">
-          <span>主题</span>
-          <select aria-label="主题">
-            <option value="default">现网蓝灰</option>
-            <option value="a-gits">攻壳青</option>
-            <option value="b-2049">2049 琥珀</option>
-            <option value="c-nightcity">夜之城黄</option>
-            <option value="d-edgerunners" selected>边缘行者粉</option>
-            <option value="c-prime">黄主色</option>
-          </select>
-        </label>
+        <div id="themePicker" class="theme-picker">
+          <button id="themeTrigger" class="theme-trigger" type="button" aria-label="主题：暖夜" aria-haspopup="menu" aria-expanded="false" aria-controls="themeOptions">
+            <span class="theme-trigger-icon" data-icon="palette" aria-hidden="true"></span>
+            <span id="themeCurrentName" class="theme-current-name">暖夜</span>
+            <span class="theme-compact-label" aria-hidden="true">主题</span>
+            <span class="theme-chevron" data-icon="chevron" aria-hidden="true"></span>
+          </button>
+          <div id="themeMenu" class="theme-menu" hidden>
+            <div class="theme-menu-head"><span>界面主题</span><span>7 款配色</span></div>
+            <div id="themeOptions" class="theme-options" role="menu" aria-label="界面主题"></div>
+            <p class="theme-menu-foot">选择后即时生效，自动记住你的偏好</p>
+          </div>
+        </div>
         <div id="qaAccount" class="qa-account" hidden>
           <button id="qaAccountBtn" class="qa-account-btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="qaAccountMenu">
-            <span class="qa-account-avatar" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                <circle cx="12" cy="8.2" r="3.1"></circle>
-                <path d="M5.6 18.4c1.1-2.5 3.3-3.9 6.4-3.9s5.3 1.4 6.4 3.9"></path>
-              </svg>
-            </span>
+            <span class="qa-account-avatar" data-icon="user" aria-hidden="true"></span>
             <span id="qaAccountName">账号</span>
           </button>
           <div id="qaAccountMenu" class="qa-account-menu" role="menu">
@@ -58,29 +53,53 @@
       </div>
     </header>
     <div class="workspace">
+      <div class="workbench-heading">
+        <div><p class="section-kicker">功能关联</p><h2 id="graphTitle">客户端 ↔ 后台</h2><p id="graphSubtitle">追踪客户端功能对应的后台入口与文档依据。</p></div>
+        <div class="heading-tools"><label class="workbench-search"><span data-icon="search"></span><input id="search" class="search" type="search" aria-label="搜索功能" placeholder="搜索功能 / ID" autocomplete="off"><kbd>/</kbd></label><div id="stats" class="stats"></div></div>
+      </div>
       <aside class="rail">
-        <h2>域筛选</h2>
+        <div class="pane-heading"><h2><span data-icon="filter"></span>业务域</h2><button class="icon-button pane-close" data-graph-panel="rail" type="button" aria-label="关闭功能列表"><span data-icon="close"></span></button></div>
         <div id="filters" class="filters"></div>
-        <p class="hint">黄色描边表示 INDEX / 文首未挂后台指针。灰色虚线框为纯后台。边均来自现有文档，未补画未写明关系。</p>
+        <div class="pane-heading node-index-heading"><h2>功能目录</h2><span id="graphNodeCount"></span></div>
+        <div id="graphNodeList" class="graph-node-list"></div>
+        <p class="hint">强调描边：未挂后台指针<br>虚线边框：纯后台<br>关系以现有文档为依据</p>
       </aside>
       <main class="canvas-wrap">
-        <svg id="graph" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="canvas-topline"><span id="graphContext">全局关系</span><button id="btnFocus" class="tool-button" type="button" aria-pressed="false" disabled><span data-icon="focus"></span>只看关联</button></div>
+        <svg id="graph" aria-label="功能关系图" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div id="graphEmpty" class="graph-empty" hidden><span data-icon="search"></span><h3>没有匹配的功能</h3><p>试试其他关键词，或恢复业务域筛选。</p><button id="btnRestoreFilters" class="tool-button" type="button">重置筛选</button></div>
         <div class="toolbar">
-          <button id="btnReset" type="button">复位布局</button>
-          <button id="btnClear" type="button">取消选中</button>
+          <button class="mobile-panel-toggle" data-graph-panel="rail" type="button"><span data-icon="folder"></span>功能</button>
+          <button id="btnZoomOut" type="button" aria-label="缩小"><span data-icon="zoomOut"></span></button>
+          <span id="graphZoom" class="zoom-value">100%</span>
+          <button id="btnZoomIn" type="button" aria-label="放大"><span data-icon="zoomIn"></span></button>
+          <button id="btnFit" type="button" title="适应画布"><span data-icon="fit"></span><span class="tool-label">适应画布</span></button>
+          <button id="btnReset" type="button" title="复位布局"><span data-icon="regen"></span><span class="tool-label">复位</span></button>
+          <button id="btnClear" type="button" title="取消选中"><span data-icon="close"></span><span class="tool-label">取消选中</span></button>
+          <button class="mobile-panel-toggle" data-graph-panel="detail" type="button"><span data-icon="cite"></span>详情</button>
         </div>
       </main>
       <aside class="detail">
-        <h2>节点详情</h2>
+        <div class="pane-heading"><h2><span data-icon="cite"></span>关系详情</h2><button class="icon-button pane-close" data-graph-panel="detail" type="button" aria-label="关闭关系详情"><span data-icon="close"></span></button></div>
         <div id="detailBody"></div>
       </aside>
     </div>
     <div id="kbWorkspace" class="kb-workspace" hidden>
+      <div class="workbench-heading">
+        <div><p class="section-kicker">文档知识库</p><h2>文档索引</h2><p>从业务功能查找规则，沿目录定位原文。</p></div>
+        <div class="heading-tools"><label class="workbench-search"><span data-icon="search"></span><input id="kbSearch" class="search kb-search" type="search" aria-label="搜索文档" placeholder="搜索标题 / 正文" autocomplete="off"><kbd>/</kbd></label><span id="kbDocumentCount" class="heading-note"></span></div>
+      </div>
       <aside class="kb-list-pane">
-        <h2>默认可读文档</h2>
+        <div class="pane-heading"><h2><span data-icon="folder"></span>文档目录</h2><button class="icon-button pane-close" data-kb-panel="list" type="button" aria-label="关闭文档目录"><span data-icon="close"></span></button></div>
+        <div id="kbSearchPanel" class="kb-search-panel" hidden>
+          <div class="pane-heading"><h2>检索结果</h2><button id="kbClearSearch" class="text-button" type="button">返回目录</button></div>
+          <p id="kbSearchHint" class="kb-hint" hidden></p>
+          <div id="kbSearchResults" class="kb-search-results"></div>
+        </div>
         <div id="kbList" class="kb-list"></div>
       </aside>
       <section class="kb-reader">
+        <div class="reader-heading"><button class="tool-button mobile-panel-toggle" data-kb-panel="list" type="button"><span data-icon="folder"></span>文档</button><div id="kbBreadcrumb" class="kb-breadcrumb">文档索引</div><button class="tool-button mobile-panel-toggle" data-kb-panel="toc" type="button"><span data-icon="filter"></span>目录</button></div>
         <div id="kbMeta" class="kb-meta"></div>
         <div id="kbToolbar" class="kb-toolbar"></div>
         <div id="kbHistory" class="kb-history" hidden></div>
@@ -88,12 +107,7 @@
         <article id="kbArticle" class="kb-article"></article>
       </section>
       <aside class="kb-side">
-        <div id="kbSearchPanel" class="kb-search-panel" hidden>
-          <h2>检索结果</h2>
-          <p id="kbSearchHint" class="kb-hint" hidden></p>
-          <div id="kbSearchResults" class="kb-search-results"></div>
-        </div>
-        <h2>本文目录</h2>
+        <div class="pane-heading"><h2><span data-icon="filter"></span>本文目录</h2><button class="icon-button pane-close" data-kb-panel="toc" type="button" aria-label="关闭本文目录"><span data-icon="close"></span></button></div>
         <nav id="kbToc" class="kb-toc"></nav>
         <h2>本文图集</h2>
         <div id="kbGallery" class="kb-gallery"></div>
@@ -101,29 +115,40 @@
     </div>
     <div id="qaWorkspace" class="qa-workspace" hidden>
       <aside class="qa-conv">
-        <button class="qa-new" type="button" data-qa-new>新建对话</button>
+        <button class="qa-new" type="button" data-qa-new><span data-icon="plus" aria-hidden="true"></span>新建对话</button>
         <div id="qaConvList" class="qa-conv-list"></div>
-        <button class="kb-btn qa-clear" type="button" data-qa-clear>清空当前</button>
+        <button class="kb-btn qa-clear" type="button" data-qa-clear><span data-icon="trash"></span>清空当前</button>
+        <p class="qa-sidebar-note">按现行文档核对业务规则</p>
       </aside>
       <div class="qa-main">
+        <div id="qaConversationHead" class="qa-conversation-head" hidden>
+          <h2 id="qaConversationTitle">当前对话</h2><span>知识问答</span>
+        </div>
         <div class="qa-col">
           <div id="qaStage" class="qa-stage-slot" hidden></div>
           <div id="qaBanner" class="qa-banner" hidden></div>
+          <section id="qaWelcome" class="qa-welcome" hidden>
+            <p class="qa-eyebrow">HAYYO / KNOWLEDGE</p>
+            <h2>把规则，问清楚。</h2>
+            <p>从一个具体场景开始，答案与出处一起给你。</p>
+          </section>
           <div id="qaMessages" class="qa-messages"></div>
           <div class="qa-composer">
             <div class="qa-composer-box">
-              <textarea id="qaInput" rows="1" placeholder="用口语问 Hayyo 现行规则"></textarea>
+              <textarea id="qaInput" rows="1" aria-label="问题" placeholder="描述你想核对的问题…"></textarea>
               <div class="qa-composer-bar">
-                <button id="qaSend" class="qa-send" type="button">发送</button>
+                <span class="qa-input-shortcut">Enter 发送 · Shift+Enter 换行</span>
+                <button id="qaSend" class="qa-send" type="button">发送 <span data-icon="send" aria-hidden="true"></span></button>
               </div>
             </div>
-            <p class="qa-hint">Enter 发送，Shift+Enter 换行</p>
+            <p class="qa-hint">基于现行文档回答 · 关键规则请结合原文核对</p>
           </div>
+          <section id="qaSuggestions" class="qa-suggestions" aria-label="提问示例" hidden></section>
         </div>
       </div>
       <aside id="qaCitePane" class="qa-cite-pane" hidden>
         <div class="qa-cite-pane-head">
-          <h2 id="qaCitePaneTitle">出处</h2>
+          <h2 id="qaCitePaneTitle">本轮出处</h2>
           <button class="kb-btn qa-icon-btn" type="button" data-close-cite title="关闭出处" aria-label="关闭出处">
             <svg class="qa-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -131,11 +156,13 @@
             </svg>
           </button>
         </div>
+        <p class="qa-cite-intro">打开文档，核对原文</p>
         <div id="qaCitePaneBody" class="qa-cite-pane-body"></div>
       </aside>
     </div>
   </div>
   <div id="qaOverlay" class="qa-overlay" hidden></div>
+  <script src="ui-icons.js"></script>
   <script src="data.js"></script>
   <script src="kb-md.js"></script>
   <script src="kb.js"></script>

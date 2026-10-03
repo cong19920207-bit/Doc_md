@@ -5,33 +5,39 @@
   ],
   "scan_roots": [
     "INDEX.md",
-        "knowledge/INDEX.md",
-        "knowledge/工作流程-文档工作台.md",
-        "prd/INDEX.md",
-        "prd/CONFIRMED.md",
-        "prd/PROJECT_OVERVIEW.md",
+    "knowledge/INDEX.md",
+    "knowledge/工作流程-文档工作台.md",
+    "prd/INDEX.md",
+    "prd/CONFIRMED.md",
+    "prd/PROJECT_OVERVIEW.md",
     "prd/VERSIONS.md",
-        "site/docs/INDEX.md",
-        "site/docs/inbox/INDEX.md",
-        "prd/inbox/INDEX.md",
-        "site/docs/design/h5-kb/PRD-H5知识库-v1.md",
-        "site/docs/design/kb-qa/INDEX.md",
-        "site/docs/design/kb-qa/PRD-知识问答-v3.md",
-        "site/docs/design/kb-qa/Hayyo-知识问答-STEP-验证版.md",
-        "site/docs/design/kb-qa/Hayyo-知识问答-实施计划.md",
-        "site/docs/design/kb-qa-feedback/INDEX.md",
-        "site/docs/design/kb-qa-feedback/PRD-知识问答-反馈与对话样式-v2.md",
-        "site/docs/design/kb-auth/INDEX.md",
-        "site/docs/design/kb-auth/PRD-账号体系与管理模块-v2.md",
-        "site/docs/contracts/INDEX.md",
-        "site/docs/contracts/kb-auth/contract.md",
-        "site/docs/contracts/kb-qa/contract.md",
-        "site/docs/contracts/kb-qa-feedback/contract.md",
-        "site/docs/contracts/h5-kb/contract.md",
-        "site/docs/contracts/h5-theme/contract.md",
+    "site/docs/INDEX.md",
+    "site/docs/inbox/INDEX.md",
+    "prd/inbox/INDEX.md",
+    "site/docs/design/h5-kb/PRD-H5知识库-v1.md",
+    "site/docs/design/kb-qa/INDEX.md",
+    "site/docs/design/kb-qa/PRD-知识问答-v3.md",
+    "site/docs/design/kb-qa/Hayyo-知识问答-STEP-验证版.md",
+    "site/docs/design/kb-qa/Hayyo-知识问答-实施计划.md",
+    "site/docs/design/kb-qa-feedback/INDEX.md",
+    "site/docs/design/kb-qa-feedback/PRD-知识问答-反馈与对话样式-v2.md",
+    "site/docs/design/kb-auth/INDEX.md",
+    "site/docs/design/kb-auth/PRD-账号体系与管理模块-v2.md",
+    "site/docs/design/kb-admin-ui/INDEX.md",
+    "site/docs/contracts/INDEX.md",
+    "site/docs/contracts/kb-auth/contract.md",
+    "site/docs/contracts/kb-qa/contract.md",
+    "site/docs/contracts/kb-qa-feedback/contract.md",
+    "site/docs/contracts/h5-kb/contract.md",
+    "site/docs/contracts/h5-theme/contract.md",
     "workspace/_kit/admin-skin/INDEX.md",
     "workspace/_kit/admin-skin/LLM.md",
-    "reviews/INDEX.md"
+    "reviews/INDEX.md",
+    "site/docs/design/kb-qa-multdesign/INDEX.md",
+    "site/docs/design/kb-qa-multdesign/PRD-知识问答多轮对话编排-Phase1-v1.10.md",
+    "site/docs/design/kb-qa-multdesign/PRD-Hayyo知识问答工作台管理后台-v1.1-正式确认版.md",
+    "site/docs/design/kb-qa-multdesign/steps-verified.md",
+    "site/docs/design/kb-qa-multdesign/实施计划.md"
   ],
   "exclude_roots": [
     "Aold_D",
@@ -64,6 +70,7 @@
     "site/feature-interaction/vendor",
     "site/docs/design/h5-kb/steps-draft.md",
     "site/docs/design/kb-qa/history",
+    "site/docs/design/kb-qa-multdesign/history",
     "site/docs/design/kb-qa-feedback/history",
     "site/docs/design/kb-auth/history",
     "site/docs/inbox/条目",
@@ -208,11 +215,13 @@
         "kb-qa-feedback-prd",
         "kb-auth-prd",
         "kb-auth-contract",
+        "kb-admin-ui",
         "kb-qa-contract",
         "contracts-index",
         "site-inbox",
         "knowledge-index",
-        "feature-interaction"
+        "feature-interaction",
+        "kb-multi-index"
       ],
       "related_td": [],
       "max_lines": 80
@@ -294,7 +303,8 @@
         "kb-qa-contract",
         "kb-qa-feedback-contract",
         "h5-kb-contract",
-        "h5-theme-contract"
+        "h5-theme-contract",
+        "kb-multi-index"
       ],
       "related_td": [],
       "max_lines": 80
@@ -467,7 +477,12 @@
         "鉴权",
         "管理模块",
         "越权",
-        "证书"
+        "证书",
+        "配置发布",
+        "隔离测试",
+        "实际删除",
+        "诊断",
+        "问题处理"
       ],
       "code_paths": [
         "site/feature-interaction",
@@ -486,7 +501,11 @@
         "kb-auth-index",
         "contracts-index"
       ],
-      "max_lines": 220
+      "max_lines": 420,
+      "related_documents": [
+        "kb-admin-prd",
+        "kb-multi-steps"
+      ]
     },
     {
       "id": "kb-qa-contract",
@@ -500,7 +519,12 @@
         "知识问答",
         "SSE",
         "切块",
-        "契约"
+        "契约",
+        "消息事实",
+        "Router",
+        "Memory",
+        "回答过程",
+        "版本"
       ],
       "code_paths": [
         "site/kb-api",
@@ -518,10 +542,12 @@
       "related_documents": [
         "kb-qa-prd",
         "kb-auth-contract",
-        "kb-qa-feedback-contract"
+        "kb-qa-feedback-contract",
+        "kb-multi-prd",
+        "kb-multi-steps"
       ],
       "related_td": [],
-      "max_lines": 220
+      "max_lines": 420
     },
     {
       "id": "kb-qa-feedback-contract",
@@ -535,7 +561,9 @@
         "反馈",
         "点赞",
         "刷新",
-        "契约"
+        "契约",
+        "版本反馈",
+        "问题关联"
       ],
       "code_paths": [
         "site/feature-interaction/qa.js",
@@ -550,10 +578,12 @@
       ],
       "related_documents": [
         "kb-qa-feedback-prd",
-        "kb-auth-contract"
+        "kb-auth-contract",
+        "kb-multi-prd",
+        "kb-multi-steps"
       ],
       "related_td": [],
-      "max_lines": 180
+      "max_lines": 220
     },
     {
       "id": "h5-kb-contract",
@@ -632,7 +662,40 @@
       "related_documents": [
         "kb-auth-prd",
         "kb-auth-contract",
-        "kb-qa-prd"
+        "kb-admin-ui",
+        "kb-qa-prd",
+        "kb-multi-index"
+      ],
+      "related_td": [],
+      "max_lines": 80
+    },
+    {
+      "id": "kb-admin-ui",
+      "path": "site/docs/design/kb-admin-ui/INDEX.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "kb-auth",
+        "routing"
+      ],
+      "keywords": [
+        "管理模块",
+        "管理站",
+        "页面结构",
+        "工作区"
+      ],
+      "code_paths": [
+        "site/kb-admin"
+      ],
+      "route_prefixes": [
+        "/kb-admin/"
+      ],
+      "depends_on": [
+        "kb-auth-index",
+        "kb-auth-contract"
+      ],
+      "related_documents": [
+        "kb-auth-prd"
       ],
       "related_td": [],
       "max_lines": 80
@@ -660,7 +723,8 @@
         "kb-qa-steps",
         "kb-qa-plan",
         "kb-qa-contract",
-        "knowledge-index"
+        "knowledge-index",
+        "kb-multi-index"
       ],
       "related_td": [],
       "max_lines": 80
@@ -935,6 +999,176 @@
       ],
       "related_td": [],
       "max_lines": 0
+    },
+    {
+      "id": "kb-multi-index",
+      "path": "site/docs/design/kb-qa-multdesign/INDEX.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "routing",
+        "kb-qa",
+        "kb-auth"
+      ],
+      "keywords": [
+        "多轮编排",
+        "Memory",
+        "管理后台",
+        "收尾"
+      ],
+      "code_paths": [
+        "site/kb-api",
+        "site/feature-interaction",
+        "site/kb-admin"
+      ],
+      "route_prefixes": [],
+      "depends_on": [
+        "docs-index"
+      ],
+      "related_documents": [
+        "kb-multi-prd",
+        "kb-admin-prd",
+        "kb-multi-steps",
+        "kb-multi-plan",
+        "kb-qa-contract",
+        "kb-auth-contract",
+        "kb-qa-feedback-contract"
+      ],
+      "related_td": [],
+      "max_lines": 100
+    },
+    {
+      "id": "kb-multi-prd",
+      "path": "site/docs/design/kb-qa-multdesign/PRD-知识问答多轮对话编排-Phase1-v1.10.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "kb-qa"
+      ],
+      "keywords": [
+        "多轮",
+        "任务",
+        "Memory",
+        "Router",
+        "L1"
+      ],
+      "code_paths": [
+        "site/kb-api",
+        "site/feature-interaction",
+        "site/kb-admin"
+      ],
+      "route_prefixes": [],
+      "depends_on": [
+        "kb-qa-prd"
+      ],
+      "related_documents": [
+        "kb-multi-index",
+        "kb-multi-steps",
+        "kb-qa-contract"
+      ],
+      "related_td": [],
+      "max_lines": 1600
+    },
+    {
+      "id": "kb-admin-prd",
+      "path": "site/docs/design/kb-qa-multdesign/PRD-Hayyo知识问答工作台管理后台-v1.1-正式确认版.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "kb-auth"
+      ],
+      "keywords": [
+        "管理后台",
+        "配置发布",
+        "隔离测试",
+        "诊断",
+        "问题处理"
+      ],
+      "code_paths": [
+        "site/kb-api",
+        "site/feature-interaction",
+        "site/kb-admin"
+      ],
+      "route_prefixes": [],
+      "depends_on": [
+        "kb-auth-prd",
+        "kb-multi-prd"
+      ],
+      "related_documents": [
+        "kb-multi-index",
+        "kb-multi-steps",
+        "kb-auth-contract",
+        "kb-admin-ui"
+      ],
+      "related_td": [],
+      "max_lines": 1600
+    },
+    {
+      "id": "kb-multi-steps",
+      "path": "site/docs/design/kb-qa-multdesign/steps-verified.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "kb-qa",
+        "kb-auth"
+      ],
+      "keywords": [
+        "STEP",
+        "当前进度",
+        "契约整合",
+        "剩余事项",
+        "回归"
+      ],
+      "code_paths": [
+        "site/kb-api",
+        "site/feature-interaction",
+        "site/kb-admin"
+      ],
+      "route_prefixes": [],
+      "depends_on": [
+        "kb-multi-prd",
+        "kb-admin-prd"
+      ],
+      "related_documents": [
+        "kb-multi-index",
+        "kb-multi-plan",
+        "kb-qa-contract",
+        "kb-auth-contract",
+        "kb-qa-feedback-contract"
+      ],
+      "related_td": [],
+      "max_lines": 400
+    },
+    {
+      "id": "kb-multi-plan",
+      "path": "site/docs/design/kb-qa-multdesign/实施计划.md",
+      "status": "current",
+      "authority": "reference",
+      "scopes": [
+        "kb-qa",
+        "kb-auth"
+      ],
+      "keywords": [
+        "M1",
+        "M8",
+        "里程碑",
+        "收尾"
+      ],
+      "code_paths": [
+        "site/kb-api",
+        "site/feature-interaction",
+        "site/kb-admin"
+      ],
+      "route_prefixes": [],
+      "depends_on": [
+        "kb-multi-steps"
+      ],
+      "related_documents": [
+        "kb-multi-index",
+        "kb-multi-steps"
+      ],
+      "related_td": [],
+      "max_lines": 500
     }
   ]
 }

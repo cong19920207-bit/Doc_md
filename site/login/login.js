@@ -10,6 +10,17 @@
   var userEl = document.getElementById("loginUser");
   var passEl = document.getElementById("loginPass");
   var errEl = document.getElementById("loginErr");
+  var submitEl = document.getElementById("loginSubmit");
+  var submitText = document.getElementById("loginSubmitText");
+  var passwordToggle = document.getElementById("passwordToggle");
+  var pending = false;
+
+  function setPending(value) {
+    pending = value;
+    if (submitEl) submitEl.disabled = value;
+    if (submitText) submitText.textContent = value ? "正在登录…" : "登录工作台";
+    if (form) form.setAttribute("aria-busy", String(value));
+  }
 
   function showErr(text) {
     if (!errEl) return;
@@ -55,9 +66,11 @@
 
   async function submitLogin(ev) {
     if (ev) ev.preventDefault();
+    if (pending) return;
     var username = userEl ? String(userEl.value || "").trim() : "";
     var password = passEl ? String(passEl.value || "") : "";
     showErr("");
+    setPending(true);
     try {
       var res = await fetch(API + "/auth/login", {
         method: "POST",
@@ -73,10 +86,18 @@
       if (passEl) passEl.value = "";
       goNext();
     } catch (e) {
-      showErr("登录失败");
+      showErr("连接失败，请检查网络后重试。");
+    } finally {
+      setPending(false);
     }
   }
 
+  if (passwordToggle && passEl) passwordToggle.addEventListener("click", function () {
+    var visible = passEl.type === "password";
+    passEl.type = visible ? "text" : "password";
+    passwordToggle.setAttribute("aria-pressed", String(visible));
+    passwordToggle.setAttribute("aria-label", visible ? "隐藏密码" : "显示密码");
+  });
   if (form) form.addEventListener("submit", submitLogin);
   checkAlreadyIn();
 })();

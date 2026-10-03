@@ -49,6 +49,8 @@ def harness(monkeypatch):
     monkeypatch.setattr(main, "convs", convs)
     monkeypatch.setattr(main, "_startup_index", _noop_index)
     monkeypatch.setattr(main.logs, "ensure_feedback_columns", lambda: True)
+    # 无 MySQL 测试环境：列表分页默认空结果（查询失败的用例自行覆盖）
+    monkeypatch.setattr(main.logs, "page_rounds", lambda **k: ([], False))
     with TestClient(main.app) as client:
         yield client, store
 

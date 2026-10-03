@@ -59,22 +59,26 @@
     return wrap.innerHTML;
   }
 
-  function inline(text) {
+  function inline(text, safeText) {
     const tokens = [];
     const save = (html) => {
       tokens.push(html);
       return "\u0000T" + (tokens.length - 1) + "\u0000";
     };
     let s = String(text);
-    s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, url) => {
-      return save("<img alt=\"" + escapeHtml(alt) + "\" src=\"" + escapeHtml(url.trim()) + "\">");
-    });
-    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, url) => {
-      return save("<a href=\"" + escapeHtml(url.trim()) + "\">" + escapeHtml(label) + "</a>");
-    });
+    if (!safeText) {
+      s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, url) => {
+        return save("<img alt=\"" + escapeHtml(alt) + "\" src=\"" + escapeHtml(url.trim()) + "\">");
+      });
+      s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, url) => {
+        return save("<a href=\"" + escapeHtml(url.trim()) + "\">" + escapeHtml(label) + "</a>");
+      });
+    }
     s = s.replace(/`([^`]+)`/g, (_, code) => save("<code>" + escapeHtml(code) + "</code>"));
-    s = s.replace(/<br\s*\/?>/gi, () => save("<br>"));
-    s = s.replace(/<a\s+([^>]*id\s*=\s*["'][^"']+["'][^>]*)><\/a>/gi, (m) => save(m));
+    if (!safeText) {
+      s = s.replace(/<br\s*\/?>/gi, () => save("<br>"));
+      s = s.replace(/<a\s+([^>]*id\s*=\s*["'][^"']+["'][^>]*)><\/a>/gi, (m) => save(m));
+    }
     s = escapeHtml(s);
     s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
     s = s.replace(/__(.+?)__/g, "<strong>$1</strong>");
@@ -102,7 +106,10 @@
     return m ? { level: m[1].length, text: m[2].replace(/\s+#+\s*$/, "") } : null;
   }
 
-  function parse(src) {
+  function parse(src, options) {
+    // 模型回答仅排版文本，不解释原始 HTML、链接或图片；文档默认渲染保持原有行为。
+    const safeText = Boolean(options && options.safeText);
+    const renderInline = (text) => inline(text, safeText);
     const lines = String(src).replace(/\r\n/g, "\n").split("\n");
     const html = [];
     let headingIndex = 0;
@@ -113,13 +120,12 @@
       const text = am ? raw.slice(0, am.index).trim() : raw;
       headingIndex += 1;
       const id = am ? am[1] : "kb-h-" + headingIndex;
-      html.push(
-        `<h${level} id="${id}" data-toc-id="${id}" data-heading="${escapeHtml(text)}">${inline(text)}</h${level}>`
-      );
+      const attrs = safeText ? "" : ` id="${id}" data-toc-id="${id}" data-heading="${escapeHtml(text)}"`;
+      html.push(`<h${level}${attrs}>${renderInline(text)}</h${level}>`);
     };
 
     // 丢掉 YAML frontmatter，避免现行说明文首变成横线和字段段落。
-    if (lines[0] && lines[0].trim() === "---") {
+    if (!safeText && lines[0] && lines[0].trim() === "---") {
       i = 1;
       while (i < lines.length && lines[i].trim() !== "---") i += 1;
       if (i < lines.length) i += 1;
@@ -134,7 +140,7 @@
         continue;
       }
 
-      if (trimmed.startsWith("<!--")) {
+      if (!safeText && trimmed.startsWith("<!--")) {
         while (i < lines.length && lines[i].indexOf("-->") < 0) i += 1;
         i += 1;
         continue;
@@ -160,9 +166,9 @@
           body.push(splitRow(lines[i]));
           i += 1;
         }
-        const thead = "<thead><tr>" + header.map((c) => `<th>${inline(c)}</th>`).join("") + "</tr></thead>";
+        const thead = "<thead><tr>" + header.map((c) => `<th>${renderInline(c)}</th>`).join("") + "</tr></thead>";
         const tbody = "<tbody>" + body.map((row) => {
-          const cells = header.map((_, idx) => `<td>${inline(row[idx] || "")}</td>`).join("");
+          const cells = header.map((_, idx) => `<td>${renderInline(row[idx] || "")}</td>`).join("");
           return `<tr>${cells}</tr>`;
         }).join("") + "</tbody>";
         html.push(`<table>${thead}${tbody}</table>`);
@@ -182,7 +188,7 @@
         continue;
       }
 
-      if (/^<a\s/i.test(trimmed) || /^<\/a>/i.test(trimmed)) {
+      if (!safeText && (/^<a\s/i.test(trimmed) || /^<\/a>/i.test(trimmed))) {
         html.push(trimmed);
         i += 1;
         continue;
@@ -194,7 +200,7 @@
           buf.push(lines[i].replace(/^\s*>\s?/, ""));
           i += 1;
         }
-        html.push(`<blockquote>${inline(buf.join(" "))}</blockquote>`);
+        html.push(`<blockquote>${renderInline(buf.join(" "))}</blockquote>`);
         continue;
       }
 
@@ -206,7 +212,7 @@
           if (!t.trim()) break;
           const m = ordered ? /^\s*\d+\.\s+(.*)$/.exec(t) : /^\s*[-*+]\s+(.*)$/.exec(t);
           if (!m) break;
-          items.push(`<li>${inline(m[1])}</li>`);
+          items.push(`<li>${renderInline(m[1])}</li>`);
           i += 1;
         }
         html.push(ordered ? `<ol>${items.join("")}</ol>` : `<ul>${items.join("")}</ul>`);
@@ -226,10 +232,10 @@
         buf.push(n);
         i += 1;
       }
-      html.push(`<p>${inline(buf.join("\n")).replace(/\n/g, "<br>")}</p>`);
+      html.push(`<p>${renderInline(buf.join("\n")).replace(/\n/g, "<br>")}</p>`);
     }
 
-    return sanitizeHtml(html.join("\n"));
+    return safeText ? html.join("\n") : sanitizeHtml(html.join("\n"));
   }
 
   window.KBMarkdown = { parse, sanitizeHtml, escapeHtml };

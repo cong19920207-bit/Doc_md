@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from pathlib import Path
 
 from cryptography import x509
@@ -31,17 +32,41 @@ class TlsStore:
     def is_enabled(self) -> bool:
         return self._paths()["enabled"].is_file()
 
+    def _state(self) -> dict:
+        p = self._paths()["state"]
+        try:
+            data = json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
+            return data if isinstance(data, dict) else {}
+        except Exception:  # noqa: BLE001
+            return {}
+
+    def _write_state(self, **fields) -> None:
+        data = self._state()
+        data.update(fields)
+        self._paths()["state"].write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+
     def status(self) -> dict:
         p = self._paths()
         has_pending = p["pending_cert"].is_file() and p["pending_key"].is_file()
         has_live = p["cert"].is_file() and p["key"].is_file()
         enabled = self.is_enabled()
+        # STEP-A18：上传只保存；已保存但与正在使用的不同（或未启用）时标「待启用」
+        pending = has_pending and not (
+            enabled and has_live
+            and p["pending_cert"].read_bytes() == p["cert"].read_bytes()
+            and p["pending_key"].read_bytes() == p["key"].read_bytes()
+        )
+        st = self._state()
         return {
             "enabled": enabled,
             "scheme": "http",
             "redirect_https": False,
             "has_cert": has_pending or has_live,
             "has_key": has_pending or has_live,
+            "pending": pending,
+            "last_enable_error": st.get("last_enable_error"),
+            "last_enable_error_at": st.get("last_enable_error_at"),
+            "port_note": "对外端口不是 80/443 时，即使已启用也不强制跳转 HTTPS",
         }
 
     def save_upload(self, cert_pem: str, key_pem: str) -> dict:
@@ -58,11 +83,17 @@ class TlsStore:
         p = self._paths()
         cert_path = p["pending_cert"] if p["pending_cert"].is_file() else p["cert"]
         key_path = p["pending_key"] if p["pending_key"].is_file() else p["key"]
-        if not cert_path.is_file() or not key_path.is_file():
-            raise ValueError("还没有可启用的证书")
-        cert_pem = cert_path.read_text(encoding="utf-8")
-        key_pem = key_path.read_text(encoding="utf-8")
-        self._validate(cert_pem, key_pem)
+        try:
+            if not cert_path.is_file() or not key_path.is_file():
+                raise ValueError("还没有可启用的证书")
+            cert_pem = cert_path.read_text(encoding="utf-8")
+            key_pem = key_path.read_text(encoding="utf-8")
+            self._validate(cert_pem, key_pem)
+        except ValueError as exc:
+            # 启用失败：开关不动，只留下失败原因，页面如实显示
+            self._write_state(last_enable_error=str(exc),
+                              last_enable_error_at=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"))
+            raise
         p["cert"].write_text(cert_pem, encoding="utf-8")
         p["key"].write_text(key_pem, encoding="utf-8")
         p["enabled"].write_text("1", encoding="utf-8")

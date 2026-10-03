@@ -142,3 +142,13 @@ def test_feedback_api_write_clear_and_404(monkeypatch):
         assert missing.status_code == 404
         bad = client.post("/api/kb/rounds/r1/feedback", json={"feedback": "sideways"})
         assert bad.status_code == 400
+        # STEP-Q21：新记录（schema_ver≥2）只允许已保存且正常完成的回复；旧记录 r1 沿用原规则
+        store["r2"] = {
+            "round_id": "r2", "user_id": me_id, "status": "gen_fail",
+            "schema_ver": 2, "msg_save": "saved", "assistant_msg_id": "m_x",
+        }
+        denied = client.post("/api/kb/rounds/r2/feedback", json={"feedback": "up"})
+        assert denied.status_code == 409
+        assert denied.json()["code"] == "feedback_not_allowed"
+        store["r2"]["status"] = "success"
+        assert client.post("/api/kb/rounds/r2/feedback", json={"feedback": "up"}).status_code == 200

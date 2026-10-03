@@ -1,0 +1,29 @@
+/* 已确认的 A 暖夜方案；旧主题仍可选择。 */
+:root {
+  --bg: #121313;
+  --bg-elevated: #202323;
+  --bg-panel: #191b1b;
+  --stroke: #343937;
+  --stroke-strong: #525b56;
+  --text: #f4f1eb;
+  --text-muted: #a5aaa7;
+  --text-faint: #86918b;
+  --accent: #e9b77c;
+  --accent-soft: rgba(233, 183, 124, 0.14);
+  --on-accent: #211b13;
+  --ok: #92bca3;
+  --warn: #e9b77c;
+  --danger: #e18d8d;
+  --danger-soft: rgba(225, 141, 141, 0.14);
+  --social: #86b6bb;
+  --money: #c4b08c;
+  --growth: #e9b77c;
+  --reach: #c3a2b3;
+  --reach-soft: rgba(195, 162, 179, 0.16);
+  --admin: #a5aaa7;
+  --dot: #2c3330;
+  --node-admin: #202622;
+  --node-pure: #262c29;
+  --node-selected: #393227;
+  --edge: #515c55;
+}

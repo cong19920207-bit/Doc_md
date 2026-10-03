@@ -1,21 +1,23 @@
 ---
 title: 知识问答（工程专题）
-updated: "2026-09-20"
+updated: "2026-10-03"
 ---
 
 # 知识问答 · 本专题怎么读
 
 > 这是 **本仓库工程** 专题，不是 Hayyo 产品功能规则。产品规则仍只在 `prd/design/<功能>/PRD.md`。
 
+> 多轮编排与新版后台增量另见 [kb-qa-multdesign](../kb-qa-multdesign/INDEX.md)；M1～M8已按现有功能并入正式契约，剩余项与当前回归见该专题收尾记录。本夹早期计划的状态不代表当前代码状态。
+
 ## 文件夹
 
 | 路径 | 放什么 | 默认读 | 权威 |
 |---|---|---|---|
-| [`PRD-知识问答-v3.md`](PRD-知识问答-v3.md) | 当前需求与实施口径 | **改问答 / 检索 / 日志时必读** | 工程 canonical；**本夹唯一现行 PRD** |
+| [`PRD-知识问答-v3.md`](PRD-知识问答-v3.md) | 检索/切块基线需求；多轮增量见Phase1 | **改问答 / 检索 / 日志时必读** | 工程 canonical；**本夹唯一现行 PRD** |
 | [`../../contracts/kb-qa/contract.md`](../../contracts/kb-qa/contract.md) | 落地符号、SSE、切块、查 bug 点 | **改实现 / 对照回归时必读** | 现行实现契约（总入口 [`../../contracts/INDEX.md`](../../contracts/INDEX.md)） |
 | [`Hayyo-知识问答-STEP-验证版.md`](Hayyo-知识问答-STEP-验证版.md) | STEP 验证版 | **按 STEP 实施时读** | 验证版；权威需求仍是 v3 PRD |
 | [`Hayyo-知识问答-实施计划.md`](Hayyo-知识问答-实施计划.md) | 里程碑编排（M1–M4） | **按阶段开发时读** | 只改分组与顺序，不改 STEP |
-| [`../../../../knowledge/INDEX.md`](../../../../knowledge/INDEX.md) | 讲解 / 案例 / 示意（仓库根 `knowledge/`） | **要理解链路时再读**；不当需求合同 | 讲解；冲突以 v3 为准 |
+| [`../../../../knowledge/INDEX.md`](../../../../knowledge/INDEX.md) | 讲解 / 案例 / 示意（仓库根 `knowledge/`） | **要理解链路时再读**；不当需求合同 | 讲解；冲突以适用的现行需求与正式契约为准 |
 | [`history/`](history/INDEX.md) | 旧版 PRD、STEP 草稿、r1 快照、审查过程 | **不默认读** | 已被 v3 / 现行验证版替代 |
 | `workspace/kb-qa-proto/` | mock 原型（Demo A/B） | 调交互时读 | 非正式 kb-api、非正式现网第四 Tab |
 | [`../kb-qa-feedback/`](../kb-qa-feedback/INDEX.md) | 反馈、刷新、对话区样式 | **改那些时读新夹，不读本夹 v3** | 独立专题 v2 |

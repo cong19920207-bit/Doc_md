@@ -6,6 +6,7 @@ import base64
 import logging
 import os
 import secrets
+import threading
 from datetime import datetime, timedelta
 from typing import Any
 
@@ -22,7 +23,12 @@ log = logging.getLogger("kb-api.auth")
 PERM_CHECKBOX = (
     "知识问答",
     "进管理模块",
-    "配置",
+    "配置查看",
+    "配置编辑",
+    "Prompt查看",
+    "Prompt编辑",
+    "Prompt调试",
+    "配置发布",
     "重建",
     "问答明细",
     "功能热度",
@@ -30,7 +36,32 @@ PERM_CHECKBOX = (
     "健康",
     "操作审计",
     "反馈汇总",
+    "知识源查看",
+    "数据概览",
+    "问题处理",
 )
+# G-ADM-E06：本版新增的动作权限，不自动附加给已有角色
+NEW_PERMS = (
+    "配置查看",
+    "配置编辑",
+    "Prompt查看",
+    "Prompt编辑",
+    "Prompt调试",
+    "配置发布",
+    "知识源查看",
+    "数据概览",
+    "问题处理",
+)
+# 已注册但对应功能尚未接入，勾选后页面显示「未接入」
+# STEP-A15：「数据概览」已接入运行概览，不再列为未接入
+PENDING_PERMS = ()
+# 已停用的旧权限码：库内保留供迁移报告，不再授予任何能力
+RETIRED_PERMS = {
+    "配置": {
+        "was": "读取并直接保存当前配置（含系统/改写 Prompt）",
+        "now": "不再授予任何能力；请按需分配配置查看、配置编辑、Prompt查看、Prompt编辑",
+    },
+}
 ROLE_SUPER_ID = "role-super"
 ROLE_USER_ID = "role-user"
 ROLE_SUPER_NAME = "超级管理员"
@@ -101,6 +132,74 @@ AUTH_SCHEMA_SQL = (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     """,
 )
+
+
+# G-ADM-E07：审计补列；旧记录这些列为空，按「旧记录」显示，不补造
+AUDIT_EXTRA_COLUMNS = (
+    ("op_id", "ALTER TABLE kb_audit_logs ADD COLUMN op_id VARCHAR(64) NULL"),
+    ("result", "ALTER TABLE kb_audit_logs ADD COLUMN result VARCHAR(16) NULL"),
+    ("error_code", "ALTER TABLE kb_audit_logs ADD COLUMN error_code VARCHAR(64) NULL"),
+    ("object_type", "ALTER TABLE kb_audit_logs ADD COLUMN object_type VARCHAR(32) NULL"),
+    ("actor_role", "ALTER TABLE kb_audit_logs ADD COLUMN actor_role VARCHAR(64) NULL"),
+    ("changed_fields", "ALTER TABLE kb_audit_logs ADD COLUMN changed_fields JSON NULL"),
+    ("before_ver", "ALTER TABLE kb_audit_logs ADD COLUMN before_ver VARCHAR(64) NULL"),
+    ("after_ver", "ALTER TABLE kb_audit_logs ADD COLUMN after_ver VARCHAR(64) NULL"),
+    ("relation", "ALTER TABLE kb_audit_logs ADD COLUMN relation JSON NULL"),
+    ("reason", "ALTER TABLE kb_audit_logs ADD COLUMN reason VARCHAR(255) NULL"),
+)
+AUDIT_FIELDS = tuple(name for name, _ in AUDIT_EXTRA_COLUMNS)
+AUDIT_JSON_FIELDS = ("changed_fields", "relation")
+AUDIT_RESULTS = ("accepted", "success", "failed", "unknown")
+# 新登记事件编码：由后续 STEP 负责写入
+AUDIT_ACTIONS_PLANNED = (
+    "config_draft_save", "config_validate", "config_publish", "config_publish_fail",
+    "config_rollback", "config_draft_discard", "debug_run", "index_backfill", "index_retry",
+    "conv_delete", "issue_create", "issue_update", "issue_close", "issue_reopen", "sensitive_read",
+)
+# 审计不写秘密与被查看正文：键名含以下片段即丢弃
+_AUDIT_SECRET_PARTS = (
+    "password", "secret", "token", "jwt", "authorization", "cookie", "session",
+    "api_key", "apikey", "key_pem", "private", "prompt", "content", "answer", "query",
+)
+
+
+# 改启停/改角色串行执行，保证「最后一名启用超管」检查与写入之间不被穿插
+_SUPER_GUARD = threading.Lock()
+
+
+class AuditUnavailable(Exception):
+    """审计写入不可用：高风险写须拒绝。"""
+
+
+AUDIT_FILTER_KEYS = ("action", "actor_username", "result", "object", "object_type", "op_id")
+
+
+def _audit_match(row: dict, filters: dict) -> bool:
+    for key in AUDIT_FILTER_KEYS:
+        want = filters.get(key)
+        if not want:
+            continue
+        if key == "result" and want == "legacy":
+            if row.get("result") is not None:
+                return False
+            continue
+        if str(row.get(key) or "") != str(want):
+            return False
+    return True
+
+
+def _safe_audit_value(value: Any) -> Any:
+    if isinstance(value, dict):
+        out = {}
+        for key, val in value.items():
+            low = str(key).lower()
+            if any(part in low for part in _AUDIT_SECRET_PARTS):
+                continue
+            out[key] = _safe_audit_value(val)
+        return out
+    if isinstance(value, list):
+        return [_safe_audit_value(v) for v in value]
+    return value
 
 
 def use_memory_auth() -> bool:
@@ -243,8 +342,23 @@ class MemoryAuthRepo:
     def insert_audit(self, row: dict) -> None:
         self.audits.append(dict(row))
 
+    def update_audit(self, audit_id: str, fields: dict) -> bool:
+        for row in self.audits:
+            if row.get("id") == audit_id:
+                row.update(fields)
+                return True
+        return False
+
     def list_audits(self) -> list[dict]:
         return [dict(x) for x in reversed(self.audits)]
+
+    def page_audits(self, filters: dict, before: tuple[str, str] | None, size: int) -> tuple[list[dict], bool]:
+        from .listing import time_key
+        rows = [dict(x) for x in self.audits if _audit_match(x, filters)]
+        rows.sort(key=lambda r: (time_key(r.get("created_at")), str(r.get("id") or "")), reverse=True)
+        if before:
+            rows = [r for r in rows if (time_key(r.get("created_at")), str(r.get("id") or "")) < before]
+        return rows[:size], len(rows) > size
 
     def list_accounts(self) -> list[dict]:
         return [dict(x) for x in self.accounts.values()]
@@ -272,6 +386,15 @@ class MysqlAuthRepo:
                 with conn.cursor() as cur:
                     for sql in AUTH_SCHEMA_SQL:
                         cur.execute(sql)
+                    cur.execute(
+                        "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS "
+                        "WHERE TABLE_SCHEMA=%s AND TABLE_NAME='kb_audit_logs'",
+                        (settings.MYSQL_DATABASE,),
+                    )
+                    have = {row["COLUMN_NAME"] for row in (cur.fetchall() or [])}
+                    for name, alter in AUDIT_EXTRA_COLUMNS:
+                        if name not in have:
+                            cur.execute(alter)
             return True
         except Exception as exc:  # noqa: BLE001
             log.warning("ensure auth schema failed: %s", exc)
@@ -435,22 +558,45 @@ class MysqlAuthRepo:
                 )
 
     def insert_audit(self, row: dict) -> None:
+        extra = [name for name in AUDIT_FIELDS if row.get(name) is not None]
+        cols = ["id", "actor_id", "actor_username", "action", "object", "ip", "created_at", "detail"] + extra
+        args = [
+            row["id"],
+            row.get("actor_id"),
+            row.get("actor_username"),
+            row["action"],
+            row.get("object"),
+            row.get("ip"),
+            row["created_at"],
+            json_dumps(row.get("detail") or {}),
+        ] + [
+            json_dumps(row[name]) if name in AUDIT_JSON_FIELDS else row[name]
+            for name in extra
+        ]
         with self._conn() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "INSERT INTO kb_audit_logs (id, actor_id, actor_username, action, object, ip, "
-                    "created_at, detail) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-                    (
-                        row["id"],
-                        row.get("actor_id"),
-                        row.get("actor_username"),
-                        row["action"],
-                        row.get("object"),
-                        row.get("ip"),
-                        row["created_at"],
-                        json_dumps(row.get("detail") or {}),
-                    ),
+                    f"INSERT INTO kb_audit_logs ({', '.join(cols)}) "
+                    f"VALUES ({','.join(['%s'] * len(cols))})",
+                    args,
                 )
+
+    def update_audit(self, audit_id: str, fields: dict) -> bool:
+        allowed = set(AUDIT_FIELDS) | {"object", "detail"}
+        sets = []
+        args: list[Any] = []
+        for key, value in fields.items():
+            if key not in allowed:
+                continue
+            sets.append(f"{key}=%s")
+            args.append(json_dumps(value) if key in AUDIT_JSON_FIELDS or key == "detail" else value)
+        if not sets:
+            return False
+        args.append(audit_id)
+        with self._conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute(f"UPDATE kb_audit_logs SET {', '.join(sets)} WHERE id=%s", args)
+                return cur.rowcount > 0
 
     def list_audits(self) -> list[dict]:
         with self._conn() as conn:
@@ -463,8 +609,41 @@ class MysqlAuthRepo:
             raw = item.get("detail")
             if isinstance(raw, str):
                 item["detail"] = json_loads(raw, {})
+            for name in AUDIT_JSON_FIELDS:
+                if isinstance(item.get(name), str):
+                    item[name] = json_loads(item[name], None)
             out.append(item)
         return out
+
+    def page_audits(self, filters: dict, before: tuple[str, str] | None, size: int) -> tuple[list[dict], bool]:
+        sql = "SELECT * FROM kb_audit_logs WHERE 1=1"
+        args: list[Any] = []
+        for key in AUDIT_FILTER_KEYS:
+            want = filters.get(key)
+            if not want:
+                continue
+            if key == "result" and want == "legacy":
+                sql += " AND result IS NULL"
+                continue
+            sql += f" AND {key}=%s"
+            args.append(str(want))
+        if before:
+            sql += " AND (created_at < %s OR (created_at = %s AND id < %s))"
+            args.extend([before[0], before[0], before[1]])
+        sql += " ORDER BY created_at DESC, id DESC LIMIT %s"
+        args.append(int(size) + 1)
+        with self._conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute(sql, args)
+                rows = cur.fetchall() or []
+        out = []
+        for row in rows:
+            item = dict(row)
+            for name in ("detail",) + AUDIT_JSON_FIELDS:
+                if isinstance(item.get(name), str):
+                    item[name] = json_loads(item[name], {} if name == "detail" else None)
+            out.append(item)
+        return out[:size], len(out) > size
 
     def list_accounts(self) -> list[dict]:
         with self._conn() as conn:
@@ -596,7 +775,42 @@ class AuthStore:
         out["enabled"] = bool(out.get("enabled"))
         out["role_name"] = role.get("name") or ""
         out["is_super"] = bool(role.get("is_super"))
-        out["permissions"] = perms
+        # 停用的旧码不进入授权集合
+        out["permissions"] = {p for p in perms if p not in RETIRED_PERMS}
+        return out
+
+    def sync_super_perms(self) -> None:
+        """启动时把超管角色的权限清单补全为当前完整清单；其他角色不动。"""
+        try:
+            for role in self.repo.list_roles():
+                if role.get("is_super"):
+                    self.repo.set_role_perms(str(role["id"]), list(PERM_CHECKBOX))
+        except Exception as exc:  # noqa: BLE001
+            log.warning("sync super perms failed: %s", exc)
+
+    def perm_migration_report(self) -> list[dict]:
+        """持有已停用旧码的非超管角色清单，供超管重新分配。"""
+        counts: dict[str, int] = {}
+        for acc in self.repo.list_accounts():
+            rid = str(acc.get("role_id") or "")
+            counts[rid] = counts.get(rid, 0) + 1
+        out = []
+        for role in self.repo.list_roles():
+            if role.get("is_super"):
+                continue
+            perms = self.repo.get_role_perms(str(role["id"]))
+            retired = sorted(p for p in perms if p in RETIRED_PERMS)
+            if not retired:
+                continue
+            out.append({
+                "role_id": role["id"],
+                "role_name": role.get("name") or "",
+                "retired": retired,
+                "was": [RETIRED_PERMS[p]["was"] for p in retired],
+                "now": [RETIRED_PERMS[p]["now"] for p in retired],
+                "current_permissions": sorted(p for p in perms if p in PERM_CHECKBOX),
+                "account_count": counts.get(str(role["id"]), 0),
+            })
         return out
 
     def has_perm(self, account: dict | None, perm: str) -> bool:
@@ -653,24 +867,141 @@ class AuthStore:
         object_: str | None = None,
         ip: str | None = None,
         detail: dict | None = None,
-    ) -> None:
+        **extra: Any,
+    ) -> bool:
+        """尽力写入：失败只记日志，不影响调用方。"""
+        try:
+            self.repo.insert_audit(self._audit_row(action, actor_id, actor_username, object_, ip, detail, extra))
+            return True
+        except Exception as exc:  # noqa: BLE001
+            log.warning("insert audit failed: %s", exc)
+            return False
+
+    def _audit_row(
+        self,
+        action: str,
+        actor_id: str | None,
+        actor_username: str | None,
+        object_: str | None,
+        ip: str | None,
+        detail: dict | None,
+        extra: dict,
+    ) -> dict:
         safe = dict(detail or {})
         for key in list(safe.keys()):
             if "password" in key.lower() or "secret" in key.lower() or key.lower() in {"jwt", "token"}:
                 safe.pop(key, None)
+        row = {
+            "id": uid("aud"),
+            "actor_id": actor_id,
+            "actor_username": actor_username,
+            "action": action,
+            "object": object_,
+            "ip": ip or "",
+            "created_at": self.now(),
+            "detail": _safe_audit_value(safe),
+        }
+        for name in AUDIT_FIELDS:
+            if extra.get(name) is not None:
+                val = extra[name]
+                row[name] = _safe_audit_value(val) if name in AUDIT_JSON_FIELDS else val
+        return row
+
+    # ---------- G-ADM-E07：高风险写两段记录 ----------
+
+    audit_counters: dict[str, int] | None = None
+
+    def _bump_counter(self, name: str) -> None:
+        if self.audit_counters is None:
+            self.audit_counters = {}
+        self.audit_counters[name] = self.audit_counters.get(name, 0) + 1
+
+    def audit_health(self) -> dict:
+        """进程内审计失败计数（重启清零）。"""
+        c = self.audit_counters or {}
+        return {
+            "read_audit_failures": c.get("read_audit_failures", 0),
+            "result_audit_failures": c.get("result_audit_failures", 0),
+            "blocked_high_risk": c.get("blocked_high_risk", 0),
+        }
+
+    def begin_audit(
+        self,
+        action: str,
+        *,
+        actor: dict | None,
+        object_: str | None = None,
+        ip: str | None = None,
+        detail: dict | None = None,
+        **extra: Any,
+    ) -> str:
+        """高风险写受理：先写一行 accepted，写不进去抛 AuditUnavailable，调用方须拒绝操作。"""
+        actor = actor or {}
+        extra.setdefault("actor_role", actor.get("role_name") or None)
+        row = self._audit_row(
+            action,
+            str(actor.get("id") or "") or None,
+            str(actor.get("username") or "") or None,
+            object_,
+            ip,
+            detail,
+            extra,
+        )
+        row["op_id"] = row["id"]
+        row["result"] = "accepted"
         try:
-            self.repo.insert_audit({
-                "id": uid("aud"),
-                "actor_id": actor_id,
-                "actor_username": actor_username,
-                "action": action,
-                "object": object_,
-                "ip": ip or "",
-                "created_at": self.now(),
-                "detail": safe,
-            })
+            self.repo.insert_audit(row)
         except Exception as exc:  # noqa: BLE001
-            log.warning("insert audit failed: %s", exc)
+            log.warning("begin audit failed action=%s: %s", action, exc)
+            self._bump_counter("blocked_high_risk")
+            raise AuditUnavailable(str(exc)) from exc
+        return row["id"]
+
+    def finish_audit(self, op_id: str, result: str, **fields: Any) -> bool:
+        """写结果：失败时该行停在 accepted（待核对），不重做操作。"""
+        upd: dict[str, Any] = {"result": result if result in AUDIT_RESULTS else "unknown"}
+        for key, value in fields.items():
+            if value is None:
+                continue
+            if key == "detail":
+                upd["detail"] = _safe_audit_value(dict(value))
+            elif key in AUDIT_JSON_FIELDS:
+                upd[key] = _safe_audit_value(value)
+            elif key in AUDIT_FIELDS or key == "object":
+                upd[key] = value
+        try:
+            ok = bool(self.repo.update_audit(op_id, upd))
+        except Exception as exc:  # noqa: BLE001
+            log.warning("finish audit failed op=%s: %s", op_id, exc)
+            ok = False
+        if not ok:
+            self._bump_counter("result_audit_failures")
+        return ok
+
+    def record_sensitive_read(
+        self,
+        *,
+        actor: dict | None,
+        object_type: str,
+        object_id: str,
+        ip: str | None = None,
+    ) -> bool:
+        """敏感正文读取：尽力记录，不写被查看正文；失败不阻断读取。"""
+        actor = actor or {}
+        ok = self.write_audit(
+            "sensitive_read",
+            actor_id=str(actor.get("id") or "") or None,
+            actor_username=str(actor.get("username") or "") or None,
+            object_=object_id,
+            ip=ip,
+            detail={},
+            object_type=object_type,
+            actor_role=actor.get("role_name") or None,
+            result="success",
+        )
+        if not ok:
+            self._bump_counter("read_audit_failures")
+        return ok
 
     def login(self, username: str, password: str, ip: str = "") -> dict:
         name = (username or "").strip()
@@ -758,13 +1089,20 @@ class AuthStore:
 
     def list_roles_public(self) -> list[dict]:
         out = []
+        counts: dict[str, int] = {}
+        for acc in self.repo.list_accounts():
+            rid = str(acc.get("role_id") or "")
+            counts[rid] = counts.get(rid, 0) + 1
         for role in self.repo.list_roles():
+            perms = self.repo.get_role_perms(str(role["id"]))
             out.append({
+                "account_count": counts.get(str(role["id"]), 0),
                 "id": role["id"],
                 "name": role.get("name"),
                 "is_super": bool(role.get("is_super")),
                 "is_preset": bool(role.get("is_preset")),
-                "permissions": sorted(self.repo.get_role_perms(str(role["id"]))),
+                "permissions": sorted(p for p in perms if p not in RETIRED_PERMS),
+                "retired_permissions": sorted(p for p in perms if p in RETIRED_PERMS),
             })
         return out
 
@@ -788,28 +1126,55 @@ class AuthStore:
         row = self.create_account(username.strip(), password, role_id, enabled=True)
         return self.public_account(row)
 
+    def _ensure_super_left(self, account_id: str, restore: dict) -> None:
+        """写后复核：没有启用中的超管就回滚本次修改（防并发各自通过前置检查）。"""
+        if self.count_enabled_super() >= 1:
+            return
+        self.repo.update_account_fields(account_id, dict(restore, updated_at=self.now()))
+        raise PermissionError("不能去掉最后一名启用超管")
+
     def set_account_enabled(self, account_id: str, enabled: bool) -> dict:
-        acc = self.hydrate_account(self.repo.get_account(account_id))
-        if not acc:
-            raise KeyError("账号不存在")
-        if acc.get("is_super") and acc.get("enabled") and not enabled and self.count_enabled_super() <= 1:
-            raise PermissionError("不能去掉最后一名启用超管")
-        self.repo.update_account_fields(account_id, {"enabled": 1 if enabled else 0, "updated_at": self.now()})
-        if not enabled:
-            self.repo.revoke_account_sessions(account_id, self.now())
-        return self.public_account(self.repo.get_account(account_id) or acc)
+        with _SUPER_GUARD:
+            acc = self.hydrate_account(self.repo.get_account(account_id))
+            if not acc:
+                raise KeyError("账号不存在")
+            if acc.get("is_super") and acc.get("enabled") and not enabled and self.count_enabled_super() <= 1:
+                raise PermissionError("不能去掉最后一名启用超管")
+            self.repo.update_account_fields(account_id, {"enabled": 1 if enabled else 0, "updated_at": self.now()})
+            if acc.get("is_super") and not enabled:
+                self._ensure_super_left(account_id, {"enabled": 1 if acc.get("enabled") else 0})
+            if not enabled:
+                self.repo.revoke_account_sessions(account_id, self.now())
+            return self.public_account(self.repo.get_account(account_id) or acc)
 
     def set_account_role(self, account_id: str, role_id: str) -> dict:
-        acc = self.hydrate_account(self.repo.get_account(account_id))
-        if not acc:
-            raise KeyError("账号不存在")
-        role = self.repo.get_role(role_id)
-        if not role:
-            raise ValueError("角色不存在")
-        if acc.get("is_super") and not role.get("is_super") and self.count_enabled_super() <= 1:
-            raise PermissionError("不能去掉最后一名启用超管")
-        self.repo.update_account_fields(account_id, {"role_id": role_id, "updated_at": self.now()})
-        return self.public_account(self.repo.get_account(account_id) or acc)
+        with _SUPER_GUARD:
+            acc = self.hydrate_account(self.repo.get_account(account_id))
+            if not acc:
+                raise KeyError("账号不存在")
+            role = self.repo.get_role(role_id)
+            if not role:
+                raise ValueError("角色不存在")
+            if acc.get("is_super") and not role.get("is_super") and self.count_enabled_super() <= 1:
+                raise PermissionError("不能去掉最后一名启用超管")
+            self.repo.update_account_fields(account_id, {"role_id": role_id, "updated_at": self.now()})
+            if acc.get("is_super") and not role.get("is_super"):
+                self._ensure_super_left(account_id, {"role_id": acc.get("role_id")})
+            return self.public_account(self.repo.get_account(account_id) or acc)
+
+    def lock_status(self, username: str) -> dict:
+        """登录锁定状态：只读登录失败锁，不涉及问答会话保存阻塞。"""
+        name = (username or "").strip()
+        row = self.repo.get_lock(name) or {}
+        until = _dt(row.get("locked_until"))
+        locked = until is not None and until > self.now()
+        return {
+            "username": name,
+            "exists": self.repo.get_account_by_username(name) is not None,
+            "locked": locked,
+            "locked_until": str(until) if locked else None,
+            "fail_count": int(row.get("fail_count") or 0),
+        }
 
     def unlock_username(self, username: str) -> None:
         self._clear_fail((username or "").strip())

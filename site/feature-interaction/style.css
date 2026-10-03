@@ -115,28 +115,6 @@ body {
   margin-left: auto;
   flex: none;
 }
-.theme-picker {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: none;
-}
-.theme-picker span {
-  font-size: 12px;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-.theme-picker select {
-  height: 34px;
-  border-radius: 8px;
-  border: 1px solid var(--stroke);
-  background: var(--bg);
-  color: var(--text);
-  padding: 0 8px;
-  font: inherit;
-  font-size: 13px;
-}
-
 .stats {
   display: flex;
   gap: 14px;

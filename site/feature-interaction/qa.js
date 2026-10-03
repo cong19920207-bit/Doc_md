@@ -1,12 +1,20 @@
 /**
  * 正式知识问答工作区：多会话、流式回答、出处跳转、配置/重建/明细/热度。
- * 无过程栏。空状态允许建议 chips（C22）。
+ * 回答过程来自服务端实际事件；空状态允许建议 chips（C22）。
  */
 (function () {
   const API = "/api/kb";
   const CONV_KEY = "hayyo-kb-qa-conversations-v1";
-  const MAX_CONVS = 40;
   const STAGE_LABEL = {
+    route: "理解问题中…",
+    task_prep: "梳理任务中…",
+    recall: "查找此前对话中…",
+    conversation: "整理此前对话…",
+    check: "核对原文中…",
+    repair: "按原文修正中…",
+    reconnect: "连接中断，正在查询结果…",
+    smalltalk: "回复中…",
+    clarify: "整理澄清问题…",
     rewrite: "改写中…",
     retrieve: "检索中…",
     rerank: "重排中…",
@@ -15,18 +23,22 @@
   const UNWRITTEN_HINT = "本轮日志未写入，反馈不会进明细";
   const CHIP_FIXED = [
     {
+      label: "链接支付权益",
       title: "币商用链接支付帮朋友充金币：付款人能拿 VIP 积分和拉新返利吗？收货人呢？这笔算不算收货人的首充？会不会进充值任务进度？",
       query: "币商用链接支付帮朋友充金币：付款人能拿 VIP 积分和拉新返利吗？收货人呢？这笔算不算收货人的首充？会不会进充值任务进度？"
     },
     {
+      label: "币商转账规则",
       title: "币商给用户转了 20000 金币。这笔会进 Billionaires 充值榜吗？算不算用户首充？会不会给用户加 VIP 财富值？",
       query: "币商给用户转了 20000 金币。这笔会进 Billionaires 充值榜吗？算不算用户首充？会不会给用户加 VIP 财富值？"
     },
     {
+      label: "游戏使用限制",
       title: "非 VIP 在语聊房 Game Center 点 Bounty Racing 会怎样？如果这个房间同时开着 Ludo，我关掉数值游戏弹窗后，休闲游戏还在吗？Lord of Olympus 有 VIP 限制吗？",
       query: "非 VIP 在语聊房 Game Center 点 Bounty Racing 会怎样？如果这个房间同时开着 Ludo，我关掉数值游戏弹窗后，休闲游戏还在吗？Lord of Olympus 有 VIP 限制吗？"
     },
     {
+      label: "VIP 保级规则",
       title: "VIP 保级扣的是财富值还是金币？200 金币等于多少财富值？退款怎么扣？",
       query: "VIP 保级扣的是财富值还是金币？200 金币等于多少财富值？退款怎么扣？"
     }
@@ -84,6 +96,7 @@
     c.lastChunks = Array.isArray(raw.lastChunks) ? raw.lastChunks : [];
     c.citationsOpen = raw.citationsOpen && typeof raw.citationsOpen === "object" ? raw.citationsOpen : {};
     c.updatedAt = Number(raw.updatedAt) || Date.now();
+    c.saveBlockedExecId = raw.saveBlockedExecId ? String(raw.saveBlockedExecId) : null;
     return c;
   }
 
@@ -108,6 +121,8 @@
     activeId: null,
     busy: false,
     stage: "",
+    pendingRequest: null,
+    convNextOffset: null,
     persistError: false,
     health: null,
     overlay: null,
@@ -118,6 +133,10 @@
   const els = {
     list: document.getElementById("qaConvList"),
     messages: document.getElementById("qaMessages"),
+    welcome: document.getElementById("qaWelcome"),
+    suggestions: document.getElementById("qaSuggestions"),
+    conversationHead: document.getElementById("qaConversationHead"),
+    conversationTitle: document.getElementById("qaConversationTitle"),
     input: document.getElementById("qaInput"),
     send: document.getElementById("qaSend"),
     stage: document.getElementById("qaStage"),
@@ -207,7 +226,7 @@
       return;
     }
     renderAccount();
-    await loadCloud();
+    if (!state.busy) await loadCloud();
     render();
   }
 
@@ -233,12 +252,36 @@
     } catch (e) {}
   }
 
+  async function loadAnswerHistory(conv) {
+    if (!conv || !state.me || state.busy) return;
+    const accountId = state.me.id;
+    const requestNo = (conv.historyRequest || 0) + 1;
+    conv.historyRequest = requestNo;
+    try {
+      const res = await fetch(API + "/conversations/" + encodeURIComponent(conv.id) + "/answer-history", {
+        credentials: "same-origin"
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!state.me || state.me.id !== accountId || state.busy || conv.historyRequest !== requestNo ||
+          state.conversations.indexOf(conv) < 0) return;
+      if (data.authoritative && Array.isArray(data.messages)) {
+        conv.messages = data.messages;
+        const last = conv.messages.slice().reverse().find(function (m) { return m.role !== "user"; });
+        conv.lastChunks = last && last.citations || [];
+      }
+    } catch (err) {
+      // 已有展示缓存保留；读取失败不伪造空历史。
+    }
+  }
+
   async function loadCloud() {
     if (!state.me) return;
     try {
       const res = await fetch(API + "/conversations", { credentials: "same-origin" });
       if (!res.ok) return;
       const data = await res.json();
+      state.convNextOffset = data.next_offset == null ? null : data.next_offset;
       let items = (data.items || []).map(sanitizeConv);
       if (!items.length) {
         const created = await fetch(API + "/conversations", {
@@ -254,6 +297,26 @@
       if (!items.some(function (c) { return c.id === state.activeId; })) {
         state.activeId = items[0].id;
       }
+      await loadAnswerHistory(active());
+    } catch (e) {}
+  }
+
+  // 会话列表按页加载，不设数量上限
+  async function loadMoreConvs() {
+    if (!state.me || state.convNextOffset == null) return;
+    try {
+      const res = await fetch(API + "/conversations?offset=" + encodeURIComponent(state.convNextOffset), {
+        credentials: "same-origin"
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      const known = {};
+      state.conversations.forEach(function (c) { known[c.id] = true; });
+      (data.items || []).map(sanitizeConv).forEach(function (c) {
+        if (!known[c.id]) state.conversations.push(c);
+      });
+      state.convNextOffset = data.next_offset == null ? null : data.next_offset;
+      renderList();
     } catch (e) {}
   }
 
@@ -261,14 +324,6 @@
     if (state.me) {
       saveCloud(active());
       return true;
-    }
-    const conv = active();
-    while (state.conversations.length > MAX_CONVS) {
-      const oldest = state.conversations
-        .filter(function (c) { return c.id !== conv.id; })
-        .sort(function (a, b) { return (a.updatedAt || 0) - (b.updatedAt || 0); })[0];
-      if (!oldest) break;
-      state.conversations = state.conversations.filter(function (c) { return c.id !== oldest.id; });
     }
     const payload = {
       activeId: state.activeId,
@@ -311,16 +366,22 @@
   }
 
   function citeButton(c) {
+    const feature = ((window.FEATURE_DATA && window.FEATURE_DATA.features) || []).find(function (f) { return f.id === c.feature_id; });
+    const excerpt = c.excerpt || c.content || c.text || "";
     const col = '<span class="qa-tag' + (c.collection === "hayyo-admin" ? " admin" : "") + '">' +
       escapeHtml(collectionLabel(c.collection)) + "</span>";
     return (
       '<button class="qa-chunk" type="button" data-cite-path="' + escapeHtml(c.path || "") +
         '" data-cite-anchor="' + escapeHtml(c.anchor || "") +
-        '" data-cite-heading="' + escapeHtml(c.heading || "") + '">' +
+        '" data-cite-heading="' + escapeHtml(c.heading || "") +
+        '" data-cite-chunk="' + escapeHtml(c.chunk_id || "") +
+        '" data-cite-hash="' + escapeHtml(c.content_hash || "") + '">' +
         col +
+        (feature ? '<span class="qa-cite-feature">' + escapeHtml(feature.name) + '</span>' : '') +
         '<span class="name">' + escapeHtml(c.heading || c.chunk_id || "") + "</span>" +
-        '<span class="meta">' + escapeHtml(c.path || "") + " · #" + escapeHtml(c.anchor || "") +
-        " · " + escapeHtml(c.chunk_id || "") + "</span>" +
+        (excerpt ? '<span class="qa-cite-excerpt">' + escapeHtml(String(excerpt).slice(0, 180)) + (String(excerpt).length > 180 ? '…' : '') + '</span>' : '') +
+        '<span class="meta">' + escapeHtml(c.path || "") + " · #" + escapeHtml(c.anchor || "") + "</span>" +
+        '<span class="qa-cite-open">查看原文 <span aria-hidden="true">↗</span></span>' +
       "</button>"
     );
   }
@@ -331,20 +392,7 @@
 
   // 操作条用内联 SVG，不引入图标库
   function iconSvg(kind) {
-    const common = ' class="qa-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
-    if (kind === "cite") {
-      return "<svg" + common + '><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>';
-    }
-    if (kind === "copy") {
-      return "<svg" + common + '><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
-    }
-    if (kind === "up") {
-      return "<svg" + common + '><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88z"/></svg>';
-    }
-    if (kind === "down") {
-      return "<svg" + common + '><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88z"/></svg>';
-    }
-    return "<svg" + common + '><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>';
+    return window.HayyoIcons.svg(kind, 'qa-ico');
   }
 
   function iconBtn(opts) {
@@ -385,33 +433,124 @@
     const cites = m.citations || [];
     const citeOpen = Boolean(active().citationsOpen && active().citationsOpen[m.id]);
     if (cites.length) {
-      keys.push(iconBtn({
-        kind: "cite",
-        label: cites.length + " 条出处",
-        on: citeOpen,
-        attrs: ' data-toggle-cite="' + id + '"',
-        badge: '<span class="qa-icon-badge">' + escapeHtml(String(cites.length)) + "</span>"
-      }));
+      keys.push('<button class="kb-btn qa-cite-toggle' + (citeOpen ? ' is-on' : '') +
+        '" type="button" data-toggle-cite="' + id + '" aria-controls="qaCitePane" aria-expanded="' + citeOpen +
+        '">' + iconSvg("cite") + '<span>查看出处 · ' + cites.length + '</span></button>');
     }
     if (hasAnswerBody(m)) {
       keys.push(iconBtn({ kind: "copy", label: "复制回答", attrs: ' data-copy="' + id + '"' }));
-      keys.push(iconBtn({
-        kind: "up",
-        label: "赞",
-        on: m.feedback === "赞",
-        attrs: ' data-qa-fb="up" data-msg="' + id + '"'
-      }));
-      keys.push(iconBtn({
-        kind: "down",
-        label: "踩",
-        on: m.feedback === "踩",
-        attrs: ' data-qa-fb="down" data-msg="' + id + '"'
-      }));
+      // 未保存的回复不开放赞踩（服务端同样拒收）
+      if (!m.unsaved) {
+        keys.push(iconBtn({
+          kind: "up",
+          label: "赞",
+          on: m.feedback === "赞",
+          attrs: ' data-qa-fb="up" data-msg="' + id + '"'
+        }));
+        keys.push(iconBtn({
+          kind: "down",
+          label: "踩",
+          on: m.feedback === "踩",
+          attrs: ' data-qa-fb="down" data-msg="' + id + '"'
+        }));
+      }
       keys.push(iconBtn({ kind: "regen", label: "刷新", attrs: ' data-qa-regen="' + id + '"' }));
     } else {
       keys.push(iconBtn({ kind: "regen", label: "刷新", attrs: ' data-qa-regen="' + id + '"' }));
     }
+    if (m.unsaved && active().saveBlockedExecId === m.round_id) {
+      keys.push('<button class="kb-btn qa-retry-save" type="button" data-qa-retry-save="' + id + '">重试保存</button>');
+    }
+    if (Array.isArray(m.versions) && m.versions.length > 1) {
+      keys.push(
+        '<span class="qa-ver">' +
+          '<button class="kb-btn qa-icon-btn" type="button" title="上一版本" aria-label="上一版本" data-ver-step="-1" data-msg="' + id + '"' +
+            (m.viewIndex <= 0 ? " disabled" : "") + ">‹</button>" +
+          '<span class="qa-ver-no">' + (m.viewIndex + 1) + "/" + m.versions.length + "</span>" +
+          '<button class="kb-btn qa-icon-btn" type="button" title="下一版本" aria-label="下一版本" data-ver-step="1" data-msg="' + id + '"' +
+            (m.viewIndex >= m.versions.length - 1 ? " disabled" : "") + ">›</button>" +
+        "</span>"
+      );
+    }
     return '<div class="qa-actions">' + keys.join("") + "</div>";
+  }
+
+  // STEP-Q20：历史引用（此前对话·时间·版本）。点开时按当前可见性复核，复核得到的原文只放在内存里，不写进缓存
+  const histOpen = {};
+
+  function historyRefsHtml(m) {
+    const refs = m.historyRefs || [];
+    if (!refs.length) return "";
+    return '<div class="qa-hist">' + refs.map(function (r) {
+      const label = "此前对话 · " + (r.role === "user" ? "提问" : "回答") +
+        (r.version_no ? " 第 " + r.version_no + " 版" : "") + (r.time ? " · " + r.time : "");
+      const open = histOpen[r.message_id];
+      return (
+        '<button class="qa-hist-ref" type="button" data-hist-conv="' + escapeHtml(r.conversation_id || "") +
+          '" data-hist-msg="' + escapeHtml(r.message_id || "") + '">' + escapeHtml(label) + "</button>" +
+        (open ? '<div class="qa-hist-text">' + escapeHtml(open) + "</div>" : "")
+      );
+    }).join("") + "</div>";
+  }
+
+  async function checkHistoryRef(convId, msgId) {
+    if (!convId || !msgId) return;
+    if (histOpen[msgId]) {
+      delete histOpen[msgId];
+      render();
+      return;
+    }
+    let res = null;
+    let data = {};
+    try {
+      res = await fetch(API + "/conversations/" + encodeURIComponent(convId) + "/messages/" +
+        encodeURIComponent(msgId), { credentials: "same-origin" });
+      data = await res.json().catch(function () { return {}; });
+    } catch (err) {
+      toast("此前内容暂时无法读取");
+      return;
+    }
+    if (!res.ok || !data.message) {
+      toast(data.message && typeof data.message === "string" ? data.message : "此前内容已不可查看");
+      return;
+    }
+    histOpen[msgId] = data.message.content || "";
+    render();
+  }
+
+  function processIsOpen(m) {
+    return typeof m.processOpen === "boolean" ? m.processOpen :
+      Boolean(m.pending && !m.text && !m.processAutoFolded);
+  }
+
+  function processHtml(m) {
+    const p = m.process;
+    if (!p || !Array.isArray(p.steps) || !p.steps.length) return "";
+    const open = processIsOpen(m);
+    const last = p.steps[p.steps.length - 1];
+    const summary = m.stage === "reconnect" ? STAGE_LABEL.reconnect :
+      (p.state === "running" && m.pending ? (STAGE_LABEL[m.stage] || last.title + "中…") : (p.summary || "过程记录"));
+    const statusLabel = { running: "进行中", done: "已完成", warning: "需注意", error: "未完成" };
+    const contentId = "qa-process-" + m.id;
+    const steps = p.steps.map(function (step) {
+      const status = statusLabel[step.state] || "已记录";
+      const mark = step.state === "done" ? "✓" : (step.state === "running" ? "" : "!");
+      return '<li class="qa-process-step is-' + escapeHtml(step.state) + '">' +
+        '<span class="qa-process-mark" aria-label="' + status + '">' + mark + '</span>' +
+        '<div class="qa-process-step-body"><div class="qa-process-step-title">' + escapeHtml(step.title) +
+        '<span>' + status + '</span></div><ul class="qa-process-lines">' +
+        (step.details || []).map(function (line) { return '<li>' + escapeHtml(line) + '</li>'; }).join("") +
+        '</ul>' + ((step.sources || []).length ? '<div class="qa-process-sources">' +
+          step.sources.map(citeButton).join("") + '</div>' : '') + '</div></li>';
+    }).join("");
+    return '<section class="qa-process" aria-label="回答过程">' +
+      '<button type="button" class="qa-process-toggle" data-toggle-process="' + escapeHtml(m.id) +
+      '" aria-expanded="' + open + '" aria-controls="' + escapeHtml(contentId) + '">' +
+      '<span class="qa-process-chevron" aria-hidden="true">›</span><span class="qa-process-label">回答过程</span>' +
+      '<span class="qa-process-summary">' + escapeHtml(summary) + '</span>' +
+      (p.document_count ? '<span class="qa-process-count">参考 ' + p.document_count + ' 份文档</span>' : '') +
+      '</button><div id="' + escapeHtml(contentId) + '"' + (open ? '' : ' hidden') +
+      '><ol class="qa-process-steps">' + steps + '</ol></div></section>';
   }
 
   function messageHtml(m) {
@@ -425,14 +564,21 @@
     }
     const flags = [];
     if (m.refused) flags.push('<span class="qa-tag warn">文档未写</span>');
+    if (m.unsaved && !m.pending) flags.push('<span class="qa-tag warn">未保存</span>');
+    if (m.saveLost) flags.push('<span class="qa-tag warn">保存失败，内容无法恢复</span>');
+    // STEP-Q10（UD-01）：流式正文先标草稿，检查通过转正式；修正稿替换后标注
+    if (m.draft) flags.push('<span class="qa-tag">草稿·核对中</span>');
+    if (m.corrected && !m.draft) flags.push('<span class="qa-tag">已按原文修正</span>');
     let body;
-    if (m.pending && !m.text) {
+    if (m.process && m.process.steps && m.process.steps.length) {
+      body = processHtml(m) + (m.text ? answerBodyHtml(m) : "");
+    } else if (m.pending && !m.text) {
       body = '<div class="qa-stage">' + escapeHtml(STAGE_LABEL[m.stage] || "处理中…") + "</div>";
     } else if (m.pending && m.text) {
       body = '<div class="qa-stage">' + escapeHtml(STAGE_LABEL[m.stage] || "生成中…") +
-        '</div><div class="qa-body">' + escapeHtml(m.text) + "</div>";
+        '</div>' + answerBodyHtml(m);
     } else {
-      body = '<div class="qa-body">' + escapeHtml(m.text || "") + "</div>";
+      body = answerBodyHtml(m);
     }
     const cls = ["qa-bubble"];
     if (m.role === "system") cls.push("system");
@@ -441,34 +587,38 @@
       '<div class="qa-row">' +
         '<div class="qa-avatar">' + (m.role === "system" ? "!" : "答") + "</div>" +
         '<div class="' + cls.join(" ") + '">' +
+          (m.role === "assistant" ? '<div class="qa-answer-byline">' + window.HayyoIcons.svg("core") + 'Hayyo <span>知识问答</span></div>' : '') +
           (flags.length ? '<div class="qa-flags">' + flags.join("") + "</div>" : "") +
           body +
+          historyRefsHtml(m) +
           actionBarHtml(m) +
         "</div>" +
       "</div>"
     );
   }
 
-  function chipButton(title, query) {
+  function answerBodyHtml(m) {
+    const formatted = m.role === "assistant" && window.KBMarkdown;
+    return '<div class="qa-body' + (formatted ? ' qa-markdown' : '') + '">' +
+      (formatted ? window.KBMarkdown.parse(m.text || "", { safeText: true }) : escapeHtml(m.text || "")) + '</div>';
+  }
+
+  function chipButton(title, query, label) {
     return (
-      '<button class="qa-chip" type="button" data-qa-chip="' + escapeHtml(query) + '">' +
-        escapeHtml(title) +
+      '<button class="qa-chip' + (label ? ' qa-question-card' : '') + '" type="button" data-qa-chip="' + escapeHtml(query) + '">' +
+        (label ? '<strong>' + escapeHtml(label) + '</strong><span>' + escapeHtml(title) + '</span>' : escapeHtml(title)) +
       "</button>"
     );
   }
 
   function emptyHtml() {
-    const fixed = CHIP_FIXED.map(function (c) { return chipButton(c.title, c.query); }).join("");
+    const fixed = CHIP_FIXED.map(function (c) { return chipButton(c.title, c.query, c.label); }).join("");
     const heat = (heatChipCache.items || []).map(function (c) { return chipButton(c.title, c.query); }).join("");
     return (
-      '<div class="qa-empty">' +
-        "<h2>知识问答</h2>" +
-        "<p>直接提问，或从下面的例子开始。按 Hayyo 现行规则作答，不是需求合同。</p>" +
         '<div class="qa-chips">' +
-          '<p class="qa-chips-label">试试这些问题</p>' +
+          '<div class="qa-chips-heading"><h3>从这些场景开始</h3><span>点击提问</span></div>' +
           '<div class="qa-chips-fixed">' + fixed + "</div>" +
-          (heat ? '<div class="qa-chips-heat">' + heat + "</div>" : "") +
-        "</div>" +
+          (heat ? '<div class="qa-chips-heat"><span class="qa-chips-label">最近常问</span>' + heat + "</div>" : "") +
       "</div>"
     );
   }
@@ -499,8 +649,8 @@
     }
     heatChipCache.loading = false;
     const conv = active();
-    if (els.messages && conv && !conv.messages.length) {
-      els.messages.innerHTML = emptyHtml();
+    if (els.suggestions && conv && !conv.messages.length) {
+      els.suggestions.innerHTML = emptyHtml();
     }
   }
 
@@ -517,7 +667,7 @@
       if (!h.qdrant_ready) msg = "索引未就绪";
       else if (keys.length) msg = "缺 Key：" + keys.join("/");
       else if (!h.index_ready) msg = "索引未就绪";
-      else msg = "索引就绪 · Key 已配置";
+      else msg = "知识库就绪";
     }
     els.health.innerHTML = "<i></i><span>" + escapeHtml(msg) + "</span>";
   }
@@ -527,25 +677,54 @@
     const list = state.conversations.slice().sort(function (a, b) {
       return (b.updatedAt || 0) - (a.updatedAt || 0);
     });
+    let lastGroup = "";
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     els.list.innerHTML = list.map(function (c) {
+      const group = c.updatedAt >= today.getTime() ? "今天" : "更早";
+      const heading = group !== lastGroup ? '<h3 class="qa-conv-group">' + group + '</h3>' : '';
+      lastGroup = group;
       return (
+        heading +
         '<div class="qa-conv-item' + (c.id === state.activeId ? " active" : "") + '" data-conv="' + escapeHtml(c.id) + '">' +
-          '<span class="qa-conv-title">' + escapeHtml(c.title) + "</span>" +
-          '<button class="qa-conv-del" type="button" data-del="' + escapeHtml(c.id) + '">删除</button>' +
+          '<button class="qa-conv-select" type="button" aria-current="' + (c.id === state.activeId ? 'true' : 'false') + '" title="' + escapeHtml(c.title) + '"><span class="qa-conv-symbol" aria-hidden="true">' + window.HayyoIcons.svg("thread") + '</span><span class="qa-conv-title">' + escapeHtml(c.title) + '</span></button>' +
+          '<button class="qa-conv-del" type="button" aria-label="删除对话：' + escapeHtml(c.title) + '" data-del="' + escapeHtml(c.id) + '">删除</button>' +
         "</div>"
       );
-    }).join("");
+    }).join("") + (state.convNextOffset != null
+      ? '<button class="qa-conv-more" type="button" data-conv-more>加载更多</button>'
+      : "");
   }
 
   function renderMessages() {
     if (!els.messages) return;
     const conv = active();
+    const isEmpty = !conv.messages.length && !conv.saveBlockedExecId;
+    els.workspace.classList.toggle("is-empty", isEmpty);
+    els.messages.hidden = isEmpty;
+    if (els.welcome) els.welcome.hidden = !isEmpty;
+    if (els.suggestions) els.suggestions.hidden = !isEmpty;
+    if (els.conversationHead) els.conversationHead.hidden = isEmpty;
+    if (els.conversationTitle) els.conversationTitle.textContent = conv.title;
+    if (els.input) els.input.placeholder = isEmpty ? "描述你想核对的问题…" : "继续追问这条规则…";
     const stick = els.messages.scrollHeight - els.messages.scrollTop - els.messages.clientHeight < 90;
-    if (!conv.messages.length) {
-      els.messages.innerHTML = emptyHtml();
+    if (isEmpty) {
+      els.messages.innerHTML = "";
+      if (els.suggestions) els.suggestions.innerHTML = emptyHtml();
       if (heatChipCache.items === null) refreshHeatChips();
     } else {
       els.messages.innerHTML = conv.messages.map(messageHtml).join("");
+    }
+    // 阻塞来自其他设备、本机没有那条未保存回复时，也要给出重试入口
+    const blockedHere = conv.saveBlockedExecId && conv.messages.some(function (m) {
+      return m.unsaved && m.round_id === conv.saveBlockedExecId;
+    });
+    if (conv.saveBlockedExecId && !blockedHere) {
+      els.messages.insertAdjacentHTML("beforeend",
+        '<div class="qa-row"><div class="qa-avatar">!</div><div class="qa-bubble system">' +
+          '<div class="qa-body">上一条回答未保存，重试保存后可继续提问。</div>' +
+          '<div class="qa-actions"><button class="kb-btn qa-retry-save" type="button" data-qa-retry-save="">重试保存</button></div>' +
+        "</div></div>");
     }
     if (stick) els.messages.scrollTop = els.messages.scrollHeight;
   }
@@ -565,12 +744,12 @@
       pane.hidden = true;
       if (workspace) workspace.classList.remove("cite-open");
       body.innerHTML = "";
-      if (title) title.textContent = "出处";
+      if (title) title.textContent = "本轮出处";
       return;
     }
     pane.hidden = false;
     if (workspace) workspace.classList.add("cite-open");
-    if (title) title.textContent = cites.length ? ("出处 · " + cites.length) : "出处";
+    if (title) title.textContent = cites.length ? ("本轮出处 · " + cites.length) : "本轮出处";
     body.innerHTML = cites.length
       ? cites.map(citeButton).join("")
       : '<p class="qa-cite-pane-hint">生成中…</p>';
@@ -584,8 +763,10 @@
   }
 
   function renderLock() {
-    if (els.input) els.input.disabled = state.busy;
-    if (els.send) els.send.disabled = state.busy;
+    // 保存阻塞只锁当前会话的输入；新建、切换其他会话不受影响
+    const blocked = Boolean(active().saveBlockedExecId);
+    if (els.input) els.input.disabled = state.busy || blocked;
+    if (els.send) els.send.disabled = state.busy || blocked;
     if (els.newBtn) els.newBtn.disabled = state.busy;
     if (els.clearBtn) els.clearBtn.disabled = state.busy;
   }
@@ -658,6 +839,7 @@
     state.activeId = id;
     persist();
     render();
+    loadAnswerHistory(active()).then(function () { if (state.activeId === id) render(); });
     return true;
   }
 
@@ -694,9 +876,26 @@
     return true;
   }
 
-  function clearCurrent() {
+  async function clearCurrent() {
     if (lockGuard("清空当前")) return false;
     const conv = active();
+    if (state.me) {
+      // 服务端记下清空边界后才清本地；失败时不假装已切断语境
+      try {
+        const res = await fetch(API + "/conversations/" + encodeURIComponent(conv.id) + "/clear", {
+          method: "POST",
+          credentials: "same-origin"
+        });
+        if (!res.ok) {
+          toast("清空未生效，请重试");
+          return false;
+        }
+      } catch (e) {
+        toast("清空未生效，请重试");
+        return false;
+      }
+    }
+    conv.historyRequest = (conv.historyRequest || 0) + 1;
     conv.messages = [];
     conv.lastChunks = [];
     conv.citationsOpen = {};
@@ -748,6 +947,8 @@
     const mode = opt.mode || "send";
     const freezeSnap = Boolean(opt.freezeSnap);
     let logWritten = true;
+    // 本次执行的结果摘要，供刷新判断是否采用新版本
+    const outcome = { adopted: null, saveBlocked: false, rejected: false, errorType: "" };
 
     function meta(patch) {
       const base = {
@@ -764,7 +965,10 @@
 
     function patchTarget(patch) {
       const m = conv.messages.find(function (x) { return x.id === targetId; });
-      if (m) Object.assign(m, meta(patch));
+      if (m) {
+        if (patch.text) m.processAutoFolded = true;
+        Object.assign(m, meta(patch));
+      }
     }
 
     try {
@@ -783,18 +987,54 @@
           citations: [],
           refused: false
         });
-        return;
+        return outcome;
       }
       let acc = "";
       let lastCgen = [];
+      let terminalSeen = false;
       await readSSE(res, function (event, data) {
-        if (event === "stage") {
+        // 只认本次执行的事件；迟到的其他执行结果不写进这条消息
+        if (data && data.exec_id && data.exec_id !== body.round_id) return;
+        if (event === "done" || event === "error") {
+          terminalSeen = true;
+          if (data.adopted != null) outcome.adopted = Boolean(data.adopted);
+          outcome.errorType = event === "error" ? (data.type || "") : "";
+          if (data.save_blocked) {
+            outcome.saveBlocked = true;
+            conv.saveBlockedExecId = data.exec_id || body.round_id;
+          }
+          if (data.logical_round_id) {
+            patchTarget({
+              logical_round_id: data.logical_round_id,
+              assistant_msg_id: data.assistant_msg_id || null,
+              unsaved: Boolean(data.save_blocked)
+            });
+          }
+        }
+        if (data && data.process && data.process.exec_id === body.round_id) {
+          patchTarget({ process: data.process });
+        }
+        if (event === "process") {
+          render();
+        } else if (event === "stage") {
           state.stage = data.stage || "";
           patchTarget({ stage: state.stage });
           render();
         } else if (event === "token") {
           acc += data.text || "";
-          patchTarget({ text: acc, stage: "generate" });
+          patchTarget({ text: acc, stage: "generate", draft: true });
+          render();
+        } else if (event === "check") {
+          // 检查通过：草稿转正式；不通过或修正：用服务端给出的正文替换草稿
+          if (data.check_status === "pass" && !data.replaced) {
+            patchTarget({ draft: false });
+          } else {
+            patchTarget({
+              draft: false,
+              corrected: data.check_status === "pass",
+              text: data.text || ""
+            });
+          }
           render();
         } else if (event === "log" && data.written === false) {
           logWritten = false;
@@ -837,7 +1077,10 @@
             return;
           }
           if (data.status === "empty") {
-            patchTarget({ pending: false, stage: "" });
+            // STEP-Q19：检查未通过时 done 带失败说明，替换掉草稿
+            const patch = { pending: false, stage: "", draft: false };
+            if (data.text) Object.assign(patch, { role: "system", refused: true, text: data.text });
+            patchTarget(patch);
             return;
           }
           if (data.status === "success" || data.status === "refuse") {
@@ -846,8 +1089,10 @@
               pending: false,
               role: "assistant",
               stage: "",
+              draft: false,
               text: data.text || acc,
               citations: cgen,
+              historyRefs: data.history_refs || [],
               refused: Boolean(data.refused) || data.status === "refuse"
             });
             if (mode === "send") {
@@ -857,6 +1102,30 @@
               conv.lastChunks = cgen;
             }
           }
+        } else if (event === "accepted") {
+          // 服务端已保存 User，本段草稿的请求号不再复用
+          if (mode === "send") state.pendingRequest = null;
+          patchTarget({ logical_round_id: data.logical_round_id || null });
+        } else if (event === "error" && mode === "send" &&
+          (data.type === "user_save_fail" || data.type === "conversation_busy" || data.type === "save_blocked")) {
+          // 提问未落库 / 会话忙碌 / 保存阻塞：撤掉本地这一对消息，原文放回输入框，不排队
+          outcome.rejected = true;
+          if (data.type === "save_blocked") conv.saveBlockedExecId = data.blocked_exec_id || conv.saveBlockedExecId;
+          conv.messages = conv.messages.filter(function (m) {
+            return m.id !== targetId && m.id !== opt.userMsgId;
+          });
+          if (els.input && !els.input.value) {
+            els.input.value = opt.draft || "";
+            autosizeInput();
+          }
+          toast(data.message || "提问未保存，请重试");
+          render();
+        } else if (event === "error" && mode === "regen" &&
+          (data.type === "conversation_busy" || data.type === "save_blocked" || data.type === "duplicate_request")) {
+          // 刷新未被受理：由 regen 恢复原版本
+          outcome.rejected = true;
+          if (data.type === "save_blocked") conv.saveBlockedExecId = data.blocked_exec_id || conv.saveBlockedExecId;
+          if (data.message) toast(data.message);
         } else if (event === "error") {
           const cites = data.c_gen || [];
           if (data.log_written === false) {
@@ -875,6 +1144,7 @@
             role: "system",
             kind: kind,
             stage: "",
+            draft: false,
             text: text,
             citations: cites,
             refused: false
@@ -884,18 +1154,103 @@
           render();
         }
       });
+      // STEP-Q10（AT-16）：EOF 未收到终态不等于成功或中断，以服务端状态为准
+      if (!terminalSeen) await settleFromServer(conv, targetId, body.round_id, patchTarget, outcome);
     } catch (e) {
-      logWritten = false;
-      patchTarget({
-        pending: false,
-        role: "system",
-        kind: "ask_fail",
-        stage: "",
-        text: "提问失败，请检查 kb-api。",
-        citations: [],
-        refused: false
-      });
+      // 连接中途断开：服务端仍在处理，查询原执行状态，不重发
+      const settled = await settleFromServer(conv, targetId, body.round_id, patchTarget, outcome);
+      if (!settled) {
+        logWritten = false;
+        patchTarget({
+          pending: false,
+          role: "system",
+          kind: "ask_fail",
+          stage: "",
+          draft: false,
+          text: "提问失败，请检查 kb-api。",
+          citations: [],
+          refused: false
+        });
+      }
     }
+    return outcome;
+  }
+
+  // STEP-Q10：轮询本人执行的状态接口直到终态；只读，不会触发新的生成
+  const STATUS_POLL_MS = 1500;
+  const STATUS_POLL_MAX = 240;
+
+  function sleep(ms) {
+    return new Promise(function (resolve) { setTimeout(resolve, ms); });
+  }
+
+  async function settleFromServer(conv, targetId, execId, patchTarget, outcome) {
+    if (!execId) return false;
+    patchTarget({ stage: "reconnect" });
+    render();
+    for (let i = 0; i < STATUS_POLL_MAX; i += 1) {
+      let res = null;
+      let data = null;
+      try {
+        res = await fetch(API + "/rounds/" + encodeURIComponent(execId) + "/status", { credentials: "same-origin" });
+        data = await res.json().catch(function () { return null; });
+      } catch (err) {
+        data = null;
+      }
+      if (res && res.status === 404) return false;
+      if (data && data.ok && data.process) { patchTarget({ process: data.process }); render(); }
+      if (data && data.ok && data.terminal) {
+        applyServerStatus(conv, targetId, data, patchTarget, outcome);
+        render();
+        return true;
+      }
+      await sleep(STATUS_POLL_MS);
+    }
+    patchTarget({
+      pending: false,
+      role: "system",
+      kind: "status_timeout",
+      stage: "",
+      draft: false,
+      text: "暂时查不到本轮结果，稍后重新打开会话查看。",
+      citations: [],
+      refused: false
+    });
+    render();
+    return true;
+  }
+
+  function applyServerStatus(conv, targetId, data, patchTarget, outcome) {
+    const st = data.statuses || {};
+    if (data.adopted != null) outcome.adopted = Boolean(data.adopted);
+    outcome.errorType = st.exec_state === "completed" ? "" : (data.error_type || "");
+    if (data.save_blocked) {
+      outcome.saveBlocked = true;
+      conv.saveBlockedExecId = data.exec_id;
+    }
+    const failed = st.exec_state !== "completed" || data.completeness === "error_notice";
+    const text = data.text || (st.exec_state === "interrupted" ? "服务中断，本轮未完成。可重试。" : "提问失败");
+    patchTarget({
+      pending: false,
+      role: failed ? "system" : "assistant",
+      kind: failed ? (data.error_type || "ask_fail") : undefined,
+      stage: "",
+      draft: false,
+      text: text,
+      citations: data.c_gen || [],
+      refused: !failed && (data.status === "refuse" || data.status === "empty"),
+      logical_round_id: data.logical_round_id || null,
+      assistant_msg_id: data.assistant_msg_id || null,
+      process: data.process || null,
+      unsaved: Boolean(data.save_blocked)
+    });
+  }
+
+  // 保存阻塞期间该会话不接受新发送与刷新；其他会话照常
+  function saveBlockGuard(conv) {
+    if (!conv || !conv.saveBlockedExecId) return false;
+    toast("上一条回答未保存，请先重试保存");
+    return true;
   }
 
   async function send(presetQuery) {
@@ -906,6 +1261,7 @@
     const text = String(presetQuery == null ? (els.input && els.input.value || "") : presetQuery).trim();
     if (!text || state.busy) return;
     const conv = active();
+    if (saveBlockGuard(conv)) return;
     const history = conv.messages.filter(function (m) { return m.role === "user"; }).slice(-5).map(function (m) {
       return { role: "user", text: m.text };
     });
@@ -917,7 +1273,12 @@
       conv.titleLocked = true;
     }
     conv.updatedAt = Date.now();
-    conv.messages.push({ id: uid("u"), role: "user", text: text });
+    if (!state.pendingRequest || state.pendingRequest.text !== text || state.pendingRequest.convId !== conv.id) {
+      state.pendingRequest = { text: text, convId: conv.id, id: uid("q") };
+    }
+    const clientRequestId = state.pendingRequest.id;
+    const userMsgId = uid("u");
+    conv.messages.push({ id: userMsgId, role: "user", text: text });
     const pendingId = uid("a");
     const roundId = uid("r");
     conv.messages.push({
@@ -944,6 +1305,7 @@
     const body = {
       conversation_id: conv.id,
       round_id: roundId,
+      client_request_id: clientRequestId,
       query: text,
       history: history,
       last_chunks: lastChunksSnapshot,
@@ -953,7 +1315,7 @@
       role: null
     };
     try {
-      await completeAssistantRound(conv, pendingId, body, { mode: "send" });
+      await completeAssistantRound(conv, pendingId, body, { mode: "send", userMsgId: userMsgId, draft: text });
     } finally {
       state.busy = false;
       state.stage = "";
@@ -973,6 +1335,7 @@
       return;
     }
     const conv = active();
+    if (saveBlockGuard(conv)) return;
     const m = conv.messages.find(function (x) { return x.id === id; });
     if (!m || m.pending || m.role === "user") return;
     const hasSnap = Boolean(m.query) && Array.isArray(m.historySnapshot) && Array.isArray(m.lastChunksSnapshot);
@@ -981,9 +1344,20 @@
     const lastChunksSnapshot = hasSnap ? m.lastChunksSnapshot : [];
     const isLast = Boolean(conv.messages.length && conv.messages[conv.messages.length - 1].id === id);
     const roundId = uid("r");
+    // 带逻辑回合的消息走服务端版本：新版本采用后才替换；本地旧消息没有逻辑回合时沿用原位替换
+    const versioned = Boolean(m.logical_round_id);
+    let prev = null;
+    if (versioned) {
+      ensureVersions(m);
+      syncVersion(m);
+      prev = m.versions[m.viewIndex];
+    }
     state.busy = true;
     setBanner("");
     m.pending = true;
+    m.process = null;
+    delete m.processOpen;
+    m.processAutoFolded = false;
     m.stage = "rewrite";
     m.text = "";
     m.citations = [];
@@ -995,6 +1369,8 @@
     const body = {
       conversation_id: conv.id,
       round_id: roundId,
+      op_type: "refresh",
+      client_request_id: uid("rf"),
       query: query,
       history: historySnapshot,
       last_chunks: lastChunksSnapshot,
@@ -1003,8 +1379,10 @@
       tenant_id: null,
       role: null
     };
+    if (versioned) body.logical_round_id = m.logical_round_id;
+    let outcome = null;
     try {
-      await completeAssistantRound(conv, id, body, {
+      outcome = await completeAssistantRound(conv, id, body, {
         mode: "regen",
         freezeSnap: true,
         isLast: isLast
@@ -1012,8 +1390,19 @@
     } finally {
       const now = conv.messages.find(function (x) { return x.id === id; });
       if (now) {
-        now.round_id = roundId;
         now.pending = false;
+        now.stage = "";
+        if (!versioned) {
+          now.round_id = roundId;
+        } else if (outcome && !outcome.rejected && (outcome.adopted || outcome.saveBlocked)) {
+          // 采用的新版本，或已收到但未保存的新版本（标「未保存」，重试保存成功后才算数）
+          now.round_id = roundId;
+          now.versions.push(pickVersion(now));
+          now.viewIndex = now.versions.length - 1;
+        } else {
+          applyVersion(now, prev);
+          if (!(outcome && outcome.rejected)) toast("刷新失败，已保留原回答");
+        }
       }
       state.busy = false;
       state.stage = "";
@@ -1023,12 +1412,104 @@
     }
   }
 
+  // ---------- 回答版本（STEP-Q08）：本地展示缓存，默认版本以服务端为准 ----------
+
+  const VERSION_KEYS = ["round_id", "text", "citations", "refused", "role", "kind", "feedback", "logWritten", "unsaved", "saveLost", "process", "processOpen", "processAutoFolded", "assistant_msg_id", "historyRefs", "corrected"];
+
+  function pickVersion(m) {
+    const v = {};
+    VERSION_KEYS.forEach(function (k) { v[k] = m[k]; });
+    return v;
+  }
+
+  function applyVersion(m, v) {
+    if (!m || !v) return;
+    VERSION_KEYS.forEach(function (k) { m[k] = v[k]; });
+  }
+
+  function ensureVersions(m) {
+    if (!Array.isArray(m.versions) || !m.versions.length) {
+      m.versions = [pickVersion(m)];
+      m.viewIndex = 0;
+    }
+    if (typeof m.viewIndex !== "number" || m.viewIndex < 0 || m.viewIndex >= m.versions.length) {
+      m.viewIndex = m.versions.length - 1;
+    }
+  }
+
+  // 把当前显示内容（含刚改的赞踩）写回正在查看的版本
+  function syncVersion(m) {
+    if (!m || !Array.isArray(m.versions) || !m.versions.length) return;
+    m.versions[m.viewIndex] = pickVersion(m);
+  }
+
+  // 切换查看不改变服务端默认版本
+  function stepVersion(id, delta) {
+    const m = active().messages.find(function (x) { return x.id === id; });
+    if (!m || m.pending || !Array.isArray(m.versions) || m.versions.length < 2) return;
+    syncVersion(m);
+    const next = Math.min(Math.max(m.viewIndex + delta, 0), m.versions.length - 1);
+    if (next === m.viewIndex) return;
+    m.viewIndex = next;
+    applyVersion(m, m.versions[next]);
+    persist();
+    render();
+  }
+
+  // ---------- 保存阻塞（STEP-Q09） ----------
+
+  function markExecSaved(conv, execId, lost) {
+    conv.messages.forEach(function (m) {
+      const touch = function (v) {
+        if (v && v.round_id === execId) {
+          v.unsaved = false;
+          if (lost) v.saveLost = true;
+        }
+      };
+      touch(m);
+      (m.versions || []).forEach(touch);
+    });
+  }
+
+  async function retrySave() {
+    const conv = active();
+    const execId = conv && conv.saveBlockedExecId;
+    if (!execId || state.busy) return;
+    try {
+      const res = await fetch(API + "/conversations/" + encodeURIComponent(conv.id) + "/retry-save", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ exec_id: execId })
+      });
+      const data = await res.json().catch(function () { return {}; });
+      if (data.ok) {
+        markExecSaved(conv, execId, false);
+        conv.saveBlockedExecId = null;
+        toast("已保存");
+      } else if (data.code === "save_source_lost") {
+        markExecSaved(conv, execId, true);
+        conv.saveBlockedExecId = null;
+        toast(data.message || "保存失败，内容无法恢复");
+      } else {
+        toast(data.message || "仍未保存，请稍后再试");
+      }
+    } catch (e) {
+      toast("仍未保存，请稍后再试");
+    }
+    persist();
+    render();
+  }
+
   async function setFeedback(id, key) {
     const conv = active();
     const m = conv.messages.find(function (x) { return x.id === id; });
-    if (!hasAnswerBody(m)) return;
+    if (!hasAnswerBody(m) || m.unsaved) return;
     const label = key === "up" ? "赞" : "踩";
+    const before = m.feedback;
     m.feedback = m.feedback === label ? "" : label;
+    // 赞踩记在正在查看的版本上，新版本不继承旧版反馈
+    syncVersion(m);
     persist();
     render();
     if (!m.round_id || !m.logWritten) {
@@ -1042,6 +1523,17 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ feedback: db })
       });
+      if (res.status === 409) {
+        const data = await res.json().catch(function () { return {}; });
+        if (data.code === "feedback_not_allowed") {
+          m.feedback = before;
+          syncVersion(m);
+          persist();
+          render();
+          toast(data.message || "该回复不支持赞踩");
+          return;
+        }
+      }
       if (!res.ok) toast(UNWRITTEN_HINT);
     } catch (e) {
       toast(UNWRITTEN_HINT);
@@ -1059,6 +1551,37 @@
         headingText: heading || ""
       });
     }
+  }
+
+  // STEP-Q18：点引用先按 path + chunk_id + hash 复核当前可读性；来源已变更或不可读时不打开，避免新正文冒充旧出处
+  async function checkCitation(path, anchor, heading, chunkId, hash) {
+    if (!path) return;
+    if (!chunkId) {
+      openCitation(path, anchor, heading);
+      return;
+    }
+    const qs = "path=" + encodeURIComponent(path) + "&chunk_id=" + encodeURIComponent(chunkId) +
+      "&content_hash=" + encodeURIComponent(hash || "");
+    let res = null;
+    let data = {};
+    try {
+      res = await fetch(API + "/chunk?" + qs, { credentials: "same-origin" });
+      data = await res.json().catch(function () { return {}; });
+    } catch (err) {
+      toast("来源暂时无法读取");
+      return;
+    }
+    if (!res.ok) {
+      // 正在跑的旧接口没有 /chunk，404 只有 detail、没有业务 code。这时按改前方式打开文档。
+      // 新接口带 source_not_found / source_changed / source_unavailable 时仍只提示、不打开。
+      if (!data.code) {
+        openCitation(path, anchor, heading);
+        return;
+      }
+      toast(data.message || "来源已不存在或不可读");
+      return;
+    }
+    openCitation(path, anchor, heading);
   }
 
   function copyText(text) {
@@ -1320,6 +1843,7 @@
     if (clearBtn) { clearCurrent(); return; }
     const del = ev.target.closest("[data-del]");
     if (del) { ev.stopPropagation(); deleteConversation(del.getAttribute("data-del")); return; }
+    if (ev.target.closest("[data-conv-more]")) { loadMoreConvs(); return; }
     const item = ev.target.closest("[data-conv]");
     if (item && els.list && els.list.contains(item)) { switchConversation(item.getAttribute("data-conv")); return; }
     if (ev.target.closest("[data-qa-config]")) { openConfig(); return; }
@@ -1337,6 +1861,21 @@
       setCiteOpen(conv, openCiteMsgId(conv), false);
       persist();
       render();
+      return;
+    }
+    const processToggle = ev.target.closest("[data-toggle-process]");
+    if (processToggle) {
+      const m = active().messages.find(function (item) { return item.id === processToggle.getAttribute("data-toggle-process"); });
+      if (m) {
+        const scrollTop = els.messages.scrollTop;
+        m.processOpen = !processIsOpen(m);
+        renderMessages();
+        els.messages.scrollTop = scrollTop;
+        const button = Array.from(els.messages.querySelectorAll("[data-toggle-process]")).find(function (item) {
+          return item.getAttribute("data-toggle-process") === m.id;
+        });
+        if (button) button.focus({ preventScroll: true });
+      }
       return;
     }
     const toggle = ev.target.closest("[data-toggle-cite]");
@@ -1360,6 +1899,12 @@
       setFeedback(fb.getAttribute("data-msg"), fb.getAttribute("data-qa-fb"));
       return;
     }
+    const verBtn = ev.target.closest("[data-ver-step]");
+    if (verBtn) {
+      stepVersion(verBtn.getAttribute("data-msg"), Number(verBtn.getAttribute("data-ver-step")) || 0);
+      return;
+    }
+    if (ev.target.closest("[data-qa-retry-save]")) { retrySave(); return; }
     const regenBtn = ev.target.closest("[data-qa-regen]");
     if (regenBtn) {
       regen(regenBtn.getAttribute("data-qa-regen"));
@@ -1370,12 +1915,19 @@
       send(chip.getAttribute("data-qa-chip") || "");
       return;
     }
+    const hist = ev.target.closest("[data-hist-msg]");
+    if (hist) {
+      checkHistoryRef(hist.getAttribute("data-hist-conv"), hist.getAttribute("data-hist-msg"));
+      return;
+    }
     const cite = ev.target.closest("[data-cite-path]");
     if (cite) {
-      openCitation(
+      checkCitation(
         cite.getAttribute("data-cite-path"),
         cite.getAttribute("data-cite-anchor"),
-        cite.getAttribute("data-cite-heading")
+        cite.getAttribute("data-cite-heading"),
+        cite.getAttribute("data-cite-chunk"),
+        cite.getAttribute("data-cite-hash")
       );
     }
   });

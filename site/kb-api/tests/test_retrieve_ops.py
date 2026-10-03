@@ -34,6 +34,14 @@ def test_heatmap_c34():
     assert ranked[0] == ("vip", 2)
     assert ("referral", 1) in ranked
     assert ("user-level", 1) in ranked
+    # STEP-Q21：旧记录（无 schema_ver）按旧口径计入，结果与原算法一致并单列旧口径数量
+    agg = LogStore.aggregate_heat(rows)
+    assert [(i["feature_id"], i["count"]) for i in agg["items"]] == ranked
+    assert agg["unclassified"] == 1 and agg["legacy_rows"] == 4
+    assert all(i["count"] == i["legacy_count"] for i in agg["items"])
+    # 新记录未实际调用 Knowledge RAG：不进热度、不加未归类
+    skipped = LogStore.aggregate_heat([{"schema_ver": 2, "used_knowledge_rag": 0, "c_gen": []}])
+    assert skipped["items"] == [] and skipped["unclassified"] == 0
     # 空路不计：点名 referral 但 c_gen 无该功能
     empty_lane_round = {"c_gen": [{"feature_id": "vip"}], "lanes": [{"feature_id": "referral", "count": 0, "empty": True}]}
     assert "referral" not in LogStore._hit_features(empty_lane_round)

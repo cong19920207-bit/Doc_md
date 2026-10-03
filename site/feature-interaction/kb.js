@@ -20,7 +20,11 @@
     listReady: false,
     index: null,
     indexFailed: [],
-    indexPromise: null
+    indexPromise: null,
+    documentRequest: 0,
+    searchRequest: 0,
+    historyRequest: 0,
+    scrollRequest: 0
   };
 
   const els = {};
@@ -39,6 +43,8 @@
     els.searchPanel = document.getElementById("kbSearchPanel");
     els.searchResults = document.getElementById("kbSearchResults");
     els.searchHint = document.getElementById("kbSearchHint");
+    els.breadcrumb = document.getElementById('kbBreadcrumb');
+    els.count = document.getElementById('kbDocumentCount');
   }
 
   function escapeHtml(s) {
@@ -165,10 +171,17 @@
     if (nonCurrent) bits.push("<span class=\"kb-badge\">非当前规则</span>");
     bits.push("<span class=\"kb-path\"><code>" + escapeHtml(path) + "</code></span>");
     els.meta.innerHTML = bits.join("");
+    if (els.breadcrumb) els.breadcrumb.textContent = listLabel(path) + (isBrief(path) ? ' / 功能描述' : isFeaturePrd(path) ? ' / PRD' : '');
   }
 
   function rewriteMediaAndLinks() {
     const baseDir = dirOf(state.currentPath);
+    els.article.querySelectorAll('a[href]').forEach((a) => {
+      const href = a.getAttribute('href');
+      if (!href || /^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(href)) return;
+      const resolved = resolveMdHref(state.currentPath, href);
+      a.setAttribute('href', fetchUrl(resolved.path) + (resolved.hash ? '#' + resolved.hash : ''));
+    });
     els.article.querySelectorAll("img").forEach((img) => {
       const src = img.getAttribute("src") || "";
       if (!src || /^(https?:|data:|\/\/)/i.test(src)) return;
@@ -232,7 +245,7 @@
     els.gallery.innerHTML = images.map((img, idx) => {
       const abs = resolveRelative(baseDir, img.rel);
       return "<button type=\"button\" class=\"kb-thumb\" data-img-idx=\"" + idx +
-        "\" data-img-rel=\"" + escapeHtml(img.rel) + "\">" +
+        "\" data-img-rel=\"" + escapeHtml(img.rel) + "\" aria-label=\"" + escapeHtml(img.alt || ('查看图片 ' + (idx + 1))) + "\">" +
         "<img alt=\"" + escapeHtml(img.alt || "") + "\" src=\"" + escapeHtml(fetchUrl(abs)) + "\">" +
         "</button>";
     }).join("");
@@ -278,7 +291,10 @@
   }
 
   function scrollToTarget(hash, highlightText) {
+    const request = state.documentRequest;
+    const scrollRequest = ++state.scrollRequest;
     const apply = () => {
+      if (request !== state.documentRequest || scrollRequest !== state.scrollRequest) return false;
       const art = els.article;
       let el = null;
       if (hash) {
@@ -297,7 +313,15 @@
           target = el.nextElementSibling;
         }
         art.scrollTop = Math.max(0, yInArticle(target) - 8);
-        if (highlightText && !art.querySelector("mark")) highlightFirst(art, highlightText);
+        if (highlightText && !art.querySelector("mark")) {
+          let section = target;
+          const level = /^H[1-6]$/.test(target.tagName) ? Number(target.tagName.slice(1)) : 0;
+          while (section) {
+            if (section !== target && /^H[1-6]$/.test(section.tagName) && Number(section.tagName.slice(1)) <= level) break;
+            if (highlightFirst(section, highlightText)) break;
+            section = section.nextElementSibling;
+          }
+        }
         return true;
       }
       if (highlightText) {
@@ -356,45 +380,51 @@
   }
 
   async function openDocument(docPath, options) {
+    const request = ++state.documentRequest;
+    state.historyRequest += 1;
     const opts = options || {};
     const hash = opts.hash || "";
+    if (els.workspace) els.workspace.classList.remove('list-open', 'toc-open');
     state.currentPath = docPath;
     state.currentHash = hash;
     state.openedWithHash = Boolean(hash) || Boolean(opts.fromNode && hash);
     hideHistory();
     hideFail();
-    els.article.innerHTML = "";
+    els.article.innerHTML = '<p class="kb-loading">正在打开文档…</p>';
+    els.article.setAttribute('aria-busy', 'true');
+    els.toc.innerHTML = ''; els.gallery.innerHTML = ''; els.meta.innerHTML = '';
+    if (els.breadcrumb) els.breadcrumb.textContent = listLabel(docPath);
     markListActive(docPath);
     renderToolbar(docPath);
     try {
       const src = await fetchText(docPath);
-      if (state.currentPath !== docPath) return;
+      if (request !== state.documentRequest) return;
       state.currentSource = src;
       const html = window.KBMarkdown.parse(src);
       els.article.innerHTML = html;
+      els.article.setAttribute("aria-busy", "false");
       rewriteMediaAndLinks();
       const nonCurrent = Boolean(opts.nonCurrent) || isChangelog(docPath);
       renderMeta(docPath, src, nonCurrent);
       renderToc();
       renderGallery(src);
+      requestAnimationFrame(syncToc);
       const hl = opts.highlight || "";
-      if (hash) scrollToTarget(hash, hl);
-      else if (hl) scrollToTarget("", hl);
-      else els.article.scrollTop = 0;
-      if (opts.headingText && !hash) {
+      let targetHash = hash;
+      const hashTarget = hash && document.getElementById(hash);
+      if (opts.headingText && (!hashTarget || !els.article.contains(hashTarget))) {
         const h = [...els.article.querySelectorAll("h1,h2,h3")].find((el) => {
           const t = el.getAttribute("data-heading") || el.textContent.trim();
           return t === opts.headingText || t.indexOf(opts.headingText) >= 0;
         });
-        if (h) {
-          h.scrollIntoView({ block: "start" });
-          if (hl) highlightFirst(h.parentNode === els.article ? els.article : h, hl);
-        } else if (hl) {
-          scrollToTarget("", hl);
-        }
+        if (h) targetHash = h.id;
       }
+      if (targetHash || hl) scrollToTarget(targetHash, hl);
+      else els.article.scrollTop = 0;
     } catch (err) {
+      if (request !== state.documentRequest) return;
       state.currentSource = "";
+      els.article.setAttribute("aria-busy", "false");
       renderMeta(docPath, "", Boolean(opts.nonCurrent));
       renderToolbar(docPath);
       showFail(err.message || reasonFromError(err, err.response), docPath);
@@ -407,7 +437,10 @@
     const featurePrd = id ? featurePrdPath(id) : "";
     els.list.querySelectorAll("[data-path]").forEach((btn) => {
       const p = btn.getAttribute("data-path");
-      btn.classList.toggle("active", p === docPath || (featurePrd && p === featurePrd));
+      const active = p === docPath || (featurePrd && p === featurePrd);
+      btn.classList.toggle("active", active);
+      btn.setAttribute('aria-current', active ? 'page' : 'false');
+      if (active) btn.scrollIntoView({ block: 'nearest' });
     });
   }
 
@@ -431,12 +464,35 @@
   }
 
   function renderList() {
-    els.list.innerHTML = state.scanRoots.map((p) => {
-      return "<button type=\"button\" class=\"kb-list-item\" data-path=\"" + escapeHtml(p) + "\">" +
-        "<span class=\"kb-list-name\">" + escapeHtml(listLabel(p)) + "</span>" +
-        "<span class=\"kb-list-path\">" + escapeHtml(p) + "</span></button>";
-    }).join("");
+    const groups = new Map();
+    state.scanRoots.forEach((p) => {
+      const id = featureIdOf(p);
+      const feature = window.FEATURE_DATA.features.find((f) => f.id === id);
+      const group = id === 'admin' ? '运营后台' : feature ? feature.domain : '总览与规范';
+      if (!groups.has(group)) groups.set(group, []);
+      groups.get(group).push(p);
+    });
+    els.list.innerHTML = [...groups].map(([group, paths]) => '<h3 class="kb-list-group">' + escapeHtml(group) + '<span>' + paths.length + '</span></h3>' + paths.map((p) => {
+      return '<button type="button" class="kb-list-item" data-path="' + escapeHtml(p) + '" title="' + escapeHtml(p) + '">' +
+        (window.HayyoIcons ? window.HayyoIcons.svg('cite') : '') + '<span class="kb-list-copy"><span class="kb-list-name">' + escapeHtml(listLabel(p)) + '</span>' +
+        '<span class="kb-list-path">' + escapeHtml(featureIdOf(p) || p.split('/').pop()) + '</span></span></button>';
+    }).join('')).join('');
+    if (els.count) els.count.textContent = state.scanRoots.length + ' 份默认可读文档';
     if (state.currentPath) markListActive(state.currentPath);
+  }
+
+  function syncToc() {
+    const heads = [...els.article.querySelectorAll('h1,h2,h3')];
+    if (!heads.length) return;
+    const top = els.article.getBoundingClientRect().top + 56;
+    let current = heads[0];
+    for (const head of heads) { if (head.getBoundingClientRect().top <= top) current = head; }
+    const id = current.getAttribute('data-toc-id') || current.id;
+    els.toc.querySelectorAll('[data-toc]').forEach((btn) => {
+      const active = btn.getAttribute('data-toc') === id;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-current', active ? 'location' : 'false');
+    });
   }
 
   function parseDirectoryListing(html, dirPath) {
@@ -458,6 +514,7 @@
   }
 
   async function openHistory() {
+    const request = ++state.historyRequest;
     const id = featureIdOf(state.currentPath);
     if (!id) return;
     const dirPath = "prd/design/" + id + "/history";
@@ -467,6 +524,7 @@
       const res = await fetch(fetchUrl(dirPath) + "/");
       if (!res.ok) throw new Error(reasonFromError(null, res));
       const html = await res.text();
+      if (request !== state.historyRequest) return;
       const files = parseDirectoryListing(html, dirPath);
       if (!files.length) {
         els.history.innerHTML = "<p class=\"kb-empty\">该目录下没有可打开的文件。</p>";
@@ -477,6 +535,7 @@
           escapeHtml(p.split("/").pop()) + "</button>";
       }).join("");
     } catch (err) {
+      if (request !== state.historyRequest) return;
       els.history.innerHTML =
         "<p><strong>原因</strong>：" + escapeHtml(err.message || reasonFromError(err, null)) + "</p>" +
         "<p><strong>路径</strong>：<code>" + escapeHtml(dirPath + "/") + "</code></p>" +
@@ -622,7 +681,7 @@
         if (seen.has(key)) return;
         seen.add(key);
         let highlight = q;
-        if (q === AC11_QUERY && rec.path === AC11_PATH) highlight = AC11_HIT;
+        if (q === AC11_QUERY && rec.path === AC11_PATH && rec.body.includes(AC11_HIT)) highlight = AC11_HIT;
         items.push({
           path: rec.path,
           title: rec.title || listLabel(rec.path),
@@ -638,15 +697,10 @@
 
   function renderSearchResults(query, result) {
     els.searchPanel.hidden = false;
-    if (result.total > MAX_RESULTS) {
-      els.searchHint.hidden = false;
-      els.searchHint.textContent = "命中超过 20 条，仅展示 20 条。请收窄关键词。";
-    } else {
-      els.searchHint.hidden = !state.indexFailed.length;
-      els.searchHint.textContent = state.indexFailed.length
-        ? ("部分文档未能进入检索：" + state.indexFailed.join("、"))
-        : "";
-    }
+    els.searchHint.hidden = false;
+    els.searchHint.textContent = '“' + query + '” · ' + result.total + ' 个匹配章节' +
+      (result.total > MAX_RESULTS ? '，展示前 20 条，请收窄关键词。' : '') +
+      (state.indexFailed.length ? '（部分文档加载失败）' : '');
     if (!result.items.length) {
       els.searchResults.innerHTML = "<p class=\"kb-empty\">无命中</p>";
       return;
@@ -662,14 +716,21 @@
   }
 
   async function runSearch(query) {
+    const request = ++state.searchRequest;
     const q = String(query || "").trim();
+    els.list.hidden = Boolean(q);
     if (!q) {
       els.searchPanel.hidden = true;
+      els.searchResults.innerHTML = '';
+      els.searchResults._items = [];
       return;
     }
     els.searchPanel.hidden = false;
+    els.workspace.classList.add('list-open');
+    els.searchHint.hidden = true;
     els.searchResults.innerHTML = "<p class=\"kb-hint\">正在检索…</p>";
     await ensureIndex();
+    if (request !== state.searchRequest || els.search.value.trim() !== q) return;
     renderSearchResults(q, search(q));
   }
 
@@ -681,7 +742,7 @@
     const last = app.getLastGraphView();
     if (id && id !== "admin" && window.FEATURE_DATA.features.some((f) => f.id === id)) {
       app.setView(last, { preserveSelection: true });
-      app.selectNode(id);
+      app.selectNode(id, { reveal: true });
       return;
     }
     if (id === "admin" && state.openedWithHash && state.currentHash) {
@@ -691,8 +752,8 @@
         return prd.indexOf("#" + hash) >= 0 || prd.endsWith("#" + hash);
       });
       if (node) {
-        app.setView(last, { preserveSelection: true });
-        app.selectNode(node.id);
+        app.setView("admin");
+        app.selectNode(node.id, { reveal: true });
         return;
       }
     }
@@ -730,7 +791,11 @@
       if (!btn) return;
       const id = btn.getAttribute("data-toc");
       const el = els.article.querySelector("[data-toc-id=\"" + id.replace(/"/g, "") + "\"]") || document.getElementById(id);
-      if (el) el.scrollIntoView({ block: "start" });
+      if (el) {
+        state.currentHash = id; state.openedWithHash = true;
+        scrollToTarget(id);
+        syncToc(); els.workspace.classList.remove('toc-open');
+      }
     });
 
     els.article.addEventListener("click", (ev) => {
@@ -792,7 +857,11 @@
         const src = n.getAttribute("src") || "";
         return src.indexOf(rel) >= 0 || decodeURIComponent(src).indexOf(rel) >= 0;
       });
-      if (img) img.scrollIntoView({ block: "center" });
+      if (img) {
+        state.scrollRequest += 1;
+        els.article.scrollTop = Math.max(0, yInArticle(img) - Math.max(0, (els.article.clientHeight - img.clientHeight) / 2));
+        els.workspace.classList.remove('toc-open');
+      }
     });
 
     els.searchResults.addEventListener("click", (ev) => {
@@ -808,8 +877,29 @@
       });
     });
 
+    let tocFrame = false;
+    els.article.addEventListener('scroll', () => {
+      if (tocFrame) return;
+      tocFrame = true;
+      requestAnimationFrame(() => { tocFrame = false; syncToc(); });
+    });
+    els.article.addEventListener('wheel', () => { state.scrollRequest += 1; }, { passive: true });
+    els.article.addEventListener('touchstart', () => { state.scrollRequest += 1; }, { passive: true });
+    document.querySelectorAll('[data-kb-panel]').forEach((btn) => btn.addEventListener('click', () => {
+      const cls = btn.getAttribute('data-kb-panel') + '-open';
+      const open = !els.workspace.classList.contains(cls);
+      els.workspace.classList.remove('list-open', 'toc-open');
+      if (open) els.workspace.classList.add(cls);
+    }));
+    document.getElementById('kbClearSearch').addEventListener('click', () => {
+      clearTimeout(searchTimer); els.search.value = ''; runSearch(''); els.search.focus();
+    });
+    window.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape') els.workspace.classList.remove('list-open', 'toc-open');
+    });
     let searchTimer = null;
     els.search.addEventListener("input", () => {
+      state.searchRequest += 1;
       clearTimeout(searchTimer);
       const q = els.search.value;
       searchTimer = setTimeout(() => runSearch(q), 120);

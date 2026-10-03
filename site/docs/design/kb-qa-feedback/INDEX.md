@@ -1,12 +1,14 @@
 ---
 title: 知识问答 · 反馈与对话样式（工程专题）
-updated: "2026-09-20"
+updated: "2026-10-03"
 ---
 
 # 知识问答 · 反馈与对话样式
 
 > 这是 **独立增量专题**，与 [`../kb-qa/`](../kb-qa/INDEX.md) 的 v3 主链路分开存放。  
 > 不是 Hayyo 产品功能规则。产品规则仍只在 `prd/design/<功能>/PRD.md`。
+
+> 版本刷新/反馈增量见 [多轮编排专题](../kb-qa-multdesign/INDEX.md)，2026-10-03 页面与回答过程调整已并入 [正式契约](../../contracts/kb-qa-feedback/contract.md)。当前回归、收尾和剩余项见 [收尾记录](../kb-qa-multdesign/steps-verified.md#2026-10-03-开发收尾与正式契约整合)。
 
 ## 文件夹
 
@@ -17,7 +19,7 @@ updated: "2026-09-20"
 | [`steps-verified.md`](steps-verified.md) | STEP 验证版与进度 | 按 STEP 开发时必读 | 现行 STEP；草稿 `steps-draft.md` 不覆盖 |
 | [`实施计划.md`](实施计划.md) | 三里程碑编排 | 按阶段开发时必读 | 只编排 STEP，不改需求/STEP 正文 |
 | [`history/`](history/INDEX.md) | 旧版 PRD | **不默认读** | 已被 v2 替代 |
-| [`../kb-qa/`](../kb-qa/INDEX.md) | 检索、改写、切块、日志、分路、多会话 | 改主链路时再读 | 主链路仍是 v3；本文不替代它 |
+| [`../kb-qa/`](../kb-qa/INDEX.md) | 检索、改写、切块、日志、分路、多会话 | 改主链路时再读 | v3为检索基线，多轮增量见Phase1；本文不替代它 |
 
 不要把本文写进 `prd/design/`。不要把本专题文件放进 `design/kb-qa/`。
 
