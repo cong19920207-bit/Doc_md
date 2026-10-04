@@ -1,6 +1,7 @@
 /**
  * Hayyo 功能交互关系数据。
- * 来源：prd/INDEX.md、design/admin/PRD.md 文首、各功能 PRD 文首与正文交叉。
+ * 来源：site/core-docs/prd/INDEX.md、其 design/admin/PRD.md 文首与各功能 PRD。
+ * prd 字段保留 /prd/... 浏览器 URL，不使用来源文件的磁盘路径。
  * 不编造未写明的边。
  */
 window.FEATURE_DATA = {

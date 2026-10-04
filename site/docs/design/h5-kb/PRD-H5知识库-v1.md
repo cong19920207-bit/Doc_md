@@ -8,6 +8,8 @@ source_prd: null
 
 # Hayyo H5 需求知识库 PRD
 
+> 2026-10-04 路径同步：产品文档已迁入 `site/core-docs/prd/`。本文保留原需求阶段的基线、文档标识和验收约定；本次未适配 Docker / 运行映射或验证运行链路。适配前不得启动或重启容器 / API、不得重建索引，详见[工程入口](../../INDEX.md#迁移阶段边界2026-10-04)。
+
 ## 本次更新（v1 → v1.1）
 
 在 v1 原文结构上填入 2026-08-24～25 需求确认结论，不另起一份平行 PRD。未实施的代码现状仍按复核时的仓库事实写；已确认但尚未改代码的项写「本期将…」，不写成已经上线。
@@ -16,7 +18,7 @@ source_prd: null
 
 ## 1. 摘要
 
-在现有功能交互关系 H5（`site/feature-interaction/`）上，基于已经按功能切开的权威文档，增加需求知识浏览与检索。权威正文仍是 `prd/design/<功能>/PRD.md`，H5 只做展示和检索，不另建第二套知识正文。
+在现有功能交互关系 H5（`site/feature-interaction/`）上，基于已经按功能切开的权威文档，增加需求知识浏览与检索。权威正文的唯一物理位置是 `site/core-docs/prd/design/<功能>/PRD.md`，H5 只做展示和检索，不另建第二套知识正文。
 
 L1 阅读器 / L2 文档站 / L3 问答层仍写在同一份 PRD。界面、开工范围、是否重切功能目录已确认如下：第三视图「知识库」；本期做 L1 与 L2；功能目录不重切；L3 本期不做。
 
@@ -24,7 +26,7 @@ L1 阅读器 / L2 文档站 / L3 问答层仍写在同一份 PRD。界面、开�
 
 ### 2.1 当前背景或现状
 
-Hayyo 需求已从 `demo/` 各版 Word 洗成按功能存放的 Markdown 知识库。人和 AI 的默认入口是 [`prd/INDEX.md`](../../../../prd/INDEX.md)，机器路由是 [`prd/llm-manifest.json`](../../../../prd/llm-manifest.json)。每个功能一份当前权威 `PRD.md`，版本差在 `changelog.md`，原文切片在 `history/`（不默认读）。
+Hayyo 需求已从 `demo/` 各版 Word 洗成按功能存放的 Markdown 知识库。人和 AI 的默认入口是 [`site/core-docs/prd/INDEX.md`](../../../core-docs/prd/INDEX.md)，机器路由是 [`site/core-docs/prd/llm-manifest.json`](../../../core-docs/prd/llm-manifest.json)。每个功能一份当前权威 `PRD.md`，版本差在 `changelog.md`，原文切片在 `history/`（不默认读）。
 
 同仓库已有静态 H5：[`site/feature-interaction/`](../../../feature-interaction/index.html)。2026-08-26 复核现状（与 v1 一致，代码尚未按本期需求改）：
 
@@ -447,7 +449,7 @@ flowchart TB
 |---|---|---|---|---|---|
 | `FEATURE_DATA.features[].prd` | 相对路径字符串 | 已检查 `data.js` | H5 读 | 指向功能 PRD | 不把正文写入该文件 |
 | `FEATURE_DATA.adminNodes[].prd` | 路径 + `#锚点` | 已检查 `data.js` | H5 读 | 与 admin 文内锚点对应 | 本期仅改「拉新后台」为 `#admin-referral-v130`；不新增节点 |
-| 权威 PRD | Markdown | `prd/design/` | 人与 AI 维护 | 一份功能一份当前正文 | H5 只读 |
+| 权威 PRD | Markdown | `site/core-docs/prd/design/` | 人与 AI 维护 | 一份功能一份当前正文 | H5 只读 |
 | 内存搜索索引 | 运行时 | `fetch` 默认可读 md | H5 建、H5 读 | 非权威 | 不入库；刷新可重建 |
 | L3 chunk / 向量 | — | — | — | — | 本期不建 |
 

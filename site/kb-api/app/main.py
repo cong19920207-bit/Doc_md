@@ -201,8 +201,10 @@ async def _startup_all() -> None:
 async def _startup_index() -> None:
     global index_ready, startup_error
     try:
-        store.ensure_collections()
         if missing_keys():
+            from .chunking import scan_briefs
+            scan_briefs()
+            store.ensure_collections()
             store.rebuild_bm25_from_qdrant()
             index_ready = store.chunk_count() > 0
             return
@@ -221,6 +223,7 @@ async def _startup_index() -> None:
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     settings.DATA_DIR.mkdir(parents=True, exist_ok=True)
+    tls.migrate_legacy(settings.DATA_DIR)
     logs.ensure_feedback_columns()
     auth.ensure_schema()
     auth.bootstrap_if_empty()

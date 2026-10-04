@@ -14,7 +14,7 @@
 | 查闪蓝灰、空键被写入 | §4 |
 | 对照回归 | §5 |
 
-不要写进 `prd/design/`，不要改 kb-qa / h5-kb 正文来换皮。文件名仍是 `theme-preview.js`（未改名为 `theme.js`）。
+不要写进 `site/core-docs/prd/design/`，不要改 kb-qa / h5-kb 正文来换皮。文件名仍是 `theme-preview.js`（未改名为 `theme.js`）。
 
 ## 2. 落地符号
 
@@ -44,6 +44,8 @@
 - 换皮后调用 `GraphApp.redrawTheme()`（等皮肤 link load，双 `rAF`）。
 
 主题只存在本机，不写服务器、不跟账号。工作台无底部「正在预览」条。对照页 `/feature-interaction/themes/` 可保留当图鉴。
+
+2026-10-04 发布边界同步：迁移后的 Web 只读取生成产物。新增或改名的主题 CSS/脚本须同步 `site/docker/publish-files.json` 的逐文件清单，并重新生成、刷新 Web；仅放进源码目录不会自动上线。共同发布规则见 [H5 契约 §8](../h5-kb/contract.md#8-核心文档与受控发布)。本次迁移未改变主题 ID、默认值或存储键。
 
 四个 Tab 都看得到主题入口。点击或方向键展开，打开时聚焦当前主题；上下方向键、Home/End 移动候选，Enter/空格应用。仅移动焦点不改主题。选择后关闭并回到触发器；Esc 关闭且不触发底层图谱的取消选择，Tab 关闭并自然离开控件；点击外部或焦点移出时关闭。
 

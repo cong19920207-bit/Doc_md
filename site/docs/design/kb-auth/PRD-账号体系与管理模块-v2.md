@@ -10,7 +10,7 @@ source_prd: site/docs/design/kb-auth/history/PRD-账号体系与管理模块-v1.
 # 文档工作台账号体系与管理模块 PRD
 
 > 本文是知识问答工作台账号专题的**当前权威**。v1 已迁入 [`history/`](history/)，**不默认读**。  
-> 本文是**本仓库工程 PRD**，不是 Hayyo 产品功能规则。产品登录仍只在 [`prd/design/auth-login/PRD.md`](../../../../prd/design/auth-login/PRD.md)。本站管理模块**不写入** [`prd/design/admin/`](../../../../prd/design/admin/PRD.md)，也不套 [`workspace/_kit/admin-skin/`](../../../../workspace/_kit/admin-skin/INDEX.md)。  
+> 本文是**本仓库工程 PRD**，不是 Hayyo 产品功能规则。产品登录仍只在 [`site/core-docs/prd/design/auth-login/PRD.md`](../../../core-docs/prd/design/auth-login/PRD.md)。本站管理模块**不写入** [`site/core-docs/prd/design/admin/`](../../../core-docs/prd/design/admin/PRD.md)，也不套 [`workspace/_kit/admin-skin/`](../../../../workspace/_kit/admin-skin/INDEX.md)。  
 > 知识问答检索 / 生成口径仍以 [`../kb-qa/PRD-知识问答-v3.md`](../kb-qa/PRD-知识问答-v3.md) 为准；本专题只改身份、授权、运维入口与会话归属。v3 将「登录」标为延期 D3，由本文承接。
 
 **需求状态：** 已确认（v1 对话拍板 C1–C10；2026-09-19 req-confirm RQ-10～RQ-19 收口 Q1–Q5）。  
@@ -80,7 +80,7 @@ Hayyo App 终端用户、产品运营后台操作员：**非本专题对象**。
 
 | 项 | 说明 | 状态 | 来源 |
 |---|---|---|---|
-| Hayyo App 登录注册 | 不改 `prd/design/auth-login` | ✅ | 本专题定位 |
+| Hayyo App 登录注册 | 不改 `site/core-docs/prd/design/auth-login` | ✅ | 本专题定位 |
 | 写入产品运营后台 PRD / 套 admin-skin | 本站点工程后台 | ✅ | 确认 7 选 1；kb-qa v3 禁止项 |
 | 自助注册 | 账号只能超管角色生成 | ✅ | 确认 2、5 |
 | 多租户（`tenant_id` 产品化） | 字段可继续空 | ✅ | 确认过程：不做多租户 |

@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[3]
-os.environ.setdefault("REPO_ROOT", str(ROOT))
+os.environ.setdefault("CORE_DOCS_ROOT", str(ROOT / "site" / "core-docs"))
 os.environ.setdefault("ALIASES_PATH", str(ROOT / "site" / "kb-api" / "feature_aliases.json"))
 os.environ.setdefault("DATA_DIR", str(ROOT / "site" / "kb-api" / "tests" / ".tmp-data"))
 os.environ.setdefault("KB_AUTH_MEMORY", "1")

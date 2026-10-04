@@ -1,0 +1,709 @@
+{
+  "version": 1,
+  "scan_roots": [
+    "site/core-docs/prd/INDEX.md",
+    "site/core-docs/prd/inbox/INDEX.md",
+    "site/core-docs/prd/CONFIRMED.md",
+    "site/core-docs/prd/PROJECT_OVERVIEW.md",
+    "site/core-docs/prd/VERSIONS.md",
+    "site/core-docs/prd/design/admin/PRD.md",
+    "site/core-docs/prd/design/app-branding/PRD.md",
+    "site/core-docs/prd/design/auth-login/PRD.md",
+    "site/core-docs/prd/design/casual-game/PRD.md",
+    "site/core-docs/prd/design/channel-tracking/PRD.md",
+    "site/core-docs/prd/design/checkin-task/PRD.md",
+    "site/core-docs/prd/design/coupon/PRD.md",
+    "site/core-docs/prd/design/infra/PRD.md",
+    "site/core-docs/prd/design/lottery/PRD.md",
+    "site/core-docs/prd/design/mall/PRD.md",
+    "site/core-docs/prd/design/payout/PRD.md",
+    "site/core-docs/prd/design/merchant/PRD.md",
+    "site/core-docs/prd/design/messaging/PRD.md",
+    "site/core-docs/prd/design/profile/PRD.md",
+    "site/core-docs/prd/design/ranking/PRD.md",
+    "site/core-docs/prd/design/recharge/PRD.md",
+    "site/core-docs/prd/design/referral/PRD.md",
+    "site/core-docs/prd/design/relationship/PRD.md",
+    "site/core-docs/prd/design/room-chat/PRD.md",
+    "site/core-docs/prd/design/room-game/PRD.md",
+    "site/core-docs/prd/design/room-list/PRD.md",
+    "site/core-docs/prd/design/room/PRD.md",
+    "site/core-docs/prd/design/user-level/PRD.md",
+    "site/core-docs/prd/design/vip/PRD.md",
+    "site/core-docs/prd/design/yallapay/PRD.md"
+  ],
+  "exclude_roots": [
+    "site/core-docs/prd/design/admin/history",
+    "site/core-docs/prd/design/app-branding/history",
+    "site/core-docs/prd/design/auth-login/history",
+    "site/core-docs/prd/design/casual-game/history",
+    "site/core-docs/prd/design/channel-tracking/history",
+    "site/core-docs/prd/design/checkin-task/history",
+    "site/core-docs/prd/design/coupon/history",
+    "site/core-docs/prd/design/infra/history",
+    "site/core-docs/prd/design/lottery/history",
+    "site/core-docs/prd/design/mall/history",
+    "site/core-docs/prd/design/payout/history",
+    "site/core-docs/prd/design/merchant/history",
+    "site/core-docs/prd/design/messaging/history",
+    "site/core-docs/prd/design/profile/history",
+    "site/core-docs/prd/design/ranking/history",
+    "site/core-docs/prd/design/recharge/history",
+    "site/core-docs/prd/design/referral/history",
+    "site/core-docs/prd/design/relationship/history",
+    "site/core-docs/prd/design/room-chat/history",
+    "site/core-docs/prd/design/room-game/history",
+    "site/core-docs/prd/design/room-list/history",
+    "site/core-docs/prd/design/room/history",
+    "site/core-docs/prd/design/user-level/history",
+    "site/core-docs/prd/design/vip/history",
+    "site/core-docs/prd/design/yallapay/history",
+    "site/core-docs/prd/archive",
+    "site/core-docs/prd/inbox/条目",
+    "Aold_D"
+  ],
+  "relation_types": [
+    "depends_on",
+    "extends",
+    "related_to",
+    "supersedes",
+    "blocks",
+    "resolved_by"
+  ],
+  "documents": [
+    {
+      "id": "docs-index",
+      "path": "site/core-docs/prd/INDEX.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "routing"
+      ],
+      "keywords": [
+        "索引",
+        "Hayyo"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "confirmed-prd",
+        "project-overview",
+        "versions",
+        "prd-inbox",
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 140
+    },
+    {
+      "id": "prd-inbox",
+      "path": "site/core-docs/prd/inbox/INDEX.md",
+      "status": "current",
+      "authority": "reference",
+      "scopes": [
+        "inbox",
+        "product"
+      ],
+      "keywords": [
+        "收件箱",
+        "未立项",
+        "产品缺口"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [
+        "docs-index"
+      ],
+      "related_documents": [
+        "docs-index"
+      ],
+      "related_td": [],
+      "max_lines": 80
+    },
+    {
+      "id": "confirmed-prd",
+      "path": "site/core-docs/prd/CONFIRMED.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "confirmed-ledger"
+      ],
+      "keywords": [
+        "确认口径",
+        "现行",
+        "RQ"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [
+        "docs-index"
+      ],
+      "related_documents": [
+        "docs-index"
+      ],
+      "related_td": [],
+      "max_lines": 80
+    },
+    {
+      "id": "project-overview",
+      "path": "site/core-docs/prd/PROJECT_OVERVIEW.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "overview"
+      ],
+      "keywords": [
+        "Hayyo",
+        "Samer",
+        "概览"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [
+        "docs-index"
+      ],
+      "related_documents": [
+        "docs-index"
+      ],
+      "related_td": [],
+      "max_lines": 50
+    },
+    {
+      "id": "versions",
+      "path": "site/core-docs/prd/VERSIONS.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "release"
+      ],
+      "keywords": [
+        "版本"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "docs-index"
+      ],
+      "related_td": [],
+      "max_lines": 100
+    },
+    {
+      "id": "admin-prd",
+      "path": "site/core-docs/prd/design/admin/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "admin"
+      ],
+      "keywords": [
+        "admin",
+        "后台",
+        "运营后台"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "room-prd",
+        "room-list-prd",
+        "mall-prd",
+        "merchant-prd",
+        "referral-prd",
+        "casual-game-prd",
+        "checkin-task-prd",
+        "recharge-prd",
+        "vip-prd",
+        "ranking-prd",
+        "messaging-prd",
+        "channel-tracking-prd",
+        "coupon-prd",
+        "room-game-prd",
+        "auth-login-prd",
+        "profile-prd",
+        "app-branding-prd",
+        "docs-index",
+        "payout-prd"
+      ],
+      "related_td": [],
+      "max_lines": 4270
+    },
+    {
+      "id": "app-branding-prd",
+      "path": "site/core-docs/prd/design/app-branding/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "app-branding"
+      ],
+      "keywords": [
+        "app-branding"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 90
+    },
+    {
+      "id": "auth-login-prd",
+      "path": "site/core-docs/prd/design/auth-login/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "auth-login"
+      ],
+      "keywords": [
+        "auth-login"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 310
+    },
+    {
+      "id": "casual-game-prd",
+      "path": "site/core-docs/prd/design/casual-game/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "casual-game"
+      ],
+      "keywords": [
+        "casual-game"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 670
+    },
+    {
+      "id": "channel-tracking-prd",
+      "path": "site/core-docs/prd/design/channel-tracking/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "channel-tracking"
+      ],
+      "keywords": [
+        "channel-tracking"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 50
+    },
+    {
+      "id": "checkin-task-prd",
+      "path": "site/core-docs/prd/design/checkin-task/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "checkin-task"
+      ],
+      "keywords": [
+        "checkin-task"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 120
+    },
+    {
+      "id": "coupon-prd",
+      "path": "site/core-docs/prd/design/coupon/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "coupon"
+      ],
+      "keywords": [
+        "coupon",
+        "福利券",
+        "体验券"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 130
+    },
+    {
+      "id": "infra-prd",
+      "path": "site/core-docs/prd/design/infra/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "infra"
+      ],
+      "keywords": [
+        "infra"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [],
+      "related_td": [],
+      "max_lines": 820
+    },
+    {
+      "id": "lottery-prd",
+      "path": "site/core-docs/prd/design/lottery/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "lottery"
+      ],
+      "keywords": [
+        "lottery"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [],
+      "related_td": [],
+      "max_lines": 190
+    },
+    {
+      "id": "mall-prd",
+      "path": "site/core-docs/prd/design/mall/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "mall"
+      ],
+      "keywords": [
+        "mall"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 210
+    },
+    {
+      "id": "merchant-prd",
+      "path": "site/core-docs/prd/design/merchant/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "merchant"
+      ],
+      "keywords": [
+        "merchant"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 240
+    },
+    {
+      "id": "messaging-prd",
+      "path": "site/core-docs/prd/design/messaging/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "messaging"
+      ],
+      "keywords": [
+        "messaging"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 240
+    },
+    {
+      "id": "payout-prd",
+      "path": "site/core-docs/prd/design/payout/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "payout"
+      ],
+      "keywords": [
+        "payout",
+        "提现",
+        "积分"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd",
+        "referral-prd",
+        "auth-login-prd",
+        "profile-prd"
+      ],
+      "related_td": [],
+      "max_lines": 210
+    },
+    {
+      "id": "profile-prd",
+      "path": "site/core-docs/prd/design/profile/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "profile"
+      ],
+      "keywords": [
+        "profile"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 690
+    },
+    {
+      "id": "ranking-prd",
+      "path": "site/core-docs/prd/design/ranking/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "ranking"
+      ],
+      "keywords": [
+        "ranking"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 90
+    },
+    {
+      "id": "recharge-prd",
+      "path": "site/core-docs/prd/design/recharge/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "recharge"
+      ],
+      "keywords": [
+        "recharge"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 180
+    },
+    {
+      "id": "referral-prd",
+      "path": "site/core-docs/prd/design/referral/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "referral"
+      ],
+      "keywords": [
+        "referral"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd",
+        "payout-prd"
+      ],
+      "related_td": [],
+      "max_lines": 730
+    },
+    {
+      "id": "relationship-prd",
+      "path": "site/core-docs/prd/design/relationship/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "relationship"
+      ],
+      "keywords": [
+        "relationship"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [],
+      "related_td": [],
+      "max_lines": 160
+    },
+    {
+      "id": "room-chat-prd",
+      "path": "site/core-docs/prd/design/room-chat/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "room-chat"
+      ],
+      "keywords": [
+        "room-chat"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [],
+      "related_td": [],
+      "max_lines": 60
+    },
+    {
+      "id": "room-game-prd",
+      "path": "site/core-docs/prd/design/room-game/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "room-game"
+      ],
+      "keywords": [
+        "room-game"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 240
+    },
+    {
+      "id": "room-list-prd",
+      "path": "site/core-docs/prd/design/room-list/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "room-list"
+      ],
+      "keywords": [
+        "room-list"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 50
+    },
+    {
+      "id": "room-prd",
+      "path": "site/core-docs/prd/design/room/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "room"
+      ],
+      "keywords": [
+        "room"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 1280
+    },
+    {
+      "id": "user-level-prd",
+      "path": "site/core-docs/prd/design/user-level/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "user-level"
+      ],
+      "keywords": [
+        "user-level"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [],
+      "related_td": [],
+      "max_lines": 80
+    },
+    {
+      "id": "vip-prd",
+      "path": "site/core-docs/prd/design/vip/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "vip"
+      ],
+      "keywords": [
+        "vip"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "admin-prd"
+      ],
+      "related_td": [],
+      "max_lines": 130
+    },
+    {
+      "id": "yallapay-prd",
+      "path": "site/core-docs/prd/design/yallapay/PRD.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "yallapay"
+      ],
+      "keywords": [
+        "yallapay"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [],
+      "related_td": [],
+      "max_lines": 140
+    }
+  ]
+}

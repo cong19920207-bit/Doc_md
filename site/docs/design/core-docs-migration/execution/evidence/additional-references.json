@@ -1,0 +1,18 @@
+[
+  {
+    "path": ".cursor/rules/devlog.mdc",
+    "original_sha256": "c1cfbd22b9e094346aec6eca6904a57dc61cb81877d20290e6078584fdf9bf0d",
+    "prd_reference_lines": [
+      11
+    ],
+    "classification": "仅更新产品目录指针，记录规则不变"
+  },
+  {
+    "path": "site/docker/nginx.conf",
+    "original_sha256": "ed9ed31afb2e0d7d6e6996d7ed5cf95d6653844864cef353ceb6a50b3d293a64",
+    "prd_reference_lines": [
+      4
+    ],
+    "classification": "稳定 /prd URL 注释；运行配置留步骤4"
+  }
+]

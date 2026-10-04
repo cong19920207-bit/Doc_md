@@ -1,6 +1,6 @@
 # 运营后台原型底稿
 
-> 现网皮 + 对照表 + User list 金标准。**不是**产品权威。规则仍以 [`../../../prd/design/admin/PRD.md`](../../../prd/design/admin/PRD.md) 为准。
+> 现网皮 + 对照表 + User list 金标准。**不是**产品权威。规则仍以 [`../../../site/core-docs/prd/design/admin/PRD.md`](../../../site/core-docs/prd/design/admin/PRD.md) 为准。
 
 | 用途 | 打开 |
 |---|---|

@@ -6,7 +6,7 @@ authority: explainer
 
 # 本仓库知识
 
-> **不是合同。** 产品规则只在 [`prd/INDEX.md`](../prd/INDEX.md)；H5 / 知识问答需求只在 [`site/docs/INDEX.md`](../site/docs/INDEX.md)。  
+> **不是合同。** 产品规则只在 [`site/core-docs/prd/INDEX.md`](../site/core-docs/prd/INDEX.md)；H5 / 知识问答需求只在 [`site/docs/INDEX.md`](../site/docs/INDEX.md)。  
 > 本夹放可复用方法与讲解。冲突时改本夹，不改 `PRD.md` 去迁就回忆。  
 > 不进切块、不进向量。文件名和标题都是 **`类型 · 主题`**。
 

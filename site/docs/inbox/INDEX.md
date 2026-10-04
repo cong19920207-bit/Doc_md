@@ -6,7 +6,7 @@ authority: reference
 
 # 本仓库工程 · 立项前收件箱
 
-> **不当合同。** 已立项需求仍在 [`../design/`](../INDEX.md)。Hayyo 产品缺口去 [`../../../prd/inbox/INDEX.md`](../../../prd/inbox/INDEX.md)。  
+> **不当合同。** 已立项需求仍在 [`../design/`](../INDEX.md)。Hayyo 产品缺口去 [`../../core-docs/prd/inbox/INDEX.md`](../../core-docs/prd/inbox/INDEX.md)。  
 > 人和 AI 日常只读本页看板。`条目/` 不进默认扫描。
 
 ## 怎么记

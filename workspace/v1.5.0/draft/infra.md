@@ -5,4 +5,4 @@
 > 需求状态：已确认（2026-09-07）  
 > 实现状态：待实施  
 
-绑定成功顶部条动效复用已收录 [`../../../prd/design/infra/PRD.md`](../../../prd/design/infra/PRD.md) V1.1.0 3.4.12；业务口径以 [`referral.md`](referral.md) 为准。
+绑定成功顶部条动效复用已收录 [`../../../site/core-docs/prd/design/infra/PRD.md`](../../../site/core-docs/prd/design/infra/PRD.md) V1.1.0 3.4.12；业务口径以 [`referral.md`](referral.md) 为准。

@@ -1,6 +1,6 @@
 # 改后台页时给 LLM 的约束
 
-> 配套 [`inventory.md`](inventory.md)。**不要改** [`../../../prd/design/admin/PRD.md`](../../../prd/design/admin/PRD.md)，除非用户明确要求把某条 `live-only` 升格进现行需求。
+> 配套 [`inventory.md`](inventory.md)。**不要改** [`../../../site/core-docs/prd/design/admin/PRD.md`](../../../site/core-docs/prd/design/admin/PRD.md)，除非用户明确要求把某条 `live-only` 升格进现行需求。
 
 ## 权威顺序
 

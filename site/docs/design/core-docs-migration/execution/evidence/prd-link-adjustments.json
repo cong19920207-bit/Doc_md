@@ -1,0 +1,87 @@
+[
+  {
+    "source": "site/核心文档/prd/INDEX.md",
+    "old": "../Aold_D/",
+    "new": "../../../Aold_D/"
+  },
+  {
+    "source": "site/核心文档/prd/INDEX.md",
+    "old": "../workspace/v1.5.0/README.md",
+    "new": "../../../workspace/v1.5.0/README.md"
+  },
+  {
+    "source": "site/核心文档/prd/INDEX.md",
+    "old": "../INDEX.md",
+    "new": "../../../INDEX.md"
+  },
+  {
+    "source": "site/核心文档/prd/INDEX.md",
+    "old": "../site/docs/INDEX.md",
+    "new": "../../docs/INDEX.md"
+  },
+  {
+    "source": "site/核心文档/prd/INDEX.md",
+    "old": "../site/docs/inbox/INDEX.md",
+    "new": "../../docs/inbox/INDEX.md"
+  },
+  {
+    "source": "site/核心文档/prd/INDEX.md",
+    "old": "../Aold_D/",
+    "new": "../../../Aold_D/"
+  },
+  {
+    "source": "site/核心文档/prd/INDEX.md",
+    "old": "../Aold_D/",
+    "new": "../../../Aold_D/"
+  },
+  {
+    "source": "site/核心文档/prd/PROJECT_OVERVIEW.md",
+    "old": "../Aold_D/",
+    "new": "../../../Aold_D/"
+  },
+  {
+    "source": "site/核心文档/prd/PROJECT_OVERVIEW.md",
+    "old": "../INDEX.md",
+    "new": "../../../INDEX.md"
+  },
+  {
+    "source": "site/核心文档/prd/PROJECT_OVERVIEW.md",
+    "old": "../workspace/v1.5.0/README.md",
+    "new": "../../../workspace/v1.5.0/README.md"
+  },
+  {
+    "source": "site/核心文档/prd/VERSIONS.md",
+    "old": "../workspace/v1.5.0/README.md",
+    "new": "../../../workspace/v1.5.0/README.md"
+  },
+  {
+    "source": "site/核心文档/prd/archive/FEATURE_CATALOG.md",
+    "old": "../../INDEX.md",
+    "new": "../../../../INDEX.md"
+  },
+  {
+    "source": "site/核心文档/prd/design/admin/changelog.md",
+    "old": "../../../workspace/v1.5.0/draft/admin.md",
+    "new": "../../../../../workspace/v1.5.0/draft/admin.md"
+  },
+  {
+    "source": "site/核心文档/prd/design/infra/changelog.md",
+    "old": "../../../workspace/v1.5.0/draft/infra.md",
+    "new": "../../../../../workspace/v1.5.0/draft/infra.md"
+  },
+  {
+    "source": "site/核心文档/prd/design/messaging/changelog.md",
+    "old": "../../../workspace/v1.5.0/draft/messaging.md",
+    "new": "../../../../../workspace/v1.5.0/draft/messaging.md"
+  },
+  {
+    "source": "site/核心文档/prd/design/referral/changelog.md",
+    "old": "../../../workspace/v1.5.0/draft/referral.md",
+    "new": "../../../../../workspace/v1.5.0/draft/referral.md"
+  },
+  {
+    "source": "site/核心文档/prd/inbox/INDEX.md",
+    "old": "../../site/docs/inbox/INDEX.md",
+    "new": "../../../docs/inbox/INDEX.md"
+  }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "path": ".cursor/rules/devlog.mdc",
+    "old_sha256": "0b226835430a8611ad04a4c06c15cbeda2417156beb3b6f52f4ed6f330608334",
+    "new_sha256": "cb0db42c4031e298fc1201695f39686d8ce6b9899a412b83541d043aab3a9621"
+  },
+  {
+    "path": "INDEX.md",
+    "old_sha256": "4348335d2c5cffac7cc27bf3184417d201bd4f7f469c980a17bf9fba25ab7c47",
+    "new_sha256": "9b088b5b8d68f04b0681c2099aa14a302acc2a645ea8d3bffc88fa0be5cb325b"
+  },
+  {
+    "path": "knowledge/INDEX.md",
+    "old_sha256": "a5920fbd5401ed8ac1e187a3738465c9f75d664a3946a33d5115fa0040684db2",
+    "new_sha256": "d2a7f42b044589970f48df2a5d12824bc6430488566bfc7bc099d0fb56a2e5df"
+  },
+  {
+    "path": "knowledge/工作流程-文档工作台.md",
+    "old_sha256": "c555d190899d73a7ac482bebbd9818a2fdc926a8dbcba1207ba09795d03ae6cd",
+    "new_sha256": "f9fee4f732aa10a9ca2a175adca1907f358dd966a995f0d104d14d7c15479ef6"
+  },
+  {
+    "path": "llm-manifest.json",
+    "old_sha256": "cd894227dd365e856fcb8d2c1f4e5154f8f4dd0319c61aa90379991a579c998c",
+    "new_sha256": "e43635ca65e74993ee3e8c6293d181964fa13ae8ca956b9805ac45c0aaa2bb3f"
+  },
+  {
+    "path": "reviews/INDEX.md",
+    "old_sha256": "36bc927cbe5672bd27180a71972b591f14a816a586fffcabc57e07362d4a9d7a",
+    "new_sha256": "d1944e2197f1bacd1a22abefc6c58419e16cca9de1a9b5bdde2d7ee4536f6772"
+  },
+  {
+    "path": "site/docs/INDEX.md",
+    "old_sha256": "3e33abf323903e6a0ea1a5ff1509579da34aa8b4e2f47e5964b11ce2b9e2680c",
+    "new_sha256": "7c25a58dbe9e7cd1cdb003a2847a0a358c8981ae1eec8fceb8ec5b44806d75ba"
+  },
+  {
+    "path": "site/docs/contracts/h5-kb/contract.md",
+    "old_sha256": "21172822fa31b9f3a7f1acc7c8eb107ffb754016f3f3e0dc67c836901f131200",
+    "new_sha256": "ec8d9edb633eb3871c78c01b186ca1138c71dfa8ebd7a3d394600d8eb6ae3402"
+  },
+  {
+    "path": "site/docs/contracts/h5-theme/contract.md",
+    "old_sha256": "81892a76e5aaef340a855365b37f0f6893110dc4d7c467a2805490ceb3f226ab",
+    "new_sha256": "2935ebd786fcb7538d61ae128b73318498bf7e8b5f233b5899aacfaf691df935"
+  },
+  {
+    "path": "site/docs/contracts/kb-auth/contract.md",
+    "old_sha256": "cbc069d03fc87fcff41a4aee372c6e4bdcfab77697bf60d16ef47ecb3063e171",
+    "new_sha256": "e0361d58446abbcb5024fc7fcb3e5dacbaaae276e0e2dcd7b667c5efffdda98a"
+  },
+  {
+    "path": "site/docs/contracts/kb-qa-feedback/contract.md",
+    "old_sha256": "b85bdd3481b758056e5db6e631107e6e79dccbfaa491eb54c12ac255ad9e0c43",
+    "new_sha256": "dc33c27d8798ae672976d0d4d239b8f372a9b24fd931c530f3fbae0c721ae949"
+  },
+  {
+    "path": "site/docs/contracts/kb-qa/contract.md",
+    "old_sha256": "3989dc7d0d7518a5fa44d531feb0468ed7974704354748393a9614b88bb2df67",
+    "new_sha256": "94a8e58962b5e590dc5d9de5b0e0c45c6eac33df6b37dca9e3347e0e3205e193"
+  },
+  {
+    "path": "site/docs/design/core-docs-migration/execution/evidence/verify_migration.py",
+    "old_sha256": "95c4f4a65b58a4bca1dc3f2dd160a1ac7c405c4f930eb487d778f30afd672052",
+    "new_sha256": "e467b447c5fc22f7751b668fc4987fee106dcbc205b96a964e90e26823145880"
+  },
+  {
+    "path": "site/docs/design/core-docs-migration/execution/核心文档迁移开发执行记录.md",
+    "old_sha256": "54a1880f6517e0c2484c535dac42827eaab4a124735ffced27503125081e7cf0",
+    "new_sha256": "2ff37287201267839c40a4eb9b10b0b73fb3cc36383140493b8c5ee2c7c20a55"
+  },
+  {
+    "path": "site/docs/design/h5-kb/PRD-H5知识库-v1.md",
+    "old_sha256": "0df4920c0cd41c8635fe489ba2bf3dc648ba878a9c884cf6145acab0e4f342d1",
+    "new_sha256": "36b021c1e42d570e7114130d7ad6ddb5907bc9785ed14febeeedfacc20f46b8a"
+  },
+  {
+    "path": "site/docs/design/h5-theme/INDEX.md",
+    "old_sha256": "822915b865657b818026fbdbded3f3a99821f097786ab2f91247458e14f6c4ef",
+    "new_sha256": "71165c27f3abcc0861448ec716b4a2b02ee85350d8fa03ae37909185d8ed6a11"
+  },
+  {
+    "path": "site/docs/design/h5-theme/PRD-H5工作台主题切换-v1.md",
+    "old_sha256": "726a6fab287546744de35e23359d53e36d4a0c6ddeafae9e7392ce2299f9dcd3",
+    "new_sha256": "0c947d4adad356659c3913a69114de6e75219447d2436678863957a2b76be83c"
+  },
+  {
+    "path": "site/docs/design/kb-admin-ui/INDEX.md",
+    "old_sha256": "c06c05b105ed22a0af030ab593a32c63f4fea56b6e80fe2f8e6ce343b0ff00b2",
+    "new_sha256": "23b98c8607bdb6aa02b1d0fda1a052a713c98415ea86ebc800adf5db177f451b"
+  },
+  {
+    "path": "site/docs/design/kb-auth/INDEX.md",
+    "old_sha256": "5fa0d8206f7708d19c309692bc6d2d7f363bb8ef948984a7558ef9afd5936f13",
+    "new_sha256": "f32060a2f1e5b7c73bfc1d724c89c44f2738f71cfe94ab8655e8177b72838086"
+  },
+  {
+    "path": "site/docs/design/kb-auth/PRD-账号体系与管理模块-v2.md",
+    "old_sha256": "cbbca0dd674a3ef01ca63bf8ef9e45521100d85500b8b17b267b9a39a6b39116",
+    "new_sha256": "dc64da115335d1d18991e1f67d59e0ba638aa2ce6a3b7b7539868b850e0fb26b"
+  },
+  {
+    "path": "site/docs/design/kb-auth/history/PRD-账号体系与管理模块-v1.md",
+    "old_sha256": "e5b7d8eb8090564d4f10b7fa5a49c2b5eb5ad1dec643cc22a2511a155a5161d3",
+    "new_sha256": "3ec17fbbfa48353588ab7b69b775af11d4882758e4fa2464b687437a0a0f965d"
+  },
+  {
+    "path": "site/docs/design/kb-qa-feedback/INDEX.md",
+    "old_sha256": "87d7390d915997b9ba4c39044243bfe534ea90cb936e8c1d6186067962bac44c",
+    "new_sha256": "c4103832cb8c861cb72d69b6bb6dbcae50b0bb6dcb6271d646be27b9b987e100"
+  },
+  {
+    "path": "site/docs/design/kb-qa-feedback/PRD-知识问答-反馈与对话样式-v2.md",
+    "old_sha256": "99cf2e5b4d18480877d8f70a9addd1ceaa1c9dda1df51df6c42f24bf2e24e806",
+    "new_sha256": "bd42ff09263f3cefbf6dfd3d1c37db53911b13f7845c6324aeade07883884c70"
+  },
+  {
+    "path": "site/docs/design/kb-qa-multdesign/INDEX.md",
+    "old_sha256": "267cf970dee2a051857525f3315005f7a8bd1ce0acc37868955939dfff85df31",
+    "new_sha256": "44c6c83d9d7843cdcfa696668d4fb006776345622d5905c117284fbb7284225e"
+  },
+  {
+    "path": "site/docs/design/kb-qa-multdesign/PRD-Hayyo知识问答工作台管理后台-v1.1-正式确认版.md",
+    "old_sha256": "d57364bef3e8cc14116f3e1e30257f8b289fac72ae6043a2ebe2d45bfa9b5379",
+    "new_sha256": "0d68336086bee645bd1131ef3d172f18fa9fe3e13fd5e9294b7953aa4001fe60"
+  },
+  {
+    "path": "site/docs/design/kb-qa/INDEX.md",
+    "old_sha256": "f6105743f284d194ffaa0a476cfd1af07ad3845b28da44ef00e496196fa3f447",
+    "new_sha256": "e041d196e3a9d8c965fc0f98c8fd49a74e0f7dcd935f05b5c4b57eeb3103c1b6"
+  },
+  {
+    "path": "site/docs/design/kb-qa/PRD-知识问答-v3.md",
+    "old_sha256": "46bbfe37fc927725a704837095061642c037bd5a2138070a8a0e943564020793",
+    "new_sha256": "0484a9e151e2ddfbf9cc9016452afdfe9376a3d718361923bb3c16b42c00a0c4"
+  },
+  {
+    "path": "site/docs/inbox/INDEX.md",
+    "old_sha256": "60206b014655117a524c506bbf41a4ef324947dc8007b7efb0c897d5c78531c8",
+    "new_sha256": "e7460bd803d8c578d55c9a7953e94fb8d52bf6050debe530f492dacd85d19c44"
+  },
+  {
+    "path": "site/docs/inbox/条目/2026-09-21-临时插入需求或变动流程.md",
+    "old_sha256": "2ccbf2fae4e9146df4efca76a97433018feab587ba8acbb749a9bf54e01858ba",
+    "new_sha256": "2107d6dcd3561e4b9bd6c106367d52437bee2acf494fd8ec79cf02ccc6e60ac8"
+  },
+  {
+    "path": "site/docs/开发记录.md",
+    "old_sha256": "a0be5045bdd8784450603387b66cda7518b4e2a40643b93475131c3758e73216",
+    "new_sha256": "483c32e9588922341211eb1cd11f3893746582ecda1255f6b83049f3bd8337f5"
+  },
+  {
+    "path": "site/feature-interaction/data.js",
+    "old_sha256": "9526336d1c96e0ec8e37425c8573d41a8fc63c78571ec8f59ea35ff7e602d33c",
+    "new_sha256": "ab3b579546cfb13a8a010d08a19d118e84e3b3f20f860773551637fd02eed4db"
+  },
+  {
+    "path": "site/feature-interaction/kb.js",
+    "old_sha256": "a083b92d2fcd399c92d915420f90c64388f74063426ce86b21e5b1e25cf36a1f",
+    "new_sha256": "bad959fb1d97aef889f1de5e3d63e9df40af40ea9fac57538f459c5e882d9579"
+  },
+  {
+    "path": "site/kb-api/tests/conftest.py",
+    "old_sha256": "e47a2b1955230aa29bfe65e78d19701e46a06a671dbcd6f64f029788c52c5578",
+    "new_sha256": "5e59d834fb07f2616783dc0ba68fb923cbfef47ef03a22aa5f89411c359627ec"
+  },
+  {
+    "path": "site/kb-api/tests/test_rules.py",
+    "old_sha256": "196da21f0d9d903a8755303a361d0432266f9d3037e3551f5d03990d1d527e2c",
+    "new_sha256": "6f63873a249a72052a8a3d38636e38559405a74891d2462692c9dd77cb591d25"
+  },
+  {
+    "path": "site/core-docs/INDEX.md",
+    "old_sha256": "66dfff9a6786d0fbe1bf6cc2b03cbf4c54c7693d79162c7f3e4ab50621e9263a",
+    "new_sha256": "246f99086e98f9b5e2e7adb52a53d14a2b6956022dfdcc61d7f4607d428be2bb"
+  },
+  {
+    "path": "site/core-docs/prd/VERSIONS.md",
+    "old_sha256": "fe5c16d32ecd3b93eef91f8cb1bc0c09e3017c3655b10f74a143b52784352eb7",
+    "new_sha256": "5311e97f1fc17b6b76137d394886c29a76d666137847eba8e6b5745145bd141c"
+  },
+  {
+    "path": "site/core-docs/prd/design/admin/brief/current.md",
+    "old_sha256": "d47eccd5f7e6340dd88e2cff006b6f10e4499b8abefc57c75e36a455f7c80dbb",
+    "new_sha256": "9e69e488c2caf1079ed638219daf70ee7f1c375468d8d142e549ae3b247395a1"
+  },
+  {
+    "path": "site/core-docs/prd/design/app-branding/brief/current.md",
+    "old_sha256": "3f4337c99f16646b9e94196bfb38e7c21eaa143ab94fce91d472c6ebe97b9ee0",
+    "new_sha256": "e070f954a0886692b8d209ce859184133cff6a8da38d383daf2a971760bba7b0"
+  },
+  {
+    "path": "site/core-docs/prd/design/auth-login/brief/current.md",
+    "old_sha256": "237d632004cb4faf22436536ab519572d170e219fb37ff4e5244c805915908ca",
+    "new_sha256": "e44e42aa7fa75be09df7520c66b2696eb3c91ce7020e1faf96725d5f5c3b04e1"
+  },
+  {
+    "path": "site/core-docs/prd/design/casual-game/brief/current.md",
+    "old_sha256": "6276082e460abe3a1cda43671b72e3f68f98f1669058e478926bb05514786f81",
+    "new_sha256": "152d59ca6ad83e526f3181c5ed4b0fbc6175ee8b4569e5ee2f6366fa3ac2a30f"
+  },
+  {
+    "path": "site/core-docs/prd/design/channel-tracking/brief/current.md",
+    "old_sha256": "93be6d126e18a9813cc898f65c7c54c8b762b1e8d183246a4b51765402acc25e",
+    "new_sha256": "17f014c07534109571f64c68ca40b29fce92c601d5731a627f8a4d8baad9ad59"
+  },
+  {
+    "path": "site/core-docs/prd/design/checkin-task/brief/current.md",
+    "old_sha256": "6e9c0459a1bc29209221b621b21543edc5b5ad007505c72423ebbd20f58fc813",
+    "new_sha256": "fd909b21f5a23316b0ba9ca64f2ff97a2eb07785d3642f788cc90423915dfa2b"
+  },
+  {
+    "path": "site/core-docs/prd/design/coupon/brief/current.md",
+    "old_sha256": "8118fa72e56706f28d6f55af70345e8cc8efc866f9d890b93aff33bd7072add5",
+    "new_sha256": "576bfc8bd98ce5a7ee2938ac5698efaf588a5f90fb92000803940708a404e07f"
+  },
+  {
+    "path": "site/core-docs/prd/design/infra/brief/current.md",
+    "old_sha256": "6c85b873896164230c7f8087124c5a1eee96500ebac29ace5d09515b6baf1d18",
+    "new_sha256": "a17b8b78f2dbd815418fa2ff7685bb03883b4b1b71ba36fba71183145a6167b7"
+  },
+  {
+    "path": "site/core-docs/prd/design/lottery/brief/current.md",
+    "old_sha256": "d4cd08e616c8be730414867e8865a114b059331f2e8d8e93fbc00a6e0ef5e335",
+    "new_sha256": "84da0ac1b47fcc9d21b0a2a6f26f53c04edbd14e6800fc54bf480472f7217029"
+  },
+  {
+    "path": "site/core-docs/prd/design/mall/brief/current.md",
+    "old_sha256": "5048f298f8fadb3525ed4e6f6b84eb24a20cd51e5a9f4820dab2a9176a0ae9ac",
+    "new_sha256": "de606f7efd39ce0000c715b28c91c2a5f38acade2f99391b5ca4de9046e8c777"
+  },
+  {
+    "path": "site/core-docs/prd/design/merchant/brief/current.md",
+    "old_sha256": "3e06f156eb4dac070190427cf11c586dac838dfc2927afb33ae3bf60d6028bed",
+    "new_sha256": "623ca59ec1107bd2f4d44a06232cac8f909833024397b15b09609ff5a4448b23"
+  },
+  {
+    "path": "site/core-docs/prd/design/messaging/brief/current.md",
+    "old_sha256": "737ba2a67612d01ef5ef1661e39dcbf37ea6a888a704c67545a21126fdb27086",
+    "new_sha256": "c16a8ae4aa27b1a242825a242cc9a6e5c9bc8c417a5f93f4bb5f169c37da7ef5"
+  },
+  {
+    "path": "site/core-docs/prd/design/payout/brief/current.md",
+    "old_sha256": "e7ec8193f68e9d983c46b799407f046a0cd4cac19c3d77f375b53f74ef5dd457",
+    "new_sha256": "dcf16d286ea41510610fec9bb7c5319e22193ae695a20a245b7f5b1bc90cd987"
+  },
+  {
+    "path": "site/core-docs/prd/design/profile/brief/current.md",
+    "old_sha256": "c75d26359629e2b6688dcc49061f3d13a2708d6bda34e3b9f3682f6e9103bf7c",
+    "new_sha256": "cfa2a929f6641fd80210aafee290e0ae6323518e94e0743051a924ebb15141aa"
+  },
+  {
+    "path": "site/core-docs/prd/design/ranking/brief/current.md",
+    "old_sha256": "c25c67ad1c07cb8e772ac5635a5e96635d4e00a1a2b8cee1fd5d30d889632099",
+    "new_sha256": "63321d8f1be886e1291ed08dc164322b4d9b332de24f2c7b18cba20d0b157baa"
+  },
+  {
+    "path": "site/core-docs/prd/design/recharge/brief/current.md",
+    "old_sha256": "bb2069ee0dc551c4ed418fcfe63fb0c8fbe7a1a5b11199bb2904c480d5bc8e6a",
+    "new_sha256": "c26b09a4adc353c0a94329e72e22c364d973ac86bbff2c3466d5940f12d3a4a6"
+  },
+  {
+    "path": "site/core-docs/prd/design/referral/brief/current.md",
+    "old_sha256": "810c2dcd4cca252f2b2bbd2857e8137e35a5e49e4d960f13b7528f320351fe06",
+    "new_sha256": "e8bd3114c04c72742065154a44e408df3f5793ce66ed2a4d7513a30fe39986ac"
+  },
+  {
+    "path": "site/core-docs/prd/design/relationship/brief/current.md",
+    "old_sha256": "2c0e77b752098647157ad57105c154f30fa710a79a46f6068f772e44d0036dbc",
+    "new_sha256": "bb2f1a99c5c2876f9a4deddc6b64cb285224414c7f9a1b5bfbfd910dd2c7f25c"
+  },
+  {
+    "path": "site/core-docs/prd/design/room-chat/brief/current.md",
+    "old_sha256": "f8e4c10a49e76f9dd971636485bb636f8183e8b873c0c68b6a9e6497cd36e34a",
+    "new_sha256": "1d4ce173ec22b22034dde60e792f276d88051abfca5c9dbbe60063cb5046b777"
+  },
+  {
+    "path": "site/core-docs/prd/design/room-game/brief/current.md",
+    "old_sha256": "fc50094502068c38e6f5806fee90b9f9c0fa52a046abebbe5a64fbe86a2a02db",
+    "new_sha256": "55ea54881bc20f3ff2cbc856abe1d963ac6c0c625de7559e58c2f55cd212389c"
+  },
+  {
+    "path": "site/core-docs/prd/design/room-list/brief/current.md",
+    "old_sha256": "c4e1b45f458f1caadcde655263cd0b46959f89ba6df2b5e28a7930df66c05fce",
+    "new_sha256": "b79aaa57ad31c90ce8b488bd47361d399e1095bffdc8ac8e221a7f7f168ac173"
+  },
+  {
+    "path": "site/core-docs/prd/design/room/brief/current.md",
+    "old_sha256": "803a0415156397dc385e1298dd6a4f9c847ed8871fc16a73e5c06ccbd766d8a9",
+    "new_sha256": "f4935269ad229f98bdebfc74db86c6eb7a859e2eb7a2b90328bbae0b0027634e"
+  },
+  {
+    "path": "site/core-docs/prd/design/user-level/brief/current.md",
+    "old_sha256": "060e6f33d08f77f20e59aa1bdeae53bd773cc16034bd49a9d78c599ebfc4b074",
+    "new_sha256": "cf718f920fbdc7ee784e800be6d2289bff860e4505ff3db85e627835b43def6e"
+  },
+  {
+    "path": "site/core-docs/prd/design/vip/brief/current.md",
+    "old_sha256": "080ba58aaa3d0e44d67594522ba1138c87aa0de958589bca7549ff294d67c5e6",
+    "new_sha256": "ec3888e5c519318d0aac5a50c2451a7c3705ff26beef213188f05589b72fdd2d"
+  },
+  {
+    "path": "site/core-docs/prd/design/yallapay/brief/current.md",
+    "old_sha256": "6fea94961456b73a29a15ac43fb202424779d8021eabca07403c9989d98c438e",
+    "new_sha256": "ff23dfb0740586cfb964b189b37f714b17f11f96636d2c6d3adf22e8a28601ba"
+  },
+  {
+    "path": "site/core-docs/prd/llm-manifest.json",
+    "old_sha256": "760204d46eeb558bd6d48e3a5617b92f557b80fe5f0bffc9ca62bd45bf91d3c7",
+    "new_sha256": "d8ba701e0d6aa26455078f1e1a9e2be1742e94eebecdc9c186f5df26b1182fca"
+  },
+  {
+    "path": "workspace/INDEX.md",
+    "old_sha256": "f5914c521f687e9371b10d6e6223ffddc18af63bd81eab5ea56d33bfd99fb48e",
+    "new_sha256": "c0a991805c1825459c47e4f562db94aed690287d6b10c30b348495a89fb7016c"
+  },
+  {
+    "path": "workspace/_kit/admin-skin/INDEX.md",
+    "old_sha256": "98e23d7badf3dd592f0f8ac8062704f4f8fe3ae75564cdca3ac02365d7de90f0",
+    "new_sha256": "d97b042d4b8f91791c5c0e45987dbd0fc51f2ebcaaa9dcf7db3eaed411a10c72"
+  },
+  {
+    "path": "workspace/_kit/admin-skin/LLM.md",
+    "old_sha256": "66319634b0fbc494586d6e05d032caaf7b1df56f83498f7f8058e9447501236e",
+    "new_sha256": "3421bdf7a3508f7e44eee8b537c4bb6b497093eea3bc8c01d155e7627b700397"
+  },
+  {
+    "path": "workspace/_kit/admin-skin/evidence/build_inventory.py",
+    "old_sha256": "cbea17b138845ddf904dfea0d4bfefafe4d6c6407378bf8207ae1d6872d83448",
+    "new_sha256": "8433844faca6a5031712e2f5191672ef0cb27ce69badc47e5998e0a7fed78c68"
+  },
+  {
+    "path": "workspace/_kit/admin-skin/inventory.md",
+    "old_sha256": "83adac2a0086c910b356e74464763159c904931d9257de8d1b34b3b23ec265fa",
+    "new_sha256": "c4727d5a725232b32caa56742a5f86333069e29eca42b9b19cfc892d097387f7"
+  },
+  {
+    "path": "workspace/kb-qa-logic/知识问答-业务逻辑.md",
+    "old_sha256": "d7187d76fa0faa12d0002e70b08d7de761bcd680a6e28752acce10e4e5a87ceb",
+    "new_sha256": "d45b01f73f19f5aefce26844433ace2083b29cc4b368785dc1e43a64acbc5688"
+  },
+  {
+    "path": "workspace/kb-qa-proto/shared/mock-data.js",
+    "old_sha256": "e83ce70b2e68724c349143a4af69b59f479de95abc7b257280209144b9746ad4",
+    "new_sha256": "6f07e7bd75154ae84e96829f9e243098a70dcbb332498379e406957b1772b50f"
+  },
+  {
+    "path": "workspace/v1.5.0/README.md",
+    "old_sha256": "bab3d2c02a10138f6953c9265d31d3c2eba8bc8bbb468c1680937a4d46fbb893",
+    "new_sha256": "46ef899d301a6b09186d5c395d4c01e7f7e5de8cc37170939260c8fe1b8faa5f"
+  },
+  {
+    "path": "workspace/v1.5.0/draft/infra.md",
+    "old_sha256": "ff82a8f2ecad882d8f65ec92bbdcba640ab5cacef083b72b828ef87c1cfaea35",
+    "new_sha256": "b93c126c2550b5532cd1b2b72a9bb54ba8e9dcbb180dac579027ce663892f294"
+  },
+  {
+    "path": "workspace/v1.5.0/draft/referral.md",
+    "old_sha256": "6836c194e473bf23515742d7a87327354cdc1abed143ffbb596487fa871bcf1f",
+    "new_sha256": "2c18be04b6258c230551e669345786297e9c5af9c4783d9c5b6b4d1aa6c081c4"
+  }
+]

@@ -1,7 +1,7 @@
 # 工作区（草案）
 
 > **工作区文档，非权威。** 未升格版本的正文、原型、截图、工作稿放 `v*` 子目录。日常改功能不要读版本草稿。  
-> 产品规则仍以 [`../prd/INDEX.md`](../prd/INDEX.md) 为准。版本三态见 [`../prd/VERSIONS.md`](../prd/VERSIONS.md)。升格进已收录前须用户明确确认。  
+> 产品规则仍以 [`../site/core-docs/prd/INDEX.md`](../site/core-docs/prd/INDEX.md) 为准。版本三态见 [`../site/core-docs/prd/VERSIONS.md`](../site/core-docs/prd/VERSIONS.md)。升格进已收录前须用户明确确认。  
 > **例外：** [`_kit/admin-skin/`](_kit/admin-skin/INDEX.md) 是跨版本共享的现网皮 / 金标准，改后台页时**默认可读**。
 
 ## 怎么用
@@ -9,7 +9,7 @@
 - 按版本分子目录，版本内再按类型分文件夹。
 - 画后台原型时引用 `_kit/admin-skin/` 的壳和约束，不要把皮复制进某一版。
 - Word 底稿仍在 Hayyo 个人目录，这里只放指针，不复制大文件。
-- 本目录正文不覆盖 `prd/design/` 已收录内容。
+- 本目录正文不覆盖 `site/core-docs/prd/design/` 已收录内容。
 
 ## 工程工作稿（非产品规则）
 

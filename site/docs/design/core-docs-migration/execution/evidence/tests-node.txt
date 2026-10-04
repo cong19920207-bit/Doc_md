@@ -1,0 +1,39 @@
+✔ answers render headings, emphasis, lists and source quotes as readable HTML (1.019834ms)
+✔ answer tables keep header and cell contents (0.228709ms)
+✔ model text cannot create executable HTML, links or remote image requests (0.202791ms)
+✔ streaming partial Markdown and code fences keep text without executing it (0.179125ms)
+✔ answer separators and literal HTML comments do not discard answer text (0.520375ms)
+✔ an older failed document request cannot replace the newly opened document (2.686834ms)
+✔ reopening the same path keeps the latest response rather than the oldest response (1.33275ms)
+✔ clearing search while the index loads does not bring old results back (1.48925ms)
+✔ history uses the published JSON list and ignores paths outside that history directory (1.18025ms)
+✔ a late history response cannot replace a newly opened document (0.617625ms)
+✔ repository-only references are labelled unavailable rather than opened as website files (1.294959ms)
+✔ process opens before body, folds on first text, and honors a manual reopen through completion (13.356375ms)
+✔ manually collapsed process stays collapsed while new steps arrive (2.685458ms)
+✔ history loads authoritative versions and old answers do not invent a process (1.372542ms)
+✔ the built-in super role renders checked disabled permissions without a save form (3.270917ms)
+✔ account role change requires confirmation and sends only the selected role (2.580333ms)
+✔ new accounts require an explicit role selection (0.844834ms)
+✔ role permissions need a fresh preview and confirmation before saving (1.325541ms)
+✔ fixed configuration rules stay visible and have no editable controls (1.421833ms)
+✔ pending login submits once and presents a busy state (2.073875ms)
+✔ a server rejection remains visible and permits retry (1.155792ms)
+✔ network failure restores the form and explains retry (0.505125ms)
+✔ password visibility is accessible and does not submit credentials (0.470166ms)
+✔ credentials retain password whitespace and use the existing Session endpoint (1.296459ms)
+✔ successful login preserves an internal next path and query (0.455833ms)
+✔ unsafe, external and recursive destinations fall back to the workbench (2.806ms)
+✔ an existing session follows the same safe redirect without submitting (2.250834ms)
+✔ a manual request during an automatic transition advances beyond the visible shape (56.60625ms)
+✔ reduced motion starts with a static field and explicit controls still work (29.507875ms)
+✔ pause freezes the field and visibility restoration cannot override a user pause (31.553291ms)
+✔ WebGL failure leaves the static fallback and schedules no animation (0.4385ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 165.609584

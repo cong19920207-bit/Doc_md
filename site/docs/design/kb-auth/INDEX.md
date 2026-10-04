@@ -6,8 +6,8 @@ updated: "2026-10-03"
 # 账号体系与管理模块
 
 > 这是 **本仓库工程** 专题，不是 Hayyo 产品登录，也不是运营后台。  
-> 产品登录规则仍在 [`prd/design/auth-login/PRD.md`](../../../../prd/design/auth-login/PRD.md)。  
-> 本站管理模块**不要**写入 [`prd/design/admin/`](../../../../prd/design/admin/PRD.md)，也不套 [`workspace/_kit/admin-skin/`](../../../../workspace/_kit/admin-skin/INDEX.md)。  
+> 产品登录规则仍在 [`site/core-docs/prd/design/auth-login/PRD.md`](../../../core-docs/prd/design/auth-login/PRD.md)。  
+> 本站管理模块**不要**写入 [`site/core-docs/prd/design/admin/`](../../../core-docs/prd/design/admin/PRD.md)，也不套 [`workspace/_kit/admin-skin/`](../../../../workspace/_kit/admin-skin/INDEX.md)。  
 > 检索基线见 [`知识问答v3`](../kb-qa/PRD-知识问答-v3.md)；多轮生成、消息事实与后台增量见下方 kb-qa-multdesign。账号基础需求保留在本夹，当前权限/接口以正式契约为准。\
 > v1 在 [`history/`](history/INDEX.md)，**不默认读**。
 
@@ -25,7 +25,7 @@ updated: "2026-10-03"
 | [`step-audit.md`](step-audit.md) | STEP 审查报告 | 对照审查结论时读 | 第一轮 review-repair：`PASS_WITH_RISKS` |
 | [`history/`](history/INDEX.md) | v1 全文 | **不默认读** | 已被 v2 替代 |
 
-不要把本文写进 `prd/design/`。不要把本专题文件放进 `design/kb-qa/` 或 `design/h5-kb/`。
+不要把本文写进 `site/core-docs/prd/design/`。不要把本专题文件放进 `design/kb-qa/` 或 `design/h5-kb/`。
 
 ## 任务
 

@@ -15,8 +15,8 @@ from app.pipeline import (
 from app.util import NUMBER_LEAK_NOTE, excerpt, extract_numbers, truncate18
 
 
-def repo_root() -> Path:
-    return Path(__file__).resolve().parents[3]
+def core_docs_root() -> Path:
+    return Path(__file__).resolve().parents[3] / "site" / "core-docs"
 
 
 def test_truncate18():
@@ -27,7 +27,7 @@ def test_truncate18():
 
 
 def test_chunk_default_only_and_vip_brief():
-    root = repo_root()
+    root = core_docs_root()
     vip = root / "prd" / "design" / "vip" / "brief" / "current.md"
     chunks = parse_brief(vip, root, "vip")
     ids = {c.chunk_id for c in chunks}
@@ -43,7 +43,7 @@ def test_chunk_default_only_and_vip_brief():
 
 
 def test_skip_chunk_no_and_admin_collection():
-    root = repo_root()
+    root = core_docs_root()
     chunks = parse_brief(root / "prd" / "design" / "admin" / "brief" / "current.md", root, "admin")
     assert chunks
     assert all(c.collection == "hayyo-admin" for c in chunks)
@@ -53,7 +53,7 @@ def test_skip_chunk_no_and_admin_collection():
 
 
 def test_scan_all_briefs():
-    chunks = scan_briefs(repo_root())
+    chunks = scan_briefs(core_docs_root())
     assert len(chunks) > 20
     assert any(c.chunk_id == "user-level.scope" for c in chunks)
     assert any(c.chunk_id == "referral.scope" for c in chunks)
@@ -71,7 +71,7 @@ def test_oversized_flag():
 
 
 def test_filter_named_ids_no_invent():
-    got = filter_named_ids(["vip", "not-a-feature", "user-level", "vip"], repo_root())
+    got = filter_named_ids(["vip", "not-a-feature", "user-level", "vip"], core_docs_root())
     assert got == ["vip", "user-level"]
 
 
@@ -187,7 +187,7 @@ def test_legacy_v2_and_rewrite_prompts_stay_published(tmp_path):
 
 
 def test_aliases_cover_link_pay_and_rewrite_user():
-    root = repo_root()
+    root = core_docs_root()
     table = load_aliases(root)
     assert "链接支付" in table.get("yallapay", [])
     assert "体验券" in table.get("coupon", [])

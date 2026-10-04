@@ -1,0 +1,2078 @@
+[
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.abolished",
+    "content_hash": "a24d764924d9fa086ef4ee5d6f8400b1dd7983c383c3a5b505df738e4302d345",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.activity",
+    "content_hash": "41b19b3564a953e162b7792d6e4902e1b492cfafd2a2541a5b40c787d3ceb4ab",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.alert",
+    "content_hash": "ef8df907422d4aa0672297b7fd0c1ead4e6057cdfe6baa982b0ff10f76e89a27",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.banner",
+    "content_hash": "67fb117a0aebcfba49ddf4d187f903800d584f51a20af6a7fae1aa27dd657425",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.base",
+    "content_hash": "f980da2e1aea2bf8a82abf38ad6a2cb5bcedb84a2881b4b8ff993c89cd10e3a9",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.casual-game",
+    "content_hash": "6417ea540150dae61647aa5d0ecb3a8f5d270068468c968eabef5a7f6ce4c402",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.checkin",
+    "content_hash": "044fabd20d79a4a5ee2ae51369498fe06f0b5eec680ed009b8352f1ee6b4cfcd",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.config",
+    "content_hash": "b742296bf0a0d21fd800443c622d1ced38b3d82b11f8f3cdfa045cc6ab76d4c1",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.coupon",
+    "content_hash": "bb38dcbabb4061f8dcad8b112b628d78912c7644f3cd894e759936db0f40edad",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.currency",
+    "content_hash": "529bc1f28bea1ed223850bd11637a45f478dedc5bfba72413f4175130c221407",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.currency-audit",
+    "content_hash": "6eb88747801f3782cdd41e2ff90e3291f40ffb5eaef69eb85ddbee8c15e1dc78",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.currency-auto-ban",
+    "content_hash": "f508b1a9cf79360ac81e6ed27aadf280a1c665aeec7b7ce6a1f6b840d5a8bbbc",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.currency-gold-flow",
+    "content_hash": "823dcfe41b62f789adbcaa8a192380e12f8cfced76c32af417829c2bc3e8a3f6",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.currency-query",
+    "content_hash": "3f1677cdfb11b7d641189adb13b0519a12934436d83076bcf9b91e00d5065bcb",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.currency-recharge-log",
+    "content_hash": "c4ee9e8a3598e4330c9f9fc1eaf68f363d7493b8c0ea914888e340c977962aac",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.currency-refund",
+    "content_hash": "e23a900c6ab8ac3ba5b0dec674cee0485cf2bb825a8f20aa7dde4c41a9e7aeb4",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.gift-burst",
+    "content_hash": "82f52bf517dbb3a571d7dc35eade2a20cd021286c34755037f4fbd3784380d27",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.gifts",
+    "content_hash": "d715c103332671a3526c3f9f3a97d2369bf565b50a2ef6535a5bd1271f14dfb9",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.gifts-lucky",
+    "content_hash": "46a8b75455dae6d30fb2abc3a6f4812fb8e28a9bcf9dce2b22e2c8619f614f46",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.gifts-weekstar",
+    "content_hash": "db9e55b25a6a538a9c36eec41f446a16f690841e19bb6b610769ec2e7bae8c73",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.grant",
+    "content_hash": "d0edfe54af7d646ae399fa96a53aad8867c3306812c3cd093a1599f889dde699",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.login",
+    "content_hash": "0373fe3a69cb52cfa447dac6500be5573d83efa61b7885ffcdcb1e8e91c813e4",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.login-admins",
+    "content_hash": "b690a33f836b01f9b37af1e240ff3387c2a1a56ca224b848ad7fd06d48949219",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.login-menus",
+    "content_hash": "d2359df6db75398541a5d528fb1b86297c8971ad566a80ec49f030583ab3faaf",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.login-modules",
+    "content_hash": "2264a8b8f4dbf32e64bd1e6a005d7e93579025895acf3acd8e3017a1385c2221",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.login-password",
+    "content_hash": "017dd2b3ce684e11fa86630a0ebba930f26ffbec95a145168391274bc32f2a37",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.login-roles",
+    "content_hash": "a3ad3a95224cb8c2a6737a2e4eefa78065aaf23ebbdabd0fcc964ce05984a031",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.login-timeout",
+    "content_hash": "b0e0fcf2e8e73d38beaa1c2e7ca19cb5b3c3806f70d79a6101e0163314f70e97",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.mall",
+    "content_hash": "36d6a653f5371999863af9635b2abf5b49779c661e6b6262f165884ea532fd87",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage",
+    "content_hash": "10d482b1f2de595b956fe251b97e366e9a0e090d6136faa0ed11dc242a8a757e",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage-action-record",
+    "content_hash": "88ccb02252d6910b3f5db9cef2402251ef7cabb8b298a31e68c9ed2621fe99fa",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage-feedback-app",
+    "content_hash": "1885a2d5e51a5a15d207ebe0bf69d0c25af8cc6dd4b5ce1855eaa7cb2c755de4",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage-feedback-login",
+    "content_hash": "452f2e564ef86877c2873cab38de1a7cbe171dd5f204cdf1b498acc0a53c135a",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage-feedback-tpl",
+    "content_hash": "7194ec12dd76b8290b1a97630fdd68572168f5fccfc7445e2482769ee310d14b",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage-identity-record",
+    "content_hash": "4ea180471f27ae143b77be8b89c93e431fa9c483db45b0129de0cc5e23055470",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage-keyword",
+    "content_hash": "76eb78c42abf73578b9fc5320391b04ccbffecfaef964ab3216732d5ff166ef7",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage-login-record",
+    "content_hash": "e719cae744a1671d66a7e120dc3082fe1b770d8c2e24a0f3f07702ad68fb97f7",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage-plat-record",
+    "content_hash": "c58e42f3bbdf4946a433e854a8c7f8ac3ca8010c369a261f5c72ad1c0528f829",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.manage-report",
+    "content_hash": "a81237fa150b48b55a7afbd54b6a637df6784591d537765eb40d71c101edcbeb",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.merchant",
+    "content_hash": "4d544b95f9b18348cebecde101e3a0ec9a665acf3f36393458336bebde9eb786",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.merchant-autobuy",
+    "content_hash": "4e201765a7d96e295370163f6e7474999d3f5153e9386d83fec8b23f8f782b90",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.merchant-coin",
+    "content_hash": "4474e9640451247cefe920e220bed0d0bcdcd87780cf641589f56af8042fccbb",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.merchant-greylist",
+    "content_hash": "da6234b7570b4cafcc89d4f06906ca1a1ab06eefe6a76e0e10cd2a448612bb97",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.merchant-transfer",
+    "content_hash": "f31efce1b1e08fef1a1fca0a687bb1fc000a12d43b567e366a204918c450bf82",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.merchant-whitelist",
+    "content_hash": "59d9c79815e6e197b209d7b3daeef0724184c3283cd0ac36165b4a0865b8916a",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.msg",
+    "content_hash": "b9c1ff0872900fe28b5844a637be9f60bb929c9f40fa282a820eccccc8a0658b",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.ops",
+    "content_hash": "5e2893bbe474414a902b78e460180ff0c63bf49596a1823f6c36e100c0052c60",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.payout",
+    "content_hash": "0192b65f01db273a3ce00a417d7b725a701ec63c2af21a3464d965f2a17bfd15",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.platform",
+    "content_hash": "019c350cacbcf4c9c5e4ef4f594eef8281e27564d95297f7b902f3b09765fec1",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.platform-rank-whitelist",
+    "content_hash": "e3c1a7acc5b536f135928f1d0adfc92066d0815b9caff492c00850dedbcae3bc",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.recharge-msg",
+    "content_hash": "45216866691460c6311b64a4224cd0f7411b5abc0e392821dae63887f0e24147",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.referral",
+    "content_hash": "3e0be854eb119da9d86e41fc1f3bbd10a3346f82aa55743572c7411e4be0b94d",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.room-game",
+    "content_hash": "41b56f08cbf078787a8838f9250099dbb78fc466e91f2d75e24359f24ea408fc",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.room-kpi",
+    "content_hash": "15086cd58d2f1bf4ef0584e61ca1ac871614c1657a82c5ac6b694e972ce91bcc",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.rooms",
+    "content_hash": "47eebabef41de183b2b75c09c59afde308b28b238e065589006ac3e89c49f23c",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.rooms-broadcast",
+    "content_hash": "fccaf6d62616f73b7516f1a60e6c0488dd35fabfa96098f594c0019c6fe84208",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.rooms-official-admins",
+    "content_hash": "992726c1a6967325f58028dfdd1f7732091dc564f14c5a70d99cd458c5c24911",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.rooms-official-friends",
+    "content_hash": "3e31a281946a7aa64dfaf48467da129c2f9e836edc0321ecea26f2edb92774cc",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.rooms-official-hours",
+    "content_hash": "308edd41881af19f63dfd79132dfa793be8c0eb55576ee67af52f69b144bf6a9",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.rooms-official-stats",
+    "content_hash": "233871cfe3ea314e0620be1d816588122d9205cb240cb8af7e82a51bdc19a52b",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.rooms-ops",
+    "content_hash": "71027c6146569c3152252cd867ebc0fed4a6f5fc8962f0b6af525eb61478f9da",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.sailfish",
+    "content_hash": "f5e080562b42a426d827c809a68d7a8e85c7c3274d6a7167c6695c72866c2d86",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.scope",
+    "content_hash": "16d26d67c6974e6b7c30f8370d1c5e9d19eed10c15776a2eab3936e7ed03b656",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats",
+    "content_hash": "35a03acf666025deb090e93405e03266081d51fd3c274b0d9c7ebb5bb2fb2799",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-active-users",
+    "content_hash": "b2017d5b5351e2d68451a6f86dab91fa930049f114a90da383b96474e883ef6e",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-activity-ops-room",
+    "content_hash": "b1bf27442de1580eb5251105e27d1298af3001b0875a3774fbfdef05950362d2",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-channel",
+    "content_hash": "cb756c8d2dc9f6a5f0556e15ac5f85a978b3762ab85c5c9725433c0452e09b7c",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-consume-daily",
+    "content_hash": "a6b22e9db10f965b1bf616063460f474a20590a907616f0a52cb695a420460a9",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-customer-service",
+    "content_hash": "a86e8eed62b50ad61e644224b484c8cda85d7adc326dcab8c3715259554479b5",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-duration-detail",
+    "content_hash": "3d654ee5b128d75698d1eb79b6ec09046c6a663aa4c79e0b717e6f52b8182aec",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-gem",
+    "content_hash": "d4d37fcaad1e156a25d4a34cc04b11cb065f2d44387ec9b85d1284234aa627d2",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-gift",
+    "content_hash": "93d8925c437dd2ac100af1b5d5452b26e3cf77368ab917d1fd4df62ab59399a4",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-gift-counter",
+    "content_hash": "8cfe08cbd77ccd387479e751555636c905027fa2091e606b9557286907f04249",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-gift-query",
+    "content_hash": "9465480bc95c520e6e093cc9f4c1d7271baf854eed5590a0244bf26776a40b35",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-gold",
+    "content_hash": "9315fb6378bb7e4562ac7b181b0d274a7a948d5249cec667d475aa9f5e52ca78",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-gold-flow",
+    "content_hash": "da46487d7a0e6f5e11ccc0185c58ef38542e722825d50736840988b63b84632e",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-goods",
+    "content_hash": "fe7c961a86a75e97721c90791294731298bccb5af0cd2457ce26b5c0ed346eec",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-lucky-gift",
+    "content_hash": "7765ad575f3e4d3857e21762c273e2083caced6530ab2b677517c528d12e7dc0",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-new-user-recharge",
+    "content_hash": "2439cd1e789b9f6c3b8df208bed60aa7bd72e56369962e67f79f2cbe54ed1ad9",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-new-user-source",
+    "content_hash": "8769afcc38829c91bad8d8f91cd0e59c00db45d47e499f5293db2cc9ce4c902a",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-new-users",
+    "content_hash": "73974dbf49d2f04c04c5e15bc6f411b3e51ace8d53b980ea8656ddcd683c6859",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-newcomer-behavior",
+    "content_hash": "77f3bebeaea52ed98d754a81a51d58034f0c31b1eaf54a1978542435c106e2e2",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-operation-log",
+    "content_hash": "951e500668d0acfb57aa4e366f2f8ed127a45bfa92f6039b95ed5bc1f07146d6",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-platform-daily",
+    "content_hash": "9abe512c478896e2c9762389a5e2f8971897471fe5337be2b9535ff7132c8911",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-platform-duration",
+    "content_hash": "e59195e7b8fd668d7a317d2ff40acdea74f02e1e99c8c0c916aa6552546398f3",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-ranking",
+    "content_hash": "568d60f1cae24abf741351ff550d4cd4a162a14435f1789bf436a99fb4f30d17",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-recharge-coins",
+    "content_hash": "404f928cf4829798f4b9c4e5edba321cdcf3da269729b223a5aea527dc35853c",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-recharge-log",
+    "content_hash": "f42ff132d19f301b535a75473b9131a1d17e41c6e470fb6aa0d1d692e1171bf7",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-retention",
+    "content_hash": "eb8a040380b5266cfc9cf3c45e95aec19a520e1cf5d4bc01fe7fa5450e01c627",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-room-consume",
+    "content_hash": "cc8c42e3eed65bef02810448f5c5e62dce3aa0949cddb5c1d6a934545133e68e",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-room-online",
+    "content_hash": "190a6f87fc393a6826c403473ce320534ae6d4bf8d5146dcbfe7ffa3c60e148a",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-task",
+    "content_hash": "154f3307adf2bc52ae094b99141283c278379a02965240413ea0e47372f6e817",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.stats-week-star",
+    "content_hash": "47e211f376dcce178243150dde705a1c859ef14c75061575c6f972d61bf6cc3a",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.update-popup",
+    "content_hash": "317a0919c4ab5e835f0b3ab5578a2955ca8d8012249bdc353777ac916a503b8c",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.users",
+    "content_hash": "bab6843bc1bba590a3c462b7dae99e1fad63bb9a0303f0045affe673cd46d84f",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.users-account-ban",
+    "content_hash": "edc472643650dd9bf4677ccb27a0f6dc9f8e392ea697a718c170cb9c6ec50f6a",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.users-detail",
+    "content_hash": "7be9aba77be25f0cf4ae1a58f5426e32890985cc266a1e270fc027defb6067d6",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.users-device-ban",
+    "content_hash": "a5e35189674705396c3e52ce7a464b22e59a2d2406c1e3590a2816bb27a4ee46",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.users-fingerprint",
+    "content_hash": "3278b905d7cb0fa4727c69ea22af575581ec6a33c6a08c307b9464af42110f20",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.users-list",
+    "content_hash": "99dafdcb794b4508c1cbe67a6f809582c67c6c82b5a68105bdc87f547f752949",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.users-network",
+    "content_hash": "0bb61e02513fe898bfe2508f76e4bf743a959384fe421079935b869a5561f44d",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.users-pretty-id",
+    "content_hash": "8b598ddcb26d542ac074b6d2a6e827f5c6a5e859e7e5587adb3b095169aa0177",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/admin/brief/current.md",
+    "chunk_id": "admin.vip",
+    "content_hash": "b0b5699a644099df71ac4c740a8e4ed23849eaf19d3c135ee11393e0b739f26a",
+    "collection": "hayyo-admin"
+  },
+  {
+    "path": "prd/design/app-branding/brief/current.md",
+    "chunk_id": "app-branding.admin-impact",
+    "content_hash": "0a31ffa6850e9bc882d7abc3b05379f43aa8d1bbad51e7734f49debdb00ce83c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/app-branding/brief/current.md",
+    "chunk_id": "app-branding.flow-main",
+    "content_hash": "200ab7a162205717096baeb1661d4f62cb4eb2c9b066cbb67c41924e371a38f1",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/app-branding/brief/current.md",
+    "chunk_id": "app-branding.logic-exp",
+    "content_hash": "a5b550ba9df664ea9a9182fdc224ffe7a03d7bf66ff2336b8d41daffe1550ece",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/app-branding/brief/current.md",
+    "chunk_id": "app-branding.logic-home",
+    "content_hash": "3755facbcc3675bb6a5ef8d7d42b1c643ea6665c6684a26f6f771066ea87a854",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/app-branding/brief/current.md",
+    "chunk_id": "app-branding.logic-rename",
+    "content_hash": "16dd2fcb476563e0fd32ca919cda19c1e339e003b928a501c8b650ccd321388f",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/app-branding/brief/current.md",
+    "chunk_id": "app-branding.logic-update",
+    "content_hash": "348a5ec1f739f075f53c4c95940705e58711f5eae0f3b9ab2db6878993f6db48",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/app-branding/brief/current.md",
+    "chunk_id": "app-branding.page-update",
+    "content_hash": "f5d502c575c6867cfe3f30bf23a78ec9f88302f3a7eaf8a43b81905918f1fd6f",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/app-branding/brief/current.md",
+    "chunk_id": "app-branding.scope",
+    "content_hash": "cbfe4abe4962a4d5a9a94af0439c0414f84d392c5b6b0d7f9d1623870be80e35",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.admin-impact",
+    "content_hash": "4d3fb750c43745a2b1d6bada80015affc5eecf7949ca57e4951a716fcf852571",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.flow-main",
+    "content_hash": "569ad244d9b1fb0d947b614b4538966d52928e9cabfe9a5a578b2ca791b99ece",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.logic-ban",
+    "content_hash": "53a098b03a44768b16a250ed5001df7fa3f9d89073a80fe95ba66ed4fc197d52",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.logic-entry",
+    "content_hash": "d083baa08ab9dc8325caf75765ed8d5b8202f6dd2e71af263f609424819ff5d9",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.logic-login",
+    "content_hash": "2a85967ec7184ce756363f07dcfb4918a3dd5e470abfba5e14ab907032faf50b",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.logic-password",
+    "content_hash": "b87d81d279fb3ad0bd4e08660552444bc58f4745dd9384ef5b145fbceef36cc0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.logic-phone",
+    "content_hash": "d5c927e080103eea1007669c84118999c4e1e68df85da946609840c1e2a7e312",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.logic-sms",
+    "content_hash": "0532819a6c51f84c01ed85f64b7468b1f46355d1b57100d535f7d58c7581a343",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.logic-third",
+    "content_hash": "5723b4f32dec92925aa52093821ca8b85e4a2db244e5e7e9ffb9413823cead58",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.page-entry",
+    "content_hash": "f383512d5b1d93f5793d32581bbe72249f1e868717cac8e5459e995b5d563ed9",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.page-feedback",
+    "content_hash": "8977dfa6e79aed317bc3fcd2de27e7dac6dc402a39b22dc0d23cbf2db84490a3",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.page-phone",
+    "content_hash": "cc65925a33b9a397a0b277a179b6109c855a8684d233d0bc1ea2318ce27510b8",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.page-profile",
+    "content_hash": "907c68b300280ff73a50302fd9d0d0e759d1260c633e85b4262442cf7ffd4c19",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/auth-login/brief/current.md",
+    "chunk_id": "auth-login.scope",
+    "content_hash": "2d8da7b32cc36573a0fdc7959b185e4ec76cef3b53c10b6bf669eb1a1136ac99",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.admin-impact",
+    "content_hash": "5bca9d9ec994b20969e3ffead7337f758a90d3edd6c9f6c290d70e5e0ff57682",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.flow-main",
+    "content_hash": "20cb810304b4a63e35d8cfd2eb91901ab8ebf0729ae5186ac824bbf8f28de82e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.logic-lobby-match",
+    "content_hash": "14f0cf1c9be43e8c0dda260488aafd4d9d3d51e5e2c69808261f8510ea20cd18",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.logic-lobby-play",
+    "content_hash": "7dd0400d7fc3f040226af05f6a9cda4e8d9f181d25648fcf080b7e1f335b30cf",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.logic-room-open",
+    "content_hash": "169437d8002969a153f1ebe7738bffdd248901e4b7b75d282bdd1c379365ff40",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.logic-settle",
+    "content_hash": "a07e41d8e6cd9fa25b7a41e8f325825a95498e9997a2a76acfef7dc08116e560",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.logic-three-games",
+    "content_hash": "eb4e7df6bde237a4ce7b6e6cb81e7c0cdacd58d403a8d39db2999d5f0f25fb3c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.page-match",
+    "content_hash": "a474a38a364635d6618c6a6e6c55b27e2b2369e92b8169adda948f33c12b6778",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.page-room-panel",
+    "content_hash": "bd964f086ed2c0c7e2ce75ac45bd9bd71c153c00027feb8b525db0ed785586db",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.page-tab",
+    "content_hash": "9989926d92f4bb0d492120678785e36bcb279398e1ec6cf7ab8a07eaa28f0dae",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/casual-game/brief/current.md",
+    "chunk_id": "casual-game.scope",
+    "content_hash": "d031952e05c2eb0f503111594068c12258a6ed3f13d124637b105253a5d8ec2a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/channel-tracking/brief/current.md",
+    "chunk_id": "channel-tracking.admin-impact",
+    "content_hash": "143982d80d35e7445b7c8e1e7ffc60e0092ec75c5af6d146e6f8e3208add7fbd",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/channel-tracking/brief/current.md",
+    "chunk_id": "channel-tracking.flow-main",
+    "content_hash": "1d14f99ee73f57e9fea620c5f16666a8dbbeaa824bf0f0447bfee0cf9eb17ab6",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/channel-tracking/brief/current.md",
+    "chunk_id": "channel-tracking.logic-events",
+    "content_hash": "dc35d08a962634e3b01d37bf6f92ff4bb0f83199d0611a785070f8c8c8859c70",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/channel-tracking/brief/current.md",
+    "chunk_id": "channel-tracking.page-none",
+    "content_hash": "a4c03d41dab501a15e43489752601496dad5543d9205357c50013c9bb21b439d",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/channel-tracking/brief/current.md",
+    "chunk_id": "channel-tracking.scope",
+    "content_hash": "3aad11575a94b46845f8c36de0f71a44afc24e200effc3fa0e8867f5f88c86ee",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/checkin-task/brief/current.md",
+    "chunk_id": "checkin-task.admin-impact",
+    "content_hash": "61aa4902a132d35c94e5cff7131fbb8bad3ef178d4cfb02c25ed56298af9746f",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/checkin-task/brief/current.md",
+    "chunk_id": "checkin-task.flow-main",
+    "content_hash": "7bc4db4e8257b4e488be6c6c6fc47e35886fe9e3339002ffdd83a08af1d3e2d0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/checkin-task/brief/current.md",
+    "chunk_id": "checkin-task.logic-checkin",
+    "content_hash": "4e6217ed22f09dd5c78ff16f56410b5d3b5cb14be2e1e8fddf9c134b4be8cedd",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/checkin-task/brief/current.md",
+    "chunk_id": "checkin-task.logic-task",
+    "content_hash": "4fbdce338ff6eef1dfde70318ad0a8e3e371b2bd16a4011a5a91d90b286e580f",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/checkin-task/brief/current.md",
+    "chunk_id": "checkin-task.page-entry",
+    "content_hash": "9c778470cedcb1b31c797479b785485395d4026b4f1d6f778a1866a80e1e9427",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/checkin-task/brief/current.md",
+    "chunk_id": "checkin-task.page-popup",
+    "content_hash": "e832f6291f669633360c819a3e92ed4144cd75f6eaff155bdd09d26c045597e9",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/checkin-task/brief/current.md",
+    "chunk_id": "checkin-task.page-task",
+    "content_hash": "0212822522cac3c8f76e7319d8674d11f5ca99d3becd05389e0f175e366c186a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/checkin-task/brief/current.md",
+    "chunk_id": "checkin-task.scope",
+    "content_hash": "5e0ce27c75729bd67ac26ae8223b48dfc22a38ac9c18e446358ff9020c4e7b34",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/coupon/brief/current.md",
+    "chunk_id": "coupon.admin-impact",
+    "content_hash": "9dd2d3586e34f19c2f3f1fb32f6193c0a09c696d58e2e51545171c2f5119e695",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/coupon/brief/current.md",
+    "chunk_id": "coupon.flow-main",
+    "content_hash": "cc884924315546babe2e620abbb6301ecc38f198c6d527d8622e656bf4f76261",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/coupon/brief/current.md",
+    "chunk_id": "coupon.logic-msg",
+    "content_hash": "7e206f88ac3d2e9d220a1f5b56fd984a57b424632ea2c28a87e695f19a1d390b",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/coupon/brief/current.md",
+    "chunk_id": "coupon.logic-popup",
+    "content_hash": "c1c0510b94b086cd5cf7228881f4aeff6bcced70943630aad05980bd90c740a7",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/coupon/brief/current.md",
+    "chunk_id": "coupon.logic-vip-trial",
+    "content_hash": "d3a90055fdb81074a68674edacb121bdb953d9f5a5a648d4de7a513f48233220",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/coupon/brief/current.md",
+    "chunk_id": "coupon.page-history",
+    "content_hash": "a56d04354aa913efe7e4ca6c87cfec5910d6a527f367f4e3792e8f66262a53fd",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/coupon/brief/current.md",
+    "chunk_id": "coupon.page-trial-list",
+    "content_hash": "212cda46aad644b8abac00b04bb085d4023bfd9ccc73f575f28783c8c2984f4c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/coupon/brief/current.md",
+    "chunk_id": "coupon.page-vip",
+    "content_hash": "d02c3bcad836f94e551b0bddfe62d937639fa42d01f7422565f5c3c39c919a09",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/coupon/brief/current.md",
+    "chunk_id": "coupon.scope",
+    "content_hash": "d0a736508a430f45e488d13906408899713152e379461f9d846f776f81144c8b",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.admin-impact",
+    "content_hash": "1021c20a9feee60f6d1d2854dafed3629787b3f3147fbc5ce44acca65903be5d",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.flow-main",
+    "content_hash": "cb131c30a54d970cfa226b502157b430fa1b797f321c2bc245ececa2564bc56d",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.logic-gift",
+    "content_hash": "ce579a3e02d8de4826b1e6b832f62dd10d5a56e376164236691c19910fb4f5fc",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.logic-guide",
+    "content_hash": "28947f4e2a5a605575fb64e9f1723e17e052f196a3fe6e0a26ac623d4ae7f408",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.logic-inroom",
+    "content_hash": "14c36e64b295f760d950160e267b037092f1c4cf353ac527e3c618b9825dafa4",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.logic-patches",
+    "content_hash": "9ba6c7b2e943a9e35a41de454d4f57e17d86bd8ae96f2fb09c4442085e92ce60",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.logic-queue",
+    "content_hash": "e1f93df14c5f5a3df95a3c87228cbfa1fbbb8cb3e169541af71013d8beed08f0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.logic-risk",
+    "content_hash": "49166be3affda24c02240034250705fed4b56f23f07080f84d4ec4e90c687a7c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.logic-sms-region",
+    "content_hash": "f839004f9a9116a0b5991504ef7f07d41b038424cb1bbfdfcb51ca9eff98421a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.logic-ui",
+    "content_hash": "bbc7b97442542a46215a37a8fa867f56c127cf89ca51edcd013d1ea25bbdcca6",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.page-gift",
+    "content_hash": "756d06e67887196a6c6d965fe9fe11db5f16453fa056cf7d043a581ea5969e39",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.page-guide",
+    "content_hash": "5ddc733165128267428ebd08264754b37648d5c5482b58631718c7ec3b9cd857",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.page-inroom",
+    "content_hash": "a3b707ade72671031b0ce246a61cfbb29fcb2eb8e2ae90b1a5d3a16938b11ffd",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/infra/brief/current.md",
+    "chunk_id": "infra.scope",
+    "content_hash": "98ccb4cbdac5ce588b7db2cb703d57355bb897fe49dd17369f8dcce46c3b1814",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.admin-impact",
+    "content_hash": "7f7d6b87f6c6b2cd790dcbd3a9a0fff1bc13611b912906616d1d7e0bb339a869",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.flow-main",
+    "content_hash": "21026477a45a7b5eff3c5e48ead115c1872f993c65371c81163064f46d792960",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.logic-achieve",
+    "content_hash": "8d88ee2e38b7c306ab898b52306607c154a07ff5ad2b30b53594f2b3e1bc5c0a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.logic-chance",
+    "content_hash": "580bad811e26439067d25e1221915a239605f289940dd3eed75387381b118e34",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.logic-exchange",
+    "content_hash": "2c27bf2dc4ecfad21fbc6f486242e2a444f8ec8d92db64e9ffb613e95a2b9153",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.logic-reward",
+    "content_hash": "53f0b3daf581097f716f78661af2d121d8f9e3724ca8ae9421c1254fc76b4608",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.page-home",
+    "content_hash": "f83acfde1facb3dd0849007c2335251ef77522efbd7139c327854e88e9f5ab07",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.page-notice",
+    "content_hash": "30e5a553a5e05ab0892f9352a17667b4899ea0caa545fa2953ccb590b3677ccd",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.page-win",
+    "content_hash": "956c6e69fab88e3e570e3acd9d120ae4944a153ad019675d5fadd5cdc54af817",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/lottery/brief/current.md",
+    "chunk_id": "lottery.scope",
+    "content_hash": "d96fc554406e085ea0981b5fe7036c80fcc99c52d6cada0449c3e72c4816757c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/mall/brief/current.md",
+    "chunk_id": "mall.admin-impact",
+    "content_hash": "54238e3e3e5153628fc597fdccac66348df5b9786901530744bdef8a6a4c7526",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/mall/brief/current.md",
+    "chunk_id": "mall.flow-main",
+    "content_hash": "29f0728bc68e7829f7f5f0a8851ad6107cc24653f2fb065c0e319165c0c05428",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/mall/brief/current.md",
+    "chunk_id": "mall.logic-id",
+    "content_hash": "4c6c645c61ddfdf073380df7bbe6d69cf86e76d77c0566b185e1b9cedba39863",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/mall/brief/current.md",
+    "chunk_id": "mall.logic-shop",
+    "content_hash": "ec60f9f1138b6df71b85101b1d02f560ee138f65b426110cf77a43cb17f01ad1",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/mall/brief/current.md",
+    "chunk_id": "mall.logic-theme",
+    "content_hash": "19cc0f99feea47082f4480ec2fff761d8bc164a9ca8fdbec68fd8b53a1b6f7c0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/mall/brief/current.md",
+    "chunk_id": "mall.page-bag",
+    "content_hash": "5ecff31d393dacfcb8f768ac52e92bfb1263bff1502f8937383ce17544db6f66",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/mall/brief/current.md",
+    "chunk_id": "mall.page-id",
+    "content_hash": "5fc5bbc0cc1e8c6ccc15f820ae79421c5d3e029bda4c022c8b68f4b79d1a4120",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/mall/brief/current.md",
+    "chunk_id": "mall.page-shop",
+    "content_hash": "57f179c7673506b3d6eb46bc922a071c1966dc7fb36de2a77333e136ce1a2347",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/mall/brief/current.md",
+    "chunk_id": "mall.scope",
+    "content_hash": "3fa949e4f15049bb513c0bc858ef5f3341b67f2bf5fc7e005e4fa269a647793b",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.admin-impact",
+    "content_hash": "2160622e7100ccee614e8e48a393edf5c680a8924b7844ce4c5c9ba905107664",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.flow-main",
+    "content_hash": "dd2c78564589f1b118d71ed3017ac0b7b4616c708e35e8d661feae48a6360f4c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.logic-account",
+    "content_hash": "efc2dab9c2bdda183268068fc733dd340ab7ed16044d35de64b658ea35acf28c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.logic-list",
+    "content_hash": "ca134d1450ff580418910d9a3ff3f123ebc8fd7475905e4990df06e92d8c1bf0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.logic-payermax",
+    "content_hash": "4e63328f111b715a96a4fab164de5a3d7041efa929b156db7b62be419587d161",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.logic-transfer",
+    "content_hash": "1aa311666b413e27498e9dc9ff5f370dc8e55fe6c9e20535c12cb022f8666479",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.page-center",
+    "content_hash": "09382446df7451c1346c5086c676131343b938128052cff1450094ee495a6a16",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.page-list",
+    "content_hash": "feb2900e494c5c36c2e63071633f126b72165176cc81e2caf4bbc36cf342092c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.page-payermax",
+    "content_hash": "f12993b881b1239b40c27b719c833911d5f37ef0ddb36103fed156f988703fc2",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.page-transfer",
+    "content_hash": "02069df2c9445376ce8fb240fb61c1ef56c92dff9f0c9e2ff8bc12b54950b026",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.scope",
+    "content_hash": "40a6de45d898fbee0197bbf517fd4a4fad605f5befa272a236b90893bd0e20d9",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.admin-impact",
+    "content_hash": "a133b941fd63b0509150ccc41d616f96eb0cd49ccb634bd68762216c82f78274",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.flow-main",
+    "content_hash": "f07b12a654e1601efc4eb6baf2a61b3dc8179370470d0c5b5217a1ac23bd683b",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.logic-friend-msg",
+    "content_hash": "9e6f6586fdadfcc51e5b3d86180b82868da749d2e88eb7ad16cbfd36c6267e82",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.logic-gift",
+    "content_hash": "67cb9789bce57189b3306442d14952b6ef7664470636bfe3fe22a9ea5aae5922",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.logic-list",
+    "content_hash": "e2ceebd19559b643ab8558d207f7d8c7ba2434b66b4e0b947cf1ceebd44ece61",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.logic-official",
+    "content_hash": "118b7865e86eca7c82eb193a6625d1cb23af3771409fcafac626608aa374ea7e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.logic-send",
+    "content_hash": "525f6b2b33e5c8758e5370177f2452d76eae4276832da73267335f00c23fe86e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.logic-stranger",
+    "content_hash": "b5703f0e64f3b65ec3e8d1fc0296648a21ad31d33690cac04c011142cfdd27f2",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.page-chat",
+    "content_hash": "dbe17dd98cadc02378bc6922c18facdfafaead8b4f08aa32c978028653b6f532",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.page-friends",
+    "content_hash": "fc556ee6c2c8bc523ee45b87ce047fa7da943f024ccfbc82bf84eb89f7bf812a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.page-list",
+    "content_hash": "bba2640d1deee273e54e89105444640c0d1bb15cac7feee68aec26931adf8f0c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.page-official",
+    "content_hash": "54111e2666a9ded85f451e39a534db864192db249dca7b71cc86306d6e2a2699",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/messaging/brief/current.md",
+    "chunk_id": "messaging.scope",
+    "content_hash": "342206653011c978f89b2e5639a788a6fd7128987762b776e92cc70c1b619643",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/payout/brief/current.md",
+    "chunk_id": "payout.admin-impact",
+    "content_hash": "7a8ee04cd63ee269a4f60ae637e046d349d6ce97ab8705efa4c0dd9a74bc0ed8",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/payout/brief/current.md",
+    "chunk_id": "payout.flow-main",
+    "content_hash": "1d8ae50093a0b1a12096fa200d0fff293135820a29b3d52f40b872cf022b3626",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/payout/brief/current.md",
+    "chunk_id": "payout.logic-apply",
+    "content_hash": "7f9663c1b440b86066ef7b2540abd2776812165e85cc2b6f6b3a01a3247c43cf",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/payout/brief/current.md",
+    "chunk_id": "payout.logic-guard",
+    "content_hash": "3303d435a077fea6f208d321749ce96a5bea17edfcc1f7ab7abde34c75e0ee15",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/payout/brief/current.md",
+    "chunk_id": "payout.logic-points",
+    "content_hash": "65d7206c76175e6554eac22a7cf2da22d54481bc281161c726bdff85037b799a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/payout/brief/current.md",
+    "chunk_id": "payout.page-apply",
+    "content_hash": "e19f2a878379f00d794460a4e4bbbd3d383d73704ca188b1328e08c21209ebc3",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/payout/brief/current.md",
+    "chunk_id": "payout.page-entry",
+    "content_hash": "cff4ec1431747c0fdcbb34e3067039cf3fea7ab6a0e37140053c14df0bafee8f",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/payout/brief/current.md",
+    "chunk_id": "payout.page-verify",
+    "content_hash": "752fb27098cc119ff7a063e9c9fb005833d81be6a3765d9529afa5a95b4029e7",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/payout/brief/current.md",
+    "chunk_id": "payout.scope",
+    "content_hash": "b14100e9b71c8f2694edb2f0346b6c985abe523995243ef755266f9a1a9e74e2",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.admin-impact",
+    "content_hash": "700f008b02b0299afbe089f0d2cb8e573e674c45b96e1c809b6117cfc1175c2c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.flow-main",
+    "content_hash": "c3c8a8e7a3e35913ae8cf92671f336cd848ee0e83cee18a02dbe69637c828a76",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.logic-bind",
+    "content_hash": "697de1ef93fa3cbf4a7d66d76bbdfc51cacb617be7659d62e098bf1c2c014a3a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.logic-delete",
+    "content_hash": "5b5b16019b00d79248b628649fbc4281f1795de640e8931442beeeabf6a849d6",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.logic-frame",
+    "content_hash": "885d85c1eaba02921773c2c388acf38320028c3dbab8e957f71a46ee6f72f2d5",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.logic-gender",
+    "content_hash": "831a9cf48028c40853565042803d3a7a247d563c12116dc59e7335966e0a088e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.logic-relation",
+    "content_hash": "5425322c8b3fe9d018ea79f6a8dfda1ded37dcc4a55b88aca8aa0910359e1af5",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.logic-update",
+    "content_hash": "5e242fe67b8f34c0424ece75d7e7b94bde8da49836ac20e3fb0e29ee2f083cd6",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.page-delete",
+    "content_hash": "8e157c5401dd5fe242a5b1b32755bfe2edf94968d371916a782958abdea19952",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.page-edit",
+    "content_hash": "d954ab0ce7014e131923f130ae1bfc45fc0043f82d3d2d790658d13c2be133b0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.page-feedback",
+    "content_hash": "f6c1bf14bed0d903ae765d301223dea5a1c30566d09668ab603b873b296def44",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.page-frame",
+    "content_hash": "4a55a4414fbcd5684cf776be01df5ca44613bebdb16b63db1b469b0909759149",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.page-lists",
+    "content_hash": "c190f505f25fe236396ec4d77a323daa87835bef2b5cb098170b52b54637dc9c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.page-me",
+    "content_hash": "57064e85a15f41b41998eae2bf6cdcfd6fbc34a902b4ac53d74904601fc3316f",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.page-other",
+    "content_hash": "591cd8be2c0ab161204a5661bb8918bb3b6f8306bce15dcb6391c98265b33ab5",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.page-settings",
+    "content_hash": "faddca9c59a479310fe58ca46ee68f4821f240e747039fef5e11a41a95a999a4",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/profile/brief/current.md",
+    "chunk_id": "profile.scope",
+    "content_hash": "8daf196919247445b8aa52273e8ca343ac2def941ca018e7abe2725a47defcf7",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/ranking/brief/current.md",
+    "chunk_id": "ranking.admin-impact",
+    "content_hash": "3dccc6cd258c70210388bda683e6e0312f120b88de7dccf10af313af5c795703",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/ranking/brief/current.md",
+    "chunk_id": "ranking.flow-main",
+    "content_hash": "15b0f7fea5f2327c3264d4c2d44886667fe8e4b6c77ab4b46571b02278ad99d6",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/ranking/brief/current.md",
+    "chunk_id": "ranking.logic-number",
+    "content_hash": "322675306dad48b812af21549b6324307651868ad02e62259877ecd5abc5053f",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/ranking/brief/current.md",
+    "chunk_id": "ranking.logic-platform",
+    "content_hash": "fe356abe190f432c72fe3fc2a1e9a9572ad9946fbe9967bc16a0902365da6641",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/ranking/brief/current.md",
+    "chunk_id": "ranking.logic-room",
+    "content_hash": "b97c901eb365b4749ffb7be718f94e82592808c83898259fdc5108fab0ab8fd8",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/ranking/brief/current.md",
+    "chunk_id": "ranking.page-platform",
+    "content_hash": "62895872bb980700db1f205031444ec29438506896a691b51c94bf121f089774",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/ranking/brief/current.md",
+    "chunk_id": "ranking.page-room",
+    "content_hash": "135aa71d55a2109bbf06baf18208a00d8df5e80cbbe98b39b0551d4223ace5da",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/ranking/brief/current.md",
+    "chunk_id": "ranking.scope",
+    "content_hash": "e5ecb84a0eec5d504a0f8057f8f6e7e8edca2910506677de78e6f54987b95007",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/recharge/brief/current.md",
+    "chunk_id": "recharge.admin-impact",
+    "content_hash": "bfa59ca8f6ca3027dfa5cdc2c31192f12e4d49e76b4ee61ec38e5678a10ebafc",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/recharge/brief/current.md",
+    "chunk_id": "recharge.flow-main",
+    "content_hash": "d47556f6d3e046bf5f2d9ecd9de3907b3b3532572fa63480bcd8e4ddc41e5a93",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/recharge/brief/current.md",
+    "chunk_id": "recharge.logic-first",
+    "content_hash": "877a9256d11e08d846a889f00ec33d5383e4285a8e364d95096c812c4baf5994",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/recharge/brief/current.md",
+    "chunk_id": "recharge.logic-quick",
+    "content_hash": "712c746bedb51d18f49d91bf44e7c8fbf4e7bc3c9f7c7d171eff22b7fadd3444",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/recharge/brief/current.md",
+    "chunk_id": "recharge.logic-wallet",
+    "content_hash": "fea38e8d9a5b4b9bafc3ac232a217f55b3f64b87dba7c8dfb63f1fe2e98dc0a4",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/recharge/brief/current.md",
+    "chunk_id": "recharge.page-first",
+    "content_hash": "bf056a6c9f8607551f6a39fa59180c723dd17dc76dc107f140e8815c73e735c2",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/recharge/brief/current.md",
+    "chunk_id": "recharge.page-quick",
+    "content_hash": "36a4c6fa6558e95eb06b7dbc3d9be5f4a08ff7cbfaa557c46ce474a5aeceb633",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/recharge/brief/current.md",
+    "chunk_id": "recharge.page-wallet",
+    "content_hash": "f3e2f01e18adf9d0adeabaa62e1a1cac98b7cfd9f6719193e3a89b9c99d4ae1a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/recharge/brief/current.md",
+    "chunk_id": "recharge.scope",
+    "content_hash": "99c5c88dd65a9e725ed1a35fc37b5c05d67a5f81a00dd61cb8f0d98e3f68fea0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.admin-impact",
+    "content_hash": "1f36792f21982262647b9682555990b6d338f726421d09564c94dedb810ed1d8",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.flow-main",
+    "content_hash": "230406b81e4141c36497f3e2f4aaf2b30ea16b56177490f5619767a464b29dbe",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-activate",
+    "content_hash": "5625f1745661a51b191bfa804b35a370ee45462d7486efa07777326e36950ec8",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-bind",
+    "content_hash": "b69ec36ec4ad85240d614d3ca466d545d009932809328a9f38f763a436e27b38",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-cycle-headcount",
+    "content_hash": "c1e065207458cc17a10de07d99d8045ecdc68c6ca20e032682747f7f061e9671",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-cycle-recharge",
+    "content_hash": "318b3df7c64353ed82478cc11474f17ca133689bc4d19f5ad0941e83cf672cb2",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-identity",
+    "content_hash": "1a69e4628f06bc049b53b924877d775b1f4ff155028b3558e276223d3e6cdaab",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-novice",
+    "content_hash": "bcb9f746028166f5c9e6c0c610ca81ccfe2348dd540348048ac137d8747d0966",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-numbers",
+    "content_hash": "cf76732cd154d0d4aab314a9b0bcbff148341cb2a7bf0f3946777c6c019d346e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-pool",
+    "content_hash": "a311c217636cd1da7afd4c179194d25886a81ba0bda83f4cd5b3873c729a3ee3",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-reward-record",
+    "content_hash": "1ed2fc7c66530423d9f55a1b12b5270da23992919b868f3feed42d70603088ce",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.logic-team",
+    "content_hash": "7eb9db0d2624659f59227d3e21503d73bfca6ab83018507bb498299b31700d43",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.page-entry",
+    "content_hash": "5d435acdb5d433de2bbd7cc6bdbeeb966db621c81e0da995c93dec2f66d716e0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.page-h5",
+    "content_hash": "451071a9425837b136609f39aec1b0ad37854bb6fb1bda33ca957355329a2e5e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.page-more-data",
+    "content_hash": "e5b4a112f60d4d4370cf34a0e675f292514c3f462a0ddf87a00c04b1556dcec7",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.page-personal-off",
+    "content_hash": "8d407196e160136426fbac91a6a63ee63deceefa8f25aa4af62415b4cfac3e11",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.page-personal-on",
+    "content_hash": "befcd9966ba81fccaeb97eda6c52810be12e8c4b68cde8985b3d18e2e89404aa",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.page-push",
+    "content_hash": "7f4eaa0ac7f114d6a1c1b7bb732841f94c0dc611b77fb987660e0352912047cf",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.page-share",
+    "content_hash": "bc730d1deb0ec36d085f39b2bd9cff4d2ac5a73acd53837291302ecff45b4fae",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.page-team",
+    "content_hash": "7e8eb30a19fd7118c1c1ff4a1821edfc02110e3e5a23086a20f41d6acffeeb19",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/referral/brief/current.md",
+    "chunk_id": "referral.scope",
+    "content_hash": "dda7734c54d68ca17424b21fecd3e17a276c0fd81b7989f72157e8eafb275489",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.admin-impact",
+    "content_hash": "79cdd361d3a85f5ac597c188c895f5cf27445e08f9dd668a0eb071d2cb971ee6",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.flow-main",
+    "content_hash": "b60f5d0723df135b991c590d06e2fa47183219da24fbdeacf7e834ff451cda65",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.logic-follow",
+    "content_hash": "08c82f65bae46fa4cc619c051dd7a3ad5bb5e6f47b215af9c5757de6e0ef45b0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.logic-follow-room",
+    "content_hash": "158e864c255977f3b464a23325ee93d9b51fed3d47710c0e19bd75b495c8d608",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.logic-im",
+    "content_hash": "3b6682a1626c76cd3126f5cb94260427f43f764c468038c07eb66efa042281c2",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.logic-im-guide",
+    "content_hash": "7c77f0fa31959e1110895a860a83e0dd15d0943d2a9589bf3ea2692513434f3c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.logic-room-guide",
+    "content_hash": "5f8df06ad75b509a59ec31dcaeb939f5ff0975669c5f467f64f19284ebb108c0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.logic-share",
+    "content_hash": "cb527c032241639c74cb8d63e515b778c88cc7e25b468bb523378516c37d4a25",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.page-buttons",
+    "content_hash": "133d069c1feb763130995d0d5a29f712e3a97af583f96069ab14f3714f678b38",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.page-follow-share",
+    "content_hash": "24fd9ca6cc4b5c83dc5ef431f0ef1cfcd43737150bb64635e310beef25fb6036",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.page-notify",
+    "content_hash": "ab3c0749477efc0d462ed2d91401e28497db21d49347f03154adfaff85631412",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/relationship/brief/current.md",
+    "chunk_id": "relationship.scope",
+    "content_hash": "65388675e3bfb532245257779196e06f79cfc0f23948416ffb19b61b4032b19b",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-chat/brief/current.md",
+    "chunk_id": "room-chat.admin-impact",
+    "content_hash": "66085f9dca710c3845b45b0c7cc379db026bc416075860f6bc4a0a1125110d28",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-chat/brief/current.md",
+    "chunk_id": "room-chat.flow-main",
+    "content_hash": "1b91af444bb67ea411364e9c495c19dc840c907f872698fb03175d80286b4baf",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-chat/brief/current.md",
+    "chunk_id": "room-chat.logic-freq",
+    "content_hash": "ae011f8f15600837a019117c0387fbea1ac716c481eea203afffacddaa3f86a4",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-chat/brief/current.md",
+    "chunk_id": "room-chat.page-android-list",
+    "content_hash": "4937d3432540c9388c2bc8e36ecc745dfcfee08fc19b1aeafb39f519f7241ed7",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-chat/brief/current.md",
+    "chunk_id": "room-chat.scope",
+    "content_hash": "70764fc1cc5a92b1e52bb5b8fe38fc8468ab18f44ac05a51e7cfeaf2de4fc47e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.admin-impact",
+    "content_hash": "6cf4e2896fea3e5791013d3fdcc06c32a9c4b1b0ac907f116af029641e7ed733",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.flow-main",
+    "content_hash": "894ef4444d087c9757df68ff697945e1845b9c42d7d06a928151a3dfe9415710",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.logic-bet",
+    "content_hash": "0bd18390f46867e9c3bcda2a83e0044b5af1c055048d9a9a0192b97369131579",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.logic-coexist",
+    "content_hash": "03f692e25f6de138926c41c08988f1de0fa19643ba4ab2b2b8577294a3f50971",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.logic-pool",
+    "content_hash": "a00f7e65c3e721c76a40057ca34b791969ac7a053a708ade1ccdf07aebecf75f",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.logic-result",
+    "content_hash": "a43d64b3aa67be6f732477d85082b139de6e49b824cc23a7ddb712a358fc924a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.logic-round",
+    "content_hash": "45c9ad6663b9802dc4c5f64c12909843115609977b2b983afd9bb743e2d8affd",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.logic-thirdparty",
+    "content_hash": "2eb2f585ebab9b175bb7005176aaa8addefb600298a3c5d4839d3b26d59feb94",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.page-center",
+    "content_hash": "b9fea408f0896042db97c79556ffb54463f865205a4a012552041f564693cf91",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.page-main",
+    "content_hash": "6024f0721eae4b7c95330c5e24a71772f1dba00a20e9cfc3d6358cdb40cf8cba",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.page-sub",
+    "content_hash": "ee2794da3a3009554ad3ef760f6662a8898df989d9726a341c61fe824866d31a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-game/brief/current.md",
+    "chunk_id": "room-game.scope",
+    "content_hash": "5c4b1b710d9dd05459801c79787ee0d98c254913c65f67f76461f2bba561adbf",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-list/brief/current.md",
+    "chunk_id": "room-list.admin-impact",
+    "content_hash": "054e9e60ead6a3ad65c7f26e3ab06295665eed9d2dbc894df324bc90ee85dcb7",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-list/brief/current.md",
+    "chunk_id": "room-list.flow-main",
+    "content_hash": "263677660f3878cf2104d9b5fb08e2b38a49c983f261b79a917a05451db0a1f3",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-list/brief/current.md",
+    "chunk_id": "room-list.logic-pin",
+    "content_hash": "fc124fa4c0185e398cf4b40060c4b25a8bdf34a4e568235735c7f8ff77cd7fd2",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-list/brief/current.md",
+    "chunk_id": "room-list.page-list",
+    "content_hash": "11443af5e6d2e2330501329e6a6c818298c5f3fa9c192f1d2dcfc1aef29348df",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room-list/brief/current.md",
+    "chunk_id": "room-list.scope",
+    "content_hash": "008a41588cf3d7ab0e19537470c9666be9cf9617a0fa2c1d6f58d8a1c5e3c33f",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room/brief/current.md",
+    "chunk_id": "room.admin-impact",
+    "content_hash": "fe3bdace261071294038a9724f5f1723adf77c57c3431d89e5d064da97f5836c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room/brief/current.md",
+    "chunk_id": "room.flow-main",
+    "content_hash": "030265af6fba791c7e1ffda87a3ab366da3045805c13c930d9f920837dc17077",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room/brief/current.md",
+    "chunk_id": "room.logic-gift",
+    "content_hash": "85e1827e0aa5b3b876315118ee884de182b1d15b372d4bbd42e81383570fe9d2",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room/brief/current.md",
+    "chunk_id": "room.logic-mic",
+    "content_hash": "d854373b25fb8e78e9951ffe82eaad5b680ee928adc76390f5d5f027cee46c9b",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room/brief/current.md",
+    "chunk_id": "room.logic-mode",
+    "content_hash": "204b95069662e89ae0dc8d25638625e088e9ad142de84594478ae0fe8411ed8c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room/brief/current.md",
+    "chunk_id": "room.page-hall",
+    "content_hash": "2c5ca63e813087f77cba7481ab2d89c6b158485f21e0f77f04ab56e40ca430b1",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/room/brief/current.md",
+    "chunk_id": "room.scope",
+    "content_hash": "391963afd4de25750358c3fe8dc0dece94c85330aa28ed7d5dbe48c700eaaba1",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/user-level/brief/current.md",
+    "chunk_id": "user-level.admin-impact",
+    "content_hash": "b47eb2e9e36655f2db7fa4ff7c1da84cbd33d556c580667281d33988bdbfdadb",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/user-level/brief/current.md",
+    "chunk_id": "user-level.flow-main",
+    "content_hash": "6b680bffcce99fc057b84007c04e225dad0c1e8782e65728159f95af03649ef3",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/user-level/brief/current.md",
+    "chunk_id": "user-level.logic-exp",
+    "content_hash": "c4bd9eb0cc9ce33abadb165589a80efbc7bcdd2c061344f6bd33e8c8a401dd91",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/user-level/brief/current.md",
+    "chunk_id": "user-level.logic-notify",
+    "content_hash": "dd1ad96502ce31fd09dceac949200cc56b2da7a1d4a42a02ea3958afad985885",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/user-level/brief/current.md",
+    "chunk_id": "user-level.page-level",
+    "content_hash": "b746d16d0f541dcca9103620044317860572f0390acc6af0beaa34eef32573b5",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/user-level/brief/current.md",
+    "chunk_id": "user-level.page-popup",
+    "content_hash": "04a99b186abf99e83400f876665dc6cd295a325058a7e24918d2b80625049d72",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/user-level/brief/current.md",
+    "chunk_id": "user-level.scope",
+    "content_hash": "9f77248e0a73150e0f37a4ec0c9bfb0a31bd3ab22c8035e64b257531ca69c1dc",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.admin-impact",
+    "content_hash": "9bb664de1ab6b57150e503f8b3f4e78ffc50aa67ff476d830b8d296cb05f55a3",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.flow-main",
+    "content_hash": "98b7ec52aa4a092a1afbee0893cf55a4430802c5deee927a6023e1124a0d450b",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.logic-cycle",
+    "content_hash": "5ad63d06a502559e6462e4bbe78b01e292fb8a7a01c8f0b16a7a192cb0a5263c",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.logic-notify",
+    "content_hash": "de0fe0c8beccfb28270bd226efebfa11efc36342e84da260ea36eea380103145",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.logic-perk",
+    "content_hash": "abb7a8ee9f2e146ebee8a8c0936f402385e25e7d6d12191ed355a35a87cddd1b",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.logic-pretty",
+    "content_hash": "7c46e29c93d8d26c85cfae7c9848bc9e11e7b24fbd0347f186612a5039a3983e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.logic-wealth",
+    "content_hash": "9d7f6755d751718b9a0d587ac45e7d4f7100e124b1fe26a399404db6fd103e2e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.page-home",
+    "content_hash": "99583c8325c8b3059feb5530fe801fbaf9944801211db655486a77af791573c6",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.page-perk",
+    "content_hash": "7159d90c3da43d45f39eaa565af4b5c2b500ae216518eaf653343632f7a4eca0",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.page-privacy",
+    "content_hash": "3de40915af70f4f1ec38580d9fb27d88066fa55ed98118a06baa357f47ba45fc",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/vip/brief/current.md",
+    "chunk_id": "vip.scope",
+    "content_hash": "12783032026a8e877d6b0fea9a1732b37281654238b4abfd9fb299d5e1db1fb7",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/yallapay/brief/current.md",
+    "chunk_id": "yallapay.admin-impact",
+    "content_hash": "f30ee40438b87e5d1dea5af1bf919b65c4f725c2da6e03f54d2ffd7672d388cc",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/yallapay/brief/current.md",
+    "chunk_id": "yallapay.flow-main",
+    "content_hash": "aee9e81b52df036e4846ecebe540ed7477dafaa225f06f95a1d7239dbc4cee9e",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/yallapay/brief/current.md",
+    "chunk_id": "yallapay.logic-create",
+    "content_hash": "0483921ffc4b63fedc13779d082e1e1a7d37faaee4559c15f5211bccda9ee258",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/yallapay/brief/current.md",
+    "chunk_id": "yallapay.logic-pay",
+    "content_hash": "9c2f22b7315c296cefd69b5367af73eb075045da2bb02d85210e861a4aa56ab2",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/yallapay/brief/current.md",
+    "chunk_id": "yallapay.page-editor",
+    "content_hash": "837a7464463299bec00d57cbf53ed43585f3f63b1f885d026fd04da301c1c373",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/yallapay/brief/current.md",
+    "chunk_id": "yallapay.page-pay",
+    "content_hash": "18f784c40702b7e5bdde71ad5ce01a3e01f1203762118243ec28590e01734f57",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/yallapay/brief/current.md",
+    "chunk_id": "yallapay.page-records",
+    "content_hash": "fe672d5d58d57987204b061074ba3e54f776ad70b44f3007dd89c2bb4ba8c94a",
+    "collection": "hayyo-client"
+  },
+  {
+    "path": "prd/design/yallapay/brief/current.md",
+    "chunk_id": "yallapay.scope",
+    "content_hash": "7cb3791ea85c6c87239746f32c1b8ea43b9fc76f2e301c6c32ab3f6ca0a35ce0",
+    "collection": "hayyo-client"
+  }
+]

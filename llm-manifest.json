@@ -1,19 +1,20 @@
 {
   "version": 1,
   "delegates_to": [
-    "prd/llm-manifest.json"
+    "site/core-docs/prd/llm-manifest.json"
   ],
   "scan_roots": [
     "INDEX.md",
     "knowledge/INDEX.md",
     "knowledge/工作流程-文档工作台.md",
-    "prd/INDEX.md",
-    "prd/CONFIRMED.md",
-    "prd/PROJECT_OVERVIEW.md",
-    "prd/VERSIONS.md",
+    "site/core-docs/INDEX.md",
+    "site/core-docs/prd/INDEX.md",
+    "site/core-docs/prd/CONFIRMED.md",
+    "site/core-docs/prd/PROJECT_OVERVIEW.md",
+    "site/core-docs/prd/VERSIONS.md",
     "site/docs/INDEX.md",
     "site/docs/inbox/INDEX.md",
-    "prd/inbox/INDEX.md",
+    "site/core-docs/prd/inbox/INDEX.md",
     "site/docs/design/h5-kb/PRD-H5知识库-v1.md",
     "site/docs/design/kb-qa/INDEX.md",
     "site/docs/design/kb-qa/PRD-知识问答-v3.md",
@@ -41,32 +42,32 @@
   ],
   "exclude_roots": [
     "Aold_D",
-    "prd/archive",
-    "prd/design/admin/history",
-    "prd/design/app-branding/history",
-    "prd/design/auth-login/history",
-    "prd/design/casual-game/history",
-    "prd/design/channel-tracking/history",
-    "prd/design/checkin-task/history",
-    "prd/design/coupon/history",
-    "prd/design/infra/history",
-    "prd/design/lottery/history",
-    "prd/design/mall/history",
-    "prd/design/payout/history",
-    "prd/design/merchant/history",
-    "prd/design/messaging/history",
-    "prd/design/profile/history",
-    "prd/design/ranking/history",
-    "prd/design/recharge/history",
-    "prd/design/referral/history",
-    "prd/design/relationship/history",
-    "prd/design/room-chat/history",
-    "prd/design/room-game/history",
-    "prd/design/room-list/history",
-    "prd/design/room/history",
-    "prd/design/user-level/history",
-    "prd/design/vip/history",
-    "prd/design/yallapay/history",
+    "site/core-docs/prd/archive",
+    "site/core-docs/prd/design/admin/history",
+    "site/core-docs/prd/design/app-branding/history",
+    "site/core-docs/prd/design/auth-login/history",
+    "site/core-docs/prd/design/casual-game/history",
+    "site/core-docs/prd/design/channel-tracking/history",
+    "site/core-docs/prd/design/checkin-task/history",
+    "site/core-docs/prd/design/coupon/history",
+    "site/core-docs/prd/design/infra/history",
+    "site/core-docs/prd/design/lottery/history",
+    "site/core-docs/prd/design/mall/history",
+    "site/core-docs/prd/design/payout/history",
+    "site/core-docs/prd/design/merchant/history",
+    "site/core-docs/prd/design/messaging/history",
+    "site/core-docs/prd/design/profile/history",
+    "site/core-docs/prd/design/ranking/history",
+    "site/core-docs/prd/design/recharge/history",
+    "site/core-docs/prd/design/referral/history",
+    "site/core-docs/prd/design/relationship/history",
+    "site/core-docs/prd/design/room-chat/history",
+    "site/core-docs/prd/design/room-game/history",
+    "site/core-docs/prd/design/room-list/history",
+    "site/core-docs/prd/design/room/history",
+    "site/core-docs/prd/design/user-level/history",
+    "site/core-docs/prd/design/vip/history",
+    "site/core-docs/prd/design/yallapay/history",
     "site/feature-interaction/vendor",
     "site/docs/design/h5-kb/steps-draft.md",
     "site/docs/design/kb-qa/history",
@@ -74,7 +75,7 @@
     "site/docs/design/kb-qa-feedback/history",
     "site/docs/design/kb-auth/history",
     "site/docs/inbox/条目",
-    "prd/inbox/条目",
+    "site/core-docs/prd/inbox/条目",
     "workspace/v1.5.0",
     "reviews/getnew/source"
   ],
@@ -105,6 +106,7 @@
       "route_prefixes": [],
       "depends_on": [],
       "related_documents": [
+        "core-docs-index",
         "prd-index",
         "docs-index",
         "site-inbox",
@@ -117,8 +119,29 @@
       "max_lines": 120
     },
     {
+      "id": "core-docs-index",
+      "path": "site/core-docs/INDEX.md",
+      "status": "current",
+      "authority": "canonical",
+      "scopes": [
+        "routing"
+      ],
+      "keywords": [
+        "核心文档",
+        "分类"
+      ],
+      "code_paths": [],
+      "route_prefixes": [],
+      "depends_on": [],
+      "related_documents": [
+        "prd-index"
+      ],
+      "related_td": [],
+      "max_lines": 100
+    },
+    {
       "id": "prd-index",
-      "path": "prd/INDEX.md",
+      "path": "site/core-docs/prd/INDEX.md",
       "status": "current",
       "authority": "canonical",
       "scopes": [
@@ -141,11 +164,11 @@
       ],
       "related_td": [],
       "max_lines": 280,
-      "delegates_to": "prd/llm-manifest.json"
+      "delegates_to": "site/core-docs/prd/llm-manifest.json"
     },
     {
       "id": "project-overview",
-      "path": "prd/PROJECT_OVERVIEW.md",
+      "path": "site/core-docs/prd/PROJECT_OVERVIEW.md",
       "status": "current",
       "authority": "canonical",
       "scopes": [
@@ -171,7 +194,7 @@
     },
     {
       "id": "versions",
-      "path": "prd/VERSIONS.md",
+      "path": "site/core-docs/prd/VERSIONS.md",
       "status": "current",
       "authority": "canonical",
       "scopes": [
@@ -255,7 +278,7 @@
     },
     {
       "id": "prd-inbox",
-      "path": "prd/inbox/INDEX.md",
+      "path": "site/core-docs/prd/inbox/INDEX.md",
       "status": "current",
       "authority": "reference",
       "scopes": [

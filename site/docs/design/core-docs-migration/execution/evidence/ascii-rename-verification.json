@@ -1,0 +1,13 @@
+{
+  "files_including_parent_index": 3243,
+  "unchanged_hashes": 3215,
+  "path_only_content_changes": 28,
+  "valid_links_in_rename_scope": 741,
+  "link_regressions": [],
+  "generator_matches_inventory": true,
+  "browser_executable_code_unchanged": true,
+  "protected_files_unchanged": true,
+  "historical_evidence_unchanged": true,
+  "old_directory_absent": true,
+  "runtime_verified": false
+}

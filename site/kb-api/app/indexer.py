@@ -20,8 +20,10 @@ class Indexer:
         self.embed = embed
 
     async def rebuild(self) -> dict:
-        self.store.ensure_collections()
         chunks = scan_briefs()
+        if not chunks:
+            raise RuntimeError("语料扫描为空，禁止清除已有索引")
+        self.store.ensure_collections()
         existing = self.store.existing_points()
         current_keys = {f"{c.path}::{c.chunk_id}" for c in chunks if not c.oversized}
         items: list[dict] = []

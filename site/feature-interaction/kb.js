@@ -1,11 +1,11 @@
 /**
  * 知识库阅读器与检索。权威仍是各功能 PRD.md；本模块只展示与检索。
- * 文档请求一律走站点根（仓库根）绝对路径，例如 /prd/...。
- * 这样页面在 /feature-interaction/ 或磁盘路径 /site/feature-interaction/ 下都能取到同一份文档。
+ * 文档请求一律使用站点根逻辑 URL，例如 /prd/...，不跟随磁盘目录迁移。
+ * 来源文件位于 site/core-docs/prd/；其浏览器 URL 由静态服务映射。
  */
 (function () {
   const MANIFEST_URL = "/prd/llm-manifest.json";
-  const START_EXAMPLE = "docker compose -f site/docker-compose.yml up -d";
+  const START_EXAMPLE = "sh site/preview.sh";
   const MAX_RESULTS = 20;
   const AC11_QUERY = "官方房置顶";
   const AC11_HIT = "官方房临时置顶";
@@ -13,6 +13,7 @@
 
   const state = {
     scanRoots: [],
+    publishedPaths: null,
     currentPath: null,
     currentHash: "",
     currentSource: "",
@@ -52,7 +53,7 @@
   }
 
   function fetchUrl(docPath) {
-    // 站点根即仓库根，不用 ../ 相对当前页面目录。
+    // 文档标识转为站点根逻辑 URL，不用 ../ 相对当前页面目录。
     return "/" + docPath.replace(/^\/+/, "");
   }
 
@@ -120,7 +121,7 @@
     }
     if (response && response.status === 404) return "路径无效（404）。";
     if (err && (err.name === "TypeError" || /Failed to fetch|NetworkError|CORS/i.test(String(err.message || err)))) {
-      return "fetch 失败，可能未在仓库根启动静态服务，或存在跨源限制。";
+      return "fetch 失败，可能未启动文档服务，或存在跨源限制。";
     }
     if (response && !response.ok) return "请求失败（HTTP " + response.status + "）。";
     return "文档加载失败。";
@@ -135,7 +136,7 @@
       "<p><strong>原因</strong>：" + escapeHtml(reason) + "</p>" +
       "<p><strong>路径</strong>：<code>" + escapeHtml(path || "") + "</code></p>" +
       "<p>请启动本仓库静态站后再打开本页。推荐地址：<code>http://127.0.0.1:18765/feature-interaction/</code>。示例：<code>" + START_EXAMPLE +
-      "</code>（也可在 <code>site/</code> 目录执行 <code>docker compose up -d</code>；不是唯一允许的服务器）。</p>";
+      "</code>（先生成发布目录，再启动或刷新服务）。</p>";
   }
 
   function hideFail() {
@@ -180,6 +181,13 @@
       const href = a.getAttribute('href');
       if (!href || /^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(href)) return;
       const resolved = resolveMdHref(state.currentPath, href);
+      if (!resolved.path.startsWith('prd/') || (state.publishedPaths && !state.publishedPaths.has(resolved.path))) {
+        a.removeAttribute('href');
+        a.setAttribute('aria-disabled', 'true');
+        a.setAttribute('title', '此引用未发布到网站，可在本地仓库查看');
+        a.textContent += '（未发布）';
+        return;
+      }
       a.setAttribute('href', fetchUrl(resolved.path) + (resolved.hash ? '#' + resolved.hash : ''));
     });
     els.article.querySelectorAll("img").forEach((img) => {
@@ -455,7 +463,9 @@
       const json = await res.json();
       const roots = Array.isArray(json.scan_roots) ? json.scan_roots.slice() : [];
       state.scanRoots = roots.filter((p) => typeof p === "string" && !/(^|\/)changelog\.md$/i.test(p) && p.indexOf("/history/") < 0);
+      state.publishedPaths = Array.isArray(json.published_paths) ? new Set(json.published_paths) : null;
       state.listReady = true;
+      if (state.currentPath) rewriteMediaAndLinks();
       renderList();
     } catch (err) {
       els.list.innerHTML = "";
@@ -495,24 +505,6 @@
     });
   }
 
-  function parseDirectoryListing(html, dirPath) {
-    const tpl = document.createElement("template");
-    tpl.innerHTML = html;
-    const prefix = dirPath.replace(/\/?$/, "/");
-    const files = [];
-    tpl.content.querySelectorAll("a").forEach((a) => {
-      let href = a.getAttribute("href") || "";
-      if (!href || href === "../" || href === ".." || href.startsWith("?C=") || href.startsWith("?M=")) return;
-      if (href.indexOf("://") >= 0) return;
-      try { href = decodeURIComponent(href); } catch (e) { /* 保持原值 */ }
-      if (href.endsWith("/")) return;
-      const name = href.split("/").pop();
-      if (!name || name === "." || name === "..") return;
-      files.push(prefix + name);
-    });
-    return [...new Set(files)];
-  }
-
   async function openHistory() {
     const request = ++state.historyRequest;
     const id = featureIdOf(state.currentPath);
@@ -521,11 +513,14 @@
     els.history.hidden = false;
     els.history.innerHTML = "<p class=\"kb-hint\">正在列出旧版文件…</p>";
     try {
-      const res = await fetch(fetchUrl(dirPath) + "/");
+      const res = await fetch(fetchUrl(dirPath) + "/index.json");
       if (!res.ok) throw new Error(reasonFromError(null, res));
-      const html = await res.text();
+      const data = await res.json();
       if (request !== state.historyRequest) return;
-      const files = parseDirectoryListing(html, dirPath);
+      if (!Array.isArray(data.files)) throw new Error("历史清单格式无效。");
+      const prefix = dirPath + "/";
+      const files = [...new Set(data.files.filter((path) => typeof path === "string" &&
+        path.startsWith(prefix) && /^[^./][^/]*\.md$/i.test(path.slice(prefix.length))))];
       if (!files.length) {
         els.history.innerHTML = "<p class=\"kb-empty\">该目录下没有可打开的文件。</p>";
         return;
@@ -538,7 +533,7 @@
       if (request !== state.historyRequest) return;
       els.history.innerHTML =
         "<p><strong>原因</strong>：" + escapeHtml(err.message || reasonFromError(err, null)) + "</p>" +
-        "<p><strong>路径</strong>：<code>" + escapeHtml(dirPath + "/") + "</code></p>" +
+        "<p><strong>路径</strong>：<code>" + escapeHtml(dirPath + "/index.json") + "</code></p>" +
         "<p>请启动本仓库静态站。示例：<code>" + START_EXAMPLE + "</code>（不是唯一允许的服务器）。</p>";
     }
   }

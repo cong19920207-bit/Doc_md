@@ -2,6 +2,7 @@
 """只切 brief/current.md 的 chunk:default。"""
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass, asdict
 from pathlib import Path
@@ -70,9 +71,9 @@ def _heading_before(text: str, pos: int) -> tuple[str, str]:
     return raw, ""
 
 
-def parse_brief(path: Path, repo_root: Path, feature_id: str) -> list[Chunk]:
+def parse_brief(path: Path, core_docs_root: Path, feature_id: str) -> list[Chunk]:
     text = path.read_text(encoding="utf-8")
-    rel = path.relative_to(repo_root).as_posix()
+    rel = path.relative_to(core_docs_root).as_posix()
     marks = list(CHUNK_RE.finditer(text))
     chunks: list[Chunk] = []
     for i, mark in enumerate(marks):
@@ -106,15 +107,36 @@ def parse_brief(path: Path, repo_root: Path, feature_id: str) -> list[Chunk]:
     return chunks
 
 
-def scan_briefs(repo_root: Path | None = None) -> list[Chunk]:
-    root = repo_root or settings.REPO_ROOT
+def scan_briefs(core_docs_root: Path | None = None) -> list[Chunk]:
+    root = (core_docs_root or settings.CORE_DOCS_ROOT).resolve()
     design = root / "prd" / "design"
     out: list[Chunk] = []
     if not design.is_dir():
-        return out
-    for feature_dir in sorted(design.iterdir()):
+        raise RuntimeError("语料目录不存在，已中止扫描；请检查 CORE_DOCS_ROOT 与挂载")
+    try:
+        manifest = json.loads((root / "prd/llm-manifest.json").read_text(encoding="utf-8"))
+        features = sorted({
+            match.group(1) for path in manifest["scan_roots"]
+            if isinstance(path, str)
+            for match in [re.fullmatch(r"(?:site/core-docs/)?prd/design/([a-z0-9-]+)/PRD\.md", path)]
+            if match
+        })
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        raise RuntimeError("语料清单不可读，已中止扫描") from exc
+    if not features:
+        raise RuntimeError("语料清单为空，禁止以空扫描清除索引")
+    for feature_id in features:
+        feature_dir = design / feature_id
         brief = feature_dir / "brief" / "current.md"
-        if not brief.is_file():
-            continue
-        out.extend(parse_brief(brief, root, feature_dir.name))
+        if not brief.is_file() or not (feature_dir / "PRD.md").is_file():
+            raise RuntimeError(f"语料文件缺失：{feature_id}；已中止整次扫描")
+        if root not in brief.resolve().parents:
+            raise RuntimeError(f"语料路径越出文档根：{feature_id}")
+        chunks = parse_brief(brief, root, feature_id)
+        if not chunks:
+            raise RuntimeError(f"语料没有可索引章节：{feature_id}；禁止以空扫描清除索引")
+        out.extend(chunks)
+    keys = [(c.path, c.chunk_id) for c in out]
+    if len(keys) != len(set(keys)):
+        raise RuntimeError("语料包含重复知识块标识，已中止扫描")
     return out

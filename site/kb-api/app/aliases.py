@@ -32,8 +32,8 @@ EXTRA_ALIASES: dict[str, list[str]] = {
 _CACHE: dict[str, dict[str, list[str]]] = {}
 
 
-def known_feature_ids(repo_root: Path | None = None) -> list[str]:
-    root = repo_root or settings.REPO_ROOT
+def known_feature_ids(core_docs_root: Path | None = None) -> list[str]:
+    root = core_docs_root or settings.CORE_DOCS_ROOT
     design = root / "prd" / "design"
     if not design.is_dir():
         return sorted(EXTRA_ALIASES.keys())
@@ -41,8 +41,8 @@ def known_feature_ids(repo_root: Path | None = None) -> list[str]:
     return sorted(ids)
 
 
-def load_aliases(repo_root: Path | None = None) -> dict[str, list[str]]:
-    root = (repo_root or settings.REPO_ROOT).resolve()
+def load_aliases(core_docs_root: Path | None = None) -> dict[str, list[str]]:
+    root = (core_docs_root or settings.CORE_DOCS_ROOT).resolve()
     cache_key = str(root)
     cached = _CACHE.get(cache_key)
     if cached is not None:
@@ -78,10 +78,10 @@ def load_aliases(repo_root: Path | None = None) -> dict[str, list[str]]:
     return table
 
 
-def format_alias_hint(repo_root: Path | None = None) -> str:
+def format_alias_hint(core_docs_root: Path | None = None) -> str:
     """改写用户消息用的口语对照，不发明功能 ID。"""
-    ids = known_feature_ids(repo_root)
-    aliases = load_aliases(repo_root)
+    ids = known_feature_ids(core_docs_root)
+    aliases = load_aliases(core_docs_root)
     lines: list[str] = []
     for fid in ids:
         names = [n for n in (aliases.get(fid) or [fid]) if n != fid]
@@ -92,8 +92,8 @@ def format_alias_hint(repo_root: Path | None = None) -> str:
     return "\n".join(lines)
 
 
-def filter_named_ids(raw_ids: list[str] | None, repo_root: Path | None = None) -> list[str]:
-    known = set(known_feature_ids(repo_root))
+def filter_named_ids(raw_ids: list[str] | None, core_docs_root: Path | None = None) -> list[str]:
+    known = set(known_feature_ids(core_docs_root))
     out: list[str] = []
     seen: set[str] = set()
     for item in raw_ids or []:
@@ -135,12 +135,12 @@ def _json_alias_first(feature_id: str) -> str:
     return ""
 
 
-def c20_display_name(feature_id: str, repo_root: Path | None = None) -> str:
+def c20_display_name(feature_id: str, core_docs_root: Path | None = None) -> str:
     """C20：合并去重列表第一条含汉字的别名；否则 JSON 第一项；否则 feature_id。"""
     fid = str(feature_id or "").strip()
     if not fid:
         return fid
-    names = load_aliases(repo_root).get(fid) or []
+    names = load_aliases(core_docs_root).get(fid) or []
     for name in names:
         if _has_han(str(name)):
             return str(name)

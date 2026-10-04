@@ -76,7 +76,7 @@ v1 已归档到 [`history/PRD-知识问答-反馈与对话样式-v1.md`](history
 - 登录、按人计票、赞踩筛选明细。  
 - 刷新时在新旧 round 之间建父子关联字段。  
 - 把「那退款呢」做成空状态 chip（依赖上一轮，已排除）。  
-- 把本增量写进 `prd/design/*/PRD.md`。  
+- 把本增量写进 `site/core-docs/prd/design/*/PRD.md`。  
 - 修订 `PRD-知识问答-v3.md` 正文。现网空状态 chips 与相关测试以本文覆盖 v3 C32/AC21 中「无建议问法 chips」；「无过程栏」仍以 v3 为准（C22）。
 
 ## 5. 决策与来源记录

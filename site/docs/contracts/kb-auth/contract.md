@@ -3,7 +3,7 @@
 > 现行实现合同。给改本站登录 / 问答身份 / 管理站 / 证书的人与 AI 用。  
 > 账号基础需求见 [账号体系 v2](../../design/kb-auth/PRD-账号体系与管理模块-v2.md)；多轮编排后台增量见 [后台 v1.1](../../design/kb-qa-multdesign/PRD-Hayyo知识问答工作台管理后台-v1.1-正式确认版.md)。本文件记录当前实现，未落地条款见 §14。\
 > 旧账号 M1～M4 与多轮编排 M1～M8 草案保留为阶段快照；当前实现以正式契约为准。整合映射和回归证据见 [专题进度](../../design/kb-qa-multdesign/steps-verified.md#2026-10-03-开发收尾与正式契约整合)。\
-> 契约总入口：[`../INDEX.md`](../INDEX.md)。更新：2026-10-03。覆盖权限拆分、消息/执行审计、实际删除、配置发布、隔离测试及当日九工作区调整。
+> 契约总入口：[`../INDEX.md`](../INDEX.md)。更新：2026-10-04。覆盖权限拆分、消息/执行审计、实际删除、配置发布、隔离测试、九工作区及文档迁移后的静态边界与 TLS 隔离。
 
 ## 1. 怎么用
 
@@ -19,7 +19,7 @@
 | 改问题、知识来源、Memory 运维 | §12 |
 | 改诊断、概览、热度、审计 | §13 |
 
-不要写进 `prd/design/auth-login` 或 `prd/design/admin`。不要套 `workspace/_kit/admin-skin/`。不要改 `pipeline.py` / `indexer.py` 来做鉴权。
+不要写进 `site/core-docs/prd/design/auth-login` 或 `site/core-docs/prd/design/admin`。不要套 `workspace/_kit/admin-skin/`。不要改 `pipeline.py` / `indexer.py` 来做鉴权。
 
 ## 2. 落地符号
 
@@ -33,7 +33,8 @@
 | 本地旧对话键 | `hayyo-kb-qa-conversations-v1`；**登录后不导入云端** |
 | HTTP 端口 | `HAYYO_WEB_PORT` 默认 18765 → 容器 80 |
 | TLS 端口 | `HAYYO_TLS_PORT` 默认 18769 → 容器 443；默认宿主机 443 连不上 |
-| 证书开关 | `DATA_DIR/https.enabled`；私钥不回显 |
+| 证书目录 | `TLS_DIR`；缺省为 `DATA_DIR/tls`，Compose 显式设为 `/tls` |
+| 证书开关 | `TLS_DIR/https.enabled`（Compose 为 `/tls/https.enabled`）；私钥不回显 |
 | JWT | 无；响应体无 token；无自助注册 |
 
 账号表仍为 `kb_roles`、`kb_role_permissions`、`kb_accounts`、`kb_sessions`、`kb_login_locks`、`kb_audit_logs`。消息/执行事实见 [kb-qa §9](../kb-qa/contract.md#9-消息事实执行版本与保存)；问题、索引任务和删除操作由对应 Store 启动建表/补列。已有卷不重跑 `init.sql`，启动迁移按缺列/索引增补，不能只依赖 `CREATE TABLE IF NOT EXISTS`。
@@ -129,6 +130,7 @@ KDF：`pbkdf2_sha256`。无 `/auth/register`。
 ### 5.1 独立登录页（2026-10-03）
 
 - `/login/` 自带匿名可加载的 `login.css`、`login.js`、`ion-scene.js` 和内联H图标，不依赖登录后工作台资源。桌面为离子互动区与登录表单双栏，小屏按自身样式收缩；不受工作台主题存储控制。
+- 登录模块底部按“Hayyo｜你的知识，有处可寻｜浙ICP备2026035072号-2”排列，文案无句号，分隔线样式及两侧间距一致；备案号链接工信部备案查询网站，沿用底部字号和颜色，窄屏换行后不保留行首分隔线。
 - `#loginForm` 复用 `/auth/me` 和 `/auth/login`，已有Session直接进入目标。`next` 只接受站内单斜线开头且无反斜线/协议的路径，拒绝再次进入login路径，其他值回退 `/feature-interaction/`。
 - 提交期间禁止重复请求、按钮禁用并设置 `aria-busy`；失败保留输入并用文本提示，成功清空密码后跳转。密码显隐更新 `aria-pressed`/名称，不改变登录载荷。
 - 动效有离子涡环、引力扭结、星核脉动、流光薄膜、H共振五种形态，支持自动/三种手选颜色、拖动、鼠标拖尾和代码雨。暂停、页面隐藏与不可见时停止动画调度；减少动态效果偏好默认静态，显式形态/颜色控件仍可用；WebGL不可用保留静态背景，不影响登录表单。显示恢复不能覆盖用户暂停选择。
@@ -145,6 +147,12 @@ KDF：`pbkdf2_sha256`。无 `/auth/register`。
 - 证书 / 开户 / 解锁仅超管，都在「访问管理」；证书是单独页签。后台无端口面板。
 
 ## 7. TLS 与 compose
+
+- Web 只读挂载 `site/release/www` 为 `/usr/share/nginx/html`；API 只读挂载 `site/core-docs` 为 `/core-docs`。两处 bind mount 均禁止 Docker 在源缺失时自动创建空目录。不得重新挂载整仓库或整个 `site` 为 Web 根；文件选择、保留页面例外及本地刷新以 [H5 契约 §8](../h5-kb/contract.md#8-核心文档与受控发布) 为准。
+- `/`、`/site`、`/site/` 重定向到 `/feature-interaction/`，工作台与已发布的 `/prd/...` 仍经 Session 门保护；不能由访问地址获得管理员身份。`/kb-admin/` 另经管理员门，已登录但无「进管理模块」返回 403。
+- `autoindex off`，历史选单使用生成的 JSON；未发布文件不存在于 Web 根，兜底路径返回 404。不存在合法首页的目录不提供文件列表。保留的 `/admin-skin-demo/` 与两个复盘汇总页也受登录门保护；旧 `/workspace/_kit/admin-skin/...` 仅为该原型的 URL 跳转，不开放其他工作区。`/docs/`、`/site/docs/` 及物理 `/site/core-docs/...` 不是文档公开入口。
+- 证书存储由 `TLS_DIR=/tls` 指定，使用独立 `kb-tls-data` 卷（API 可写、Web 只读）。API 数据仍在 `kb-api-data:/data`，Web 不挂载该数据卷。API 启动调用 `TlsStore.migrate_legacy(DATA_DIR)`，完成后 Web 才按 API 健康检查启动。
+- 旧 `/data` 迁移只复制 `cert.pem`、`key.pem`、`pending-cert.pem`、`pending-key.pem`、`state.json`、`https.enabled`，保留原件；新旧同名内容冲突或符号链接会报错，不覆盖目标。未完成迁移可补齐缺失文件；成功写入 `/tls/.legacy-migrated`，后续启动不覆盖新证书。配置、审计等其他数据不得随证书迁移进入 TLS 卷。
 
 - 上传仅保存待启用证书；`pending` 标明与活动证书不同或尚未启用，`last_enable_error`、`last_enable_error_at` 记录最近启用失败；`port_note` 说明非标准端口行为。坏证书启用失败不替换活动证书、不改变现有开关。
 - Host 带非标准端口（如 `:18765`）即使已启用也不强制 301 HTTPS。
@@ -181,10 +189,14 @@ KDF：`pbkdf2_sha256`。无 `/auth/register`。
 | `site/kb-api/tests/test_auth_m4.py` | 审计字段、反馈汇总、证书三态、compose 无端口面板 |
 | `site/kb-api/tests/test_site_contract.py` | 四 Tab、无四钮、compose 127.0.0.1 与端口变量 |
 | `site/kb-api/tests/test_feedback.py` | 赞踩带 Session |
+| `site/kb-api/tests/test_core_docs_migration.py` | TLS 独立目录、白名单复制、冲突保护、中断恢复和后续启动不覆盖 |
+| `site/kb-api/tests/test_publication.py` | 发布产物排除源码、配置、测试和未授权工作区文件 |
 
 追加回归：`test_m3_admin_base.py`、`test_m4_admin_observe.py`、`test_m7_exec.py`、`test_m7_index.py`、`test_m7_issues.py`、`test_m7_purge.py`、`test_m8_config.py`、`test_m8_rest.py`、`test_admin_review_regressions.py`（均在 `site/kb-api/tests/`）；管理站原生 Node 交互回归在 `site/kb-admin/tests/admin-contract.test.cjs`，覆盖角色确认/预览、超管只读和固定规则只读。测试通过范围见专题进度，不由本表推定真实模型质量。
 
 比较键与验收符号定义见 [`../../design/kb-auth/steps-verified.md`](../../design/kb-auth/steps-verified.md) 比较表（`SESSION_DEAD`、`ROLE_MINGXI`、`AUDIT_CFG` 等）。
+
+迁移后的实际 HTTP 角色矩阵、文档 URL、目录列表及 TLS 本地验证见[迁移执行记录](../../design/core-docs-migration/execution/核心文档迁移开发执行记录.md)。生产尚未部署，生产证书迁移及标准 80/443 跳转未在本轮实测；不能由本地证据推定线上状态。
 
 
 ## 10. 对话审计、执行详情与实际删除

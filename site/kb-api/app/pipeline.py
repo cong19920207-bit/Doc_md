@@ -222,16 +222,16 @@ def numbers_ok(answer: str, blocks: list[dict], original: str = "") -> bool:
     return found <= allowed
 
 
-def build_rewrite_user(original: str, history_lines: list[str], repo_root=None, task_brief: str | None = None) -> str:
+def build_rewrite_user(original: str, history_lines: list[str], core_docs_root=None, task_brief: str | None = None) -> str:
     """改写用户消息：功能 ID 列表 + 口语对照。最终点名仍经 filter_named_ids。
     STEP-Q13：有任务说明时附上，独立问句只覆盖「执行」项（Q17 接手后改为正式交接）。"""
-    ids = known_feature_ids(repo_root)
+    ids = known_feature_ids(core_docs_root)
     brief = (
         f"{task_brief}\n独立问句只为「执行」项生成，不写入「未完成」「不执行」项。\n" if task_brief else ""
     )
     return (
         f"已有功能 ID：{json.dumps(ids, ensure_ascii=False)}\n"
-        f"口语→功能 ID：\n{format_alias_hint(repo_root)}\n"
+        f"口语→功能 ID：\n{format_alias_hint(core_docs_root)}\n"
         f"上一轮摘要：\n" + ("\n".join(history_lines) or "（无）") + "\n"
         f"本轮原句：{original}\n"
         f"{brief}"

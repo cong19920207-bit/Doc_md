@@ -10,8 +10,9 @@ def env(name: str, default: str = "") -> str:
     return os.environ.get(name, default).strip()
 
 
-REPO_ROOT = Path(env("REPO_ROOT", "/repo")).resolve()
+CORE_DOCS_ROOT = Path(env("CORE_DOCS_ROOT", str(Path(__file__).resolve().parents[2] / "core-docs"))).resolve()
 DATA_DIR = Path(env("DATA_DIR", "/data")).resolve()
+TLS_DIR = Path(env("TLS_DIR", str(DATA_DIR / "tls"))).resolve()
 CONFIG_PATH = DATA_DIR / "kb-config.json"
 ALIASES_PATH = Path(env("ALIASES_PATH", "/app/feature_aliases.json"))
 

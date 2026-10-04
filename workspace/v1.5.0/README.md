@@ -1,7 +1,7 @@
 # V1.5.0 工作区
 
 > 状态：**工作区文档，非权威**。图和 HTML 是 demo，不以本目录当已上线事实。  
-> 不覆盖 [`../../prd/design/`](../../prd/design/) 已收录正文。版本三态见 [`../../prd/VERSIONS.md`](../../prd/VERSIONS.md)。
+> 不覆盖 [`../../site/core-docs/prd/design/`](../../site/core-docs/prd/design/) 已收录正文。版本三态见 [`../../site/core-docs/prd/VERSIONS.md`](../../site/core-docs/prd/VERSIONS.md)。
 
 ## 按类型
 

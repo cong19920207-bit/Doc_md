@@ -5,7 +5,7 @@ updated: "2026-10-03"
 
 # 知识问答 · 本专题怎么读
 
-> 这是 **本仓库工程** 专题，不是 Hayyo 产品功能规则。产品规则仍只在 `prd/design/<功能>/PRD.md`。
+> 这是 **本仓库工程** 专题，不是 Hayyo 产品功能规则。产品规则仍只在 `site/core-docs/prd/design/<功能>/PRD.md`。
 
 > 多轮编排与新版后台增量另见 [kb-qa-multdesign](../kb-qa-multdesign/INDEX.md)；M1～M8已按现有功能并入正式契约，剩余项与当前回归见该专题收尾记录。本夹早期计划的状态不代表当前代码状态。
 
@@ -22,7 +22,7 @@ updated: "2026-10-03"
 | `workspace/kb-qa-proto/` | mock 原型（Demo A/B） | 调交互时读 | 非正式 kb-api、非正式现网第四 Tab |
 | [`../kb-qa-feedback/`](../kb-qa-feedback/INDEX.md) | 反馈、刷新、对话区样式 | **改那些时读新夹，不读本夹 v3** | 独立专题 v2 |
 
-不要把讲解稿或原型写进 `prd/design/`。日志页 / 热度页也是本站点工程后台，不写入 `prd/design/admin/`。
+不要把讲解稿或原型写进 `site/core-docs/prd/design/`。日志页 / 热度页也是本站点工程后台，不写入 `site/core-docs/prd/design/admin/`。
 
 **v2 已过期**，不是实施依据。v3 写「沿用」的条款视为 v3 并入，不要打开 `history/PRD-知识问答-v2.md` 当现行合同。
 

@@ -6,7 +6,7 @@ updated: "2026-10-03"
 # 知识问答 · 反馈与对话样式
 
 > 这是 **独立增量专题**，与 [`../kb-qa/`](../kb-qa/INDEX.md) 的 v3 主链路分开存放。  
-> 不是 Hayyo 产品功能规则。产品规则仍只在 `prd/design/<功能>/PRD.md`。
+> 不是 Hayyo 产品功能规则。产品规则仍只在 `site/core-docs/prd/design/<功能>/PRD.md`。
 
 > 版本刷新/反馈增量见 [多轮编排专题](../kb-qa-multdesign/INDEX.md)，2026-10-03 页面与回答过程调整已并入 [正式契约](../../contracts/kb-qa-feedback/contract.md)。当前回归、收尾和剩余项见 [收尾记录](../kb-qa-multdesign/steps-verified.md#2026-10-03-开发收尾与正式契约整合)。
 
@@ -21,7 +21,7 @@ updated: "2026-10-03"
 | [`history/`](history/INDEX.md) | 旧版 PRD | **不默认读** | 已被 v2 替代 |
 | [`../kb-qa/`](../kb-qa/INDEX.md) | 检索、改写、切块、日志、分路、多会话 | 改主链路时再读 | v3为检索基线，多轮增量见Phase1；本文不替代它 |
 
-不要把本文写进 `prd/design/`。不要把本专题文件放进 `design/kb-qa/`。
+不要把本文写进 `site/core-docs/prd/design/`。不要把本专题文件放进 `design/kb-qa/`。
 
 **v1 已过期**，不是实施依据。不要打开 `history/PRD-知识问答-反馈与对话样式-v1.md` 当现行合同。
 

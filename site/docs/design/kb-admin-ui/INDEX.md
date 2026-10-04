@@ -8,7 +8,7 @@ updated: "2026-10-03"
 > 改 `site/kb-admin/` 的壳、工作区或新管理页时先读本文件。  
 > 鉴权、接口、越权仍以 [`../../contracts/kb-auth/contract.md`](../../contracts/kb-auth/contract.md) 为准。  
 > 账号基础能力以 [`../kb-auth/PRD-账号体系与管理模块-v2.md`](../kb-auth/PRD-账号体系与管理模块-v2.md) 为准；本轮后台增量以 [`../kb-qa-multdesign/PRD-Hayyo知识问答工作台管理后台-v1.1-正式确认版.md`](../kb-qa-multdesign/PRD-Hayyo知识问答工作台管理后台-v1.1-正式确认版.md) 为准。  
-> 本文件只规定**页面怎么摆**。不写进 `prd/design/admin/`，不套 `workspace/_kit/admin-skin/`。
+> 本文件只规定**页面怎么摆**。不写进 `site/core-docs/prd/design/admin/`，不套 `workspace/_kit/admin-skin/`。
 
 ## 1. 边界
 

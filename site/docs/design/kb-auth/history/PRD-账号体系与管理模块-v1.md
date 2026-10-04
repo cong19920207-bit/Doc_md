@@ -9,7 +9,7 @@ source_prd: null
 
 # 文档工作台账号体系与管理模块 PRD
 
-> 本文是**本仓库工程 PRD**，不是 Hayyo 产品功能规则。产品登录仍只在 [`prd/design/auth-login/PRD.md`](../../../../prd/design/auth-login/PRD.md)。本站管理模块**不写入** [`prd/design/admin/`](../../../../prd/design/admin/PRD.md)，也不套 [`workspace/_kit/admin-skin/`](../../../../workspace/_kit/admin-skin/INDEX.md)。  
+> 本文是**本仓库工程 PRD**，不是 Hayyo 产品功能规则。产品登录仍只在 [`prd/design/auth-login/PRD.md`](../../../../core-docs/prd/design/auth-login/PRD.md)。本站管理模块**不写入** [`prd/design/admin/`](../../../../core-docs/prd/design/admin/PRD.md)，也不套 [`workspace/_kit/admin-skin/`](../../../../workspace/_kit/admin-skin/INDEX.md)。  
 > 知识问答检索 / 生成口径仍以 [`../kb-qa/PRD-知识问答-v3.md`](../kb-qa/PRD-知识问答-v3.md) 为准；本专题只改身份、授权、运维入口与会话归属。v3 将「登录」标为延期 D3，由本文承接。
 
 **需求状态：** 对话确认已齐（确认 1～7、8 纠偏为角色 RBAC、9～11、12-1、13-2、14-1；本轮确认采用 Session、不用 JWT）。  

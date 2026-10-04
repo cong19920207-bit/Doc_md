@@ -201,7 +201,7 @@ def main():
     a = lines.append
     a("# 运营后台现网对照表")
     a("")
-    a("> 台账，不是产品权威。现行规则仍以 [`../../../prd/design/admin/PRD.md`](../../../prd/design/admin/PRD.md) 为准。  ")
+    a("> 台账，不是产品权威。现行规则仍以 [`../../../site/core-docs/prd/design/admin/PRD.md`](../../../site/core-docs/prd/design/admin/PRD.md) 为准。  ")
     a("> `live-only` 只归档，确认前不写入 `admin/PRD.md`。")
     a("")
     a("## 采集说明")

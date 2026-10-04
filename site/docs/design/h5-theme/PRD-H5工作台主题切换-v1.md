@@ -84,7 +84,7 @@ updated: "2026-09-19"
 - Hayyo App 客户端。  
 - 浅色模式、自定义上传皮肤、同步到其他电脑。  
 - 改四个 Tab 的信息结构、问答接口、图谱数据。  
-- 把本增量写进 `prd/design/*/PRD.md`，或改 kb-qa / h5-kb / kb-qa-feedback 正文。
+- 把本增量写进 `site/core-docs/prd/design/*/PRD.md`，或改 kb-qa / h5-kb / kb-qa-feedback 正文。
 
 ## 5. 功能规则
 

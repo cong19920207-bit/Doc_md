@@ -8,6 +8,13 @@ site/kb-api/tests/.tmp-data/
 .pytest_cache/
 .DS_Store
 
+# 受控 Web 发布产物（从源码重新生成）
+/site/release/
+
+# 本地下载的生产证书包（含私钥）
+/lkonw.com_nginx/
+/lkonw.com_nginx.tar
+
 # Word 原文不入库
 *.doc
 *.docx

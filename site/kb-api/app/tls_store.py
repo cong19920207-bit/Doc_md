@@ -16,7 +16,32 @@ log_name = "kb-api.tls"
 
 class TlsStore:
     def __init__(self, root: Path | None = None) -> None:
-        self.root = Path(root) if root else settings.DATA_DIR
+        self.root = Path(root) if root else settings.TLS_DIR
+
+    def migrate_legacy(self, legacy_root: Path) -> None:
+        """一次性复制已知 TLS 文件；保留旧卷，后续启动不覆盖新证书。"""
+        self.root.mkdir(parents=True, exist_ok=True)
+        marker = self.root / ".legacy-migrated"
+        if marker.is_file() or self.root.resolve() == legacy_root.resolve():
+            return
+        names = ("cert.pem", "key.pem", "pending-cert.pem", "pending-key.pem", "state.json", "https.enabled")
+        contents = {}
+        for name in names:
+            source, target = legacy_root / name, self.root / name
+            if source.is_symlink() or target.is_symlink():
+                raise RuntimeError("TLS 迁移拒绝符号链接")
+            if source.is_file():
+                contents[name] = source.read_bytes()
+                if target.exists() and target.read_bytes() != contents[name]:
+                    raise RuntimeError("TLS 新旧目录内容冲突，未覆盖已有证书")
+        for name, content in contents.items():
+            target = self.root / name
+            if not target.exists():
+                temporary = self.root / (".migrate-" + name)
+                temporary.write_bytes(content)
+                temporary.chmod(0o600)
+                temporary.replace(target)
+        marker.write_text("1\n", encoding="utf-8")
 
     def _paths(self) -> dict[str, Path]:
         self.root.mkdir(parents=True, exist_ok=True)

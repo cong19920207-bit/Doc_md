@@ -5,7 +5,7 @@ updated: "2026-09-20"
 
 # H5 工作台主题切换
 
-> 这是 **本仓库工程** 专题，不是 Hayyo 产品功能规则。产品规则仍只在 `prd/design/<功能>/PRD.md`。  
+> 这是 **本仓库工程** 专题，不是 Hayyo 产品功能规则。产品规则仍只在 `site/core-docs/prd/design/<功能>/PRD.md`。  
 > **工作台** = http://127.0.0.1:18765/feature-interaction/ 这一页（四个 Tab）。  
 > **下拉框** = 顶栏里的原生主题选择框。  
 > **首次默认** = 未选过时是边缘行者粉；「现网蓝灰」仍可选手动选。
@@ -21,7 +21,7 @@ updated: "2026-09-20"
 | [`execution/H5工作台主题切换开发执行记录.md`](execution/H5工作台主题切换开发执行记录.md) | 执行证据 | 核对实施结果时读 | 不改需求 |
 | [`../../../feature-interaction/themes/`](../../../feature-interaction/themes/) | 对照页与皮肤 CSS | 看配色时打开 | 视觉文件；规则以 PRD 为准 |
 
-不要把本文写进 `prd/design/`。不要把本专题文件放进 `design/h5-kb/` 或 `design/kb-qa/`。
+不要把本文写进 `site/core-docs/prd/design/`。不要把本专题文件放进 `design/h5-kb/` 或 `design/kb-qa/`。
 
 ## 任务
 

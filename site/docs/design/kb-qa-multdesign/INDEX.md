@@ -5,7 +5,7 @@ updated: "2026-10-03"
 
 # 多轮对话编排与管理后台 · 本专题怎么读
 
-> 这是 **本仓库工程** 专题，不是 Hayyo 产品功能规则。不要写进 `prd/design/admin/` 或 `prd/design/auth-login/`。
+> 这是 **本仓库工程** 专题，不是 Hayyo 产品功能规则。不要写进 `site/core-docs/prd/design/admin/` 或 `site/core-docs/prd/design/auth-login/`。
 
 > 当前开发批次已按用户要求收口，契约已整合，仍有未完成需求；从 [收尾与验证](steps-verified.md#2026-10-03-开发收尾与正式契约整合) 恢复。M1～M8草案只作阶段快照，不是第二套现行合同。
 

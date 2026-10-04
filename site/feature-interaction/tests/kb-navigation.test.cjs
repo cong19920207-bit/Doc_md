@@ -72,3 +72,45 @@ test('clearing search while the index loads does not bring old results back', as
   for(let i=0;i<20;i++) await Promise.resolve();
   assert.equal(h.element('kbSearchPanel').hidden, true);
 });
+
+test('history uses the published JSON list and ignores paths outside that history directory', async () => {
+  const requested = [];
+  const h = harness(async url => {
+    requested.push(url);
+    if (url.endsWith('/history/index.json')) return {ok:true,json:async()=>({files:[
+      'prd/design/vip/history/v1.md', 'prd/design/vip/history/../../private.md',
+      'workspace/private.md', 'prd/design/vip/history/key.pem'
+    ]})};
+    return response('当前文档');
+  });
+  await h.kb.openDocument('prd/design/vip/PRD.md');
+  h.element('kbToolbar').events.click({target:{closest:()=>({getAttribute:()=> 'history'})}});
+  for (let i=0;i<20;i++) await Promise.resolve();
+  assert.ok(requested.includes('/prd/design/vip/history/index.json'));
+  assert.ok(!requested.includes('/prd/design/vip/history/'));
+  assert.match(h.element('kbHistory').innerHTML, /v1.md/);
+  assert.doesNotMatch(h.element('kbHistory').innerHTML, /private|key.pem/);
+});
+
+test('a late history response cannot replace a newly opened document', async () => {
+  const history = deferred();
+  const h = harness(url => url.endsWith('/history/index.json') ? history.promise : Promise.resolve(response('正文')));
+  await h.kb.openDocument('prd/design/vip/PRD.md');
+  h.element('kbToolbar').events.click({target:{closest:()=>({getAttribute:()=> 'history'})}});
+  await h.kb.openDocument('prd/design/admin/PRD.md');
+  history.resolve({ok:true,json:async()=>({files:['prd/design/vip/history/old.md']})});
+  for (let i=0;i<20;i++) await Promise.resolve();
+  assert.equal(h.element('kbHistory').hidden, true);
+});
+
+test('repository-only references are labelled unavailable rather than opened as website files', async () => {
+  const h = harness(async () => response('文档'));
+  const attrs = {href:'../../../workspace/private.md'};
+  const link = {textContent:'工作稿', getAttribute:key=>attrs[key], setAttribute:(key,value)=>{attrs[key]=value;},
+    removeAttribute:key=>{delete attrs[key];}, classList:{add(){}}};
+  h.element('kbArticle').querySelectorAll = selector => selector === 'a[href]' ? [link] : [];
+  await h.kb.openDocument('prd/INDEX.md');
+  assert.equal(attrs.href, undefined);
+  assert.equal(attrs['aria-disabled'], 'true');
+  assert.match(link.textContent, /未发布/);
+});

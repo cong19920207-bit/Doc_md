@@ -40,8 +40,8 @@ def test_init_sql_has_feedback_columns():
 
 
 def test_c20_vip_and_yallapay():
-    assert c20_display_name("vip", ROOT) == "用户VIP"
-    assert c20_display_name("yallapay", ROOT) == "链接支付"
+    assert c20_display_name("vip", ROOT / "site/core-docs") == "用户VIP"
+    assert c20_display_name("yallapay", ROOT / "site/core-docs") == "链接支付"
 
 
 def test_bind_fields_and_action_keys_in_js():

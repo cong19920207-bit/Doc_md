@@ -1,0 +1,821 @@
+{
+  "checks": [
+    {
+      "label": "user login",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user identity",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin login",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin identity",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "projected manifest",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "anonymous login page",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "anonymous root /",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous root /site",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous root /site/",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /feature-interaction/",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /prd/llm-manifest.json",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /prd/design/referral/PRD.md",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /prd/design/referral/brief/current.md",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /prd/design/referral/changelog.md",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /prd/design/admin/images/v1.0.0后台-admin-001.png",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /prd/design/admin/history/index.json",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /prd/design/admin/history/PRD.stacked-2026-09-16.md",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /admin-skin-demo/",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous /reviews/referral/summary/index.html",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous admin page",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous admin API",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "label": "anonymous legacy admin",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous private /INDEX.md",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /llm-manifest.json",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /workspace/INDEX.md",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /knowledge/INDEX.md",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /site/docs/INDEX.md",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /docs/INDEX.md",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /site/.env",
+      "status": 404
+    },
+    {
+      "label": "anonymous private /.git/config",
+      "status": 404
+    },
+    {
+      "label": "anonymous private /.env",
+      "status": 404
+    },
+    {
+      "label": "anonymous private /site/kb-api/app/main.py",
+      "status": 404
+    },
+    {
+      "label": "anonymous private /site/docker-compose.yml",
+      "status": 404
+    },
+    {
+      "label": "anonymous private /site/docker/nginx.conf",
+      "status": 404
+    },
+    {
+      "label": "anonymous private /lkonw.com_nginx.tar",
+      "status": 404
+    },
+    {
+      "label": "anonymous private /lkonw.com_nginx/key.pem",
+      "status": 404
+    },
+    {
+      "label": "anonymous private /tls/key.pem",
+      "status": 404
+    },
+    {
+      "label": "anonymous private /data/kb-config.json",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /site/core-docs/prd/INDEX.md",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /prd/archive/",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /prd/inbox/entries/private.md",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /prd/../workspace/INDEX.md",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /prd/%2e%2e/workspace/INDEX.md",
+      "status": 302
+    },
+    {
+      "label": "anonymous private /unknown-route",
+      "status": 404
+    },
+    {
+      "label": "anonymous no listing /prd/",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous no listing /prd/design/",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "anonymous no listing /prd/design/referral/history/",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "user login page",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user root /",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "user root /site",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "user root /site/",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "user /feature-interaction/",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user /prd/llm-manifest.json",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user /prd/design/referral/PRD.md",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user /prd/design/referral/brief/current.md",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user /prd/design/referral/changelog.md",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user /prd/design/admin/images/v1.0.0后台-admin-001.png",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user /prd/design/admin/history/index.json",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user /prd/design/admin/history/PRD.stacked-2026-09-16.md",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user /admin-skin-demo/",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user /reviews/referral/summary/index.html",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "user admin page",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "user admin API",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "user legacy admin",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "user private /INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "user private /llm-manifest.json",
+      "status": 404
+    },
+    {
+      "label": "user private /workspace/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "user private /knowledge/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "user private /site/docs/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "user private /docs/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "user private /site/.env",
+      "status": 404
+    },
+    {
+      "label": "user private /.git/config",
+      "status": 404
+    },
+    {
+      "label": "user private /.env",
+      "status": 404
+    },
+    {
+      "label": "user private /site/kb-api/app/main.py",
+      "status": 404
+    },
+    {
+      "label": "user private /site/docker-compose.yml",
+      "status": 404
+    },
+    {
+      "label": "user private /site/docker/nginx.conf",
+      "status": 404
+    },
+    {
+      "label": "user private /lkonw.com_nginx.tar",
+      "status": 404
+    },
+    {
+      "label": "user private /lkonw.com_nginx/key.pem",
+      "status": 404
+    },
+    {
+      "label": "user private /tls/key.pem",
+      "status": 404
+    },
+    {
+      "label": "user private /data/kb-config.json",
+      "status": 404
+    },
+    {
+      "label": "user private /site/core-docs/prd/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "user private /prd/archive/",
+      "status": 404
+    },
+    {
+      "label": "user private /prd/inbox/entries/private.md",
+      "status": 404
+    },
+    {
+      "label": "user private /prd/../workspace/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "user private /prd/%2e%2e/workspace/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "user private /unknown-route",
+      "status": 404
+    },
+    {
+      "label": "user no listing /prd/",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "user no listing /prd/design/",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "user no listing /prd/design/referral/history/",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "admin login page",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin root /",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "admin root /site",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "admin root /site/",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "admin /feature-interaction/",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin /prd/llm-manifest.json",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin /prd/design/referral/PRD.md",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin /prd/design/referral/brief/current.md",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin /prd/design/referral/changelog.md",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin /prd/design/admin/images/v1.0.0后台-admin-001.png",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin /prd/design/admin/history/index.json",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin /prd/design/admin/history/PRD.stacked-2026-09-16.md",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin /admin-skin-demo/",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin /reviews/referral/summary/index.html",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin admin page",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin admin API",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "admin legacy admin",
+      "status": 302,
+      "expected": 302
+    },
+    {
+      "label": "admin private /INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "admin private /llm-manifest.json",
+      "status": 404
+    },
+    {
+      "label": "admin private /workspace/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "admin private /knowledge/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "admin private /site/docs/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "admin private /docs/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "admin private /site/.env",
+      "status": 404
+    },
+    {
+      "label": "admin private /.git/config",
+      "status": 404
+    },
+    {
+      "label": "admin private /.env",
+      "status": 404
+    },
+    {
+      "label": "admin private /site/kb-api/app/main.py",
+      "status": 404
+    },
+    {
+      "label": "admin private /site/docker-compose.yml",
+      "status": 404
+    },
+    {
+      "label": "admin private /site/docker/nginx.conf",
+      "status": 404
+    },
+    {
+      "label": "admin private /lkonw.com_nginx.tar",
+      "status": 404
+    },
+    {
+      "label": "admin private /lkonw.com_nginx/key.pem",
+      "status": 404
+    },
+    {
+      "label": "admin private /tls/key.pem",
+      "status": 404
+    },
+    {
+      "label": "admin private /data/kb-config.json",
+      "status": 404
+    },
+    {
+      "label": "admin private /site/core-docs/prd/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "admin private /prd/archive/",
+      "status": 404
+    },
+    {
+      "label": "admin private /prd/inbox/entries/private.md",
+      "status": 404
+    },
+    {
+      "label": "admin private /prd/../workspace/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "admin private /prd/%2e%2e/workspace/INDEX.md",
+      "status": 404
+    },
+    {
+      "label": "admin private /unknown-route",
+      "status": 404
+    },
+    {
+      "label": "admin no listing /prd/",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "admin no listing /prd/design/",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "admin no listing /prd/design/referral/history/",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "label": "existing citation read",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "label": "stale citation hash",
+      "status": 409,
+      "expected": 409
+    }
+  ],
+  "fixtures_cleaned": true,
+  "published_urls": {
+    "count": 1729,
+    "failed": []
+  },
+  "scan": {
+    "chunks": 346,
+    "features": 25,
+    "logical_prefixes": [
+      "prd"
+    ]
+  },
+  "citation": {
+    "from_saved_conversation": true,
+    "path": "prd/design/merchant/brief/current.md",
+    "chunk_id": "merchant.flow-main"
+  },
+  "tls": {
+    "handshake": true,
+    "version": "TLSv1.3",
+    "certificate_sha256": "21973f9a12aefeed29c02c7ee86da8d9a6aaa910824d6c01a98d20f8349e68c7",
+    "legacy_files_in_local_data": 0,
+    "production_certificate_migration": "not exercised; unit tests cover allowlist, conflicts, restart, interrupted copy"
+  },
+  "health": {
+    "qdrant_ready": true,
+    "config_ready": true,
+    "key_dashscope": "已配置",
+    "key_deepseek": "已配置",
+    "chunk_count": 346,
+    "index_ready": true,
+    "startup_error": ""
+  },
+  "index_identity": {
+    "points": 346,
+    "identical_before_after": true,
+    "sha256": "9b3c6b505af99c64096544ad3d17d15ec5199aac7132c7302447cfca19b25d3b"
+  },
+  "retrieval": {
+    "chunks_verified_against_qdrant": 346,
+    "features": 25,
+    "aliases": 25,
+    "bm25": {
+      "VIP 财富值": {
+        "matches": 64,
+        "expected_feature_found": true
+      },
+      "拉新 邀请": {
+        "matches": 64,
+        "expected_feature_found": true
+      },
+      "官方房 置顶": {
+        "matches": 64,
+        "expected_feature_found": true
+      }
+    }
+  },
+  "tests": {
+    "python": 75,
+    "node": 31,
+    "python_warning": "既有 LibreSSL/urllib3 环境警告"
+  },
+  "build": {
+    "standard_dockerfile": "PASS: original formal Dockerfile built successfully after official base image was cached",
+    "local_runtime": "Standard Compose API image refreshed through default preview entry; 41 application/requirements files match local source",
+    "preview_entry": "sh site/preview.sh passed; API build/start and Web recreate completed",
+    "cache_note": "Dependency installation layers were reused from build cache; no no-cache dependency reinstall was exercised",
+    "global_mirror_configuration_changed": false,
+    "base_image": "python:3.12-slim",
+    "base_image_source": "registry-1.docker.io/library/python:3.12-slim",
+    "base_image_digest": "sha256:dddfd7e07f9d15aeeca61529320492139d21cac7f0070c00609243e51e4e0016",
+    "standard_compose_image_manifest": "0863fa8d7d6bfc450c3c12856e7ac728a00ff02a7bf061d7237d9797a36a8be0",
+    "published_files": 1729,
+    "history": [
+      {
+        "standard_dockerfile": "BLOCKED: docker.1panel.live returned HTTP 403 for python:3.12-slim",
+        "local_runtime": "Rebuilt application from existing API image with unchanged dependencies",
+        "preview_entry": "sh site/preview.sh --no-build passed",
+        "published_files": 1729
+      }
+    ]
+  },
+  "browser": {
+    "status": "PASS",
+    "environment": "Local Docker in user Chrome; existing 127.0.0.1 admin session preserved; localhost host session displayed login",
+    "checks": [
+      {
+        "check": "root and old site entry",
+        "observed": "127.0.0.1 / and /site/ redirect to /feature-interaction/"
+      },
+      {
+        "check": "document index",
+        "observed": "30 default documents; INDEX rendered; unpublished workspace/engineering references disabled"
+      },
+      {
+        "check": "VIP PRD and image gallery",
+        "observed": "prd/design/vip/PRD.md body and gallery render; gallery click scrolls to visible image; screenshot chrome-vip-image.jpg"
+      },
+      {
+        "check": "history",
+        "observed": "JSON list offers stacked PRD and V1.0.0.md; clicking V1.0.0 renders prd/design/vip/history/V1.0.0.md and 非当前规则"
+      },
+      {
+        "check": "changelog and brief",
+        "observed": "vip/changelog.md renders version record; vip/brief/current.md renders 用户 VIP · 现行说明"
+      },
+      {
+        "check": "full-text search",
+        "observed": "官方房置顶 returns 5 sections; result opens room-list PRD and highlights heading"
+      },
+      {
+        "check": "client admin graph",
+        "observed": "50 nodes, 27 relations; 查看关系 selects room-list; 打开 PRD returns correct document"
+      },
+      {
+        "check": "client cross graph",
+        "observed": "24 nodes, 56 relations; referral selected with related links; 打开 PRD renders referral PRD"
+      },
+      {
+        "check": "saved answer citation",
+        "observed": "existing answer opens 8-source pane; VIP logic-perk citation opens stable brief/current.md at 权益; no new model call"
+      },
+      {
+        "check": "admin page",
+        "observed": "existing admin session renders /kb-admin/ and runtime panel shows Qdrant/index ready with 346 chunks"
+      },
+      {
+        "check": "anonymous browser gate",
+        "observed": "localhost / and direct /prd/design/vip/PRD.md redirect to login; screenshot chrome-anonymous-login.jpg"
+      },
+      {
+        "check": "private workspace browser path",
+        "observed": "existing admin 127.0.0.1 /workspace/ returns 404"
+      },
+      {
+        "check": "incognito root gate",
+        "observed": "native Chrome incognito window visiting 127.0.0.1:18765/ visibly redirected to /login/?next=/feature-interaction/; window title Hayyo · 请先登录"
+      }
+    ],
+    "limitations": [
+      "Native close-incognito action timed out before post-action observation; subsequent native app connection remained timed out and extension reported debugger detached.",
+      "Direct UI navigation to identity API was blocked by browser client; three-role identity/permissions were checked by actual HTTP runtime matrix.",
+      "Browser cleanup could not be confirmed: temporary device toolbar restoration and regression tab close. Existing accounts/passwords were not changed."
+    ],
+    "prior_partial_result": {
+      "status": "IN_PROGRESS",
+      "reason": "Mac automatically locked again during native Chrome regression; unlock requested.",
+      "connector_error": "Unable to load browser request-header policy; native Chrome also blocked by Mac lock.",
+      "partial_checks": [
+        {
+          "check": "root redirect",
+          "observed": "/ -> /feature-interaction/, existing account session remains active"
+        },
+        {
+          "check": "document index",
+          "observed": "30 default documents displayed; prd/INDEX.md rendered; unpublished workspace/engineering links have no clickable target"
+        },
+        {
+          "check": "VIP PRD",
+          "observed": "prd/design/vip/PRD.md rendered with headings, rules, stable relative links, history/changelog/brief actions and 16 gallery entries"
+        }
+      ]
+    },
+    "screenshots": [
+      "chrome-vip-image.jpg",
+      "chrome-anonymous-login.jpg"
+    ],
+    "cleanup": {
+      "status": "UNCONFIRMED",
+      "regression_tab_id": "1849746381",
+      "last_device_toolbar_value": 0,
+      "restore_attempt": "User brought local Chrome foreground; DevTools opened; toggle attempt interrupted by window change, later native connection timed out. No further global input sent."
+    }
+  },
+  "environment": "local Docker only; production unchanged",
+  "published_artifact_sha256": "f6b1f5bbc9dfcf3a067a221dd2de0820c8ba669a3b56cd8cefe2b6187567055f",
+  "running_source": {
+    "source_files_matching": 41,
+    "requirements_match": true
+  },
+  "independent_review": {
+    "scope": "steps 3-4 source and saved runtime evidence",
+    "blocking_findings": [],
+    "mode": "read-only"
+  },
+  "runtime_history": [
+    {
+      "stage": "before_standard_build_retry",
+      "checks_count": 133,
+      "checks_identical_to_latest": true,
+      "published_urls": {
+        "count": 1729,
+        "failed": []
+      },
+      "fixtures_cleaned": true,
+      "citation": {
+        "from_saved_conversation": true,
+        "path": "prd/design/admin/brief/current.md",
+        "chunk_id": "admin.rooms"
+      },
+      "index_identity": {
+        "points": 346,
+        "identical_before_after": true,
+        "sha256": "9b3c6b505af99c64096544ad3d17d15ec5199aac7132c7302447cfca19b25d3b"
+      },
+      "running_source": {
+        "source_files_matching": 41,
+        "requirements_match": true
+      },
+      "build": {
+        "standard_dockerfile": "BLOCKED: docker.1panel.live returned HTTP 403 for python:3.12-slim",
+        "local_runtime": "Rebuilt application from existing API image with unchanged dependencies",
+        "preview_entry": "sh site/preview.sh --no-build passed",
+        "published_files": 1729
+      }
+    }
+  ],
+  "latest_runtime_stage": "after_formal_dockerfile_and_default_preview_success"
+}

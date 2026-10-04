@@ -4,7 +4,9 @@
 > 检索基线见 [`知识问答 v3`](../../design/kb-qa/PRD-知识问答-v3.md)；多轮编排增量见 [`Phase1 v1.10`](../../design/kb-qa-multdesign/PRD-知识问答多轮对话编排-Phase1-v1.10.md)。本文件记录当前实现，不把尚未落地的 PRD 条款写成已完成。\
 > 登录、会话隔离、运维入口见 [`../kb-auth/contract.md`](../kb-auth/contract.md)。赞踩 / 刷新 / 空状态 chips / 对话区样式见 [`../kb-qa-feedback/contract.md`](../kb-qa-feedback/contract.md)。  
 > 旧 kb-qa M1～M4 与多轮编排 M1～M8 草案保留为阶段快照；已经被后续实现替代的过渡条款不再是当前契约。整合映射和验证见 [`多轮编排进度`](../../design/kb-qa-multdesign/steps-verified.md#2026-10-03-开发收尾与正式契约整合)。\
-> 契约总入口：[`../INDEX.md`](../INDEX.md)。更新：2026-10-03。已整合多轮编排、回答过程和当日工作台调整；验证范围与剩余项以进度记录为准。
+> 契约总入口：[`../INDEX.md`](../INDEX.md)。更新：2026-10-04。已整合多轮编排、回答过程、工作台调整与文档迁移后的扫描边界；验证范围与剩余项以进度记录为准。
+
+> 核心文档路径映射与静态发布的共同约定见 [H5 契约 §8](../h5-kb/contract.md#8-核心文档与受控发布)；本契约负责扫描、知识块与旧引用兼容。生产未部署，验证范围见[迁移执行记录](../../design/core-docs-migration/execution/核心文档迁移开发执行记录.md)。
 
 ## 1. 怎么用
 
@@ -20,7 +22,7 @@
 | 改 Router、任务、交付检查 | §10 |
 | 改 Memory、追溯、回看 | §11 |
 
-不要把本站问答写进 `prd/design/*/PRD.md`。不要用 h5-kb 附录 L3 当现行合同。
+不要把本站问答写进 `site/core-docs/prd/design/*/PRD.md`。不要用 h5-kb 附录 L3 当现行合同。
 
 ## 2. 落地符号
 
@@ -28,7 +30,8 @@
 |---|---|
 | HTTP 前缀 | `/api/kb`；浏览器只打本机 nginx，`proxy_buffering off` |
 | 浏览器入口 | `http://127.0.0.1:18765/feature-interaction/`（默认 Tab 落地知识问答） |
-| 切块源 | 只扫 `prd/design/<feature>/brief/current.md` 的 `chunk:default` |
+| 物理文档根 | `CORE_DOCS_ROOT`；本机默认 `site/core-docs`，Compose 为 `/core-docs`；旧 `REPO_ROOT` 不再读取 |
+| 切块源 | 文档根内的 `prd/design/<feature>/brief/current.md`，只扫 `chunk:default`；公开 `path` 仍为 `prd/...` |
 | 跳过 | `chunk:no`、`chunk:related-row` |
 | collection | `hayyo-client`；`feature_id=admin` → `hayyo-admin` |
 | embedding | `text-embedding-v4`，1024 维，上限 8192 token；超长不入库、不二次切、不截断，进失败清单 |
@@ -37,7 +40,7 @@
 | 日志表 | `hayyo_kb.qa_rounds`（每次执行一行；用户隐藏保留，超管实际删除按 kb-auth §10 清理） |
 | Key | `DASHSCOPE_API_KEY`、`DEEPSEEK_API_KEY` 仅服务端；健康检查只回「已配置 / 未配置」 |
 
-compose（现网）：`127.0.0.1` 发布；`HAYYO_WEB_PORT` 默认 18765→80，`HAYYO_TLS_PORT` 默认 18769→443，`HAYYO_MYSQL_HOST_PORT` 默认 18766→3306，`HAYYO_QDRANT_HOST_PORT` 默认 18767→6333。`kb-api` 不发布。禁止 `0.0.0.0`、禁止把宿主机 3306 映出来。TLS 细则见 kb-auth。
+compose（本地配置，生产未部署本次变更）：`127.0.0.1` 发布；`HAYYO_WEB_PORT` 默认 18765→80，`HAYYO_TLS_PORT` 默认 18769→443，`HAYYO_MYSQL_HOST_PORT` 默认 18766→3306，`HAYYO_QDRANT_HOST_PORT` 默认 18767→6333。`kb-api` 不发布。禁止 `0.0.0.0`、禁止把宿主机 3306 映出来。TLS 细则见 kb-auth。
 
 代码锚点：`site/kb-api/app/{main,pipeline,indexer,chunking,store,logs,config_store,settings,msg_store,conv_store,l1,migrate,router,tasks,branches,evidence,memory_index,memory_tool,recall,conv_task,answer_process}.py`，`site/feature-interaction/qa.js`。
 
@@ -70,7 +73,15 @@ compose（现网）：`127.0.0.1` 发布；`HAYYO_WEB_PORT` 默认 18765→80，
 
 知识重建现在纳入索引任务，受「重建」权限与高风险写审计约束，响应保留扫描/变更/失败信息并附任务记录。进行中的重叠任务返回 409；任务分页、详情、重试及部分失败见 [kb-auth §12](../kb-auth/contract.md#12-问题知识来源与索引任务)。
 
+物理根为 `CORE_DOCS_ROOT`（容器 `/core-docs`，本机默认 `site/core-docs`），扫描清单为该根内 `prd/llm-manifest.json` 的 `scan_roots`。只从匹配 `site/core-docs/prd/design/<id>/PRD.md`（兼容逻辑 `prd/design/<id>/PRD.md`）的条目提取功能，再读取对应 PRD/brief；不是遍历整仓库，也不自动索引新增文档分类或历史版本。
+
+根目录、清单、PRD 或 brief 缺失、功能没有可索引章节、重复知识块标识、brief 越出文档根时，在索引写入前中止；异常不作为合法空语料清除旧索引。仅迁移物理目录时，逻辑 `path`、`chunk_id`、正文 `content_hash`、collection 和由路径/块 ID 派生的点 ID 保持原值，不重写既有问答引用。功能别名与改写提示也从新文档根读取。
+
+启动索引扫描失败时，`startup_error` 保留错误；若能读取已有 Qdrant 点，仍可恢复 BM25，`index_ready` 按已有块数判断。`index_ready=true` 不代表此次扫描成功；已有索引亦不可恢复时为 false。缺模型 Key 的启动分支仍先验证语料，再加载已有索引，不以缺 Key 为由跳过语料保护。
+
 切块仍只扫描受控 brief：同 `(path, chunk_id)` 且 hash 相同不重复 embed；消失的点删除；超长块记失败，不截断。缺 Key / 索引不可用如实失败，不当作零变更成功。
+
+`site/kb-api/tests/test_core_docs_migration.py` 覆盖默认根、稳定逻辑路径、异常语料与空扫描不触碰向量库；文件迁移完整性及实际点 ID/旧引用验证见[迁移执行记录](../../design/core-docs-migration/execution/核心文档迁移开发执行记录.md)。原引用接口的 hash 校验与 404/409/503 约定仍按 §10.3，目录迁移不改变它们。
 
 ### `POST /api/kb/ask`
 
